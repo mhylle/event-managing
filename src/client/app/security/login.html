@@ -1,0 +1,21 @@
+<form>
+    <div ng-controller="SecurityController as vm">
+        <div class="row panel panel-danger">
+            <span>Login</span>
+        </div>
+        <div class="row">
+            <span class="col-xs-4">Username</span>
+            <span class="col-xs-8"><input type="text" ng-model="vm.username"></span>
+        </div>
+        <div class="row">
+            <span class="col-xs-4">Password</span>
+            <span class="col-xs-8"><input type="password" ng-model="vm.password"></span>
+        </div>
+        <div class="row">
+            <button class="btn btn-default" ng-click="vm.login()">Login</button>
+        </div>
+        <div class="row">
+            <span>Login status: {{vm.status}}</span>
+        </div>
+    </div>
+</form>
