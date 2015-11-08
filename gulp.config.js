@@ -16,6 +16,8 @@ module.exports = function() {
     var nodeModules = 'node_modules';
 
     var config = {
+        typescriptSrc : clientApp + "**.*.ts",
+        libraryTypeScriptDefinitions  :  "./tools/typings/**/*.ts",
         /**
          * File paths
          */
@@ -25,6 +27,7 @@ module.exports = function() {
             './*.js'
         ],
         build: './build/',
+        tsOutputPath: client,
         client: client,
         css: temp + 'styles.css',
         fonts: bower.directory + 'font-awesome/fonts/**/*.*',
@@ -43,6 +46,11 @@ module.exports = function() {
             '**/*.module.js',
             '**/*.js'
         ],
+        typescript: [
+            clientApp + '**.*.ts'
+        ],
+        typings : './tools/typings/',
+
         less: client + 'styles/styles.less',
         report: report,
         root: root,
