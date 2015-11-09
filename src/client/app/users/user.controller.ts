@@ -16,5 +16,5 @@ module userApp {
     }
 
     angular.module('userApp')
-        .controller('userApp.UserCOntroller', UserController);
+        .controller('userApp.UserController', UserController);
 }

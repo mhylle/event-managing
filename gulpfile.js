@@ -96,13 +96,15 @@ function compileAppScripts() {
         noExternalResolve: false,
         sortOutput: true
     });
+    var sourceTsFiles = [config.typescriptSrc,                //path to typescript files
+        config.libraryTypeScriptDefinitions];   //reference to library .d.ts files
     var opt = {
         tsProject: tsProject,
-        inPath: config.typescript,
+        inPath: sourceTsFiles,
         outDefPath: '.tmp/definitions/app',
         outJsPath: '.tmp/js/app',
         outJsFile: 'output.js'
-    }
+    };
     return compileTS(opt);
 }
 

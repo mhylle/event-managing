@@ -16,7 +16,7 @@ module.exports = function() {
     var nodeModules = 'node_modules';
 
     var config = {
-        typescriptSrc : clientApp + "**.*.ts",
+        typescriptSrc : clientApp + "**/*.ts",
         libraryTypeScriptDefinitions  :  "./tools/typings/**/*.ts",
         /**
          * File paths
