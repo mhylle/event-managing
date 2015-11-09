@@ -8,6 +8,7 @@ var path = require('path');
 var tsc = require('gulp-typescript');
 var sourcemaps = require('gulp-sourcemaps');
 var tsProject = tsc.createProject('tsconfig.json');
+var eventStream = require('event-stream');
 var _ = require('lodash');
 var $ = require('gulp-load-plugins')({lazy: true});
 
@@ -75,17 +76,49 @@ gulp.task('styles', ['clean-styles'], function () {
 });
 
 gulp.task('compile-ts', function () {
-    var sourceTsFiles = [config.typescriptSrc, config.libraryTypeScriptDefinitions];
-    var tsResult = gulp.src(sourceTsFiles)
-        .pipe(sourceMap.init())
-        .pipe(tsc(tsProject));
-
-    tsResult.dts.pipe(gulp.dest(config.tsOutputPath));
-    return tsResult.js
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(config.tsOutputPath));
+    return compileAppScripts();
+    //var sourceTsFiles = [config.typescriptSrc, config.libraryTypeScriptDefinitions];
+    //var tsResult = gulp.src(sourceTsFiles)
+    //    .pipe(sourceMap.init())
+    //    .pipe(tsc(tsProject));
+    //
+    //tsResult.dts.pipe(gulp.dest(config.tsOutputPath));
+    //return tsResult.js
+    //    .pipe(sourcemaps.write('.'))
+    //    .pipe(gulp.dest(config.tsOutputPath));
 
 });
+
+function compileAppScripts() {
+    var tsProject = $.typescript.createProject({
+        target: 'ES5',
+        declarationFiles: true,
+        noExternalResolve: false,
+        sortOutput: true
+    });
+    var opt = {
+        tsProject: tsProject,
+        inPath: config.typescript,
+        outDefPath: '.tmp/definitions/app',
+        outJsPath: '.tmp/js/app',
+        outJsFile: 'output.js'
+    }
+    return compileTS(opt);
+}
+
+function compileTS(opt) {
+    var tsResult = gulp.src(opt.inPath)
+        .pipe(sourcemaps.init()) // sourcemaps will be generated
+        .pipe(tsc(opt.tsProject, undefined, tsc.reporter.fullReporter(true)));
+
+    return eventStream.merge( // this task is finished when the IO of both operations are done
+        tsResult.dts.pipe(gulp.dest(opt.outDefPath)),
+        tsResult.js
+            .pipe($.concatSourcemap(opt.outJsFile))
+            .pipe(sourcemaps.write()) // sourcemaps are added to the .js file
+            .pipe(gulp.dest(opt.outJsPath))
+    );
+}
 
 /**
  * Remove all generated JavaScript files from TypeScript compilation.

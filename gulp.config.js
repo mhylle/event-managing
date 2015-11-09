@@ -47,7 +47,7 @@ module.exports = function() {
             '**/*.js'
         ],
         typescript: [
-            clientApp + '**.*.ts'
+            clientApp + '**/*.ts'
         ],
         typings : './tools/typings/',
 
