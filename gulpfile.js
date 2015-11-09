@@ -345,11 +345,11 @@ gulp.task('clean-images', function (done) {
  * @param  {Function} done - callback when complete
  */
 gulp.task('clean-styles', function (done) {
-    var files = [].concat(
-        config.temp + '**/*.css',
-        config.build + 'styles/**/*.css'
-    );
-    clean(files, done);
+    //var files = [].concat(
+    //    config.temp + '**/*.css',
+    //    config.build + 'styles/**/*.css'
+    //);
+    //clean(files, done);
 });
 
 /**
