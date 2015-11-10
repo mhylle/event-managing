@@ -71,6 +71,15 @@ gulp.task('styles', ['clean-styles'], function() {
         .pipe(gulp.dest(config.temp));
 });
 
+gulp.task('typescript', function () {
+    return gulp.src(config.ts)
+        .pipe($.typescript({
+            target: 'es5'
+        }))
+        .js
+        .pipe(gulp.dest(config.clientApp));
+});
+
 /**
  * Copy fonts
  * @return {Stream}
@@ -112,10 +121,10 @@ gulp.task('templatecache', ['clean-code'], function() {
         .pipe($.if(args.verbose, $.bytediff.start()))
         .pipe($.minifyHtml({empty: true}))
         .pipe($.if(args.verbose, $.bytediff.stop(bytediffFormatter)))
-        .pipe($.angularTemplatecache(
-            config.templateCache.file,
-            config.templateCache.options
-        ))
+        //.pipe($.angularTemplatecache(
+            //config.templateCache.file,
+            //config.templateCache.options
+        //))
         .pipe(gulp.dest(config.temp));
 });
 
@@ -494,6 +503,8 @@ function startBrowserSync(isDev, specRunner) {
     // If dev: watches less, compiles it to css, browser-sync handles reload
     if (isDev) {
         gulp.watch([config.less], ['styles'])
+            .on('change', changeEvent);
+        gulp.watch([config.ts], ['typescript'])
             .on('change', changeEvent);
     } else {
         gulp.watch([config.less, config.js, config.html], ['browserSyncReload'])

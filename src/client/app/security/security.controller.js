@@ -1,3 +1,4 @@
+///<reference path="../../../../tools/typings/angularjs/angular.d.ts"/>
 /**
  * @ngdoc controller
  * @name SecurityController
@@ -7,42 +8,39 @@
  *
  * @requires $scope
  * */
-(function () {
-    'use strict';
-
-    angular
-        .module('app')
-        .controller('SecurityController', SecurityController);
-
-    SecurityController.$inject = [];
-
-    /* @ngInject */
-    function SecurityController() {
-        var vm = this;
-        vm.title = 'SecurityController';
-        vm.username = '';
-        vm.password = '';
-        vm.status = '';
-
-        activate();
-
-        ////////////////
-        vm.login = doLogin;
-
-        function activate() {
-
-        }
-
-        function doLogin() {
-            if (vm.username === '' || vm.password === '') {
-                vm.status = 'Login Failed';
+var app;
+(function (app) {
+    var controllers;
+    (function (controllers) {
+        var SecurityController = (function () {
+            /* @ngInject */
+            function SecurityController($log) {
+                this.$log = $log;
+                this.init();
             }
-
-            if (vm.username === 'mah' && vm.password === 'mah') {
-                vm.status = 'Login Successful.';
-            }
-        }
-    }
-
-})();
-
+            SecurityController.prototype.init = function () {
+                this.title = 'Security';
+                this.activate();
+            };
+            SecurityController.prototype.activate = function () {
+                this.$log.info('Activated Security View');
+                //this.logger.info('Activated Security View');
+            };
+            SecurityController.prototype.login = function () {
+                this.status = 'Logging in.';
+                if (this.username === 'mah' && this.password === 'mah') {
+                    this.status = 'Login Successful.';
+                }
+                else {
+                    this.status = 'Login Failed';
+                }
+            };
+            SecurityController.controllerId = 'SecurityController';
+            SecurityController.$inject = ['$log'];
+            return SecurityController;
+        })();
+        controllers.SecurityController = SecurityController;
+        angular.module('app')
+            .controller(SecurityController.controllerId, SecurityController);
+    })(controllers = app.controllers || (app.controllers = {}));
+})(app || (app = {}));

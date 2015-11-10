@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function () {
     var client = './src/client/';
     var server = './src/server/';
     var clientApp = client + 'app/';
@@ -26,6 +26,7 @@ module.exports = function() {
         ],
         build: './build/',
         client: client,
+        clientApp: clientApp,
         css: temp + 'styles.css',
         fonts: bower.directory + 'font-awesome/fonts/**/*.*',
         html: client + '**/*.html',
@@ -53,7 +54,9 @@ module.exports = function() {
             client + 'stubs/**/*.js'
         ],
         temp: temp,
-
+        ts: [
+            clientApp + '**/*.ts'
+        ],
         /**
          * optimized files
          */
@@ -75,14 +78,14 @@ module.exports = function() {
         /**
          * template cache
          */
-        templateCache: {
-            file: 'templates.js',
-            options: {
-                module: 'app.core',
-                root: 'app/',
-                standalone: false
-            }
-        },
+        //templateCache: {
+        //    file: 'templates.js',
+        //    options: {
+        //        module: 'app.core',
+        //        root: 'app/',
+        //        standalone: false
+        //    }
+        //},
 
         /**
          * Bower and NPM files
@@ -128,7 +131,7 @@ module.exports = function() {
     /**
      * wiredep and bower settings
      */
-    config.getWiredepDefaultOptions = function() {
+    config.getWiredepDefaultOptions = function () {
         var options = {
             bowerJson: config.bower.json,
             directory: config.bower.directory,
@@ -153,7 +156,7 @@ module.exports = function() {
                 config.specHelpers,
                 clientApp + '**/*.module.js',
                 clientApp + '**/*.js',
-                temp + config.templateCache.file,
+                //temp + config.templateCache.file,
                 config.serverIntegrationSpecs
             ),
             exclude: [],
