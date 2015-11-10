@@ -16,8 +16,6 @@ module.exports = function() {
     var nodeModules = 'node_modules';
 
     var config = {
-        typescriptSrc : clientApp + "**/*.ts",
-        libraryTypeScriptDefinitions  :  "./tools/typings/**/*.ts",
         /**
          * File paths
          */
@@ -27,7 +25,6 @@ module.exports = function() {
             './*.js'
         ],
         build: './build/',
-        tsOutputPath: client,
         client: client,
         css: temp + 'styles.css',
         fonts: bower.directory + 'font-awesome/fonts/**/*.*',
@@ -39,8 +36,6 @@ module.exports = function() {
         js: [
             clientApp + '**/*.module.js',
             clientApp + '**/*.js',
-            temp + '**/*.js',
-            '!' + temp + '**/templates.js',
             '!' + clientApp + '**/*.spec.js'
         ],
         jsOrder: [
@@ -48,11 +43,6 @@ module.exports = function() {
             '**/*.module.js',
             '**/*.js'
         ],
-        typescript: [
-            clientApp + '**/*.ts'
-        ],
-        typings : './tools/typings/',
-
         less: client + 'styles/styles.less',
         report: report,
         root: root,
@@ -86,12 +76,12 @@ module.exports = function() {
          * template cache
          */
         templateCache: {
-            //file: 'templates.js',
-            //options: {
-                //module: 'app.core',
-                //root: 'app/',
-                //standalone: false
-            //}
+            file: 'templates.js',
+            options: {
+                module: 'app.core',
+                root: 'app/',
+                standalone: false
+            }
         },
 
         /**

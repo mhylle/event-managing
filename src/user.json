@@ -1,6 +1,22 @@
 [
-    {"id": 1, "name":"Ted"},
-    {"id": 2, "name":"Michelle"},
-    {"id": 3, "name":"Zed"},
-    {"id": 4, "name":"Tina"}
+    {
+        "id": 1,
+        "firstname": "Ted",
+        lastname: "Tedson"
+    },
+    {
+        "id": 2,
+        "firstname": "Michelle",
+        lastname: "Michelleson"
+    },
+    {
+        "id": 3,
+        "firstname": "Zed",
+        lastname: "Zedson"
+    },
+    {
+        "id": 4,
+        "firstname": "Tina",
+        lastname: "Tinason"
+    }
 ]
