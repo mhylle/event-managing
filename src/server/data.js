@@ -1,4 +1,5 @@
 module.exports = {
+    users: getUsers(),
     people: getPeople()
 };
 
@@ -14,3 +15,14 @@ function getPeople() {
         {id: 8, firstName: 'Aaron', lastName: 'Jinglehiemer', age: 22, location: 'Utah'}
     ];
 }
+
+function getUsers() {
+    return [
+        {"id": 1,"firstname": "Ted",lastname: "Tedson"},
+        {"id": 2,"firstname": "Michelle",lastname: "Michelleson"},
+        {"id": 3,"firstname": "Zed",lastname: "Zedson"},
+        {"id": 4,"firstname": "Tina",lastname: "Tinason"}
+    ];
+}
+
+

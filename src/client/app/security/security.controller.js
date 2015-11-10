@@ -15,8 +15,10 @@ var app;
     (function (controllers) {
         var SecurityController = (function () {
             /* @ngInject */
-            function SecurityController(logger) {
+            function SecurityController(logger, securityService) {
                 this.logger = logger;
+                this.securityService = securityService;
+                this.secService = securityService;
                 this.init();
             }
             SecurityController.prototype.init = function () {
@@ -29,15 +31,11 @@ var app;
             SecurityController.prototype.login = function () {
                 //this.logger.info('Logging in.');
                 this.status = 'Logging in.';
-                if (this.username === 'mah' && this.password === 'mah') {
-                    this.status = 'Login Successful.';
-                }
-                else {
-                    this.status = 'Login Failed';
-                }
+                var result = this.securityService.login(this.username, this.password);
+                this.status = result ? 'Successfully logged in' : 'Failed login';
             };
             SecurityController.controllerId = 'SecurityController';
-            SecurityController.$inject = ['logger'];
+            SecurityController.$inject = ['logger', 'securityservice'];
             return SecurityController;
         })();
         controllers.SecurityController = SecurityController;

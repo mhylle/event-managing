@@ -1,5 +1,4 @@
 ///<reference path="../../../../../tools/typings/angularjs/angular.d.ts"/>
-///<reference path="../../../../../tools/typings/toastr/toastr.d.ts"/>
 
 module app.blocks {
     'use strict';
@@ -19,7 +18,7 @@ module app.blocks {
         showToasts:boolean;
         log:ng.ILogCall;
 
-        static $inject = ['$log'];
+        static $inject = ['$log', 'toastr'];
         /* @ngInject */
         constructor(private $log: ng.ILogService) {
             this.showToasts = true;

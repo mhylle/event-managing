@@ -10,6 +10,7 @@
  * @requires $scope
  * */
 module app.controllers {
+    import ISecurityService = app.services.ISecurityService;
     export interface ISecurityController {
         title: string;
         username: string;
@@ -26,9 +27,11 @@ module app.controllers {
         password:string;
         status:string;
 
-        static $inject = ['logger'];
+        static $inject = ['logger', 'securityservice'];
+        private secService;
         /* @ngInject */
-        constructor(private logger:app.blocks.ILogger) {
+        constructor(private logger:app.blocks.ILogger, private securityService:ISecurityService) {
+            this.secService = securityService;
             this.init();
         }
 
@@ -43,12 +46,12 @@ module app.controllers {
 
         login():void {
             //this.logger.info('Logging in.');
+
             this.status = 'Logging in.';
-            if (this.username === 'mah' && this.password === 'mah') {
-                this.status = 'Login Successful.';
-            } else {
-                this.status = 'Login Failed';
-            }
+
+            var result = this.securityService.login(this.username, this.password);
+            this.status = result ? 'Successfully logged in' : 'Failed login';
+
         }
     }
     angular.module('app')
