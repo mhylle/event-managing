@@ -17,36 +17,37 @@ module app.blocks {
     class logger implements ILogger {
         static serviceId = 'logger';
         showToasts:boolean;
-        log:angular.ILogCall;
-        static $inject = ['$log', 'toastr'];
-        /*@ngInject */
-        constructor(private $log:ng.ILogService, private toastr:Toastr) {
+        log:ng.ILogCall;
+
+        static $inject = ['$log'];
+        /* @ngInject */
+        constructor(private $log: ng.ILogService) {
             this.showToasts = true;
             this.log = $log.log;
         }
 
         error(message:string, data?:any, title?:string):void {
-            this.toastr.error(message, title);
+            //this.toastr.error(message, title);
             this.$log.info('Error: ' + message, data);
         }
 
         info(message:string, data?:any, title?:string):void {
-            this.toastr.info(message, title);
+            //this.toastr.info(message, title);
             this.$log.info('Info: ' + message, data);
         }
 
         success(message:string, data?:any, title?:string):void {
-            this.toastr.success(message, title);
+            //this.toastr.success(message, title);
             this.$log.info('Success: ' + message, data);
         }
 
         warning(message:string, data?:any, title?:string):void {
-            this.toastr.warning(message, title);
+            //this.toastr.warning(message, title);
             this.$log.info('Warning: ' + message, data);
         }
 
-        static instance($log:ng.ILogService, toastr:Toastr):ILogger {
-            return new logger($log, toastr);
+        static instance($log:ng.ILogService):ILogger {
+            return new logger($log);
         }
     }
     angular
