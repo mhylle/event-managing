@@ -1,4 +1,5 @@
 ///<reference path="../../../../tools/typings/angularjs/angular.d.ts"/>
+///<reference path="../blocks/logger/logger.ts"/>
 /**
  * @ngdoc controller
  * @name SecurityController
@@ -25,10 +26,9 @@ module app.controllers {
         password:string;
         status:string;
 
-
-        static $inject = ['$log'];
+        static $inject = ['logger'];
         /* @ngInject */
-        constructor(private $log:any) {
+        constructor(private logger:app.blocks.ILogger) {
             this.init();
         }
 
@@ -38,16 +38,15 @@ module app.controllers {
         }
 
         activate():void {
-            this.$log.info('Activated Security View');
-            //this.logger.info('Activated Security View');
+            this.logger.info('Activated Security View');
         }
 
         login():void {
-            this.status = 'Logging in.'
+            //this.logger.info('Logging in.');
+            this.status = 'Logging in.';
             if (this.username === 'mah' && this.password === 'mah') {
                 this.status = 'Login Successful.';
             } else {
-
                 this.status = 'Login Failed';
             }
         }
