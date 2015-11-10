@@ -127,8 +127,8 @@ function compileTS(opt) {
  */
 gulp.task('clean-ts', function (cb) {
     var typeScriptGenFiles = [
-        config.tsOutputPath +'/**/*.js',    // path to all JS files auto gen'd by editor
-        config.tsOutputPath +'/**/*.js.map', // path to all sourcemap files auto gen'd by editor
+        config.tsOutputPath + '/**/*.js',    // path to all JS files auto gen'd by editor
+        config.tsOutputPath + '/**/*.js.map', // path to all sourcemap files auto gen'd by editor
         '!' + config.tsOutputPath + '/lib'
     ];
 
@@ -188,7 +188,7 @@ gulp.task('templatecache', ['clean-code'], function () {
  * Wire-up the bower dependencies
  * @return {Stream}
  */
-gulp.task('wiredep', function () {
+gulp.task('wiredep', ['compile-ts'], function () {
     log('Wiring the bower dependencies into the html');
 
     var wiredep = require('wiredep').stream;
@@ -345,11 +345,11 @@ gulp.task('clean-images', function (done) {
  * @param  {Function} done - callback when complete
  */
 gulp.task('clean-styles', function (done) {
-    //var files = [].concat(
+    var files = [];//.concat(
     //    config.temp + '**/*.css',
     //    config.build + 'styles/**/*.css'
     //);
-    //clean(files, done);
+    clean(files, done);
 });
 
 /**

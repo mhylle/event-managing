@@ -1,4 +1,4 @@
-module userApp {
+module app {
     export interface IUser {
         id: number;
         firstName: string;
@@ -18,6 +18,6 @@ module userApp {
         }
     }
 
-    angular.module('userApp')
-        .service('userApp.UserService', UserService);
+    angular.module('app')
+        .service('UserService', UserService);
 }

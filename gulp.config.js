@@ -39,6 +39,8 @@ module.exports = function() {
         js: [
             clientApp + '**/*.module.js',
             clientApp + '**/*.js',
+            temp + '**/*.js',
+            '!' + temp + '**/templates.js',
             '!' + clientApp + '**/*.spec.js'
         ],
         jsOrder: [
