@@ -18,7 +18,7 @@ module app.services {
 
         }
 
-        login(username:string, password:string):ng.IPromise {
+        login(username:string, password:string):ng.IPromise<any> {
             var defer = this.$q.defer();
             this.$http.get('/api/users').then(function (response) {
                 var data = response.data;

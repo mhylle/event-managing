@@ -11,14 +11,6 @@
  * */
 module app.controllers {
     import ISecurityService = app.services.ISecurityService;
-    export interface ISecurityController {
-        title: string;
-        username: string;
-        password: string;
-        loginStatus: string;
-        activate: () => void;
-        login: () => void;
-    }
 
     export class SecurityController implements ISecurityController {
         static controllerId = 'SecurityController';
@@ -28,10 +20,9 @@ module app.controllers {
         loginStatus:string;
 
         static $inject = ['logger', 'securityservice'];
-        private secService;
+
         /* @ngInject */
         constructor(private logger:app.blocks.ILogger, private securityService:ISecurityService) {
-            this.secService = securityService;
             this.init();
         }
 
@@ -45,13 +36,17 @@ module app.controllers {
         }
 
         login():void {
-            //this.logger.info('Logging in.');
             this.loginStatus = 'Logging in.';
+            this.logger.info('Logging in');
+            var that = this;
             this.securityService.login(this.username, this.password).then(function(response) {
+                that.logger.info('Inside promise');
                 if (response) {
-                    this.loginStatus ='Successfully logged in';
+                    that.logger.info('Successfully logged in.');
+                    that.loginStatus ='Successfully logged in.';
                 } else {
-                    this.loginStatus =  'Failed login';
+                    that.logger.info('Failed login.');
+                    that.loginStatus =  'Failed login.';
                 }
             });
         }

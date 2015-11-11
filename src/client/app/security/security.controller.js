@@ -18,7 +18,6 @@ var app;
             function SecurityController(logger, securityService) {
                 this.logger = logger;
                 this.securityService = securityService;
-                this.secService = securityService;
                 this.init();
             }
             SecurityController.prototype.init = function () {
@@ -29,14 +28,18 @@ var app;
                 this.logger.info('Activated Security View');
             };
             SecurityController.prototype.login = function () {
-                //this.logger.info('Logging in.');
                 this.loginStatus = 'Logging in.';
+                this.logger.info('Logging in');
+                var that = this;
                 this.securityService.login(this.username, this.password).then(function (response) {
+                    that.logger.info('Inside promise');
                     if (response) {
-                        this.loginStatus = 'Successfully logged in';
+                        that.logger.info('Successfully logged in.');
+                        that.loginStatus = 'Successfully logged in.';
                     }
                     else {
-                        this.loginStatus = 'Failed login';
+                        that.logger.info('Failed login.');
+                        that.loginStatus = 'Failed login.';
                     }
                 });
             };
