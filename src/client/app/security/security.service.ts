@@ -2,40 +2,43 @@
 module app.services {
     'use strict';
     export interface ISecurityService {
-        login: (username:string, password:string) => boolean;
+        login: (username:string, password:string) => ng.IPromise<boolean>;
         isLoggedIn: (username:string, password:string) => boolean;
     }
 
     class SecurityService implements ISecurityService {
-        static $inject = ['$http'];
-        private httpService;
+        static $inject = ['$http', '$q'];
+        private $http;
+        private $q:ng.IQService;
 
         /* @ngInject */
-        constructor($http:ng.IHttpService) {
-            this.httpService = $http;
+        constructor($http:ng.IHttpService, $q:ng.IQService) {
+            this.$http = $http;
+            this.$q = $q;
+
         }
 
-
-        login(username:string, password:string):boolean {
-            this.httpService.get('/api/users').then(function (response) {
-                //console.log(response.data);
+        login(username:string, password:string):ng.IPromise {
+            var defer = this.$q.defer();
+            this.$http.get('/api/users').then(function (response) {
                 var data = response.data;
+
                 for (var i = 0; i<data.length; i++) {
                     if (data[i].firstname === username && data[i].lastname === password) {
-                        return true;
+                        return defer.resolve(true);
                     }
-
                 }
+                return defer.resolve(false);
             });
-            return false;
+            return defer.promise;
         }
 
         isLoggedIn(username:string, password:string):boolean {
             return false;
         };
 
-        static instance($http:ng.IHttpService):ISecurityService {
-            return new SecurityService($http);
+        static instance($http:ng.IHttpService, $q:ng.IQService):ISecurityService {
+            return new SecurityService($http, $q);
         }
 
         static serviceId = 'securityservice';

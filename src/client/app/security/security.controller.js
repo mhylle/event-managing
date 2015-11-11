@@ -30,9 +30,15 @@ var app;
             };
             SecurityController.prototype.login = function () {
                 //this.logger.info('Logging in.');
-                this.status = 'Logging in.';
-                var result = this.securityService.login(this.username, this.password);
-                this.status = result ? 'Successfully logged in' : 'Failed login';
+                this.loginStatus = 'Logging in.';
+                this.securityService.login(this.username, this.password).then(function (response) {
+                    if (response) {
+                        this.loginStatus = 'Successfully logged in';
+                    }
+                    else {
+                        this.loginStatus = 'Failed login';
+                    }
+                });
             };
             SecurityController.controllerId = 'SecurityController';
             SecurityController.$inject = ['logger', 'securityservice'];

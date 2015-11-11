@@ -15,7 +15,7 @@ module app.controllers {
         title: string;
         username: string;
         password: string;
-        status: string;
+        loginStatus: string;
         activate: () => void;
         login: () => void;
     }
@@ -25,7 +25,7 @@ module app.controllers {
         title:string;
         username:string;
         password:string;
-        status:string;
+        loginStatus:string;
 
         static $inject = ['logger', 'securityservice'];
         private secService;
@@ -46,12 +46,14 @@ module app.controllers {
 
         login():void {
             //this.logger.info('Logging in.');
-
-            this.status = 'Logging in.';
-
-            var result = this.securityService.login(this.username, this.password);
-            this.status = result ? 'Successfully logged in' : 'Failed login';
-
+            this.loginStatus = 'Logging in.';
+            this.securityService.login(this.username, this.password).then(function(response) {
+                if (response) {
+                    this.loginStatus ='Successfully logged in';
+                } else {
+                    this.loginStatus =  'Failed login';
+                }
+            });
         }
     }
     angular.module('app')
