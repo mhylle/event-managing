@@ -6,13 +6,16 @@
   "bundle": "tools/typings/tsd.d.ts",
   "installed": {
     "angularjs/angular.d.ts": {
-      "commit": "8c4ec896ab619e7cb6572f82423e6e1eece70f5a"
+      "commit": "4f7b7e01d3a9622bfab0bef469e169529e60c66b"
     },
     "jquery/jquery.d.ts": {
-      "commit": "8c4ec896ab619e7cb6572f82423e6e1eece70f5a"
+      "commit": "4f7b7e01d3a9622bfab0bef469e169529e60c66b"
     },
     "toastr/toastr.d.ts": {
       "commit": "8c4ec896ab619e7cb6572f82423e6e1eece70f5a"
+    },
+    "angularjs/angular-route.d.ts": {
+      "commit": "4f7b7e01d3a9622bfab0bef469e169529e60c66b"
     }
   }
 }

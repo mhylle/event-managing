@@ -1,0 +1,19 @@
+<div ng-controller="UserController as vm">
+    <div>List of users:</div>
+    <div ng-repeat="user in vm.userList" class="card">
+        <div class="user.basedata">
+            <div class="user.name">{{user.firstname}} {{user.lastname}}</div>
+            <div><span class="label label-default">Username:</span><span>{{user.username}}</span></div>
+        </div>
+        <div class="user.additional">
+            <div><span class="label label-default">Adress:</span><span>{{user.address}}</span></div>
+            <div><span class="label label-default">Mail: </span><span>{{user.mail}}</span>
+                <span class="label label-default">Phone: </span><span>{{user.phone}}</span>
+            </div>
+            <div><span>{{user.logicalId}}</span></div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <a href="#"  class="btn btn-default" ng-click="vm.users()">Get Users</a>
+    </div>
+</div>

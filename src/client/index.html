@@ -27,8 +27,10 @@
 </head>
 <body>
     <div>
+        {{1+3}}
         <div ui-view=""></div>
-        <div ng-include="'app/security/login.html'"></div>
+        <!--<div ng-include="'app/security/login.html'"></div>-->
+        <!--<div ng-include="'app/users/users.html'"></div>-->
         <!--<div id="splash-page" ng-show="showSplash">-->
             <!--<div class="page-splash">-->
                 <!--<div class="page-splash-message">-->
@@ -51,6 +53,7 @@
     <script src="/tools/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/tools/bower_components/toastr/toastr.js"></script>
     <script src="/tools/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/tools/bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -59,9 +62,9 @@
     <script src="/src/client/app/app.module.js"></script>
     <script src="/src/client/app/blocks/logger/logger.module.js"></script>
     <script src="/src/client/app/security/security.module.js"></script>
-    <script src="/src/client/app/core/app.config.js"></script>
     <script src="/src/client/app/tsoutput/blocks/logger/logger.interface.js"></script>
     <script src="/src/client/app/tsoutput/blocks/logger/logger.js"></script>
+    <script src="/src/client/app/tsoutput/core/app.config.js"></script>
     <script src="/src/client/app/tsoutput/security/security.controller.interface.js"></script>
     <script src="/src/client/app/tsoutput/security/security.controller.js"></script>
     <script src="/src/client/app/tsoutput/security/security.service.js"></script>
@@ -69,9 +72,6 @@
     <script src="/src/client/app/tsoutput/users/user.controller.js"></script>
     <script src="/src/client/app/tsoutput/users/user.interface.js"></script>
     <script src="/src/client/app/tsoutput/users/user.service.js"></script>
-    <script src="/src/client/app/users/user.controller.interface.js"></script>
-    <script src="/src/client/app/users/user.controller.js"></script>
-    <script src="/src/client/app/users/user.interface.js"></script>
     <script src="/src/client/app/users/user.service.js"></script>
     <!-- endinject -->
 
