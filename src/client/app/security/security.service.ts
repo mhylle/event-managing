@@ -13,9 +13,8 @@ module app.services {
 
         /* @ngInject */
         constructor($http:ng.IHttpService, $q:ng.IQService) {
-            this.$http = $http;
-            this.$q = $q;
-
+            //this.$http = $http;
+            //this.$q = $q;
         }
 
         login(username:string, password:string):ng.IPromise<any> {

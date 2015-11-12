@@ -6,6 +6,7 @@ module.exports = function () {
     var root = './';
     var specRunnerFile = 'specs.html';
     var temp = './.tmp/';
+    var tsoutput = clientApp + '/tsoutput/';
     var wiredep = require('wiredep');
     var bowerFiles = wiredep({devDependencies: true})['js'];
     var bower = {
@@ -57,6 +58,8 @@ module.exports = function () {
         ts: [
             clientApp + '**/*.ts'
         ],
+        tsout: tsoutput,
+
         /**
          * optimized files
          */

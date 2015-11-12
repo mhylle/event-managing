@@ -77,7 +77,7 @@ gulp.task('typescript', function () {
             target: 'es5'
         }))
         .js
-        .pipe(gulp.dest(config.clientApp));
+        .pipe(gulp.dest(config.tsout));
 });
 
 /**
@@ -148,7 +148,7 @@ gulp.task('wiredep', function() {
         .pipe(gulp.dest(config.client));
 });
 
-gulp.task('inject', ['wiredep', 'styles', 'templatecache'], function() {
+gulp.task('inject', ['wiredep', 'styles', 'templatecache', 'typescript'], function() {
     log('Wire up css into the html, after files are ready');
 
     return gulp
@@ -305,6 +305,16 @@ gulp.task('clean-code', function(done) {
         config.temp + '**/*.js',
         config.build + 'js/**/*.js',
         config.build + '**/*.html'
+    );
+    clean(files, done);
+});
+/**
+ * Remove all compiled ts output.
+ * @param  {Function} done - callback when complete
+ */
+gulp.task('clean-tsout', function(done) {
+    var files = [].concat(
+        config.tsout + '**/*.js'
     );
     clean(files, done);
 });
