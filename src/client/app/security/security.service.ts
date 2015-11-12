@@ -11,23 +11,27 @@ module app.services {
         private $http;
         private $q:ng.IQService;
 
+        private userInfo:any;
+
         /* @ngInject */
         constructor($http:ng.IHttpService, $q:ng.IQService) {
-            //this.$http = $http;
-            //this.$q = $q;
+            this.$http = $http;
+            this.$q = $q;
         }
+
 
         login(username:string, password:string):ng.IPromise<any> {
             var defer = this.$q.defer();
-            this.$http.get('/api/users').then(function (response) {
-                var data = response.data;
+            var that = this;
+            this.$http.post('/api/login', {userName: username, password: password}).then(function (response) {
+                that.userInfo = {
+                    accessToken: response.data.access_token,
+                    userName: response.data.userName
+                };
 
-                for (var i = 0; i<data.length; i++) {
-                    if (data[i].firstname === username && data[i].lastname === password) {
-                        return defer.resolve(true);
-                    }
-                }
-                return defer.resolve(false);
+                return defer.resolve(that.userInfo);
+            }, function (error) {
+                defer.reject(error);
             });
             return defer.promise;
         }

@@ -1,29 +1,16 @@
 module.exports = {
-    users: getUsers(),
-    people: getPeople()
+    users: getUsers()
 };
 
-function getPeople() {
-    return [
-        {id: 1, firstName: 'John', lastName: 'Papa', age: 25, location: 'Florida'},
-        {id: 2, firstName: 'Ward', lastName: 'Bell', age: 31, location: 'California'},
-        {id: 3, firstName: 'Colleen', lastName: 'Jones', age: 21, location: 'New York'},
-        {id: 4, firstName: 'Madelyn', lastName: 'Green', age: 18, location: 'North Dakota'},
-        {id: 5, firstName: 'Ella', lastName: 'Jobs', age: 18, location: 'South Dakota'},
-        {id: 6, firstName: 'Landon', lastName: 'Gates', age: 11, location: 'South Carolina'},
-        {id: 7, firstName: 'Haley', lastName: 'Guthrie', age: 35, location: 'Wyoming'},
-        {id: 8, firstName: 'Aaron', lastName: 'Jinglehiemer', age: 22, location: 'Utah'}
-    ];
-}
 
 function getUsers() {
     return [
         {
             "id": 1,
             "firstname": "Ted",
-            lastname: "Tedson",
+            "lastname": "Tedson",
             "username": "tte",
-            "passstring": "tte",
+            "passtring": "tte",
             "address": "Someroad 1234, 576923 NA, Illinois, USA",
             "mail": "ted@something.com",
             "phone": "22446677",
@@ -32,9 +19,9 @@ function getUsers() {
         {
             "id": 2,
             "firstname": "Martin",
-            lastname: "Hylleberg",
+            "lastname": "Hylleberg",
             "username": "mah",
-            "passstring": "mah",
+            "passtring": "mah",
             "address": "Tousvej 6a, 8230 Åbyhøj, Danmark",
             "mail": "mhylle@gmail.com",
             "phone": "61791394",
@@ -43,9 +30,9 @@ function getUsers() {
         {
             "id": 3,
             "firstname": "Zed",
-            lastname: "Zedson",
+            "lastname": "Zedson",
             "username": "zze",
-            "passstring": "zze",
+            "passtring": "zze",
             "address": "",
             "mail": "zed@something.com",
             "phone": "54461564",
@@ -54,9 +41,9 @@ function getUsers() {
         {
             "id": 4,
             "firstname": "Tina",
-            lastname: "Tinason",
+            "lastname": "Tinason",
             "username": "tti",
-            "passstring": "tti",
+            "passtring": "tti",
             "address": "",
             "mail": "tina@something.com",
             "phone": "16761311",
