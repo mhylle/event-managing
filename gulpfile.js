@@ -80,6 +80,10 @@ gulp.task('typescript', function () {
         .pipe(gulp.dest(config.tsout));
 });
 
+gulp.task('clean-typescript', function (done) {
+    return clean(config.tsout,done);
+});
+
 /**
  * Copy fonts
  * @return {Stream}

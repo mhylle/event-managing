@@ -20,19 +20,21 @@ module app.services {
             return defer.promise;
         }
 
-        static $inject = ['$http', '$q'];
+        static $inject = ['$http', '$q', '$window'];
         private $http;
         private $q:ng.IQService;
+        private $window:any;
 
         /* @ngInject */
-        constructor($http:ng.IHttpService, $q:ng.IQService) {
+        constructor($http:ng.IHttpService, $q:ng.IQService, $window:any) {
             this.$http = $http;
             this.$q = $q;
+            this.$window = $window;
 
         }
 
-        static instance($http:ng.IHttpService, $q:ng.IQService):IUserService {
-            return new UserService($http, $q);
+        static instance($http:ng.IHttpService, $q:ng.IQService, $window:any):IUserService {
+            return new UserService($http, $q, $window);
         }
 
         static serviceId = 'userservice';

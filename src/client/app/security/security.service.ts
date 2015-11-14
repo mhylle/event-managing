@@ -7,16 +7,18 @@ module app.services {
     }
 
     class SecurityService implements ISecurityService {
-        static $inject = ['$http', '$q'];
-        private $http;
+        static $inject = ['$http', '$q', '$window'];
+        private $http: ng.IHttpService;
         private $q:ng.IQService;
+        private $window:any;
 
         private userInfo:any;
 
         /* @ngInject */
-        constructor($http:ng.IHttpService, $q:ng.IQService) {
+        constructor($http:ng.IHttpService, $q:ng.IQService, $window:any) {
             this.$http = $http;
             this.$q = $q;
+            this.$window = $window;
         }
 
 
@@ -28,6 +30,7 @@ module app.services {
                     accessToken: response.data.accessToken,
                     userName: response.data.userName
                 };
+                that.$window.sessionStorage["userInfo"] = JSON.stringify(that.userInfo);
 
                 return defer.resolve(that.userInfo);
             }, function (error) {
@@ -40,8 +43,8 @@ module app.services {
             return false;
         };
 
-        static instance($http:ng.IHttpService, $q:ng.IQService):ISecurityService {
-            return new SecurityService($http, $q);
+        static instance($http:ng.IHttpService, $q:ng.IQService, $window:any):ISecurityService {
+            return new SecurityService($http, $q, $window);
         }
 
         static serviceId = 'securityservice';

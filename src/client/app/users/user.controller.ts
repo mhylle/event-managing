@@ -11,13 +11,6 @@
  * */
 module app.controllers {
     import IUserService = app.services.IUserService;
-    export interface IHttpResponse {
-        data :any; // The response body transformed with the transform functions.
-        status :number; // HTTP status code of the response.
-        headers : any; // Header getter function.
-        config : any: // The configuration object that was used to generate the request.
-        statusText :string; // HTTP status text of the response.
-    }
 
     export class UserController implements IUserController {
 
@@ -26,7 +19,7 @@ module app.controllers {
         userList:IUser[];
         private $q:ng.IQService;
         static $inject = ['logger', 'userservice', '$q'];
-        errorMessage:string;
+        errorMessage: string;
 
         /* @ngInject */
         constructor(private logger:app.blocks.ILogger, private userService:IUserService) {
@@ -44,13 +37,14 @@ module app.controllers {
 
         users():void {
             var that = this;
-            this.userService.users().then(function (response: IHttpResponse) {
+
+            this.userService.users().then(function (response) {
                 if (response) {
                     if (response.status == 200) {
                         that.logger.info('Successfully called the users service.');
                         that.userList = response;
                     } else {
-                        that.logger.error('Got an error while trying to retrieve users. Code: ' + response.status + ' , Message: ' + response.data)
+                       that.logger.error('Got an error while trying to retrieve users. Code: ' + response.status + ' , Message: ' + response.data)
                         that.userList = [];
                         that.errorMessage = response.data;
                     }
