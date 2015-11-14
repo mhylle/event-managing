@@ -4,6 +4,7 @@ var router = express.Router();
 var jwt = require('jwt-simple');
 var four0four = require('./utils/404')();
 var data = require('./data');
+var _ = require('underscore');
 
 var app = express();
 app.set('jwtTokenSecret', '123456ABCDEF');
@@ -11,7 +12,7 @@ app.set('jwtTokenSecret', '123456ABCDEF');
 router.get('/users', requiresAuthentication, getUsers);
 router.get('/user/:id', requiresAuthentication, getUser);
 router.post('/login/', login);
-router.post('/logout/', requiresAuthentication, logout);
+router.get('/logout/', requiresAuthentication, logout);
 router.get('/*', four0four.notFoundMiddleware);
 
 module.exports = router;
@@ -36,7 +37,7 @@ function login(req, res, next) {
                 }, app.get('jwtTokenSecret'));
                 tokens.push(token);
                 foundUser = true;
-                res.send(200, {accessToken: token, userName: userName});
+                res.send(200, {accesstoken: token, userName: userName});
                 break;
             }
         }
@@ -47,7 +48,7 @@ function login(req, res, next) {
 }
 
 function logout(req, res, next) {
-    var token = req.headers.accessToken;
+    var token = req.headers.accesstoken;
     removeFromTokens(token);
     res.send(200);
 }
@@ -62,8 +63,8 @@ function removeFromTokens(token) {
 }
 function requiresAuthentication(request, response, next) {
     console.log(request.headers);
-    if (request.headers.accessToken) {
-        var token = request.headers.accessToken;
+    if (request.headers.accesstoken) {
+        var token = request.headers.accesstoken;
         if (_.where(tokens, token).length > 0) {
             var decodedToken = jwt.decode(token, app.get('jwtTokenSecret'));
             if (new Date(decodedToken.expires) > new Date()) {

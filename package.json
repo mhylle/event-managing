@@ -14,7 +14,8 @@
     "jwt-simple": "^0.3.1",
     "morgan": "^1.1.1",
     "serve-favicon": "^2.0.1",
-    "typescript": "^1.6.2"
+    "typescript": "^1.6.2",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "browser-sync": "^2.7.13",
