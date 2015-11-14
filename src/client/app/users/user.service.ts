@@ -4,17 +4,19 @@ module app.services {
     'use strict';
     export interface IUserService {
         users: () => ng.IPromise<IUser[]>;
-
     }
 
     class UserService implements IUserService {
-
         users():ng.IPromise<any> {
             var defer = this.$q.defer();
-            this.$http.get('/api/users').then(function (response) {
-                var data = response.data;
-                return defer.resolve(data);
-            });
+            this.$http.get('/api/users')
+                .then(function (response) {
+                    var data = response.data;
+                    return defer.resolve(data);
+                })
+                .catch(function (error) {
+                    return defer.resolve(error);
+                });
             return defer.promise;
         }
 

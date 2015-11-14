@@ -2,7 +2,7 @@
 ///<reference path="../blocks/logger/logger.ts"/>
 /**
  * @ngdoc controller
- * @name SecurityController
+ * @name UserController
  *
  * @description
  * _Please update the description and dependencies._
@@ -41,7 +41,7 @@ module app.controllers {
                     that.logger.info('Successfully called the users service.');
                     that.userList = response;
                 } else {
-                    that.logger.info('Failed login.');
+                    that.logger.info('Could not retrieve user list.');
                     that.userList = null;
                 }
             });

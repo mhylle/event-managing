@@ -27,11 +27,10 @@
 </head>
 <body>
     <div>
-        {{1+3}}
-        <a href="#login">Go there</a>
-        <div ui-view=""></div>
-        <!--<div ng-include="'app/security/login.html'"></div>-->
-        <!--<div ng-include="'app/users/users.html'"></div>-->
+        <a ui-sref="login">Login Page</a>
+        <a ui-sref="users">Show users</a>
+        <div ui-view></div>
+
         <!--<div id="splash-page" ng-show="showSplash">-->
             <!--<div class="page-splash">-->
                 <!--<div class="page-splash-message">-->

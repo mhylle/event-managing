@@ -5,7 +5,18 @@ module app {
     'use strict';
 
     angular.module('app', [
-        'ngRoute',
+        'ui.router',
         'blocks.logger'
-    ]);
+    ]).config(['$stateProvider',
+        function ($stateProvider) {
+            $stateProvider
+                .state('login', {
+                    url: '/login',
+                    templateUrl: 'app/security/login.html',
+                })
+                .state('users', {
+                    url: '/users',
+                    templateUrl: 'app/users/users.html',
+                });
+        }]);
 }
