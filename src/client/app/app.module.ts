@@ -7,16 +7,17 @@ module app {
     angular.module('app', [
         'ui.router',
         'blocks.logger'
-    ]).config(['$stateProvider',
-        function ($stateProvider) {
-            $stateProvider
-                .state('login', {
-                    url: '/login',
-                    templateUrl: 'app/security/login.html',
-                })
-                .state('users', {
-                    url: '/users',
-                    templateUrl: 'app/users/users.html',
-                });
-        }]);
+    ]).config(['$stateProvider', configuration]);
+
+    function configuration($stateProvider) {
+        $stateProvider
+            .state('login', {
+                url: '/login',
+                templateUrl: 'app/security/login.html',
+            })
+            .state('users', {
+                url: '/users',
+                templateUrl: 'app/users/users.html',
+            });
+    }
 }
