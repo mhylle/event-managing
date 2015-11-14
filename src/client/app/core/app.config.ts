@@ -7,7 +7,7 @@ module app {
     function routes($routeProvider: ng.route.IRouteProvider) {
         $routeProvider
             .when('/login', {
-                templateUrl: 'security/login.html',
+                templateUrl: 'app/security/login.html',
                 controller: 'SecurityController',
                 controllerAs: 'vm'
             })
@@ -22,7 +22,7 @@ module app {
                 controllerAs: 'vm'
             })
             .otherwise({
-                redirectTo: '/'
+                redirectTo: '/login'
             });
     }
 

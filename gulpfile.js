@@ -121,10 +121,10 @@ gulp.task('templatecache', ['clean-code'], function() {
         .pipe($.if(args.verbose, $.bytediff.start()))
         .pipe($.minifyHtml({empty: true}))
         .pipe($.if(args.verbose, $.bytediff.stop(bytediffFormatter)))
-        //.pipe($.angularTemplatecache(
-            //config.templateCache.file,
-            //config.templateCache.options
-        //))
+        .pipe($.angularTemplatecache(
+            config.templateCache.file,
+            config.templateCache.options
+        ))
         .pipe(gulp.dest(config.temp));
 });
 
@@ -218,7 +218,7 @@ gulp.task('build', ['optimize', 'images', 'fonts'], function() {
  * and inject them into the new index.html
  * @return {Stream}
  */
-gulp.task('optimize', ['inject', 'test'], function() {
+gulp.task('optimize', ['inject'], function() {
     log('Optimizing the js, css, and html');
 
     var assets = $.useref.assets({searchPath: './'});

@@ -81,14 +81,14 @@ module.exports = function () {
         /**
          * template cache
          */
-        //templateCache: {
-        //    file: 'templates.js',
-        //    options: {
-        //        module: 'app.core',
-        //        root: 'app/',
-        //        standalone: false
-        //    }
-        //},
+        templateCache: {
+            file: 'templates.js',
+            options: {
+                module: 'app',
+                root: 'app/',
+                standalone: false
+            }
+        },
 
         /**
          * Bower and NPM files
@@ -159,7 +159,7 @@ module.exports = function () {
                 config.specHelpers,
                 clientApp + '**/*.module.js',
                 clientApp + '**/*.js',
-                //temp + config.templateCache.file,
+                temp + config.templateCache.file,
                 config.serverIntegrationSpecs
             ),
             exclude: [],

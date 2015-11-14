@@ -1,4 +1,5 @@
-var express = require('express')
+/* W0116 */
+var express = require('express');
 var router = express.Router();
 var jwt = require('jwt-simple');
 var four0four = require('./utils/404')();
@@ -35,18 +36,18 @@ function login(req, res, next) {
                 }, app.get('jwtTokenSecret'));
                 tokens.push(token);
                 foundUser = true;
-                res.send(200, {access_token: token, userName: userName});
+                res.send(200, {accessToken: token, userName: userName});
                 break;
             }
         }
     }
     if (!foundUser) {
-        res.send(401, "Invalid Credentials");
+        res.send(401, 'Invalid Credentials');
     }
 }
 
 function logout(req, res, next) {
-    var token = req.headers.access_token;
+    var token = req.headers.accessToken;
     removeFromTokens(token);
     res.send(200);
 }
@@ -61,8 +62,8 @@ function removeFromTokens(token) {
 }
 function requiresAuthentication(request, response, next) {
     console.log(request.headers);
-    if (request.headers.access_token) {
-        var token = request.headers.access_token;
+    if (request.headers.accessToken) {
+        var token = request.headers.accessToken;
         if (_.where(tokens, token).length > 0) {
             var decodedToken = jwt.decode(token, app.get('jwtTokenSecret'));
             if (new Date(decodedToken.expires) > new Date()) {
@@ -70,11 +71,11 @@ function requiresAuthentication(request, response, next) {
                 return;
             } else {
                 removeFromTokens();
-                response.send(401, "Your session is expired");
+                response.send(401, 'Your session is expired');
             }
         }
     }
-    response.send(401, "No access token found in the request");
+    response.send(401, 'No access token found in the request');
 }
 
 function getUsers(req, res, next) {

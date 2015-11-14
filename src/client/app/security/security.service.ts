@@ -25,7 +25,7 @@ module app.services {
             var that = this;
             this.$http.post('/api/login', {userName: username, password: password}).then(function (response) {
                 that.userInfo = {
-                    accessToken: response.data.access_token,
+                    accessToken: response.data.accessToken,
                     userName: response.data.userName
                 };
 
