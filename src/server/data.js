@@ -48,6 +48,36 @@ function getUsers() {
             'mail': 'tina@something.com',
             'phone': '16761311',
             'logicalId': '20201a7'
+        },{
+            'id': 5,
+            'firstname': 'Tina',
+            'lastname': 'Tinason',
+            'username': 'tti',
+            'passtring': 'tti',
+            'address': '',
+            'mail': 'tina@something.com',
+            'phone': '16761311',
+            'logicalId': '20201a7'
+        },{
+            'id': 6,
+            'firstname': 'Tina',
+            'lastname': 'Tinason',
+            'username': 'tti',
+            'passtring': 'tti',
+            'address': '',
+            'mail': 'tina@something.com',
+            'phone': '16761311',
+            'logicalId': '20201a7'
+        },{
+            'id': 7,
+            'firstname': 'Tina',
+            'lastname': 'Tinason',
+            'username': 'tti',
+            'passtring': 'tti',
+            'address': '',
+            'mail': 'tina@something.com',
+            'phone': '16761311',
+            'logicalId': '20201a7'
         }
     ];
 }

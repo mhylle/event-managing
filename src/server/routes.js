@@ -71,14 +71,16 @@ function requiresAuthentication(request, response, next) {
                 return;
             } else {
                 removeFromTokens();
-                response.send(401, 'Your session is expired');
+                response.status(401).send('Your session is expired');
+                return;
             }
         }
     }
-    response.send(401, 'No access token found in the request');
+    response.status(401).send('No access token found in the request');
 }
 
 function getUsers(req, res, next) {
+    console.log('getusers start');
     res.status(200).send(data.users);
 }
 
