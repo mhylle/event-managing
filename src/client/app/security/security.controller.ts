@@ -47,12 +47,12 @@ module app.controllers {
                     that.logger.info('Successfully logged in.');
                     that.loginStatus ='Successfully logged in.';
                     that.userInfo = that.securityService.getSecurityToken();
+                    that.logger.info(that.userInfo);
                 } else {
                     that.logger.info('Failed login.');
                     that.loginStatus =  'Failed login.';
                 }
             });
-
         }
 
         logout():void {
