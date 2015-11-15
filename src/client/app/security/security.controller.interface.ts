@@ -7,5 +7,6 @@ module app.controllers {
         loginStatus: string;
         activate: () => void;
         login: () => void;
+        logout: () => void;
     }
 }

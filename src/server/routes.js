@@ -1,5 +1,6 @@
 /* W0116 */
 var express = require('express');
+var errorhandler = require('errorhandler')
 var router = express.Router();
 var jwt = require('jwt-simple');
 var four0four = require('./utils/404')();
@@ -8,11 +9,11 @@ var _ = require('underscore');
 
 var app = express();
 app.set('jwtTokenSecret', '123456ABCDEF');
-
+app.use(errorhandler);
 router.get('/users', requiresAuthentication, getUsers);
 router.get('/user/:id', requiresAuthentication, getUser);
 router.post('/login/', login);
-router.get('/logout/', requiresAuthentication, logout);
+router.get('/logout/',  logout);
 router.get('/*', four0four.notFoundMiddleware);
 
 module.exports = router;
@@ -63,9 +64,12 @@ function removeFromTokens(token) {
 }
 function requiresAuthentication(request, response, next) {
     console.log(request.headers);
-    if (request.headers.accesstoken) {
+    if (request.headers.accesstoken && request.headers.accesstoken != null) {
         var token = request.headers.accesstoken;
-        if (_.where(tokens, token).length > 0) {
+        // underscore checks if the token supplied is in the list of tokens that the server is aware of.
+        // if the token is found we can then start looking into if it is a valid one.
+        var where = _.where(tokens, token);
+        if (where.length > 0) {
             var decodedToken = jwt.decode(token, app.get('jwtTokenSecret'));
             if (new Date(decodedToken.expires) > new Date()) {
                 next();

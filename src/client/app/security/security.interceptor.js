@@ -3,7 +3,7 @@ angular
     .factory('sessionInjector',['$window', function ($window) {
         var sessionInjector = {
             request: function (config) {
-                config.headers['accesstoken'] = $window.sessionStorage["userInfo"];
+                config.headers['accessoken'] = $window.sessionStorage["userInfo"];
                 return config;
             }
 

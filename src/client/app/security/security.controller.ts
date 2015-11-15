@@ -13,11 +13,13 @@ module app.controllers {
     import ISecurityService = app.services.ISecurityService;
 
     export class SecurityController implements ISecurityController {
+
         static controllerId = 'SecurityController';
         title:string;
         username:string;
         password:string;
         loginStatus:string;
+        userInfo:string;
 
         static $inject = ['logger', 'securityservice'];
 
@@ -49,6 +51,14 @@ module app.controllers {
                     that.loginStatus =  'Failed login.';
                 }
             });
+            this.userInfo = this.securityService.getSecurityToken();
+        }
+
+        logout():void {
+            var that = this;
+            this.securityService.logout().then(function(response) {
+                that.loginStatus = 'Logged out';
+            })
         }
     }
     angular.module('app')

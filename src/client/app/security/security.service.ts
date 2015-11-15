@@ -3,8 +3,9 @@ module app.services {
     'use strict';
     export interface ISecurityService {
         login: (username:string, password:string) => ng.IPromise<boolean>;
-        logout: () =>void;
+        logout: () => ng.IPromise<boolean>;
         isLoggedIn: (username:string, password:string) => boolean;
+        getSecurityToken:() => string;
     }
 
     class SecurityService implements ISecurityService {
@@ -29,22 +30,35 @@ module app.services {
             var that = this;
             this.$http.post('/api/login', {userName: username, password: password}).then(function (response) {
                 that.userInfo = {
-                    accessToken: response.data.accesstoken,
+                    accesstoken: response.data.accesstoken,
                     userName: response.data.userName
                 };
                 that.$window.sessionStorage["userInfo"] = JSON.stringify(that.userInfo);
 
-                return defer.resolve(that.userInfo);
+                defer.resolve(that.userInfo);
             }, function (error) {
                 defer.reject(error);
             });
             return defer.promise;
         }
 
-        logout() : void {
-            this.$http.get('/api/logout').then(function (response) {
+        getSecurityToken():string {
+            var token:string;
+            var userInfo = this.$window.sessionStorage["userInfo"];
+            if (userInfo && userInfo != null) {
+                token = userInfo.accesstoken;
+                return token;
+            }
+        }
 
+        logout() :ng.IPromise<any>  {
+            var defer = this.$q.defer();
+            var that = this;
+            this.$http.get('/api/logout').then(function (response) {
+                that.$window.sessionStorage["userInfo"] = null;
+                defer.resolve();
             });
+            return defer.promise;
         }
         isLoggedIn(username:string, password:string):boolean {
             return false;
