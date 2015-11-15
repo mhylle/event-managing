@@ -8,7 +8,7 @@ var data = require('./data');
 var _ = require('underscore');
 
 var app = express();
-app.set('jwtTokenSecret', '123456ABCDEF');
+//app.set('jwtTokenSecret', '123456ABCDEF');
 app.use(errorhandler);
 router.get('/users', requiresAuthentication, getUsers);
 router.get('/user/:id', requiresAuthentication, getUser);
@@ -17,7 +17,7 @@ router.get('/logout/',  logout);
 router.get('/*', four0four.notFoundMiddleware);
 
 module.exports = router;
-
+var secret = '4757hgf87348gfhj3rf89fhj8rgerg345';
 var tokens = [];
 //////////////
 
@@ -35,7 +35,7 @@ function login(req, res, next) {
                 var token = jwt.encode({
                     userName: userName,
                     expires: expires
-                }, app.get('jwtTokenSecret'));
+                }, secret, 'HS512');
                 tokens.push(token);
                 foundUser = true;
                 res.send(200, {accesstoken: token, userName: userName});
@@ -63,14 +63,15 @@ function removeFromTokens(token) {
     }
 }
 function requiresAuthentication(request, response, next) {
-    console.log(request.headers);
+    //console.log(request.headers);
     if (request.headers.accesstoken && request.headers.accesstoken != null) {
         var token = request.headers.accesstoken;
         // underscore checks if the token supplied is in the list of tokens that the server is aware of.
         // if the token is found we can then start looking into if it is a valid one.
         var where = _.where(tokens, token);
         if (where.length > 0) {
-            var decodedToken = jwt.decode(token, app.get('jwtTokenSecret'));
+            var decodedToken = jwt.decode(token, secret);
+            console.log(decodedToken);
             if (new Date(decodedToken.expires) > new Date()) {
                 next();
                 return;

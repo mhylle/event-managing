@@ -46,12 +46,13 @@ module app.controllers {
                 if (response) {
                     that.logger.info('Successfully logged in.');
                     that.loginStatus ='Successfully logged in.';
+                    that.userInfo = that.securityService.getSecurityToken();
                 } else {
                     that.logger.info('Failed login.');
                     that.loginStatus =  'Failed login.';
                 }
             });
-            this.userInfo = this.securityService.getSecurityToken();
+
         }
 
         logout():void {
