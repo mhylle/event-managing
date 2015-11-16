@@ -13,11 +13,15 @@ module app {
         $stateProvider
             .state('login', {
                 url: '/login',
-                templateUrl: 'app/security/login.html',
+                templateUrl: 'app/security/login.html'
             })
             .state('users', {
                 url: '/users',
-                templateUrl: 'app/users/users.html',
+                templateUrl: 'app/users/users.html'
+            })
+            .state('home', {
+                url: '/home',
+                templateUrl: 'app/home.html'
             });
     }
 }
