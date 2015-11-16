@@ -40,13 +40,13 @@ module app.controllers {
 
             this.userService.users().then(function (response) {
                 if (response) {
-                    if (response.status == 200) {
-                        that.logger.info('Successfully called the users service.');
-                        that.userList = response;
-                    } else {
-                       that.logger.error('Got an error while trying to retrieve users. Code: ' + response.status + ' , Message: ' + response.data)
+                    if (response.status) {
+                        that.logger.error('Got an error while trying to retrieve users. Code: ' + response.status + ' , Message: ' + response.data)
                         that.userList = [];
                         that.errorMessage = response.data;
+                    } else {
+                        that.logger.info('Successfully called the users service.');
+                        that.userList = response;
                     }
                 } else {
                     that.logger.info('Could not retrieve user list.');

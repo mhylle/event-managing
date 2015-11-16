@@ -32,10 +32,11 @@ function login(req, res, next) {
             if (password === user.passtring) {
                 var expires = new Date();
                 expires.setDate((new Date()).getDate() + 5);
-                var token = jwt.encode({
-                    userName: userName,
-                    expires: expires
-                }, secret, 'HS512');
+                var token = userName;
+                //var token = jwt.encode({
+                //    userName: userName,
+                //    expires: expires
+                //}, secret, 'HS512');
                 tokens.push(token);
                 foundUser = true;
                 res.send(200, {accesstoken: token, userName: userName});
@@ -70,16 +71,18 @@ function requiresAuthentication(request, response, next) {
         // if the token is found we can then start looking into if it is a valid one.
         var where = _.where(tokens, token);
         if (where.length > 0) {
-            var decodedToken = jwt.decode(token, secret);
-            console.log(decodedToken);
-            if (new Date(decodedToken.expires) > new Date()) {
-                next();
-                return;
-            } else {
-                removeFromTokens();
-                response.status(401).send('Your session is expired');
-                return;
-            }
+            //var decodedToken = jwt.decode(token, secret);
+            console.log(token);
+            next();
+            return;
+            //if (new Date(decodedToken.expires) > new Date()) {
+            //    next();
+            //    return;
+            //} else {
+            //    removeFromTokens();
+            //    response.status(401).send('Your session is expired');
+            //    return;
+            //}
         }
     }
     response.status(401).send('No access token found in the request');
