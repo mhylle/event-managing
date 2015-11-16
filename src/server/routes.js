@@ -4,8 +4,8 @@ var errorhandler = require('errorhandler');
 var router = express.Router();
 
 var four0four = require('./utils/404')();
-var security = require('./security/security')();
-var users = require('./users/users')();
+var security = require('./security/security.service')();
+var users = require('./users/user.service')();
 var data = require('./data');
 
 
