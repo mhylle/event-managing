@@ -16,6 +16,7 @@ module app.services {
         private $window:any;
 
         private userInfo:any;
+        public userName: string;
 
         /* @ngInject */
         constructor($http:ng.IHttpService, $q:ng.IQService, $window:any) {
@@ -31,8 +32,9 @@ module app.services {
             this.$http.post('/api/login', {userName: username, password: password}).then(function (response) {
                 that.userInfo = {
                     accesstoken: response.data.accesstoken,
-                    userName: response.data.userName
+                    userName: response.data.userName,
                 };
+                that.userName = username;
                 that.$window.sessionStorage["userInfo"] = JSON.stringify(that.userInfo);
 
                 defer.resolve(that.userInfo);
