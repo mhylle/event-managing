@@ -5,14 +5,15 @@ module app.controllers {
     import ISecurityService = app.services.ISecurityService;
 
     export class HeaderController implements IHeaderController {
+
         static controllerId = 'HeaderController';
         username:string;
 
-        static $inject = ['$scope','logger', 'securityservice'];
+        static $inject = ['$scope', 'logger', 'securityservice'];
         private title:string;
 
         /* @ngInject */
-        constructor(private $scope: ng.IScope,  private logger:app.blocks.ILogger, private securityService:ISecurityService) {
+        constructor(private $scope:ng.IScope, private logger:app.blocks.ILogger, private securityService:ISecurityService) {
             this.init();
         }
 
@@ -21,11 +22,25 @@ module app.controllers {
             this.activate();
         }
 
+        getUserName():string{
+            return this.username;
+        }
         private activate():void {
-           this.$scope.$watch(this.securityService.getSecurityToken(), function () {
-                this.username = this.securityService.getSecurityToken();
+            var that = this;
+            this.$scope.$watch(function () {
+                that.logger.info('inside watch, token was: ' + that.securityService.getSecurityToken());
+                return that.securityService.getSecurityToken();
+            }, function (newVal, oldVal) {
+                if (this.logger) {
+                    this.logger.info('watch triggered..')
+                }
+                if (typeof newVal !=='undefined') {
+                    that.username = newVal;
+                } else {
+                    that.username = 'Not logged in.';
+                }
+
             });
-            this.username = this.securityService.getSecurityToken();
         }
     }
 

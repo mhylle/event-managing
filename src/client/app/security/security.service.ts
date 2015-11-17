@@ -49,7 +49,9 @@ module app.services {
             var userInfo = this.$window.sessionStorage["userInfo"];
             if (userInfo && userInfo != null) {
                 var userInfoString = JSON.parse(userInfo);
-                token = userInfoString.accesstoken;
+                if (userInfoString != null) {
+                    token = userInfoString.accesstoken;
+                }
                 return token;
             }
         }
