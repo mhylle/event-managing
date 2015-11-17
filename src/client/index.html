@@ -17,8 +17,8 @@
 
     <!-- build:css styles/lib.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="/tools/bower_components/bootstrap/dist/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/tools/bower_components/toastr/toastr.css"/>
+    <link rel="stylesheet" href="/tools/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/tools/bower_components/toastr/toastr.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -29,46 +29,33 @@
     <!-- endbuild -->
 </head>
 <body>
-<div>
-    <div class="header">
-        <div class="navbar-fixed-top">
-            <div class="container row">
-                <ul class="list-inline">
-                    <li class="active"><a ui-sref="home">Home</a></li>
-                    <li><a ui-sref="users">User Management</a></li>
-                    <li><a ui-sref="login">Login Page</a></li>
-                </ul>
-                <div ng-controller="SecurityController as vm">
-                    <span>Logged in as: {{vm.userInfo.userName}}</span>
-                </div>
+<div class="wrapper"><div class="navbar-fixed-top header">
+    <div ng-include="'app/layout/header.html'"></div>
+</div>
+<div class="clearfix"></div>
+<div class="usercontent">
+    <div ui-view></div>
+</div>
+</div><div class="footer">
+    <div class="container">
+        <div class="row-fluid">
+            <div class="col-lg-4">
+                <p>&copy; 2015 <a href="#">Hylarious Industries</a></p>
             </div>
-        </div>
-    </div>
-    <div class="content">
-        <div class="container">
-            <div ui-view></div>
-        </div>
-    </div>
-    <div class="footer">
-        <div class="container">
-            <div class="row-fluid">
-                <div class="col-lg-4">
-                    <p>&copy; 2015 <a href="#">Hylarious Industries</a></p>
-                </div>
-                <div class="col-lg-4 text-center">
-                    <ul class="list-inline">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 text-right">
-                    <p>Schema Version 2.0</p>
-                </div>
+            <div class="col-lg-4 text-center">
+                <ul class="list-inline">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 text-right">
+                <p>Schema Version 2.0</p>
             </div>
         </div>
     </div>
 </div>
+
 
 <!-- build:js js/lib.js -->
 <!-- bower:js -->

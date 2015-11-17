@@ -1,0 +1,9 @@
+<img ng-src="images/logo.png" class="logo"/>
+<ul class="list-inline">
+    <li class="active"><a ui-sref="home" style="color:white">Home</a></li>
+    <li><a ui-sref="users">User Management</a></li>
+    <li><a ui-sref="login">Login Page</a></li>
+</ul>
+<div ng-controller="SecurityController as vm">
+    <span>Logged in as: {{vm.userInfo.userName}}</span>
+</div>
