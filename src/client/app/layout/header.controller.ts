@@ -22,9 +22,6 @@ module app.controllers {
             this.activate();
         }
 
-        getUserName():string{
-            return this.username;
-        }
         private activate():void {
             var that = this;
             this.$scope.$watch(function () {
