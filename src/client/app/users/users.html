@@ -1,22 +1,29 @@
-<div ng-controller="UserController as vm">
-    <div>List of users:</div>
-    <div ng-repeat="user in vm.userList" class="card">
+<div ng-include="'app/users/usermenu.html'"></div>
+<div ng-controller="UserController as vm" ng-init="vm.users()">
+    <div class="header-name">
+        <span class="label label-default col-lg-2">Name</span>
+        <span class="label label-default col-lg-1">Username</span>
+        <span class="label label-default col-lg-4">Adress</span>
+        <span class="label label-default col-lg-2">Mail</span>
+        <span class="label label-default col-lg-1">Phone</span>
+        <span class="label label-default col-lg-1">Id</span>
+        <span class="label label-default col-lg-1">Action</span>
+    </div>
+    <div ng-repeat="user in vm.userList" class="card col-lg-12">
         <div class="user.basedata">
-            <div class="user.name">{{user.firstname}} {{user.lastname}}</div>
-            <div><span class="label label-default">Username:</span><span>{{user.username}}</span></div>
-        </div>
-        <div class="user.additional">
-            <div><span class="label label-default">Adress:</span><span>{{user.address}}</span></div>
-            <div><span class="label label-default">Mail: </span><span>{{user.mail}}</span>
-                <span class="label label-default">Phone: </span><span>{{user.phone}}</span>
-            </div>
-            <div><span>{{user.logicalId}}</span></div>
+            <span class="label label-default col-lg-2">{{user.firstname}} {{user.lastname}}</span>
+            <span class="label label-default col-lg-1">{{user.username}}</span>
+            <span class="label label-default col-lg-4">{{user.address ? user.address:  'NA'}}</span>
+            <span class="label label-default col-lg-2">{{user.mail}}</span>
+            <span class="label label-default col-lg-1">{{user.phone}}</span>
+            <span class="label label-default col-lg-1">{{user.logicalId}}</span>
+            <span class="label label-default col-lg-1"><a ui-sref="">...</a></span>
         </div>
     </div>
     <div ng-show="vm.errorMessage">
         {{vm.errorMessage}}
     </div>
     <div class="row text-center">
-        <a href="#"  class="btn btn-default" ng-click="vm.users()">Get Users</a>
+        <a href="#" class="btn btn-default" ng-click="vm.users()">Get Users</a>
     </div>
 </div>
