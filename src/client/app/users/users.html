@@ -1,6 +1,6 @@
 <div ng-include="'app/users/usermenu.html'"></div>
 <div ng-controller="UserController as vm" ng-init="vm.users()">
-    <div class="header-name">
+    <div class="header-name" ng-show="vm.userList.length >0">
         <span class="label label-default col-lg-2">Name</span>
         <span class="label label-default col-lg-1">Username</span>
         <span class="label label-default col-lg-4">Adress</span>
@@ -17,13 +17,10 @@
             <span class="label label-default col-lg-2">{{user.mail}}</span>
             <span class="label label-default col-lg-1">{{user.phone}}</span>
             <span class="label label-default col-lg-1">{{user.logicalId}}</span>
-            <span class="label label-default col-lg-1"><a ui-sref="">...</a></span>
+            <span class="label label-default col-lg-1"><a ui-sref="useraction">...</a></span>
         </div>
     </div>
     <div ng-show="vm.errorMessage">
         {{vm.errorMessage}}
-    </div>
-    <div class="row text-center">
-        <a href="#" class="btn btn-default" ng-click="vm.users()">Get Users</a>
     </div>
 </div>

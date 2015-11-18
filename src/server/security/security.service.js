@@ -11,7 +11,7 @@ module.exports = function () {
         requiresAuthentication: requiresAuthentication
     };
     return service;
-    
+
     function login(req, res, next) {
         var userName = req.body.userName;
         var password = req.body.password;
@@ -55,7 +55,7 @@ module.exports = function () {
 
     function requiresAuthentication(request, response, next) {
         //console.log(request.headers);
-        if (request.headers.accesstoken && request.headers.accesstoken != null) {
+        if (request.headers.accesstoken && request.headers.accesstoken !== null) {
             var token = request.headers.accesstoken;
             // underscore checks if the token supplied is in the list of tokens that the server is aware of.
             // if the token is found we can then start looking into if it is a valid one.

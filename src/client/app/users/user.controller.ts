@@ -37,7 +37,8 @@ module app.controllers {
 
         users():void {
             var that = this;
-
+            this.logger.info('calling users');
+            this.userList = null;
             this.userService.users().then(function (response) {
                 if (response) {
                     if (response.status) {
