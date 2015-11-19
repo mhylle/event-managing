@@ -13,6 +13,7 @@ var app = express();
 //app.set('jwtTokenSecret', '123456ABCDEF');
 app.use(errorhandler);
 router.get('/users', requiresAuthentication, getUsers);
+router.post('/users', requiresAuthentication, saveUser);
 router.get('/user/:id', requiresAuthentication, getUser);
 router.post('/login/', login);
 router.get('/logout/', logout);
@@ -34,6 +35,10 @@ function requiresAuthentication(req, res, next) {
 }
 function getUsers(req, res, next) {
     users.getUsers(req, res, next);
+}
+
+function saveUser(req, res, next) {
+    users.saveUser(req, res, next);
 }
 
 function getUser(req, res, next) {

@@ -1,9 +1,11 @@
 var four0four = require('../utils/404')();
+
 var data = require('../data');
 module.exports = function () {
     var service = {
         getUsers: getUsers,
-        getUser: getUser
+        getUser: getUser,
+        saveUser: saveUser
     };
     return service;
 
@@ -23,5 +25,16 @@ module.exports = function () {
             four0four.send404(req, res, 'user ' + id + ' not found');
         }
     }
-};
 
+    function saveUser(req, res, next) {
+        var user = {};
+        user.name = req.body.name;
+        user.id= req.body.id;
+        user.username= req.body.username;
+        user.address= req.body.address;
+        user.mail= req.body.mail;
+        user.phone= req.body.phone;
+
+        console.log(user);
+    }
+};

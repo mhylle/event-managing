@@ -58,7 +58,7 @@ module app.controllers {
 
         logout():void {
             var that = this;
-            this.securityService.logout().then( => {
+            this.securityService.logout().then(()=> {
                 that.loginStatus = 'Logged out';
             })
         }
