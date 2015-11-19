@@ -9,7 +9,10 @@ module app {
         'blocks.logger'
     ]).config(['$stateProvider', configuration]);
 
+    /* applicationVersion */
+    var applicationVersion : string;
     function configuration($stateProvider) {
+
         $stateProvider
             .state('login', {
                 url: '/login',
