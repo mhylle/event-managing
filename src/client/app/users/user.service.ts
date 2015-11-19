@@ -10,11 +10,11 @@ module app.services {
         users():ng.IPromise<any> {
             var defer = this.$q.defer();
             this.$http.get('/api/users')
-                .then(function (response) {
+                .then(response => {
                     var data = response.data;
                     return defer.resolve(data);
                 })
-                .catch(function (error) {
+                .catch(error => {
                     return defer.resolve(error);
                 });
             return defer.promise;

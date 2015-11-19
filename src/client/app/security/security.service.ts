@@ -16,7 +16,7 @@ module app.services {
         private $window:any;
 
         private userInfo:any;
-        public userName: string;
+        public userName:string;
 
         /* @ngInject */
         constructor($http:ng.IHttpService, $q:ng.IQService, $window:any) {
@@ -29,18 +29,19 @@ module app.services {
         login(username:string, password:string):ng.IPromise<any> {
             var defer = this.$q.defer();
             var that = this;
-            this.$http.post('/api/login', {userName: username, password: password}).then(function (response) {
-                that.userInfo = {
-                    accesstoken: response.data.accesstoken,
-                    userName: response.data.userName,
-                };
-                that.userName = username;
-                that.$window.sessionStorage["userInfo"] = JSON.stringify(that.userInfo);
+            this.$http.post('/api/login', {userName: username, password: password})
+                .then(response => {
+                    that.userInfo = {
+                        accesstoken: response.data.accesstoken,
+                        userName: response.data.userName,
+                    };
+                    that.userName = username;
+                    that.$window.sessionStorage["userInfo"] = JSON.stringify(that.userInfo);
 
-                defer.resolve(that.userInfo);
-            }, function (error) {
-                defer.reject(error);
-            });
+                    defer.resolve(that.userInfo);
+                }, function (error) {
+                    defer.reject(error);
+                });
             return defer.promise;
         }
 
@@ -56,15 +57,17 @@ module app.services {
             }
         }
 
-        logout() :ng.IPromise<any>  {
+        logout():ng.IPromise<any> {
             var defer = this.$q.defer();
             var that = this;
-            this.$http.get('/api/logout').then(function (response) {
-                that.$window.sessionStorage["userInfo"] = null;
-                defer.resolve();
-            });
+            this.$http.get('/api/logout')
+                .then(response => {
+                    that.$window.sessionStorage["userInfo"] = null;
+                    defer.resolve();
+                });
             return defer.promise;
         }
+
         isLoggedIn(username:string, password:string):boolean {
             return false;
         };

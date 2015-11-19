@@ -19,7 +19,7 @@ module app.controllers {
         userList:IUser[];
         private $q:ng.IQService;
         static $inject = ['logger', 'userservice', '$q'];
-        errorMessage: string;
+        errorMessage:string;
 
         /* @ngInject */
         constructor(private logger:app.blocks.ILogger, private userService:IUserService) {
@@ -39,21 +39,24 @@ module app.controllers {
             var that = this;
             this.logger.info('calling users');
             this.userList = null;
-            this.userService.users().then(function (response) {
-                if (response) {
-                    if (response.status) {
-                        that.logger.error('Got an error while trying to retrieve users. Code: ' + response.status + ' , Message: ' + response.data)
-                        that.userList = [];
-                        that.errorMessage = response.data;
+            this.userService.users()
+                .then(response => {
+                    if (response) {
+                        // if there was an error we will have a status code. that we can then use to show the error.
+                        // if there is no status code it means that we successfully retrieved the data.
+                        if (response.status) {
+                            that.logger.error('Got an error while trying to retrieve users. Code: ' + response.status + ' , Message: ' + response.data)
+                            that.userList = [];
+                            that.errorMessage = response.data;
+                        } else {
+                            that.logger.info('Successfully called the users service.');
+                            that.userList = response;
+                        }
                     } else {
-                        that.logger.info('Successfully called the users service.');
-                        that.userList = response;
+                        that.logger.info('Could not retrieve user list.');
+                        that.userList = null;
                     }
-                } else {
-                    that.logger.info('Could not retrieve user list.');
-                    that.userList = null;
-                }
-            });
+                });
         }
     }
     angular.module('app')

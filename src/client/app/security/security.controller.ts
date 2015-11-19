@@ -41,23 +41,24 @@ module app.controllers {
             this.loginStatus = 'Logging in.';
             this.logger.info('Logging in');
             var that = this;
-            this.securityService.login(this.username, this.password).then(function(response) {
-                that.logger.info('Inside promise');
-                if (response) {
-                    that.logger.info('Successfully logged in.');
-                    that.loginStatus ='Successfully logged in.';
-                    that.userInfo = that.securityService.getSecurityToken();
-                    that.logger.info(that.userInfo);
-                } else {
-                    that.logger.info('Failed login.');
-                    that.loginStatus =  'Failed login.';
-                }
-            });
+            this.securityService.login(this.username, this.password)
+                .then(response => {
+                    that.logger.info('Inside promise');
+                    if (response) {
+                        that.logger.info('Successfully logged in.');
+                        that.loginStatus = 'Successfully logged in.';
+                        that.userInfo = that.securityService.getSecurityToken();
+                        that.logger.info(that.userInfo);
+                    } else {
+                        that.logger.info('Failed login.');
+                        that.loginStatus = 'Failed login.';
+                    }
+                });
         }
 
         logout():void {
             var that = this;
-            this.securityService.logout().then(function(response) {
+            this.securityService.logout().then( => {
                 that.loginStatus = 'Logged out';
             })
         }
