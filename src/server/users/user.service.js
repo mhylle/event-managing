@@ -2,6 +2,24 @@ var four0four = require('../utils/404')();
 
 var data = require('../data');
 module.exports = function () {
+    var user = {
+        internalId: '',
+        publicId: '',
+        nickname: '',
+        firstname: '',
+        lastname: '',
+        username: '',
+        passstring: '',
+        address: address,
+        mail: '',
+        phone: ''
+    };
+
+    var address = {
+        street: '',
+        zip: ''
+    };
+
     var service = {
         getUsers: getUsers,
         getUser: getUser,
@@ -29,11 +47,11 @@ module.exports = function () {
     function saveUser(req, res, next) {
         var user = {};
         user.name = req.body.name;
-        user.id= req.body.id;
-        user.username= req.body.username;
-        user.address= req.body.address;
-        user.mail= req.body.mail;
-        user.phone= req.body.phone;
+        user.id = req.body.id;
+        user.username = req.body.username;
+        user.address = req.body.address;
+        user.mail = req.body.mail;
+        user.phone = req.body.phone;
 
         console.log(user);
     }
