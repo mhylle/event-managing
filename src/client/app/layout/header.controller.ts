@@ -1,6 +1,15 @@
 ///<reference path="../../../../tools/typings/angularjs/angular.d.ts"/>
 ///<reference path="../blocks/logger/logger.ts"/>
-
+/**
+ * @ngdoc controller
+ * @name HeaderController
+ *
+ * @description
+ * The header controller is currently responsible for listening to login/logout events and makes sure that
+ * the current username can be displayed in the header.
+ *
+ * @requires $scope
+ * */
 module app.controllers {
     import ISecurityService = app.services.ISecurityService;
 
@@ -25,7 +34,6 @@ module app.controllers {
         private activate():void {
             var that = this;
             this.$scope.$watch(function () {
-                that.logger.info('inside watch, token was: ' + that.securityService.getSecurityToken());
                 return that.securityService.getSecurityToken();
             }, function (newVal, oldVal) {
                 if (this.logger) {
