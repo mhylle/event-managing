@@ -1,6 +1,6 @@
 module app.controllers {
     import IUserService = app.services.IUserService;
-    export interface IUserController {
+    export interface IUserListController {
         title: string;
 
         activate: () => void;

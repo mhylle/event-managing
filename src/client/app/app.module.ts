@@ -19,9 +19,13 @@ module app {
                 url: '/users',
                 templateUrl: 'app/users/users.html'
             })
+            .state('users.list', {
+                url: '/list',
+                templateUrl: 'app/users/list/userlist.html'
+            })
             .state('users.create', {
-                url: '/users.create',
-                templateUrl: 'app/users/createUser.html'
+                url: '/create',
+                templateUrl: 'app/users/create/createUser.html'
             })
             .state('home', {
                 url: '/home',

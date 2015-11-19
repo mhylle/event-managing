@@ -1,8 +1,8 @@
-///<reference path="../../../../tools/typings/angularjs/angular.d.ts"/>
-///<reference path="../blocks/logger/logger.ts"/>
+///<reference path="../../../../../tools/typings/angularjs/angular.d.ts"/>
+///<reference path="../../blocks/logger/logger.ts"/>
 /**
  * @ngdoc controller
- * @name UserController
+ * @name UserListController
  *
  * @description
  * _Please update the description and dependencies._
@@ -12,9 +12,9 @@
 module app.controllers {
     import IUserService = app.services.IUserService;
 
-    export class UserController implements IUserController {
+    export class UserListController implements IUserListController {
 
-        static controllerId = 'UserController';
+        static controllerId = 'UserListController';
         title:string;
         userList:IUser[];
         private $q:ng.IQService;
@@ -57,5 +57,5 @@ module app.controllers {
         }
     }
     angular.module('app')
-        .controller(UserController.controllerId, UserController);
+        .controller(UserListController.controllerId, UserListController);
 }
