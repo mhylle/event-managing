@@ -54,7 +54,7 @@ module.exports = function () {
         user.lastname = req.body.lastname;
         user.username = req.body.username;
 
-        // todo Create the passstring based on the password that we received.
+        // todo Create the passtring based on the password that we received.
         user.passstring = req.body.passstring;
 
         // todo handle address section..

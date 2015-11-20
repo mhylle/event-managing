@@ -1,9 +1,38 @@
 <div ng-controller="UserCreateController as vm">
-    <div><span>Name</span><span><input type="text" ng-model="vm.user.name"></span></div>
-    <div><span>Id</span><input type="text" ng-model="vm.user.id"></div>
-    <div><span>Username</span><input type="text" ng-model="vm.user.username"></div>
-    <div><span>Address</span><input type="text" ng-model="vm.user.address"></div>
-    <div><span>Mail</span><input type="text" ng-model="vm.user.mail"></div>
-    <div><span>Phone</span><input type="text" ng-model="vm.user.phone"></div>
-    <div><button class="btn btn-default" ng-click="vm.create()">Login</button></div>
+    <div class="panel panel-info">
+        <div class="panel-heading">User Details</div>
+        <div class="panel-body">
+            <div class="row">
+                <span class="user.id col-lg-2">Id</span><span class="col-lg-4"><input type="text" ng-model="vm.user.id"></span>
+            </div>
+            <div class="row">
+                <span class="user.name col-lg-2">Firstname</span><span class="col-lg-4"><input type="text" ng-model="vm.user.name" required></span>
+                <span class="user.name col-lg-2">Lastname</span><span class="col-lg-4"><input type="text" ng-model="vm.user.name"></span>
+            </div>
+            <div class="row">
+                <span class="user.username col-lg-2">Username</span><span class="col-lg-4"><input type="text" ng-model="vm.user.username"></span>
+                <span class="user.username col-lg-2">Password</span><span class="col-lg-4"><input type="password" ng-model="vm.user.username"></span>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">Address</div>
+        <div class="panel-body">
+            <div><span>Street</span><span><input type="text" ng-model="vm.user.address"></span></div>
+            <div>
+                <span>Zip</span><span><input type="text" ng-model="vm.user.address"></span>
+                <span>City</span><span><input type="text" ng-model="vm.user.address"></span>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">Contact details</div>
+        <div class="panel-body">
+            <span>Mail</span><input type="text" ng-model="vm.user.mail">
+            <span>Phone</span><input type="text" ng-model="vm.user.phone">
+        </div>
+    </div>
+    <div class="text-right">
+        <button class="btn btn-default" ng-click="vm.create()">Create User</button>
+    </div>
 </div>
