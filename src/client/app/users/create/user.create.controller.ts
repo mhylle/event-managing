@@ -14,7 +14,6 @@ module app.controllers {
 
     export class UserCreateController implements IUserCreateController {
 
-
         static controllerId = 'UserCreateController';
         title:string;
 
