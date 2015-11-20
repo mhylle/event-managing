@@ -45,10 +45,19 @@ module.exports = function () {
     }
 
     function saveUser(req, res, next) {
-        var user = {};
-        user.name = req.body.name;
-        user.id = req.body.id;
+
+        // todo Create ID utility --> DB Responsibility, does it have to be assigned?
+        user.internalId = req.body.internalId;
+        user.publicId = req.body.publicId;
+        user.nickname = req.body.nickname;
+        user.firstname = req.body.firstname;
+        user.lastname = req.body.lastname;
         user.username = req.body.username;
+
+        // todo Create the passstring based on the password that we received.
+        user.passstring = req.body.passstring;
+
+        // todo handle address section..
         user.address = req.body.address;
         user.mail = req.body.mail;
         user.phone = req.body.phone;
