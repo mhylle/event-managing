@@ -1,21 +1,47 @@
 /*jshint node:true*/
 'use strict';
 
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+var privateKey  = fs.readFileSync('sslcert/priv.pem', 'utf8');
+var certificate = fs.readFileSync('sslcert/cert.cer', 'utf8');
+
+var options = {
+    key: fs.readFileSync('sslcert/priv.pem'),
+    cert: fs.readFileSync('sslcert/cert.cer')
+};
+
+
 var express = require('express');
 var app = express();
+
+// your express configuration here
+
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(options, app);
+
+httpServer.listen(8001, function () {
+        console.log('Express server listening on port ' + port);
+    console.log('env = ' + app.get('env') +
+        '\n__dirname = ' + __dirname  +
+        '\nprocess.cwd = ' + process.cwd());
+});
+httpsServer.listen(443);
+
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var port = process.env.PORT || 8001;
 var four0four = require('./utils/404')();
-
+//
 var environment = process.env.NODE_ENV;
 
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(logger('dev'));
-
+//
 app.use('/api', require('./routes'));
 
 console.log('About to crank up node');
@@ -46,10 +72,3 @@ switch (environment){
         app.use('/*', express.static('./src/client/index.html'));
         break;
 }
-
-app.listen(port, function() {
-    console.log('Express server listening on port ' + port);
-    console.log('env = ' + app.get('env') +
-        '\n__dirname = ' + __dirname  +
-        '\nprocess.cwd = ' + process.cwd());
-});
