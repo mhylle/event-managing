@@ -1,6 +1,7 @@
 var four0four = require('../utils/404')();
 
 var data = require('../data');
+var dataService = require('../data/data.service')();
 module.exports = function () {
     var user = {
         internalId: '',
@@ -63,5 +64,6 @@ module.exports = function () {
         user.phone = req.body.phone;
 
         console.log(user);
+        dataService.save(user);
     }
 };
