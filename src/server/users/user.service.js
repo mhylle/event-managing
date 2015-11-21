@@ -2,24 +2,36 @@ var four0four = require('../utils/404')();
 
 var data = require('../data');
 var dataService = require('../data/data.service')();
+//var user = function () {
+//    var internalId = '';
+//    var publicId = '';
+//    var nickname = '';
+//    var firstname = '';
+//    var lastname = '';
+//    var username = '';
+//    var passstring = '';
+//    var address = address;
+//    var mail = '';
+//    var phone = '';
+//}
 module.exports = function () {
-    var user = {
-        internalId: '',
-        publicId: '',
-        nickname: '',
-        firstname: '',
-        lastname: '',
-        username: '',
-        passstring: '',
-        address: address,
-        mail: '',
-        phone: ''
-    };
+    //var user = {
+    //    internalId: '',
+    //    publicId: '',
+    //    nickname: '',
+    //    firstname: '',
+    //    lastname: '',
+    //    username: '',
+    //    passstring: '',
+    //    address: address,
+    //    mail: '',
+    //    phone: ''
+    //};
 
-    var address = {
-        street: '',
-        zip: ''
-    };
+    //var address = {
+    //    street: '',
+    //    zip: ''
+    //};
 
     var service = {
         getUsers: getUsers,
@@ -30,7 +42,7 @@ module.exports = function () {
 
     function getUsers(req, res, next) {
         console.log('getusers start');
-        res.status(200).send(data.users);
+        res.status(200).send(dataService.get());
     }
 
     function getUser(req, res, next) {
@@ -47,6 +59,7 @@ module.exports = function () {
 
     function saveUser(req, res, next) {
 
+        var user = {};
         // todo Create ID utility --> DB Responsibility, does it have to be assigned?
         user.internalId = req.body.internalId;
         user.publicId = req.body.publicId;
