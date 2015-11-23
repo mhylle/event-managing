@@ -20,11 +20,11 @@ module app.controllers {
 
         private user: IUser;
         private $q:ng.IQService;
-        static $inject = ['logger', 'userservice', '$q', 'toastr'];
+        static $inject = ['logger', 'userservice', '$q'];
 
 
         /* @ngInject */
-        constructor(private logger:app.blocks.ILogger, private userService:IUserService, private toastr: Toastr) {
+        constructor(private logger:app.blocks.ILogger, private userService:IUserService) {
             this.init();
         }
 
@@ -39,7 +39,7 @@ module app.controllers {
 
         create():boolean {
             this.userService.createUser(this.user);
-            toastr.info('User ' + this.user + ' created!');
+            //this.toastr.info('User ' + this.user + ' created!');
             return false;
         };
 

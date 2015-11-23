@@ -2,36 +2,8 @@ var four0four = require('../utils/404')();
 
 var data = require('../data');
 var dataService = require('../data/data.service')();
-//var user = function () {
-//    var internalId = '';
-//    var publicId = '';
-//    var nickname = '';
-//    var firstname = '';
-//    var lastname = '';
-//    var username = '';
-//    var passstring = '';
-//    var address = address;
-//    var mail = '';
-//    var phone = '';
-//}
-module.exports = function () {
-    //var user = {
-    //    internalId: '',
-    //    publicId: '',
-    //    nickname: '',
-    //    firstname: '',
-    //    lastname: '',
-    //    username: '',
-    //    passstring: '',
-    //    address: address,
-    //    mail: '',
-    //    phone: ''
-    //};
 
-    //var address = {
-    //    street: '',
-    //    zip: ''
-    //};
+module.exports = function () {
 
     var service = {
         getUsers: getUsers,

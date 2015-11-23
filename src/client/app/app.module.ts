@@ -8,6 +8,12 @@ module app {
         'ui.router',
         'blocks.logger'
     ]).config(['$stateProvider', configuration]);
+    //.config(toastrConfig);
+
+    //function toastrConfig(toastr: Toastr) {
+        //toastr.options.timeOut = 4000;
+        //toastr.options.positionClass = 'toastr-bottom-right';
+    //}
 
     /* applicationVersion */
     var applicationVersion : string;
