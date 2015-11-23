@@ -9,10 +9,10 @@
       "commit": "efd40e67ff323f7147651bdbef03c03ead7b1675"
     },
     "jquery/jquery.d.ts": {
-      "commit": "efd40e67ff323f7147651bdbef03c03ead7b1675"
+      "commit": "ba424f7ee39717d51c17699a09ac8df312a7e9a1"
     },
     "toastr/toastr.d.ts": {
-      "commit": "8c4ec896ab619e7cb6572f82423e6e1eece70f5a"
+      "commit": "ba424f7ee39717d51c17699a09ac8df312a7e9a1"
     },
     "angularjs/angular-route.d.ts": {
       "commit": "efd40e67ff323f7147651bdbef03c03ead7b1675"

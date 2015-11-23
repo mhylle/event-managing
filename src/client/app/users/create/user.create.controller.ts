@@ -1,4 +1,5 @@
 ///<reference path="../../../../../tools/typings/angularjs/angular.d.ts"/>
+///<reference path="../../../../../tools/typings/toastr/toastr.d.ts"/>
 ///<reference path="../../blocks/logger/logger.ts"/>
 /**
  * @ngdoc controller
@@ -19,11 +20,11 @@ module app.controllers {
 
         private user: IUser;
         private $q:ng.IQService;
-        static $inject = ['logger', 'userservice', '$q'];
+        static $inject = ['logger', 'userservice', '$q', 'toastr'];
 
 
         /* @ngInject */
-        constructor(private logger:app.blocks.ILogger, private userService:IUserService) {
+        constructor(private logger:app.blocks.ILogger, private userService:IUserService, private toastr: Toastr) {
             this.init();
         }
 
@@ -38,6 +39,7 @@ module app.controllers {
 
         create():boolean {
             this.userService.createUser(this.user);
+            toastr.info('User ' + this.user + ' created!');
             return false;
         };
 

@@ -16,23 +16,28 @@ module app {
         $stateProvider
             .state('login', {
                 url: '/login',
-                templateUrl: 'app/security/login.html'
+                templateUrl: 'app/security/login.html',
+                access: {allowAnonymous: true}
             })
             .state('users', {
                 url: '/users',
-                templateUrl: 'app/users/users.html'
+                templateUrl: 'app/users/users.html',
+                access: {allowAnonymous: false}
             })
             .state('users.list', {
                 url: '/list',
-                templateUrl: 'app/users/list/userlist.html'
+                templateUrl: 'app/users/list/userlist.html',
+                access: {allowAnonymous: false}
             })
             .state('users.create', {
                 url: '/create',
-                templateUrl: 'app/users/create/createUser.html'
+                templateUrl: 'app/users/create/createUser.html',
+                access: {allowAnonymous: true}
             })
             .state('home', {
                 url: '/home',
-                templateUrl: 'app/home.html'
+                templateUrl: 'app/home.html',
+                access: {allowAnonymous: true}
             });
     }
 }

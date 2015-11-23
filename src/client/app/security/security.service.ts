@@ -10,7 +10,7 @@ module app.services {
 
     class SecurityService implements ISecurityService {
 
-        static $inject = ['$http', '$q', '$window'];
+        static $inject = ['$http', '$q', '$window', '$location'];
         private $http:ng.IHttpService;
         private $q:ng.IQService;
         private $window:any;
