@@ -9,6 +9,7 @@
     "test": "gulp test"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.8.2",
     "crypto-hashing": "^0.3.1",
     "csprng": "^0.1.1",

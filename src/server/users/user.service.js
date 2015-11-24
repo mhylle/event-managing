@@ -4,6 +4,7 @@ var data = require('../data');
 var dataService = require('../data/data.service')();
 var rand = require('csprng');
 var sha256 = require('crypto-hashing').sha256;
+var bcrypt = require('bcrypt-nodejs');
 
 module.exports = function () {
 
@@ -42,8 +43,8 @@ module.exports = function () {
         user.lastname = req.body.lastname;
         user.username = req.body.username;
 
-        user.salt = rand(passstring, 36);
-        user.hash = sha256(user.salt + passstring);
+        user.salt = bcrypt.genSaltSync(req.body.password, 36);
+        user.hash = bcrypt.hashSync(req.body.password, user.salt);
 
         // todo handle address section..
         user.address = req.body.address;

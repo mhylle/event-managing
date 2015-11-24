@@ -1,6 +1,8 @@
 /**
  * Created by mhylle on 21-11-2015.
  */
+
+var seededData = require('../data');
 var data = [];
 module.exports = function () {
 
@@ -23,6 +25,8 @@ module.exports = function () {
     function get() {
         if (data.length > 0) {
             return data;
+        } else {
+            return seededData;
         }
     }
 };

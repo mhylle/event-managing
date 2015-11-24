@@ -1,9 +1,11 @@
 var data = require('../data');
+var userService = require('../users/user.service')();
 var _ = require('underscore');
 var jwt = require('jwt-simple');
 var secret = '4757hgf87348gfhj3rf89fhj8rgerg345';
 var tokens = [];
 var sha256 = require('crypto-hashing').sha256;
+var bcrypt = require('bcrypt-nodejs');
 module.exports = function () {
     var service = {
         login: login,
@@ -15,18 +17,27 @@ module.exports = function () {
 
     function login(req, res, next) {
         var userName = req.body.userName;
-        var passtring = req.body.passtring;
-        var salt = req.body.salt;
-        var hash = req.body.hash;
-        var users = data.users;
+        var passtring = req.body.password;
+        var users = userService.getUsers(req, res, next);
         var foundUser = false;
+        if (users === undefined || users === null) {
+            res.send(401, 'Invalid Credentials');
+            return;
+        }
         for (var i = 0; i < users.length; i++) {
             var user = users[i];
             if (userName === user.username) {
-                var saltedpass = salt + passtring;
-                var hashedsalt = sha256(saltedpass);
+                var hash = user.hash;
+                if (hash === undefined) {
+                    var token = userName;
 
-                if (hashedsalt === hash) {
+                    tokens.push(token);
+                    foundUser = true;
+                    res.send(200, {accesstoken: token, userName: userName});
+                }
+                var compareSync = bcrypt.compareSync(passtring, hash);
+
+                if (compareSync) {
                     //var expires = new Date();
                     //expires.setDate((new Date()).getDate() + 5);
                     var token = userName;
