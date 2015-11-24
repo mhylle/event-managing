@@ -15,6 +15,7 @@ module.exports = function () {
 
     function login(req, res, next) {
         var userName = req.body.userName;
+        var passtring = req.body.passtring;
         var salt = req.body.salt;
         var hash = req.body.hash;
         var users = data.users;
@@ -22,8 +23,8 @@ module.exports = function () {
         for (var i = 0; i < users.length; i++) {
             var user = users[i];
             if (userName === user.username) {
-                var saltedpass = salt + password;
-                var hashedsalt = sha256.x2(saltedpass);
+                var saltedpass = salt + passtring;
+                var hashedsalt = sha256(saltedpass);
 
                 if (hashedsalt === hash) {
                     //var expires = new Date();

@@ -43,7 +43,7 @@ module.exports = function () {
         user.username = req.body.username;
 
         user.salt = rand(passstring, 36);
-        user.hash = sha256.x2(user.salt + passstring);
+        user.hash = sha256(user.salt + passstring);
 
         // todo handle address section..
         user.address = req.body.address;

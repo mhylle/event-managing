@@ -6,7 +6,7 @@ module app.controllers {
         firstname: string;
         lastname: string;
         username: string;
-        passstring:string;
+        passtring:string;
 
         // additional data. Possibly put this into extra classes?
         address:string;
