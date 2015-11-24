@@ -3,6 +3,7 @@ var _ = require('underscore');
 var jwt = require('jwt-simple');
 var secret = '4757hgf87348gfhj3rf89fhj8rgerg345';
 var tokens = [];
+var sha256 = require('crypto-hashing').sha256;
 module.exports = function () {
     var service = {
         login: login,
@@ -14,20 +15,21 @@ module.exports = function () {
 
     function login(req, res, next) {
         var userName = req.body.userName;
-        var password = req.body.password;
+        var salt = req.body.salt;
+        var hash = req.body.hash;
         var users = data.users;
         var foundUser = false;
         for (var i = 0; i < users.length; i++) {
             var user = users[i];
             if (userName === user.username) {
-                if (password === user.passtring) {
+                var saltedpass = salt + password;
+                var hashedsalt = sha256.x2(saltedpass);
+
+                if (hashedsalt === hash) {
                     //var expires = new Date();
                     //expires.setDate((new Date()).getDate() + 5);
                     var token = userName;
-                    //var token = jwt.encode({
-                    //    userName: userName,
-                    //    expires: expires
-                    //}, secret, 'HS512');
+
                     tokens.push(token);
                     foundUser = true;
                     res.send(200, {accesstoken: token, userName: userName});

@@ -2,6 +2,8 @@ var four0four = require('../utils/404')();
 
 var data = require('../data');
 var dataService = require('../data/data.service')();
+var rand = require('csprng');
+var sha256 = require('crypto-hashing').sha256;
 
 module.exports = function () {
 
@@ -40,13 +42,14 @@ module.exports = function () {
         user.lastname = req.body.lastname;
         user.username = req.body.username;
 
-        // todo Create the passtring based on the password that we received.
-        user.passstring = req.body.passstring;
+        user.salt = rand(passstring, 36);
+        user.hash = sha256.x2(user.salt + passstring);
 
         // todo handle address section..
         user.address = req.body.address;
         user.mail = req.body.mail;
         user.phone = req.body.phone;
+        user.isadmin = false;
 
         console.log(user);
         dataService.save(user);

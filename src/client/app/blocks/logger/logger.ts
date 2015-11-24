@@ -8,7 +8,7 @@ module app.blocks {
         showToasts:boolean;
         log:ng.ILogCall;
 
-        static $inject = ['$log', 'toastr'];
+        static $inject = ['$log'];
         /* @ngInject */
         constructor(private $log: ng.ILogService) {
             this.showToasts = true;
