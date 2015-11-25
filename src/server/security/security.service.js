@@ -18,16 +18,23 @@ module.exports = function () {
     function login(req, res, next) {
         var userName = req.body.userName;
         var passtring = req.body.password;
-        var users = userService.getUsers(req, res, next);
+        var users = userService.getUsers();
         var foundUser = false;
         if (users === undefined || users === null) {
             res.send(401, 'Invalid Credentials');
             return;
         }
-        for (var i = 0; i < users.length; i++) {
-            var user = users[i];
+        var tmpUsers;
+        if (users.users) {
+            tmpUsers = users.users;
+        } else {
+            tmpUsers = users;
+        }
+        for (var i = 0; i < tmpUsers.length; i++) {
+            var user = tmpUsers[i];
             if (userName === user.username) {
-                var hash = user.hash;
+                var userhash = user.hash;
+                var salt = user.salt;
                 if (hash === undefined) {
                     var token = userName;
 
@@ -35,7 +42,9 @@ module.exports = function () {
                     foundUser = true;
                     res.send(200, {accesstoken: token, userName: userName});
                 }
-                var compareSync = bcrypt.compareSync(passtring, hash);
+
+                var hash = bcrypt.hashSync(passtring, salt);
+                var compareSync = bcrypt.compareSync(hash, userhash);
 
                 if (compareSync) {
                     //var expires = new Date();

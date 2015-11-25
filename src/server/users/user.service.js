@@ -15,9 +15,9 @@ module.exports = function () {
     };
     return service;
 
-    function getUsers(req, res, next) {
+    function getUsers() {
         console.log('getusers start');
-        res.status(200).send(dataService.get());
+        return dataService.get();
     }
 
     function getUser(req, res, next) {

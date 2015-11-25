@@ -34,7 +34,8 @@ function requiresAuthentication(req, res, next) {
     security.requiresAuthentication(req, res, next);
 }
 function getUsers(req, res, next) {
-    users.getUsers(req, res, next);
+    var users2 = users.getUsers();
+    res.status(200).send(users2);
 }
 
 function saveUser(req, res, next) {
