@@ -1,9 +1,9 @@
-var four0four = require('../utils/404')();
+var four0four = require('./404')();
 
-var data = require('../data');
-var dataService = require('../data/data.service')();
-var rand = require('csprng');
-var sha256 = require('crypto-hashing').sha256;
+var data = require('../framework/data/data');
+var dataService = require('../framework/data/data.service')();
+//var rand = require('csprng');
+//var sha256 = require('crypto-hashing').sha256;
 var bcrypt = require('bcrypt-nodejs');
 
 module.exports = function () {

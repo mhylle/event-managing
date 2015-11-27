@@ -2,7 +2,7 @@
  * Created by mhylle on 21-11-2015.
  */
 
-var seededData = require('../data');
+var seededData = require('./data');
 var data = [];
 module.exports = function () {
 

@@ -3,10 +3,10 @@ var express = require('express');
 var errorhandler = require('errorhandler');
 var router = express.Router();
 
-var four0four = require('./utils/404')();
-var security = require('./security/security.service')();
+var four0four = require('./framework/utils/404')();
+var security = require('./framework/security/security.service')();
 var users = require('./users/user.service')();
-var data = require('./data');
+//var data = require('./framework/data/data');
 
 
 var app = express();

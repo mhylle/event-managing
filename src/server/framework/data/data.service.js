@@ -1,4 +1,4 @@
-dataRepository = require('./data.repository')();
+dataRepository = require('./data.repository.js')();
 module.exports = function () {
     var service = {
         save: save,
