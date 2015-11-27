@@ -15,6 +15,12 @@ module.exports = function () {
         return dataRepository.get();
     }
 
+    function getGroup(id) {
+        // something wrong here, figure out how to handle different object types in a proper, simple, but
+        // generic manner.
+        return dataRepository.getGroup(id);
+    }
+
     function remove() {
 
     }

@@ -1,0 +1,44 @@
+var four0four = require('./404')();
+
+var data = require('../framework/data/data');
+var dataService = require('../framework/data/data.service')();
+
+
+module.exports = function () {
+
+    var service = {
+        getGroups: getGroups,
+        getGroup: getGroup,
+        createGroup: createGroup
+    };
+    return service;
+
+    function getGroups() {
+        return dataService.getGroups();
+    }
+
+    function getGroup(req, res, next) {
+        var id = +req.param.id;
+        var result = dataService.getGroup(id);
+        var group = data.groups.filter(function (p) {
+            return p.id === id;
+        })[0];
+        if (result) {
+            res.status(200).send(result);
+        } else {
+            four0four.send404(req, res, 'group ' + id + ' not found');
+        }
+    }
+
+    function createGroup(req, res, next) {
+
+        var group = {};
+        // todo Create ID utility --> DB Responsibility, does it have to be assigned?
+        group.internalId = req.body.internalId;
+        group.name = req.body.name;
+        group.type = req.body.type;
+
+        console.log(group);
+        dataService.save(group);
+    }
+};
