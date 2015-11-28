@@ -1,5 +1,6 @@
 module.exports = {
-    users: getUsers()
+    users: getUsers(),
+    groups: getGroups()
 };
 
 
@@ -48,7 +49,7 @@ function getUsers() {
             'mail': 'tina@something.com',
             'phone': '16761311',
             'logicalId': '20201a7'
-        },{
+        }, {
             'id': 5,
             'firstname': 'Tina',
             'lastname': 'Tinason',
@@ -58,7 +59,7 @@ function getUsers() {
             'mail': 'tina@something.com',
             'phone': '16761311',
             'logicalId': '20201a7'
-        },{
+        }, {
             'id': 6,
             'firstname': 'Tina',
             'lastname': 'Tinason',
@@ -68,7 +69,7 @@ function getUsers() {
             'mail': 'tina@something.com',
             'phone': '16761311',
             'logicalId': '20201a7'
-        },{
+        }, {
             'id': 7,
             'firstname': 'Tina',
             'lastname': 'Tinason',
@@ -80,6 +81,19 @@ function getUsers() {
             'logicalId': '20201a7'
         }
     ];
+
+    function getGroups() {
+        return [{
+            'id': 1,
+            'name': 'default',
+            'type': 'open'
+        }, {
+            'id': 2,
+            'name': 'Example Closed Group',
+            'type': 'Closed'
+        }
+        ]
+    }
 }
 
 

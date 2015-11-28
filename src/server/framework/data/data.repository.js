@@ -29,4 +29,12 @@ module.exports = function () {
             return seededData;
         }
     }
+
+    function getGroup(id) {
+        var groups = data.getGroups();
+        return groups.filter(function (p) {
+            return p.id === id;
+        })[0];
+    };
+
 };

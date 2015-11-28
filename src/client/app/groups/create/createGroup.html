@@ -1,0 +1,40 @@
+<div ng-controller="GroupCreateController as vm" class="group_container">
+    <div class="panel panel-info">
+        <div class="panel-heading">Group Details</div>
+        <div class="panel-body form-group">
+            <div class="row">
+                <span class="user.id col-lg-1">Id</span><span class="col-lg-2"><input type="text" ng-model="vm.group.publicId"></span>
+            </div>
+            <div class="row">
+                <span class="user.firstname col-lg-1">Firstname</span><span class="col-lg-2"><input type="text" ng-model="vm.user.firstname" required></span>
+                <span class="user.lastname col-lg-1">Lastname</span><span class="col-lg-2"><input type="text" ng-model="vm.user.lastname"></span>
+            </div>
+            <div class="row">
+                <span class="user.username col-lg-1">Username</span><span class="col-lg-2"><input type="text" ng-model="vm.user.username"></span>
+                <span class="user.password col-lg-1">Password</span><span class="col-lg-2"><input type="password" ng-model="vm.user.passtring"></span>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">Address</div>
+        <div class="panel-body form-group">
+            <div class="row">
+                <span class="address.street col-lg-1">Street</span><span class="col-lg-2"><input type="text" ng-model="vm.user.address.street"></span>
+            </div>
+            <div class="row">
+                <span class="address.zip col-lg-1">Zip</span><span class="col-lg-2"><input type="text" ng-model="vm.user.address.zip"></span>
+                <span class="address.city col-lg-1">City</span><span class="col-lg-2"><input type="text" ng-model="vm.user.address.city"></span>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">Contact details</div>
+        <div class="panel-body form-group">
+            <span class=" col-lg-1">Mail</span><span class=" col-lg-2"><input type="text" ng-model="vm.user.mail"></span>
+            <span class=" col-lg-1">Phone</span><span class=" col-lg-2"><input type="text" ng-model="vm.user.phone"></span>
+        </div>
+    </div>
+    <div class="text-right">
+        <button class="btn btn-default" ng-click="vm.create()">Create User</button>
+    </div>
+</div>

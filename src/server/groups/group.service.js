@@ -20,9 +20,6 @@ module.exports = function () {
     function getGroup(req, res, next) {
         var id = +req.param.id;
         var result = dataService.getGroup(id);
-        var group = data.groups.filter(function (p) {
-            return p.id === id;
-        })[0];
         if (result) {
             res.status(200).send(result);
         } else {
