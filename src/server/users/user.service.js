@@ -1,4 +1,4 @@
-var four0four = require('./404')();
+var four0four = require('../framework/utils/404')();
 
 var data = require('../framework/data/data');
 var dataService = require('../framework/data/data.service')();

@@ -38,7 +38,22 @@ module app {
             .state('users.create', {
                 url: '/create',
                 templateUrl: 'app/users/create/createUser.html',
-                access: {allowAnonymous: true}
+                access: {allowAnonymous: false}
+            })
+            .state('groups', {
+                url: '/groups',
+                templateUrl: 'app/groups/groups.html',
+                access: {allowAnonymous: false}
+            })
+            .state('groups.list', {
+                url: '/list',
+                templateUrl: 'app/groups/list/grouplist.html',
+                access: {allowAnonymous: false}
+            })
+            .state('groups.create', {
+                url: '/create',
+                templateUrl: 'app/groups/create/createGroup.html',
+                access: {allowAnonymous: false}
             })
             .state('home', {
                 url: '/home',

@@ -81,19 +81,18 @@ function getUsers() {
             'logicalId': '20201a7'
         }
     ];
-
-    function getGroups() {
-        return [{
-            'id': 1,
-            'name': 'default',
-            'type': 'open'
-        }, {
-            'id': 2,
-            'name': 'Example Closed Group',
-            'type': 'Closed'
-        }
-        ]
+}
+function getGroups() {
+    return [{
+        'id': 1,
+        'name': 'default',
+        'type': 'open'
+    }, {
+        'id': 2,
+        'name': 'Example Closed Group',
+        'type': 'open'
     }
+    ]
 }
 
 

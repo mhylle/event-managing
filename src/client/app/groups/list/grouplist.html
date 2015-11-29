@@ -1,21 +1,14 @@
 <div ng-controller="GroupListController as vm" ng-init="vm.groups()">
     <div class="header-name" ng-show="vm.groupList.length >0">
+        <span class="label label-default col-lg-2">Id</span>
         <span class="label label-default col-lg-2">Name</span>
-        <span class="label label-default col-lg-1">Groupname</span>
-        <span class="label label-default col-lg-4">Adress</span>
-        <span class="label label-default col-lg-2">Mail</span>
-        <span class="label label-default col-lg-1">Phone</span>
-        <span class="label label-default col-lg-1">Id</span>
-        <span class="label label-default col-lg-1">Action</span>
+        <span class="label label-default col-lg-1">Type</span>
     </div>
     <div ng-repeat="group in vm.groupList" class="card col-lg-12">
         <div class="group.basedata">
-            <span class="label label-default col-lg-2">{{group.firstname}} {{group.lastname}}</span>
-            <span class="label label-default col-lg-1">{{group.groupname}}</span>
-            <span class="label label-default col-lg-4">{{group.address ? group.address:  'NA'}}</span>
-            <span class="label label-default col-lg-2">{{group.mail}}</span>
-            <span class="label label-default col-lg-1">{{group.phone}}</span>
-            <span class="label label-default col-lg-1">{{group.logicalId}}</span>
+            <span class="label label-default col-lg-2">{{group.id}} </span>
+            <span class="label label-default col-lg-1">{{group.name}}</span>
+            <span class="label label-default col-lg-1">{{group.type}}</span>
             <span class="label label-default col-lg-1"><a ui-sref="groupaction">...</a></span>
         </div>
     </div>
