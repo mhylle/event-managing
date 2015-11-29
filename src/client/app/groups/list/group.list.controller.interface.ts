@@ -1,9 +1,9 @@
 module app.controllers {
-    import IUserService = app.services.IUserService;
-    export interface IUserListController {
+    import IUserService = app.services.IGroupService;
+    export interface IGroupListController {
         title: string;
 
         activate: () => void;
-        users: ()=> void;
+        groups: ()=> void;
     }
 }

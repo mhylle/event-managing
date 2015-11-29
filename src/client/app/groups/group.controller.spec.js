@@ -1,4 +1,4 @@
-describe('Controller: app.UserListController', function () {
+describe('Controller: app.GroupListController', function () {
 
     // load the controller's module
     beforeEach(module('app'));
@@ -9,7 +9,7 @@ describe('Controller: app.UserListController', function () {
     // Initialize the controller and a mock scope
     beforeEach(inject(function ($controller, $rootScope) {
         scope = $rootScope.$new();
-        ctrl = $controller('UserListController', {
+        ctrl = $controller('GroupListController', {
             $scope: scope
         });
     }));

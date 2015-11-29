@@ -1,22 +1,22 @@
-<div ng-controller="UserListController as vm" ng-init="vm.users()">
-    <div class="header-name" ng-show="vm.userList.length >0">
+<div ng-controller="GroupListController as vm" ng-init="vm.groups()">
+    <div class="header-name" ng-show="vm.groupList.length >0">
         <span class="label label-default col-lg-2">Name</span>
-        <span class="label label-default col-lg-1">Username</span>
+        <span class="label label-default col-lg-1">Groupname</span>
         <span class="label label-default col-lg-4">Adress</span>
         <span class="label label-default col-lg-2">Mail</span>
         <span class="label label-default col-lg-1">Phone</span>
         <span class="label label-default col-lg-1">Id</span>
         <span class="label label-default col-lg-1">Action</span>
     </div>
-    <div ng-repeat="user in vm.userList" class="card col-lg-12">
-        <div class="user.basedata">
-            <span class="label label-default col-lg-2">{{user.firstname}} {{user.lastname}}</span>
-            <span class="label label-default col-lg-1">{{user.username}}</span>
-            <span class="label label-default col-lg-4">{{user.address ? user.address:  'NA'}}</span>
-            <span class="label label-default col-lg-2">{{user.mail}}</span>
-            <span class="label label-default col-lg-1">{{user.phone}}</span>
-            <span class="label label-default col-lg-1">{{user.logicalId}}</span>
-            <span class="label label-default col-lg-1"><a ui-sref="useraction">...</a></span>
+    <div ng-repeat="group in vm.groupList" class="card col-lg-12">
+        <div class="group.basedata">
+            <span class="label label-default col-lg-2">{{group.firstname}} {{group.lastname}}</span>
+            <span class="label label-default col-lg-1">{{group.groupname}}</span>
+            <span class="label label-default col-lg-4">{{group.address ? group.address:  'NA'}}</span>
+            <span class="label label-default col-lg-2">{{group.mail}}</span>
+            <span class="label label-default col-lg-1">{{group.phone}}</span>
+            <span class="label label-default col-lg-1">{{group.logicalId}}</span>
+            <span class="label label-default col-lg-1"><a ui-sref="groupaction">...</a></span>
         </div>
     </div>
     <div ng-show="vm.errorMessage">

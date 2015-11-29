@@ -1,14 +1,14 @@
 ///<reference path="../../../../tools/typings/angularjs/angular.d.ts"/>
 module app.services {
-    import IUser = app.controllers.IUser;
+    import IGroup = app.controllers.IGroup;
     'use strict';
-    export interface IUserService {
-        users: () => ng.IPromise<IUser[]>;
-        createUser(user:IUser):ng.IPromise<boolean>;
+    export interface IGroupService {
+        groups: () => ng.IPromise<IGroup[]>;
+        createGroup(group:IGroup):ng.IPromise<boolean>;
     }
 
-    class UserService implements IUserService {
-        static serviceId = 'userservice';
+    class GroupService implements IGroupService {
+        static serviceId = 'groupservice';
         static $inject = ['$http', '$q', '$window'];
         private $http;
         private $q:ng.IQService;
@@ -21,13 +21,13 @@ module app.services {
             this.$window = $window;
         }
 
-        static instance($http:ng.IHttpService, $q:ng.IQService, $window:any):IUserService {
-            return new UserService($http, $q, $window);
+        static instance($http:ng.IHttpService, $q:ng.IQService, $window:any):IGroupService {
+            return new GroupService($http, $q, $window);
         }
 
-        users():ng.IPromise<any> {
+        groups():ng.IPromise<any> {
             var defer = this.$q.defer();
-            this.$http.get('/api/users')
+            this.$http.get('/api/groups')
                 .then(response => {
                     var data = response.data;
                     return defer.resolve(data);
@@ -38,9 +38,9 @@ module app.services {
             return defer.promise;
         }
 
-        createUser(user:app.controllers.IUser):ng.IPromise<boolean> {
+        createGroup(group:app.controllers.IGroup):ng.IPromise<boolean> {
             var defer = this.$q.defer();
-            this.$http.post('/api/users/', user)
+            this.$http.post('/api/groups/', group)
                 .then(response => {
                     defer.resolve(true);
                 }).catch(error => {
@@ -52,5 +52,5 @@ module app.services {
     }
     angular
         .module('app')
-        .factory(UserService.serviceId, UserService.instance);
+        .factory(GroupService.serviceId, GroupService.instance);
 }

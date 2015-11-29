@@ -1,6 +1,6 @@
 module app.controllers {
-    import IUserService = app.services.IUserService;
-    export interface IUserCreateController {
+    import IGroupService = app.services.IGroupService;
+    export interface IGroupCreateController {
         title: string;
 
         activate: () => void;

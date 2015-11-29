@@ -2,7 +2,7 @@
 ///<reference path="../../blocks/logger/logger.ts"/>
 /**
  * @ngdoc controller
- * @name UserManagementController
+ * @name GroupManagementController
  *
  * @description
  * _Please update the description and dependencies._
@@ -10,31 +10,31 @@
  * @requires $scope
  * */
 module app.controllers {
-    import IUserService = app.services.IUserService;
+    import IGroupService = app.services.IGroupService;
 
-    export class UserManagementController implements IUserManagementController {
+    export class GroupManagementController implements IGroupManagementController {
 
 
-        static controllerId = 'UserManagementController';
+        static controllerId = 'GroupManagementController';
         title:string;
         private $q:ng.IQService;
-        static $inject = ['logger', 'userservice', '$q'];
+        static $inject = ['logger', 'groupservice', '$q'];
 
-        private user: IUser;
+        private group: IGroup;
 
         /* @ngInject */
-        constructor(private logger:app.blocks.ILogger, private userService:IUserService) {
+        constructor(private logger:app.blocks.ILogger, private groupService:IGroupService) {
             this.init();
         }
 
         private init() {
-            this.title = 'Users';
-            //user = new User();
+            this.title = 'Groups';
+            //group = new Group();
             this.activate();
         }
 
         activate():void {
-            this.logger.info('Activated User View');
+            this.logger.info('Activated Group View');
         }
 
         create():void {
@@ -49,5 +49,5 @@ module app.controllers {
 
     }
     angular.module('app')
-        .controller(UserManagementController.controllerId, UserManagementController);
+        .controller(GroupManagementController.controllerId, GroupManagementController);
 }

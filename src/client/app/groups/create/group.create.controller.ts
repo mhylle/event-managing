@@ -3,7 +3,7 @@
 ///<reference path="../../blocks/logger/logger.ts"/>
 /**
  * @ngdoc controller
- * @name UserListController
+ * @name GroupListController
  *
  * @description
  * _Please update the description and dependencies._
@@ -11,39 +11,39 @@
  * @requires $scope
  * */
 module app.controllers {
-    import IUserService = app.services.IUserService;
+    import IGroupService = app.services.IGroupService;
 
-    export class UserCreateController implements IUserCreateController {
+    export class GroupCreateController implements IGroupCreateController {
 
-        static controllerId = 'UserCreateController';
+        static controllerId = 'GroupCreateController';
         title:string;
 
-        private user: IUser;
+        private group: IGroup;
         private $q:ng.IQService;
-        static $inject = ['logger', 'userservice', '$q'];
+        static $inject = ['logger', 'groupservice', '$q'];
 
 
         /* @ngInject */
-        constructor(private logger:app.blocks.ILogger, private userService:IUserService) {
+        constructor(private logger:app.blocks.ILogger, private groupService:IGroupService) {
             this.init();
         }
 
         private init() {
-            this.title = 'Users';
+            this.title = 'Groups';
             this.activate();
         }
 
         activate():void {
-            this.logger.info('Activated User View');
+            this.logger.info('Activated Group View');
         }
 
         create():boolean {
-            this.userService.createUser(this.user);
-            //this.toastr.info('User ' + this.user + ' created!');
+            this.groupService.createGroup(this.group);
+            //this.toastr.info('Group ' + this.group + ' created!');
             return false;
         };
 
     }
     angular.module('app')
-        .controller(UserCreateController.controllerId, UserCreateController);
+        .controller(GroupCreateController.controllerId, GroupCreateController);
 }
