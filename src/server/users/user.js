@@ -20,6 +20,5 @@ function user() {
     this.phone = '';
     this.isadmin = false;
 
-
-
+    this.groups = [];
 }
