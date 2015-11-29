@@ -2,11 +2,35 @@
  * Created by mhylle on 29-11-2015.
  */
 var utils = require('../framework/utils/generator');
+module.exports = function () {
+    var group = {
 
-function group() {
-    this.id = '';
-    this.internalId = utils.uniqueID();
-    this.name = '';
-    this.type = open;
-    this.users = [];
-}
+        addUser: addUser,
+        removeUser: removeUser,
+        getUsers: getUsers,
+        clearUsers: clearUsers,
+
+        id: '',
+        internalId: utils.uniqueID(),
+        name: '',
+        type: open,
+        users: []
+    };
+
+    function addUser(user) {
+        users.push(user);
+    }
+
+    function removeUser(user) {
+        users.pop(user);
+    }
+
+    function getUsers() {
+        return users;
+    }
+    function clearUsers() {
+        users = [];
+    }
+
+    return group;
+};

@@ -2,23 +2,26 @@
  * Created by mhylle on 29-11-2015.
  */
 var utils = require('../framework/utils/generator')
+module.exports = function () {
+    var user =  {
+        internalId : utils.uniqueID(),
+        publicId : '',
+        nickname : '',
+        firstname : '',
+        lastname :'',
+        username : '',
 
-function user() {
-    this.internalId = utils.uniqueID();
-    this.publicId = '';
-    this.nickname = '';
-    this.firstname = '';
-    this.lastname = '';
-    this.username = '';
+        salt : '',
+        hash : '',
 
-    this.salt = '';
-    this.hash = '';
+        // todo handle address section..
+        address : '',
+        mail : '',
+        phone : '',
+        isadmin : false,
 
-    // todo handle address section..
-    this.address = '';
-    this.mail = '';
-    this.phone = '';
-    this.isadmin = false;
+        groups : []
+    };
 
-    this.groups = [];
+    return user;
 }
