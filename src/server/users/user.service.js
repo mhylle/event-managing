@@ -5,6 +5,7 @@ var dataService = require('../framework/data/data.service')();
 //var rand = require('csprng');
 //var sha256 = require('crypto-hashing').sha256;
 var bcrypt = require('bcrypt-nodejs');
+var user = require('./user');
 
 module.exports = function () {
 

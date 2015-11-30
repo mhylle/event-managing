@@ -1,7 +1,7 @@
-describe('Controller: app.UserListController', function () {
+describe('Controller: schema.user.UserListController', function () {
 
     // load the controller's module
-    beforeEach(module('app'));
+    beforeEach(module('schema.user'));
 
     var ctrl,
         scope;

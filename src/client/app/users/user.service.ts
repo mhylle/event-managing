@@ -1,6 +1,6 @@
 ///<reference path="../../../../tools/typings/angularjs/angular.d.ts"/>
-module app.services {
-    import IUser = app.controllers.IUser;
+module schema.user.services {
+    import IUser = schema.user.controllers.IUser;
     'use strict';
     export interface IUserService {
         users: () => ng.IPromise<IUser[]>;
@@ -38,7 +38,7 @@ module app.services {
             return defer.promise;
         }
 
-        createUser(user:app.controllers.IUser):ng.IPromise<boolean> {
+        createUser(user:schema.user.controllers.IUser):ng.IPromise<boolean> {
             var defer = this.$q.defer();
             this.$http.post('/api/users/', user)
                 .then(response => {
@@ -51,6 +51,6 @@ module app.services {
 
     }
     angular
-        .module('app')
+        .module('schema.user')
         .factory(UserService.serviceId, UserService.instance);
 }

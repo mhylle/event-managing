@@ -1,5 +1,5 @@
-module app.controllers {
-    import IUserService = app.services.IUserService;
+module schema.user.controllers {
+    import IUserService = schema.user.services.IUserService;
     export interface IUserCreateController {
         title: string;
 

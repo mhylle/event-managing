@@ -9,8 +9,8 @@
  *
  * @requires $scope
  * */
-module app.controllers {
-    import IUserService = app.services.IUserService;
+module schema.user.controllers {
+    import IUserService = schema.user.services.IUserService;
 
     export class UserListController implements IUserListController {
 
@@ -59,6 +59,6 @@ module app.controllers {
                 });
         }
     }
-    angular.module('app')
+    angular.module('schema.user')
         .controller(UserListController.controllerId, UserListController);
 }

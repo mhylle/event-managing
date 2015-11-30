@@ -6,7 +6,8 @@ module app {
 
     angular.module('app', [
         'ui.router',
-        'blocks.logger'
+        'blocks.logger',
+        'schema.user'
     ]).config(['$stateProvider', configuration]);
     //.config(toastrConfig);
 
@@ -25,21 +26,21 @@ module app {
                 templateUrl: 'app/security/login.html',
                 access: {allowAnonymous: true}
             })
-            .state('users', {
-                url: '/users',
-                templateUrl: 'app/users/users.html',
-                access: {allowAnonymous: false}
-            })
-            .state('users.list', {
-                url: '/list',
-                templateUrl: 'app/users/list/userlist.html',
-                access: {allowAnonymous: false}
-            })
-            .state('users.create', {
-                url: '/create',
-                templateUrl: 'app/users/create/createUser.html',
-                access: {allowAnonymous: false}
-            })
+            //.state('users', {
+            //    url: '/users',
+            //    templateUrl: 'app/users/users.html',
+            //    access: {allowAnonymous: false}
+            //})
+            //.state('users.list', {
+            //    url: '/list',
+            //    templateUrl: 'app/users/list/userlist.html',
+            //    access: {allowAnonymous: false}
+            //})
+            //.state('users.create', {
+            //    url: '/create',
+            //    templateUrl: 'app/users/create/createUser.html',
+            //    access: {allowAnonymous: false}
+            //})
             .state('groups', {
                 url: '/groups',
                 templateUrl: 'app/groups/groups.html',

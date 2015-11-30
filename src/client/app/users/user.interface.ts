@@ -1,4 +1,4 @@
-module app.controllers {
+module schema.user.controllers {
 
     export interface IUser {
         // base data
