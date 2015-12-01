@@ -1,7 +1,7 @@
-describe('Controller: app.GroupListController', function () {
+describe('Controller: schema.group.GroupListController', function () {
 
     // load the controller's module
-    beforeEach(module('app'));
+    beforeEach(module('schema.group'));
 
     var ctrl,
         scope;

@@ -10,8 +10,8 @@
  *
  * @requires $scope
  * */
-module app.controllers {
-    import IGroupService = app.services.IGroupService;
+module schema.group.controllers {
+    import IGroupService = schema.group.services.IGroupService;
 
     export class GroupCreateController implements IGroupCreateController {
 
@@ -44,6 +44,6 @@ module app.controllers {
         };
 
     }
-    angular.module('app')
+    angular.module('schema.group')
         .controller(GroupCreateController.controllerId, GroupCreateController);
 }

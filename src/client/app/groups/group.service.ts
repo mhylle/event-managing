@@ -1,6 +1,6 @@
 ///<reference path="../../../../tools/typings/angularjs/angular.d.ts"/>
-module app.services {
-    import IGroup = app.controllers.IGroup;
+module schema.group.services {
+    import IGroup = schema.group.controllers.IGroup;
     'use strict';
     export interface IGroupService {
         groups: () => ng.IPromise<IGroup[]>;
@@ -38,7 +38,7 @@ module app.services {
             return defer.promise;
         }
 
-        createGroup(group:app.controllers.IGroup):ng.IPromise<boolean> {
+        createGroup(group:schema.group.controllers.IGroup):ng.IPromise<boolean> {
             var defer = this.$q.defer();
             this.$http.post('/api/groups/', group)
                 .then(response => {
@@ -51,6 +51,6 @@ module app.services {
 
     }
     angular
-        .module('app')
+        .module('schema.group')
         .factory(GroupService.serviceId, GroupService.instance);
 }

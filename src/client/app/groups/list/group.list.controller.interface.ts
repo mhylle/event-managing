@@ -1,5 +1,5 @@
-module app.controllers {
-    import IUserService = app.services.IGroupService;
+module schema.group.controllers {
+    import IUserService = schema.group.services.IGroupService;
     export interface IGroupListController {
         title: string;
 

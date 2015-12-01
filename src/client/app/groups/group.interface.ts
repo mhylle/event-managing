@@ -1,4 +1,4 @@
-module app.controllers {
+module schema.group.controllers {
 
     export interface IGroup {
         // base data

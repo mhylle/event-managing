@@ -9,8 +9,8 @@
  *
  * @requires $scope
  * */
-module app.controllers {
-    import IGroupService = app.services.IGroupService;
+module schema.group.controllers {
+    import IGroupService = schema.group.services.IGroupService;
 
     export class GroupListController implements IGroupListController {
 
@@ -59,6 +59,6 @@ module app.controllers {
                 });
         }
     }
-    angular.module('app')
+    angular.module('schema.group')
         .controller(GroupListController.controllerId, GroupListController);
 }
