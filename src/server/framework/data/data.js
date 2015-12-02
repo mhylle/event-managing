@@ -3,7 +3,6 @@ module.exports = {
     groups: getGroups()
 };
 
-
 function getUsers() {
     return [
         {
@@ -94,5 +93,3 @@ function getGroups() {
     }
     ];
 }
-
-

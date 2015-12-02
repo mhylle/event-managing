@@ -9,7 +9,6 @@ var users = require('./users/user.service')();
 var groups = require('./groups/group.service')();
 //var data = require('./framework/data/data');
 
-
 var app = express();
 //app.set('jwtTokenSecret', '123456ABCDEF');
 app.use(errorhandler);

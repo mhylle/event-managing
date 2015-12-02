@@ -12,8 +12,6 @@ module.exports = function () {
         remove: remove
     };
     return service;
-
-
     function add(element) {
         data.push(element);
     }

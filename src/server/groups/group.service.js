@@ -3,7 +3,6 @@ var four0four = require('../framework/utils/404')();
 var data = require('../framework/data/data');
 var dataService = require('../framework/data/data.service')();
 
-
 module.exports = function () {
 
     var service = {
@@ -28,7 +27,6 @@ module.exports = function () {
     }
 
     function createGroup(req, res, next) {
-
         var group = {};
         // todo Create ID utility --> DB Responsibility, does it have to be assigned?
         group.internalId = req.body.internalId;

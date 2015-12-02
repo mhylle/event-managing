@@ -12,7 +12,6 @@ var options = {
     cert: fs.readFileSync('sslcert/cert.cer')
 };
 
-
 var express = require('express');
 var app = express();
 
@@ -20,8 +19,6 @@ var app = express();
 
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(options, app);
-
-
 
 //
 var environment = process.env.NODE_ENV;

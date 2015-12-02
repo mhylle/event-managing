@@ -37,7 +37,7 @@ gulp.task('vet', function() {
     log('Analyzing source with JSHint and JSCS');
 
     return gulp
-        .src(config.alljs)
+        .src(config.allvetjs)
         .pipe($.if(args.verbose, $.print()))
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish', {verbose: true}))

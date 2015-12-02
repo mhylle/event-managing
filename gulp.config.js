@@ -25,6 +25,12 @@ module.exports = function () {
             './src/**/*.js',
             './*.js'
         ],
+        // all javascript that we want to vet
+        allvetjs: [
+            './src/**/*.js',
+            './*.js',
+            '!' + tsoutput + '**/*.js'
+        ],
         build: './build/',
         client: client,
         clientApp: clientApp,
