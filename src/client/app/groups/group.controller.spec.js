@@ -1,3 +1,4 @@
+/* jshint -W117, -W030 */
 describe('Controller: schema.group.GroupListController', function () {
 
     // load the controller's module

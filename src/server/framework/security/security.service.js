@@ -10,7 +10,6 @@ module.exports = function () {
     var service = {
         login: login,
         logout: logout,
-        logout: logout,
         requiresAuthentication: requiresAuthentication
     };
     return service;
@@ -35,21 +34,20 @@ module.exports = function () {
             if (userName === user.username) {
                 var userhash = user.hash;
                 var salt = user.salt;
+                var token = userName;
+                var hash = bcrypt.hashSync(passtring, salt);
                 if (hash === undefined) {
-                    var token = userName;
-
                     tokens.push(token);
                     foundUser = true;
                     res.send(200, {accesstoken: token, userName: userName});
+                    return;
                 }
 
-                var hash = bcrypt.hashSync(passtring, salt);
                 var compareSync = bcrypt.compareSync(hash, userhash);
 
                 if (compareSync) {
                     //var expires = new Date();
                     //expires.setDate((new Date()).getDate() + 5);
-                    var token = userName;
 
                     tokens.push(token);
                     foundUser = true;

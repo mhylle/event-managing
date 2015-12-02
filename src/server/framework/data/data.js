@@ -92,7 +92,7 @@ function getGroups() {
         'name': 'Example Closed Group',
         'type': 'open'
     }
-    ]
+    ];
 }
 
 

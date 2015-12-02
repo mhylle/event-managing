@@ -4,8 +4,8 @@
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-var privateKey  = fs.readFileSync('sslcert/priv.pem', 'utf8');
-var certificate = fs.readFileSync('sslcert/cert.cer', 'utf8');
+//var privateKey  = fs.readFileSync('sslcert/priv.pem', 'utf8');
+//var certificate = fs.readFileSync('sslcert/cert.cer', 'utf8');
 
 var options = {
     key: fs.readFileSync('sslcert/priv.pem'),
@@ -21,21 +21,15 @@ var app = express();
 var httpServer = http.createServer(app);
 var httpsServer = https.createServer(options, app);
 
-httpServer.listen(8001, function () {
-        console.log('Express server listening on port ' + port);
-    console.log('env = ' + app.get('env') +
-        '\n__dirname = ' + __dirname  +
-        '\nprocess.cwd = ' + process.cwd());
-});
-httpsServer.listen(443);
 
+
+//
+var environment = process.env.NODE_ENV;
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var port = process.env.PORT || 8001;
 var four0four = require('./framework/utils/404')();
-//
-var environment = process.env.NODE_ENV;
 
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -72,3 +66,11 @@ switch (environment){
         app.use('/*', express.static('./src/client/index.html'));
         break;
 }
+
+httpServer.listen(8001, function () {
+    console.log('Express server listening on port ' + port);
+    console.log('env = ' + app.get('env') +
+        '\n__dirname = ' + __dirname  +
+        '\nprocess.cwd = ' + process.cwd());
+});
+httpsServer.listen(443);

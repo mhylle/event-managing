@@ -1,4 +1,4 @@
-dataRepository = require('./data.repository.js')();
+var dataRepository = require('./data.repository.js')();
 module.exports = function () {
     var service = {
         save: save,
@@ -24,4 +24,4 @@ module.exports = function () {
     function remove() {
 
     }
-}
+};

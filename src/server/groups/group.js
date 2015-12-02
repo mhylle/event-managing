@@ -18,18 +18,18 @@ module.exports = function () {
     };
 
     function addUser(user) {
-        users.push(user);
+        group.users.push(user);
     }
 
     function removeUser(user) {
-        users.pop(user);
+        group.users.pop(user);
     }
 
     function getUsers() {
-        return users;
+        return group.users;
     }
     function clearUsers() {
-        users = [];
+        group.users = [];
     }
 
     return group;

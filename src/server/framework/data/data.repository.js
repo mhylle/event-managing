@@ -35,6 +35,6 @@ module.exports = function () {
         return groups.filter(function (p) {
             return p.id === id;
         })[0];
-    };
+    }
 
 };

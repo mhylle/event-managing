@@ -18,4 +18,4 @@ module.exports = function () {
             '-' + chr4() +
             '-' + chr4() + chr4() + chr4();
     }
-}
+};

@@ -1,7 +1,7 @@
 /**
  * Created by mhylle on 29-11-2015.
  */
-var utils = require('../framework/utils/generator')
+var utils = require('../framework/utils/generator');
 module.exports = function () {
     var user =  {
         internalId : utils.uniqueID(),
@@ -24,4 +24,4 @@ module.exports = function () {
     };
 
     return user;
-}
+};
