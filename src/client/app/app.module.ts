@@ -6,7 +6,7 @@ module schema {
 
     angular.module('schema', [
         'ui.router',
-        'blocks.logger',
+        'schema.blocks',
         'schema.security',
         'schema.user',
         'schema.group'

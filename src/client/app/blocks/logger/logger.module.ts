@@ -1,7 +1,7 @@
-module app {
+module schema.blocks {
     'use strict';
 
-    angular.module('blocks.logger', []);
+    angular.module('schema.blocks', []);
 }
 
 

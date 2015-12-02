@@ -1,6 +1,6 @@
 ///<reference path="../../../../../tools/typings/angularjs/angular.d.ts"/>
 
-module app.blocks {
+module schema.blocks {
     'use strict';
 
     class logger implements ILogger {
@@ -40,6 +40,6 @@ module app.blocks {
         }
     }
     angular
-        .module('blocks.logger')
+        .module('schema.blocks')
         .factory(logger.serviceId, logger.instance);
 }
