@@ -43,17 +43,17 @@ describe('Controller: schema.security.SecurityController', function () {
             });
         });
 
-        describe('should fail login unless user is mah', function () {
-            it('should login successfully with mah', function () {
-                controller.username = 'mah';
-                controller.password = 'mah';
+        describe('Should be able to login with user tte', function () {
+            it('should login successfully with tte', function () {
+                controller.username = 'tte';
+                controller.password = 'tte';
                 controller.login();
                 expect(controller.status).to.equal('Login Successful.');
             });
 
-            it('should fail login without mah', function () {
-                //controller.username = 'mah';
-                //controller.password = 'mah';
+            it('should fail login without tte', function () {
+                controller.username = 'mah';
+                controller.password = 'mah';
                 controller.login();
                 expect(controller.status).to.equal('Login Failed');
             });
