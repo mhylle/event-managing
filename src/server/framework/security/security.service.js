@@ -36,7 +36,7 @@ module.exports = function () {
                 var salt = user.salt;
                 var token = userName;
                 var hash = bcrypt.hashSync(passtring, salt);
-                if (hash === undefined) {
+                if (userhash === undefined) {
                     tokens.push(token);
                     foundUser = true;
                     res.send(200, {accesstoken: token, userName: userName});

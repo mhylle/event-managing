@@ -9,8 +9,8 @@
  *
  * @requires $scope
  * */
-module app.controllers {
-    import ISecurityService = app.services.ISecurityService;
+module schema.security.controllers {
+    import ISecurityService = schema.security.services.ISecurityService;
 
     export class SecurityController implements ISecurityController {
 
@@ -63,6 +63,6 @@ module app.controllers {
             })
         }
     }
-    angular.module('app')
+    angular.module('schema.security')
         .controller(SecurityController.controllerId, SecurityController);
 }

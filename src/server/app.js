@@ -7,10 +7,10 @@ var https = require('https');
 //var privateKey  = fs.readFileSync('sslcert/priv.pem', 'utf8');
 //var certificate = fs.readFileSync('sslcert/cert.cer', 'utf8');
 
-var options = {
-    key: fs.readFileSync('sslcert/priv.pem'),
-    cert: fs.readFileSync('sslcert/cert.cer')
-};
+//var options = {
+//    key: fs.readFileSync('sslcert/priv.pem'),
+//    cert: fs.readFileSync('sslcert/cert.cer')
+//};
 
 var express = require('express');
 var app = express();
@@ -18,7 +18,7 @@ var app = express();
 // your express configuration here
 
 var httpServer = http.createServer(app);
-var httpsServer = https.createServer(options, app);
+//var httpsServer = https.createServer(options, app);
 
 //
 var environment = process.env.NODE_ENV;
@@ -70,4 +70,4 @@ httpServer.listen(8001, function () {
         '\n__dirname = ' + __dirname  +
         '\nprocess.cwd = ' + process.cwd());
 });
-httpsServer.listen(443);
+//httpsServer.listen(443);

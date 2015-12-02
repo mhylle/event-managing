@@ -1,5 +1,5 @@
 ///<reference path="../../../../tools/typings/angularjs/angular.d.ts"/>
-module app.services {
+module schema.security.services {
     'use strict';
     export interface ISecurityService {
         login: (username:string, password:string) => ng.IPromise<boolean>;
@@ -80,6 +80,6 @@ module app.services {
 
     }
     angular
-        .module('app')
+        .module('schema.security')
         .factory(SecurityService.serviceId, SecurityService.instance);
 }

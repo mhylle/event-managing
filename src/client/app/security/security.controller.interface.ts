@@ -1,5 +1,5 @@
-module app.controllers {
-    import ISecurityService = app.services.ISecurityService;
+module schema.security.controllers {
+    import ISecurityService = schema.security.services.ISecurityService;
     export interface ISecurityController {
         title: string;
         username: string;

@@ -10,8 +10,8 @@
  *
  * @requires $scope
  * */
-module app.controllers {
-    import ISecurityService = app.services.ISecurityService;
+module schema.controllers {
+    import ISecurityService = schema.security.services.ISecurityService;
 
     export class HeaderController implements IHeaderController {
 
@@ -49,7 +49,7 @@ module app.controllers {
         }
     }
 
-    angular.module('app')
+    angular.module('schema')
         .controller(HeaderController.controllerId, HeaderController);
 
 }

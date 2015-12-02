@@ -1,12 +1,13 @@
 /////<reference path="../../../../tools/typings/angularjs/angular.d.ts"/>
 ///// <reference path="../../../../tools/typings/angularjs/angular-route.d.ts" />
 
-module app {
+module schema {
     'use strict';
 
-    angular.module('app', [
+    angular.module('schema', [
         'ui.router',
         'blocks.logger',
+        'schema.security',
         'schema.user',
         'schema.group'
     ]).config(['$stateProvider', configuration]);
