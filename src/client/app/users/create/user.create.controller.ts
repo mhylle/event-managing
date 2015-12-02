@@ -20,11 +20,11 @@ module schema.user.controllers {
 
         private user: IUser;
         private $q:ng.IQService;
-        static $inject = ['logger', 'userservice', '$q'];
+        static $inject = ['schema.logger', 'userservice', '$q'];
 
 
         /* @ngInject */
-        constructor(private logger:schema.blocks.ILogger, private userService:IUserService) {
+        constructor(private logger:schema.ILogger, private userService:IUserService) {
             this.init();
         }
 

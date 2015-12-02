@@ -7,7 +7,7 @@ describe('Controller: schema.security.SecurityController', function () {
     // load the controller's module
     beforeEach(function () {
         bard.appModule('schema.security');
-        bard.inject('$controller', '$rootScope', 'schema.blocks.logger');
+        bard.inject('$controller', '$rootScope', 'schema.logger');
     });
 
     beforeEach(function () {

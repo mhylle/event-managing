@@ -6,7 +6,7 @@ module schema.group {
 
     angular.module('schema.group', [
         'ui.router',
-        'blocks.logger'
+        'logger'
     ]).config(['$stateProvider', configuration]);
 
     function configuration($stateProvider) {

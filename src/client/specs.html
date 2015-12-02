@@ -32,28 +32,80 @@
 <div id="mocha"></div>
 
     <!-- inject:testlibraries:js -->
+    <script src="/node_modules/mocha/mocha.js"></script>
+    <script src="/node_modules/chai/chai.js"></script>
+    <script src="/node_modules/sinon-chai/lib/sinon-chai.js"></script>
     <!-- endinject -->
 
     <script>
         expect = chai.expect;
         AssertionError = chai.AssertionError;
+//        mocha.setup('schema');
         mocha.setup('bdd');
         mocha.traceIgnores = ['mocha.js', 'chai.js', 'angular.js'];
     </script>
 
     <!-- bower:js -->
+    <script src="/tools/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/tools/bower_components/angular/angular.js"></script>
+    <script src="/tools/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/tools/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
+    <script src="/tools/bower_components/moment/moment.js"></script>
+    <script src="/tools/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/tools/bower_components/toastr/toastr.js"></script>
+    <script src="/tools/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/tools/bower_components/angular-route/angular-route.js"></script>
+    <script src="/tools/bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="/tools/bower_components/sinon/index.js"></script>
+    <script src="/tools/bower_components/bardjs/dist/bard.js"></script>
+    <script src="/tools/bower_components/bardjs/dist/bard-ngRouteTester.js"></script>
     <!-- endbower -->
 
     <!-- inject:js -->
+    <script src="/src/client/app/tsoutput/app.module.js"></script>
+    <script src="/src/client/app/tsoutput/blocks/logger/logger.module.js"></script>
+    <script src="/src/client/app/tsoutput/groups/group.module.js"></script>
+    <script src="/src/client/app/tsoutput/security/security.module.js"></script>
+    <script src="/src/client/app/tsoutput/users/user.module.js"></script>
+    <script src="/src/client/app/security/security.interceptor.js"></script>
+    <script src="/src/client/app/tsoutput/blocks/logger/logger.interface.js"></script>
+    <script src="/src/client/app/tsoutput/blocks/logger/logger.js"></script>
+    <script src="/src/client/app/tsoutput/groups/create/group.create.controller.interface.js"></script>
+    <script src="/src/client/app/tsoutput/groups/create/group.create.controller.js"></script>
+    <script src="/src/client/app/tsoutput/groups/group.interface.js"></script>
+    <script src="/src/client/app/tsoutput/groups/group.service.js"></script>
+    <script src="/src/client/app/tsoutput/groups/list/group.list.controller.interface.js"></script>
+    <script src="/src/client/app/tsoutput/groups/list/group.list.controller.js"></script>
+    <script src="/src/client/app/tsoutput/groups/management/groupmanagement.controller.interface.js"></script>
+    <script src="/src/client/app/tsoutput/groups/management/groupmanagement.controller.js"></script>
+    <script src="/src/client/app/tsoutput/layout/header.controller.interface.js"></script>
+    <script src="/src/client/app/tsoutput/layout/header.controller.js"></script>
+    <script src="/src/client/app/tsoutput/security/security.controller.interface.js"></script>
+    <script src="/src/client/app/tsoutput/security/security.controller.js"></script>
+    <script src="/src/client/app/tsoutput/security/security.interceptor.js"></script>
+    <script src="/src/client/app/tsoutput/security/security.service.js"></script>
+    <script src="/src/client/app/tsoutput/users/create/user.create.controller.interface.js"></script>
+    <script src="/src/client/app/tsoutput/users/create/user.create.controller.js"></script>
+    <script src="/src/client/app/tsoutput/users/list/user.list.controller.interface.js"></script>
+    <script src="/src/client/app/tsoutput/users/list/user.list.controller.js"></script>
+    <script src="/src/client/app/tsoutput/users/management/usermanagement.controller.interface.js"></script>
+    <script src="/src/client/app/tsoutput/users/management/usermanagement.controller.js"></script>
+    <script src="/src/client/app/tsoutput/users/user.interface.js"></script>
+    <script src="/src/client/app/tsoutput/users/user.service.js"></script>
     <!-- endinject -->
 
     <!-- inject:spechelpers:js -->
+    <script src="/src/client/test-helpers/bind-polyfill.js"></script>
+    <script src="/src/client/test-helpers/mock-data.js"></script>
     <!-- endinject -->
 
     <!-- inject:specs:js -->
+    <script src="/src/client/app/security/security.controller.spec.js"></script>
+    <script src="/src/client/app/users/create/user.create.controller.spec.js"></script>
     <!-- endinject -->
 
     <!-- inject:templates:js -->
+    <script src="/.tmp/templates.js"></script>
     <!-- endinject -->
 
     <script>

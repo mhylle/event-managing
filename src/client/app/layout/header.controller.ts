@@ -22,7 +22,7 @@ module schema.controllers {
         private title:string;
 
         /* @ngInject */
-        constructor(private $scope:ng.IScope, private logger:schema.blocks.ILogger, private securityService:ISecurityService) {
+        constructor(private $scope:ng.IScope, private logger:schema.ILogger, private securityService:ISecurityService) {
             this.init();
         }
 

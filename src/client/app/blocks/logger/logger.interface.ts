@@ -1,4 +1,4 @@
-module schema.blocks {
+module schema {
     'use strict';
     export interface ILogger {
         showToasts: boolean;

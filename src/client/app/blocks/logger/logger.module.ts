@@ -1,7 +1,7 @@
-module schema.blocks {
+module schema {
     'use strict';
 
-    angular.module('schema.blocks', []);
+    angular.module('schema', []);
 }
 
 

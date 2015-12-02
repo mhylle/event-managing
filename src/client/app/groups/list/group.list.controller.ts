@@ -22,7 +22,7 @@ module schema.group.controllers {
         errorMessage:string;
 
         /* @ngInject */
-        constructor(private logger:schema.blocks.ILogger, private groupService:IGroupService) {
+        constructor(private logger:schema.ILogger, private groupService:IGroupService) {
             this.init();
         }
 

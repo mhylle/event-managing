@@ -6,7 +6,7 @@ module schema.user {
 
     angular.module('schema.user', [
         'ui.router',
-        'blocks.logger'
+        'schema'
     ]).config(['$stateProvider', configuration]);
 
     function configuration($stateProvider) {
