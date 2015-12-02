@@ -24,7 +24,7 @@ module schema.security.controllers {
         static $inject = ['logger', 'securityservice'];
 
         /* @ngInject */
-        constructor(private logger:app.blocks.ILogger, private securityService:ISecurityService) {
+        constructor(private logger:schema.blocks.ILogger, private securityService:ISecurityService) {
             this.init();
         }
 

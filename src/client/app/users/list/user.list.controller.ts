@@ -22,7 +22,7 @@ module schema.user.controllers {
         errorMessage:string;
 
         /* @ngInject */
-        constructor(private logger:app.blocks.ILogger, private userService:IUserService) {
+        constructor(private logger:schema.blocks.ILogger, private userService:IUserService) {
             this.init();
         }
 

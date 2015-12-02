@@ -24,7 +24,7 @@ module schema.group.controllers {
 
 
         /* @ngInject */
-        constructor(private logger:app.blocks.ILogger, private groupService:IGroupService) {
+        constructor(private logger:schema.blocks.ILogger, private groupService:IGroupService) {
             this.init();
         }
 

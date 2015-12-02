@@ -23,7 +23,7 @@ module schema.user.controllers {
         private user: IUser;
 
         /* @ngInject */
-        constructor(private logger:app.blocks.ILogger, private userService:IUserService) {
+        constructor(private logger:schema.blocks.ILogger, private userService:IUserService) {
             this.init();
         }
 
