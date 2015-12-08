@@ -1,0 +1,27 @@
+{
+  "name": "schema.authentication",
+  "homepage": "https://github.com/mhylle/Schema2",
+  "authors": [
+    "mhylle <mhylle@yahoo.com>"
+  ],
+  "description": "Authentication module for schema.",
+  "main": "schema.authentication.module.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "security",
+    "authentication",
+    "validation"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tools/bower_components",
+    "test",
+    "tests"
+  ],
+  "private": true
+}

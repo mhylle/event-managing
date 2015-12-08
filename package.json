@@ -1,7 +1,7 @@
 {
   "name": "schema2",
   "description": "schema2 Project Generated from HotTowel Angular",
-  "version": "2.0.3-8",
+  "version": "2.0.3-19",
   "scripts": {
     "init": "npm install",
     "install": "bower install",
