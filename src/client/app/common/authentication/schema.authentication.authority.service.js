@@ -8,7 +8,7 @@
         .module('schema.authentication')
         .service('AuthService', AuthService);
 
-    AuthService.$inject = ['$http', Session];
+    AuthService.$inject = ['$http', 'Session'];
 
     /* @ngInject */
     function AuthService($http, Session) {

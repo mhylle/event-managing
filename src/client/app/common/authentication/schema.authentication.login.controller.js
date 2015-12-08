@@ -33,7 +33,7 @@
                 $scope.setCurrentUser(user);
             }, function () {
                 $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-            })
+            });
         }
     }
 

@@ -28,7 +28,7 @@
     <!-- endinject -->
     <!-- endbuild -->
 </head>
-<body>
+<body ng-controller="CoreController as coreController">
 <div class="wrapper"><div class="navbar-fixed-top header">
     <div ng-include="'app/layout/header.html'"></div>
 </div>
@@ -74,13 +74,17 @@
 <!-- build:js js/app.js -->
 <!-- inject:js -->
 <script src="/src/client/app/tsoutput/app.module.js"></script>
-<script src="/src/client/app/tsoutput/blocks/logger/logger.module.js"></script>
+<script src="/src/client/app/tsoutput/common/logger/logger.module.js"></script>
 <script src="/src/client/app/tsoutput/groups/group.module.js"></script>
 <script src="/src/client/app/tsoutput/security/security.module.js"></script>
 <script src="/src/client/app/tsoutput/users/user.module.js"></script>
+<script src="/src/client/app/common/core.controller.js"></script>
+<script src="/src/client/app/security/authentication.service.js"></script>
+<script src="/src/client/app/security/security.controller.js"></script>
 <script src="/src/client/app/security/security.interceptor.js"></script>
-<script src="/src/client/app/tsoutput/blocks/logger/logger.interface.js"></script>
-<script src="/src/client/app/tsoutput/blocks/logger/logger.js"></script>
+<script src="/src/client/app/security/session.service.js"></script>
+<script src="/src/client/app/tsoutput/common/logger/logger.interface.js"></script>
+<script src="/src/client/app/tsoutput/common/logger/logger.js"></script>
 <script src="/src/client/app/tsoutput/groups/create/group.create.controller.interface.js"></script>
 <script src="/src/client/app/tsoutput/groups/create/group.create.controller.js"></script>
 <script src="/src/client/app/tsoutput/groups/group.interface.js"></script>
@@ -93,8 +97,10 @@
 <script src="/src/client/app/tsoutput/layout/header.controller.js"></script>
 <script src="/src/client/app/tsoutput/security/security.controller.interface.js"></script>
 <script src="/src/client/app/tsoutput/security/security.controller.js"></script>
+<script src="/src/client/app/tsoutput/security/security.credentials.js"></script>
 <script src="/src/client/app/tsoutput/security/security.interceptor.js"></script>
 <script src="/src/client/app/tsoutput/security/security.service.js"></script>
+<script src="/src/client/app/tsoutput/security/session.js"></script>
 <script src="/src/client/app/tsoutput/users/create/user.create.controller.interface.js"></script>
 <script src="/src/client/app/tsoutput/users/create/user.create.controller.js"></script>
 <script src="/src/client/app/tsoutput/users/list/user.list.controller.interface.js"></script>
