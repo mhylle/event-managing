@@ -361,7 +361,6 @@ gulp.task('serve-build', ['build'], function () {
     serve(false /*isDev*/);
 });
 
-
 function autobump() {
     var options = {};
     var msg = 'Bumping versions';
