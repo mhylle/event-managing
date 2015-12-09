@@ -10,22 +10,19 @@ module schema {
         'schema.user',
         'schema.group'
     ]).config(['$stateProvider', configuration]);
-    //.config(toastrConfig);
-
-    //function toastrConfig(toastr: Toastr) {
-        //toastr.options.timeOut = 4000;
-        //toastr.options.positionClass = 'toastr-bottom-right';
-    //}
 
     /* applicationVersion */
-    var applicationVersion : string;
-    function configuration($stateProvider) {
+    var applicationVersion:string;
+
+    function configuration($stateProvider, USER_ROLES) {
 
         $stateProvider
             .state('login', {
                 url: '/login',
                 templateUrl: 'app/security/login.html',
-                access: {allowAnonymous: true}
+                data: {
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+                }
             })
             .state('home', {
                 url: '/home',

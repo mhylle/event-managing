@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('schema.authentication')
+        .module('schema')
         .service('AuthService', AuthService);
 
     AuthService.$inject = ['$http', 'Session'];

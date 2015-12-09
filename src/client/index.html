@@ -28,7 +28,7 @@
     <!-- endinject -->
     <!-- endbuild -->
 </head>
-<body ng-controller="CoreController as coreController">
+<body ng-controller="ApplicationController">
 <div class="wrapper"><div class="navbar-fixed-top header">
     <div ng-include="'app/layout/header.html'"></div>
 </div>
@@ -74,15 +74,17 @@
 <!-- build:js js/app.js -->
 <!-- inject:js -->
 <script src="/src/client/app/tsoutput/app.module.js"></script>
+<script src="/src/client/app/common/authentication/schema.authentication.module.js"></script>
 <script src="/src/client/app/tsoutput/common/logger/logger.module.js"></script>
 <script src="/src/client/app/tsoutput/groups/group.module.js"></script>
 <script src="/src/client/app/tsoutput/security/security.module.js"></script>
 <script src="/src/client/app/tsoutput/users/user.module.js"></script>
-<script src="/src/client/app/common/core.controller.js"></script>
-<script src="/src/client/app/security/authentication.service.js"></script>
-<script src="/src/client/app/security/security.controller.js"></script>
+<script src="/src/client/app/common/authentication/schema.authentication.authority.service.js"></script>
+<script src="/src/client/app/common/authentication/schema.authentication.constant.js"></script>
+<script src="/src/client/app/common/authentication/schema.authentication.login.controller.js"></script>
+<script src="/src/client/app/common/authentication/schema.authentication.session.service.js"></script>
+<script src="/src/client/app/schema.application.controller.js"></script>
 <script src="/src/client/app/security/security.interceptor.js"></script>
-<script src="/src/client/app/security/session.service.js"></script>
 <script src="/src/client/app/tsoutput/common/logger/logger.interface.js"></script>
 <script src="/src/client/app/tsoutput/common/logger/logger.js"></script>
 <script src="/src/client/app/tsoutput/groups/create/group.create.controller.interface.js"></script>

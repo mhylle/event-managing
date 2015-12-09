@@ -1,5 +1,5 @@
 ///<reference path="../../../../../tools/typings/angularjs/angular.d.ts"/>
-///<reference path="../../blocks/logger/logger.ts"/>
+///<reference path="../../common/logger/logger.ts"/>
 /**
  * @ngdoc controller
  * @name GroupListController

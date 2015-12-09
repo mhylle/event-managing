@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('schema.authentication')
+        .module('schema')
         .controller('LoginController', LoginController);
 
     LoginController.$inject = ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService'];
