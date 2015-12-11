@@ -8,22 +8,26 @@
         'schema.user',
         'schema.group',
         'schema.security'
-    ]).config(['$stateProvider', configuration])
-        .controller('ApplicationController', ApplicationController);
-//    /* applicationVersion */
-//    var applicationVersion : string;
-    function configuration($stateProvider) {
+    ]).config(['$stateProvider', 'USER_ROLES', configuration])
+        .controller('ApplicationController', ApplicationController)
+        .run(setupSecurity);
+
+    function configuration($stateProvider, USER_ROLES) {
 
         $stateProvider
             .state('login', {
                 url: '/login',
                 templateUrl: 'app/security/login.html',
-                access: {allowAnonymous: true}
+                data: {
+                    authorizedRoles: [USER_ROLES.all]
+                }
             })
             .state('home', {
                 url: '/home',
                 templateUrl: 'app/home.html',
-                access: {allowAnonymous: true}
+                data: {
+                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+                }
             });
     }
 
@@ -36,5 +40,21 @@
         $scope.setCurrentUser = function (user) {
             $scope.currentUser = user;
         };
+    }
+
+    function setupSecurity($rootScope, AUTH_EVENTS, SecurityService) {
+        $rootScope.$on('$stateChangeStart', function (event, next) {
+            var authorizedRoles = next.data.authorizedRoles;
+            if (!SecurityService.isAuthorized(authorizedRoles)) {
+                event.preventDefault();
+                if (SecurityService.isAuthenticated()) {
+                    // user is not allowed
+                    $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+                } else {
+                    // user is not logged in
+                    $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+                }
+            }
+        });
     }
 })();

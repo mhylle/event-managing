@@ -12,6 +12,9 @@
 
     /* @ngInject */
     function SecurityService($http, Session) {
+
+        var authorizedRoles = [];
+
         this.login = login;
         this.isAuthenticated = isAuthenticated;
         this.isAuthorized = isAuthorized;
@@ -35,8 +38,7 @@
             if (!angular.isArray(authorizedRoles)) {
                 authorizedRoles = [authorizedRoles];
             }
-            return (isAuthenticated() &&
-            authorizedRoles.indexOf(Session.userRole) !== -1);
+            return (isAuthenticated() && authorizedRoles.indexOf(Session.userRole) !== -1);
         }
     }
 })();

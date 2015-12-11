@@ -1,3 +1,4 @@
+/* jshint -W040 */
 /**
  * Created by mhylle on 11-12-2015.
  */
