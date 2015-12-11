@@ -1,8 +1,8 @@
 /**
- * Created by mhylle on 08-12-2015.
+ * Created by mhylle on 11-12-2015.
  */
 angular
-    .module('schema')
+    .module('schema.security')
     .constant('AUTH_EVENTS', {
         loginSuccess: 'auth-login-success',
         loginFailed: 'auth-login-failed',
@@ -16,4 +16,5 @@ angular
         admin: 'admin',
         editor: 'editor',
         guest: 'guest'
-    });
+    })
+

@@ -1,33 +1,22 @@
-<!--<form>-->
-    <!--<div ng-controller="LoginController as vm">-->
-        <!--<div class="row panel panel-info">-->
+<form>
+    <div ng-controller="SecurityController as vm">
+        <div class="row panel panel-info">
 
-            <!--<div class="panel-body">-->
-                <!--<div class="row">-->
-                    <!--<span class="col-xs-4 text-right">Username</span>-->
-                    <!--&lt;!&ndash;<span class="col-xs-8"><input type="text" ng-model="vm.username"></span>&ndash;&gt;-->
-                <!--</div>-->
-                <!--<div class="row">-->
-                    <!--<span class="col-xs-4 text-right">Password</span>-->
-                    <!--&lt;!&ndash;<span class="col-xs-8"><input type="password" ng-model="vm.password"></span>&ndash;&gt;-->
-                <!--</div>-->
-                <!--<div class="row text-center">-->
-                    <!--<button class="btn btn-default" ng-click="vm.login()">Login</button>-->
-                    <!--<button class="btn btn-default" ng-click="vm.logout()">Logout</button>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</form>-->
-
-<form name="loginForm" ng-controller="LoginController"
-      ng-submit="login(credentials)" novalidate>
-    <label for="username">Username:</label>
-    <input type="text" id="username"
-           ng-model="credentials.username">
-    <label for="password">Password:</label>
-    <input type="password" id="password"
-           ng-model="credentials.password">
-    <button type="submit">Login</button>
+            <div class="panel-body">
+                <div class="row">
+                    <span class="col-xs-4 text-right">Username</span>
+                    <span class="col-xs-8"><input type="text" ng-model="vm.credentials.username"></span>
+                </div>
+                <div class="row">
+                    <span class="col-xs-4 text-right">Password</span>
+                    <span class="col-xs-8"><input type="password" ng-model="vm.credentials.password"></span>
+                </div>
+                <div class="row text-center">
+                    <button class="btn btn-default" ng-click="vm.login(vm.credentials)">Login</button>
+                    <button class="btn btn-default" ng-click="vm.logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 

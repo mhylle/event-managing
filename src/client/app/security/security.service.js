@@ -1,24 +1,26 @@
 /**
- * Created by mhylle on 08-12-2015.
+ * Created by mhylle on 11-12-2015.
  */
 (function () {
     'use strict';
 
     angular
-        .module('schema')
-        .service('AuthService', AuthService);
+        .module('schema.security')
+        .service('SecurityService', SecurityService);
 
-    AuthService.$inject = ['$http', 'Session'];
+    SecurityService.$inject = ['$http', 'Session'];
 
     /* @ngInject */
-    function AuthService($http, Session) {
+    function SecurityService($http, Session) {
         this.login = login;
         this.isAuthenticated = isAuthenticated;
         this.isAuthorized = isAuthorized;
 
         ////////////////
+
         function login(credentials) {
-            return $http.post('/api/login', credentials)
+            return $http
+                .post('/api/login', credentials)
                 .then(function (result) {
                     Session.create(result.data.id, result.data.user.id, result.data.user.role);
                     return result.data.user;
@@ -29,11 +31,12 @@
             return !!Session.userId;
         }
 
-        function isAuthorized(authorizedRoles) {
+        function isAuthorized() {
             if (!angular.isArray(authorizedRoles)) {
                 authorizedRoles = [authorizedRoles];
             }
-            return (isAuthenticated() && authorizedRoles.indexOf(Session.userRole) !== -1);
+            return (authService.isAuthenticated() &&
+            authorizedRoles.indexOf(Session.userRole) !== -1);
         }
     }
 })();
