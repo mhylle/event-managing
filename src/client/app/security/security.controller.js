@@ -33,7 +33,7 @@
                 $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
             });
             if (credentials) {
-                console.log('Trying to login with ' + credentials.username + " , " + credentials.password);
+                console.log('Trying to login with ' + credentials.username + ' , ' + credentials.password);
             } else {
                 console.log('Trying to login with nothing entered in credentials');
             }

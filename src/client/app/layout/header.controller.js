@@ -25,7 +25,7 @@
                 return null;//that.securityService.getSecurityToken();
             }, function (newVal, oldVal) {
                 if (logger) {
-                    logger.info('watch triggered..')
+                    logger.info('watch triggered..');
                 }
                 if (typeof newVal !== 'undefined') {
                     vm.username = newVal;

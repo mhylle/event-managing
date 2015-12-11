@@ -15,7 +15,7 @@ module.exports = function () {
     return service;
 
     function login(req, res, next) {
-        var userName = req.body.userName;
+        var userName = req.body.username;
         var passtring = req.body.password;
         var users = userService.getUsers();
         var foundUser = false;

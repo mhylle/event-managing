@@ -16,5 +16,4 @@ angular
         admin: 'admin',
         editor: 'editor',
         guest: 'guest'
-    })
-
+    });

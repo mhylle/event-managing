@@ -35,7 +35,7 @@
             if (!angular.isArray(authorizedRoles)) {
                 authorizedRoles = [authorizedRoles];
             }
-            return (authService.isAuthenticated() &&
+            return (isAuthenticated() &&
             authorizedRoles.indexOf(Session.userRole) !== -1);
         }
     }
