@@ -1,4 +1,4 @@
-///* jshint -W117, -W030 */
+/* jshint -W117, -W030 */
 describe('Controller: schema.user.UserCreateController', function () {
     it ('should just work', function () {
         expect(1).to.equal(1);
