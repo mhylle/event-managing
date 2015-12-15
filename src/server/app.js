@@ -4,6 +4,8 @@
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
+
+var compress = require('compression');
 //var privateKey  = fs.readFileSync('sslcert/priv.pem', 'utf8');
 //var certificate = fs.readFileSync('sslcert/cert.cer', 'utf8');
 
@@ -16,10 +18,6 @@ var express = require('express');
 var app = express();
 
 // your express configuration here
-
-var httpServer = http.createServer(app);
-//var httpsServer = https.createServer(options, app);
-
 //
 var environment = process.env.NODE_ENV;
 var bodyParser = require('body-parser');
@@ -28,6 +26,7 @@ var logger = require('morgan');
 var port = process.env.PORT || 8001;
 var four0four = require('./framework/utils/404')();
 
+app.use(compress());
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -64,6 +63,8 @@ switch (environment){
         break;
 }
 
+//var httpsServer = https.createServer(options, app);
+var httpServer = http.createServer(app);
 httpServer.listen(8001, function () {
     console.log('Express server listening on port ' + port);
     console.log('env = ' + app.get('env') +
