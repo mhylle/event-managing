@@ -5,7 +5,6 @@ var fs = require('fs');
 var http = require('http');
 var https = require('https');
 
-var compress = require('compression');
 //var privateKey  = fs.readFileSync('sslcert/priv.pem', 'utf8');
 //var certificate = fs.readFileSync('sslcert/cert.cer', 'utf8');
 
@@ -19,14 +18,31 @@ var app = express();
 
 // your express configuration here
 //
+var compression = require('compression');
 var environment = process.env.NODE_ENV;
 var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var port = process.env.PORT || 8001;
+var helmet = require('helmet');
 var four0four = require('./framework/utils/404')();
 
-app.use(compress());
+var session = require('express-session');
+app.use(compression({filter: shouldCompress}));
+
+var expiryDate = new Date( Date.now() + 60 * 60 * 1000 ); // 1 hour
+app.use(session({
+    name: 'session',
+    keys: ['key1', 'key2'],
+    cookie: { secure: true,
+        httpOnly: true,
+        domain: 'localhost',
+        path: 'foo/bar',
+        expires: expiryDate
+    }
+}));
+
+app.use(helmet());
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -72,3 +88,13 @@ httpServer.listen(8001, function () {
         '\nprocess.cwd = ' + process.cwd());
 });
 //httpsServer.listen(443);
+
+function shouldCompress(req, res) {
+    if (req.headers['x-no-compression']) {
+        // don't compress responses with this request header
+        return false
+    }
+
+    // fallback to standard filter function
+    return compression.filter(req, res)
+}
