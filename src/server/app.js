@@ -30,11 +30,12 @@ var four0four = require('./framework/utils/404')();
 var session = require('express-session');
 app.use(compression({filter: shouldCompress}));
 
-var expiryDate = new Date( Date.now() + 60 * 60 * 1000 ); // 1 hour
+var expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
 app.use(session({
     name: 'session',
     keys: ['key1', 'key2'],
-    cookie: { secure: true,
+    cookie: {
+        secure: true,
         httpOnly: true,
         domain: 'localhost',
         path: 'foo/bar',
@@ -54,12 +55,12 @@ console.log('About to crank up node');
 console.log('PORT=' + port);
 console.log('NODE_ENV=' + environment);
 
-switch (environment){
+switch (environment) {
     case 'build':
         console.log('** BUILD **');
         app.use(express.static('./build/'));
         // Any invalid calls for templateUrls are under app/* and should return 404
-        app.use('/app/*', function(req, res, next) {
+        app.use('/app/*', function (req, res, next) {
             four0four.send404(req, res);
         });
         // Any deep link calls should return index.html
@@ -71,7 +72,7 @@ switch (environment){
         app.use(express.static('./'));
         app.use(express.static('./tmp'));
         // Any invalid calls for templateUrls are under app/* and should return 404
-        app.use('/app/*', function(req, res, next) {
+        app.use('/app/*', function (req, res, next) {
             four0four.send404(req, res);
         });
         // Any deep link calls should return index.html
@@ -84,7 +85,7 @@ var httpServer = http.createServer(app);
 httpServer.listen(8001, function () {
     console.log('Express server listening on port ' + port);
     console.log('env = ' + app.get('env') +
-        '\n__dirname = ' + __dirname  +
+        '\n__dirname = ' + __dirname +
         '\nprocess.cwd = ' + process.cwd());
 });
 //httpsServer.listen(443);
