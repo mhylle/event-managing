@@ -1,5 +1,5 @@
-module schema.user.controllers {
-    import IUserService = schema.user.services.IUserService;
+module eventmanaging.user.controllers {
+    import IUserService = eventmanaging.user.services.IUserService;
     export interface IUserManagementController {
         title: string;
 

@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('schema', [
+    angular.module('eventmanaging', [
         'ui.router',
-        'schema.logger',
-        'schema.header',
-        'schema.user',
-        'schema.group',
-        'schema.security'
+        'eventmanaging.logger',
+        'eventmanaging.header',
+        'eventmanaging.user',
+        'eventmanaging.group',
+        'eventmanaging.security'
     ]).config(['$stateProvider', 'USER_ROLES', configuration])
         .controller('ApplicationController', ApplicationController)
         .run(setupSecurity);

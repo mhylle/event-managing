@@ -1,5 +1,5 @@
 angular
-    .module('schema.security')
+    .module('eventmanaging.security')
     .factory('sessionInjector',['$window', function ($window) {
         var sessionInjector = {
             request: function (config) {

@@ -1,4 +1,4 @@
-module schema.group.controllers {
+module eventmanaging.group.controllers {
 
     export interface IGroup {
         // base data

@@ -1,4 +1,4 @@
-module schema.user.controllers {
+module eventmanaging.user.controllers {
 
     export interface IUser {
         // base data

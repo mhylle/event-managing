@@ -1,12 +1,13 @@
 /**
  * Created by mhylle on 30-11-2015.
  */
-module schema.user {
+module eventmanaging.user {
     'use strict';
 
-    angular.module('schema.user', [
+    angular.module('eventmanaging.user', [
         'ui.router',
-        'schema'
+        'eventmanaging',
+        'eventmanaging.security'
     ]).config(['$stateProvider', 'USER_ROLES', configuration]);
 
     function configuration($stateProvider, USER_ROLES) {

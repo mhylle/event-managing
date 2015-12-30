@@ -1,6 +1,6 @@
 ///<reference path="../../../../tools/typings/angularjs/angular.d.ts"/>
-module schema.user.services {
-    import IUser = schema.user.controllers.IUser;
+module eventmanaging.user.services {
+    import IUser = eventmanaging.user.controllers.IUser;
     'use strict';
     export interface IUserService {
         users: () => ng.IPromise<IUser[]>;
@@ -38,7 +38,7 @@ module schema.user.services {
             return defer.promise;
         }
 
-        createUser(user:schema.user.controllers.IUser):ng.IPromise<boolean> {
+        createUser(user:eventmanaging.user.controllers.IUser):ng.IPromise<boolean> {
             var defer = this.$q.defer();
             this.$http.post('/api/users/', user)
                 .then(response => {
@@ -51,6 +51,6 @@ module schema.user.services {
 
     }
     angular
-        .module('schema.user')
+        .module('eventmanaging.user')
         .factory(UserService.serviceId, UserService.instance);
 }

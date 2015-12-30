@@ -2,7 +2,7 @@
  * Created by mhylle on 11-12-2015.
  */
 angular
-    .module('schema.security')
+    .module('eventmanaging.security')
     .constant('AUTH_EVENTS', {
         loginSuccess: 'auth-login-success',
         loginFailed: 'auth-login-failed',

@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('schema.security')
+        .module('eventmanaging.security')
         .service('Session', Session);
 
     Session.$inject = [];

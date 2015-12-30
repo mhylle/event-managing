@@ -1,12 +1,12 @@
 /**
  * Created by mhylle on 30-11-2015.
  */
-module schema.group {
+module eventmanaging.group {
     'use strict';
 
-    angular.module('schema.group', [
+    angular.module('eventmanaging.group', [
         'ui.router',
-        'schema.logger'
+        'eventmanaging.logger'
     ]).config(['$stateProvider', configuration]);
 
     function configuration($stateProvider) {

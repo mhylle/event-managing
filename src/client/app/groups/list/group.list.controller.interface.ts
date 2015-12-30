@@ -1,5 +1,4 @@
-module schema.group.controllers {
-    import IUserService = schema.group.services.IGroupService;
+module eventmanaging.group.controllers {
     export interface IGroupListController {
         title: string;
 

@@ -5,10 +5,10 @@
     'use strict';
 
     angular
-        .module('schema.header')
+        .module('eventmanaging.header')
         .controller('HeaderController', HeaderController);
 
-    HeaderController.$inject = ['$scope', 'schema.logger'];
+    HeaderController.$inject = ['$scope', 'eventmanaging.logger'];
 
     /* @ngInject */
     function HeaderController($scope, logger) {
