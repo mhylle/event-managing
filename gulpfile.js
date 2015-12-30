@@ -240,7 +240,9 @@ gulp.task('optimize', ['inject'], function () {
         .pipe(assets) // Gather all assets from the html with useref
         // Get the css
         .pipe(cssFilter)
-        .pipe($.minifyCss())
+        .pipe($.sourcemaps.init())
+        .pipe($.nano())
+        .pipe($.sourcemaps.write('.'))
         .pipe(cssFilter.restore())
         // Get the custom javascript
         .pipe(jsAppFilter)
