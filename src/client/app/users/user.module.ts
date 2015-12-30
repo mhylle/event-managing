@@ -7,24 +7,30 @@ module schema.user {
     angular.module('schema.user', [
         'ui.router',
         'schema'
-    ]).config(['$stateProvider', configuration]);
+    ]).config(['$stateProvider', 'USER_ROLES', configuration]);
 
-    function configuration($stateProvider) {
+    function configuration($stateProvider, USER_ROLES) {
         $stateProvider
             .state('users', {
                 url: '/users',
                 templateUrl: 'app/users/users.html',
-                access: {allowAnonymous: false}
+                data: {
+                    authorizedRoles: [USER_ROLES.user]
+                }
             })
             .state('users.list', {
                 url: '/list',
                 templateUrl: 'app/users/list/userlist.html',
-                access: {allowAnonymous: false}
+                data: {
+                    authorizedRoles: [USER_ROLES.user]
+                }
             })
             .state('users.create', {
                 url: '/create',
                 templateUrl: 'app/users/create/createUser.html',
-                access: {allowAnonymous: false}
+                data: {
+                    authorizedRoles: [USER_ROLES.editor]
+                }
             })
     }
 }

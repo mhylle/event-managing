@@ -13,7 +13,6 @@
         .run(setupSecurity);
 
     function configuration($stateProvider, USER_ROLES) {
-
         $stateProvider
             .state('login', {
                 url: '/login',
