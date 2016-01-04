@@ -1,22 +1,38 @@
-<form>
-    <div ng-controller="SecurityController as vm">
-        <div class="row panel panel-info">
+<!--<form>-->
+    <!--<div ng-controller="SecurityController as vm">-->
+        <!--<div class="row panel panel-info">-->
 
-            <div class="panel-body">
-                <div class="row">
-                    <span class="col-xs-4 text-right">Username</span>
-                    <span class="col-xs-8"><input type="text" ng-model="vm.credentials.username"></span>
-                </div>
-                <div class="row">
-                    <span class="col-xs-4 text-right">Password</span>
-                    <span class="col-xs-8"><input type="password" ng-model="vm.credentials.password"></span>
-                </div>
-                <div class="row text-center">
-                    <button class="btn btn-default" ng-click="vm.login(vm.credentials)">Login</button>
-                    <button class="btn btn-default" ng-click="vm.logout()">Logout</button>
-                </div>
+            <!--<div class="panel-body">-->
+                <!--<div class="row">-->
+                    <!--<span class="col-xs-4 text-right">Username</span>-->
+                    <!--<span class="col-xs-8"><input type="text" ng-model="vm.credentials.username"></span>-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<span class="col-xs-4 text-right">Password</span>-->
+                    <!--<span class="col-xs-8"><input type="password" ng-model="vm.credentials.password"></span>-->
+                <!--</div>-->
+                <!--<div class="row text-center">-->
+                    <!--<button class="btn btn-default" ng-click="vm.login(vm.credentials)">Login</button>-->
+                    <!--<button class="btn btn-default" ng-click="vm.logout()">Logout</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</form>-->
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="loginmodal-container">
+            <h1>Login to Your Account</h1><br>
+            <form>
+                <input type="text" name="user" placeholder="Username">
+                <input type="password" name="pass" placeholder="Password">
+                <input type="submit" name="login" class="login loginmodal-submit" value="Login">
+            </form>
+
+            <div class="login-help">
+                <a href="#">Register</a> - <a href="#">Forgot Password</a>
             </div>
         </div>
     </div>
-</form>
-
+</div>

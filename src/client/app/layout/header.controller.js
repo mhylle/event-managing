@@ -21,6 +21,7 @@
 
         function init() {
             vm.title = 'Header';
+            vm.logo = 'images/logo.png';
             $scope.$watch(function () {
                 return null;//that.securityService.getSecurityToken();
             }, function (newVal, oldVal) {
