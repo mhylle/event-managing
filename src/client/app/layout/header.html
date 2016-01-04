@@ -1,13 +1,17 @@
-<img ng-src="images/logo.png" class="logo"/>
-<ul class="list-inline">
-    <li><a ui-sref="home">Home</a></li>
-    <li><a ui-sref="users">User Management</a></li>
-    <li><a ui-sref="groups">Group Management</a></li>
-    <li><a ui-sref="login">Login Page</a></li>
-</ul>
-<div class="row">
-    <span>Security tests</span>
-    <span>Logged in as: {{username}}</span>
-    <span>Is authorized?: {{isAuthorized}}</span>
-    <span>UserRoles !!{{userRoles}}!!</span>
+<div ng-controller="HeaderController as vm" class="container">
+    <div class="icon-logo"><img ng-src="images/logo.png" class="logo"/></div>
+    <div class="row">
+        <span>Security tests</span>
+        <span>Logged in as: {{username}}</span>
+        <span>Is authorized?: {{isAuthorized}}</span>
+        <span>UserRoles !!{{userRoles}}!!</span>
+    </div>
+    <div class="box">
+        <ul class="list-inline">
+            <li><a ui-sref="home">Home</a></li>
+            <li><a ui-sref="users">User Management</a></li>
+            <li><a ui-sref="groups">Group Management</a></li>
+        </ul>
+    </div>
+
 </div>

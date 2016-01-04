@@ -8,10 +8,10 @@
         .module('eventmanaging.header')
         .controller('HeaderController', HeaderController);
 
-    HeaderController.$inject = ['$scope', 'eventmanaging.logger'];
+    HeaderController.$inject = ['$scope', 'Logger'];
 
     /* @ngInject */
-    function HeaderController($scope, logger) {
+    function HeaderController($scope, Logger) {
         var vm = this;
         vm.title = 'HeaderController';
 
@@ -24,8 +24,8 @@
             $scope.$watch(function () {
                 return null;//that.securityService.getSecurityToken();
             }, function (newVal, oldVal) {
-                if (logger) {
-                    logger.info('watch triggered..');
+                if (Logger) {
+                    Logger.info('watch triggered..');
                 }
                 if (typeof newVal !== 'undefined') {
                     vm.username = newVal;
