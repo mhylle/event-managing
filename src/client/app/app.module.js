@@ -49,7 +49,7 @@
             if (next.data) {
                 var authorizedRoles = next.data.authorizedRoles;
                 if (!SecurityService.isAuthorized(authorizedRoles)) {
-                    Logger.info('user was not authorized to proceed')
+                    Logger.info('user was not authorized to proceed');
                     event.preventDefault();
                     if (SecurityService.isAuthenticated()) {
                         // user is not allowed
