@@ -1,7 +1,7 @@
 {
   "name": "event-managing",
   "description": "event-managing Project Generated from HotTowel Angular",
-  "version": "2.0.3-74",
+  "version": "2.0.3-79",
   "scripts": {
     "init": "npm install",
     "install": "tsd install & bower install",
@@ -12,6 +12,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.2",
     "compression": "^1.6.0",
+    "cookie-parser": "^1.4.0",
     "crypto-hashing": "^0.3.1",
     "csprng": "^0.1.1",
     "errorhandler": "^1.4.2",
@@ -20,6 +21,7 @@
     "helmet": "^0.15.0",
     "jwt-simple": "^0.3.1",
     "morgan": "^1.6.1",
+    "passport": "^0.3.2",
     "serve-favicon": "^2.3.0",
     "typescript": "^1.7.5",
     "underscore": "^1.8.3"

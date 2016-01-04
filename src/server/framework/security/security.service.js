@@ -15,13 +15,13 @@ module.exports = function () {
     return service;
 
     function login(req, res, next) {
+        // TODO Create a proper login method. This one seems a tad broken and unpleasant..
         var userName = req.body.username;
         var passtring = req.body.password;
         var users = userService.getUsers();
         var foundUser = false;
         if (users === undefined || users === null) {
-            res.send(401, 'Invalid Credentials');
-            return;
+            return {status: 401, accesstoken: null, userName: null};
         }
         var tmpUsers;
         if (users.users) {
@@ -39,8 +39,7 @@ module.exports = function () {
                 if (userhash === undefined) {
                     tokens.push(token);
                     foundUser = true;
-                    res.send(200, {accesstoken: token, userName: userName});
-                    return;
+                    return {status: 200, accesstoken: token, userName: userName};
                 }
 
                 var compareSync = bcrypt.compareSync(hash, userhash);
@@ -48,15 +47,14 @@ module.exports = function () {
                 if (compareSync) {
                     //var expires = new Date();
                     //expires.setDate((new Date()).getDate() + 5);
-
                     tokens.push(token);
                     foundUser = true;
-                    res.send(200, {accesstoken: token, userName: userName});
-                    return;
+                    return {status: 200, accesstoken: token, userName: userName};
                 }
             }
         }
-        res.send(401, 'Invalid Credentials');
+        return {status: 401, accesstoken: null, userName: null};
+
     }
 
     function logout(req, res, description) {
