@@ -27,5 +27,6 @@ And much much more..
 
 A user guide and wiki will be created for the system.
 
+[![Build Status](https://travis-ci.org/mhylle/event-managing.svg)](https://travis-ci.org/mhylle/event-managing)
 
 [![Coverage Status](https://coveralls.io/repos/mhylle/event-managing/badge.svg?branch=master&service=github)](https://coveralls.io/github/mhylle/event-managing?branch=master)
