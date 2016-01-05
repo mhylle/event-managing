@@ -1,4 +1,4 @@
-# Schema2
+# event-managing.com
 A system for managing different kinds of events, from a work party so a handball cup.
 
 Base features:
@@ -27,3 +27,5 @@ And much much more..
 
 A user guide and wiki will be created for the system.
 
+
+[![Coverage Status](https://coveralls.io/repos/mhylle/event-managing/badge.svg?branch=master&service=github)](https://coveralls.io/github/mhylle/event-managing?branch=master)
