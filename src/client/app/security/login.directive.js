@@ -22,8 +22,8 @@
 
         function link(scope, element, attrs) {
             var showDialog = function () {
-                scope.visible = true
-            }
+                scope.visible = true;
+            };
             scope.visible = false;
             scope.$on(AUTH_EVENTS.notAuthenticated, showDialog);
             scope.$on(AUTH_EVENTS.sessionTimeout, showDialog);
