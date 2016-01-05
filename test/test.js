@@ -8,7 +8,7 @@ var userService = require('../src/server/users/user.service');
 
 describe('#userService', function () {
     it('Should return some users', function () {
-        var result = userService.getUsers();
+        var result = userService.users();
         expect(result).to.be.defined;
     });
 });

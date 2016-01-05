@@ -7,7 +7,7 @@ var dataService = require('../framework/data/data.service')();
 var bcrypt = require('bcrypt-nodejs');
 var user = require('./user');
 
-module.exports.getUsers = function() {
+module.exports.users = function() {
     return dataService.get();
 };
 
