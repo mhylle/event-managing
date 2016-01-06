@@ -1,5 +1,5 @@
 var data = require('../data/data');
-var userService = require('../../users/userservice.js')();
+var userService = require('../../users/user.service')();
 var _ = require('underscore');
 var jwt = require('jwt-simple');
 var secret = '4757hgf87348gfhj3rf89fhj8rgerg345';
