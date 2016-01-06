@@ -8,7 +8,8 @@ var bcrypt = require('bcrypt-nodejs');
 var user = require('./user');
 
 module.exports.users = function() {
-    return dataService.get();
+    return [{name:'mah', password: 'mah'}];
+    //return dataService.get();
 };
 
 module.exports = function () {
