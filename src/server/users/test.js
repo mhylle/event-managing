@@ -4,7 +4,7 @@
 'use strict';
 
 var expect = require('chai').expect;
-var userService = require('../src/server/users/user.service');
+var userService = require('user.service');
 
 describe('#userService', function () {
     it('Should return some users', function () {
@@ -12,3 +12,4 @@ describe('#userService', function () {
         expect(result).to.be.defined;
     });
 });
+

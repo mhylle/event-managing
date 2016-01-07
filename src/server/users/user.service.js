@@ -7,18 +7,23 @@ var dataService = require('../framework/data/data.service')();
 var bcrypt = require('bcrypt-nodejs');
 var user = require('./user');
 
-module.exports.users = function() {
-    return [{name:'mah', password: 'mah'}];
+module.exports.users = function () {
+    return [{name: 'mah', password: 'mah'}];
     //return dataService.get();
 };
 
 module.exports = function () {
 
     var service = {
+
         getUser: getUser,
         saveUser: saveUser
     };
     return service;
+
+    function getUsers() {
+        return [{name: 'mah', password: 'mah'}];
+    }
 
     function getUser(req, res, next) {
         var id = +req.param.id;
