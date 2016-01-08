@@ -7,7 +7,7 @@
         "init": "npm install",
         "install": "tsd install & bower install",
         "start": "node src/server/app.js",
-        "test": "mocha --reporter spec",
+        "test": "gulp test",
         "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec src/server/**/*"
     },
     "engines": {

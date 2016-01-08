@@ -5,7 +5,7 @@
 
 var expect = require('chai').expect;
 var _ = require('lodash');
-var userService = require('./user.service');
+var userService = require('./../server/users/user.service.js');
 
 describe('#userService', function () {
     it('Should return some users', function () {
