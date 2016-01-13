@@ -5,8 +5,8 @@
         'ui.router',
         'eventmanaging.logger',
         'eventmanaging.header',
-        'eventmanaging.user',
-        'eventmanaging.group',
+        //'eventmanaging.user',
+        //'eventmanaging.group',
         'eventmanaging.security'
     ]).config(['$stateProvider', 'USER_ROLES', configuration])
         .controller('ApplicationController', ApplicationController)
