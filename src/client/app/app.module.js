@@ -21,6 +21,13 @@
                     authorizedRoles: [USER_ROLES.all]
                 }
             })
+            .state('events', {
+                url: '/events',
+                templateUrl: 'app/events/events.html',
+                data: {
+                    authorizedRoles: [USER_ROLES.all]
+                }
+            })
             .state('home', {
                 url: '/home',
                 templateUrl: 'app/home.html',
