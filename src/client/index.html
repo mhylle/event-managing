@@ -17,8 +17,8 @@
 
     <!-- build:css styles/lib.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="/tools/bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="/tools/bower_components/toastr/toastr.css" />
+    <link rel="stylesheet" href="/tools/bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/tools/bower_components/toastr/toastr.css"/>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -29,7 +29,7 @@
     <!-- endbuild -->
 </head>
 <body ng-controller="ApplicationController">
-<div  id="header" class="navbar navbar-default navbar-fixed-top">
+<div id="header" class="navbar navbar-default navbar-fixed-top">
     <div class="navbar-header">
         <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
             <i class="icon-reorder"></i>
@@ -53,7 +53,8 @@
         </ul>
         <ul class="nav navbar-nav pull-right">
             <li class="dropdown">
-                <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>Username<i class="icon-sort-down"></i></a>
+                <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>Username<i
+                    class="icon-sort-down"></i></a>
                 <ul class="dropdown-menu pull-right">
                     <li><a href="#">Log Out</a></li>
                 </ul>
@@ -62,34 +63,63 @@
     </nav>
 </div>
 <div id="wrapper">
-    <!--<div id="sidebar-wrapper"  class="col-md-1">-->
-        <!--<div id="sidebar">-->
-            <!--<ul class="nav list-group">-->
-                <!--<li>-->
-                    <!--<a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 1</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 2</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 3</a>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</div>-->
     <div id="main-wrapper" class="col-md-11 pull-right">
         <div id="main">
             <div class="page-header">
+                <div class="card col-xs-3">
+                    <div class="card-caption row">
+                        <div class="event-title col-xs-10">Fastelavn</div>
+                        <div class="event-status col-xs-1">X</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="event-time-remaining col-xs-8">Tilmelding: 14 dage.</div>
+                            <div class="event-date col-xs-4 text-right">7/2-12</div>
+                        </div>
+                        <div class="event-time text-right">13:00-15:00</div>
+                        <div class="event-location text-right">Kantinen</div>
+                    </div>
+                </div>
+                <div class="card col-xs-3">
+                    <div class="card-caption row">
+                        <div class="event-title col-xs-11">Julefrokost</div>
+                        <div class="event-status col-xs-1">X</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="event-time-remaining col-xs-8">Tilmelding: 72 dage.</div>
+                            <div class="event-date col-xs-4 text-right">7/2-12</div>
+                        </div>
+                        <div class="event-time text-right">13:00-15:00</div>
+                        <div class="event-location text-right">Kantinen</div>
+                    </div>
+                </div>
                 <div class="card col-xs-3">
                     <div class="card-caption row">
                         <div class="event-title col-xs-11">Fastelavn</div>
                         <div class="event-status col-xs-1">X</div>
                     </div>
                     <div class="card-content">
-                        <div class="event-time-remaining">Tilmelding: 14 dage.</div>
-                        <div class="event-date">7/2-12</div>
-                        <div class="event-time">13:00-15:00</div>
-                        <div class="event-location">Kantinen</div>
+                        <div class="row">
+                            <div class="event-time-remaining col-xs-8">Tilmelding: 14 dage.</div>
+                            <div class="event-date col-xs-4 text-right">7/2-12</div>
+                        </div>
+                        <div class="event-time text-right">13:00-15:00</div>
+                        <div class="event-location text-right">Kantinen</div>
+                    </div>
+                </div>
+                <div class="card col-xs-3">
+                    <div class="card-caption row">
+                        <div class="event-title col-xs-11">Fastelavn</div>
+                        <div class="event-status col-xs-1">X</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="event-time-remaining col-xs-8">Tilmelding: 14 dage.</div>
+                            <div class="event-date col-xs-4 text-right">7/2-12</div>
+                        </div>
+                        <div class="event-time text-right">13:00-15:00</div>
+                        <div class="event-location text-right">Kantinen</div>
                     </div>
                 </div>
             </div>
@@ -97,31 +127,31 @@
     </div>
 </div>
 <!--<div class="wrapper">-->
-    <!--<div class="navbar-fixed-top header">-->
-        <!--<div ng-include="'app/layout/header.html'"></div>-->
-    <!--</div>-->
+<!--<div class="navbar-fixed-top header">-->
+<!--<div ng-include="'app/layout/header.html'"></div>-->
+<!--</div>-->
 <!--</div>-->
 <!--<div class="usercontent">-->
-    <!--<div ui-view></div>-->
+<!--<div ui-view></div>-->
 <!--</div>-->
 <!--<div class="footer">-->
-    <!--<div class="container">-->
-        <!--<div class="row-fluid">-->
-            <!--<div class="col-lg-4">-->
-                <!--<p>&copy; 2015 <a href="#">Hylarious Industries & Martin Hylleberg</a></p>-->
-            <!--</div>-->
-            <!--<div class="col-lg-4 text-center">-->
-                <!--<ul class="list-inline">-->
-                    <!--<li><a href="#">About Us</a></li>-->
-                    <!--<li><a href="#">Contact Us</a></li>-->
-                    <!--<li><a href="#">Privacy Policy</a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
-            <!--<div class="col-lg-4 text-right">-->
-                <!--<p>Event Managing Version 2.0</p>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+<!--<div class="container">-->
+<!--<div class="row-fluid">-->
+<!--<div class="col-lg-4">-->
+<!--<p>&copy; 2015 <a href="#">Hylarious Industries & Martin Hylleberg</a></p>-->
+<!--</div>-->
+<!--<div class="col-lg-4 text-center">-->
+<!--<ul class="list-inline">-->
+<!--<li><a href="#">About Us</a></li>-->
+<!--<li><a href="#">Contact Us</a></li>-->
+<!--<li><a href="#">Privacy Policy</a></li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--<div class="col-lg-4 text-right">-->
+<!--<p>Event Managing Version 2.0</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->
 
 
