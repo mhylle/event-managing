@@ -5,6 +5,7 @@
         'ui.router',
         'eventmanaging.logger',
         'eventmanaging.header',
+        'event-managing-events',
         //'eventmanaging.user',
         //'eventmanaging.group',
         'eventmanaging.security'

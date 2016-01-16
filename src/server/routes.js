@@ -7,6 +7,7 @@ var four0four = require('./framework/utils/404')();
 var security = require('./framework/security/security.service')();
 var users = require('./users/user.service')();
 var groups = require('./groups/group.service')();
+var events = require('./events/event.service');
 //var data = require('./framework/data/data');
 
 var app = express();
@@ -18,6 +19,7 @@ router.get('/user/:id', requiresAuthentication, getUser);
 router.get('/groups', requiresAuthentication, getGroups);
 router.post('/groups', requiresAuthentication, saveGroup);
 router.get('/groups/:id', requiresAuthentication, getGroup);
+router.get('/events', getEvents);
 router.post('/login/', login);
 router.get('/logout/', logout);
 router.get('/*', four0four.notFoundMiddleware);
@@ -60,4 +62,9 @@ function saveGroup(req, res, next) {
 
 function getGroup(req, res, next) {
     groups.getGroup(req, res, next);
+}
+
+function getEvents(req, res, next) {
+    var events = events.getEvents();
+    res.status(200).send(events);
 }
