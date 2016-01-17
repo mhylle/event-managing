@@ -2,7 +2,7 @@ var four0four = require('../framework/utils/404')();
 
 var data = require('../framework/data/data');
 var dataService = require('../framework/data/data.service')();
-var event = require('./event')
+//var event = require('./event')
 
 
 module.exports = function () {
@@ -16,7 +16,7 @@ module.exports = function () {
     return service;
 
     function getEvents() {
-        return dataService.getEvents();
+        return [];//dataService.getEvents();
     }
 
     function getEvent(req, res, next) {

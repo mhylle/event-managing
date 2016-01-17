@@ -7,7 +7,7 @@ var four0four = require('./framework/utils/404')();
 var security = require('./framework/security/security.service')();
 var users = require('./users/user.service')();
 var groups = require('./groups/group.service')();
-var events = require('./events/event.service');
+var events = require('./events/event.service')();
 //var data = require('./framework/data/data');
 
 var app = express();

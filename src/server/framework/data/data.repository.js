@@ -35,4 +35,8 @@ module.exports = function () {
         })[0];
     }
 
+    function getEvents() {
+        return data.getEvents();
+    }
+
 };

@@ -93,3 +93,17 @@ function getGroups() {
     }
     ];
 }
+
+function getEvents() {
+    return [{
+        'id': 1,
+        'name': 'Fastelavn',
+        internalId: utils.uniqueID(),
+        signstart: new Date(),
+        signend: new Date(),
+        signoutend: new Date(),
+        location: 'Kantinen',
+        users: []
+    }
+    ]
+}
