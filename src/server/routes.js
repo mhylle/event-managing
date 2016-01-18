@@ -8,6 +8,8 @@ var security = require('./framework/security/security.service')();
 var users = require('./users/user.service')();
 var groups = require('./groups/group.service')();
 var events = require('./events/event.service')();
+
+var dataRepository = require('./framework/data/data.repository');
 //var data = require('./framework/data/data');
 
 var app = express();
@@ -65,6 +67,7 @@ function getGroup(req, res, next) {
 }
 
 function getEvents(req, res, next) {
-    var events = events.getEvents();
+    var dataRepositoryInstance = new dataRepository();
+    var events = dataRepositoryInstance.getEvents();
     res.status(200).send(events);
 }

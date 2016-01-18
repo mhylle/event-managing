@@ -107,5 +107,5 @@ function getEvents() {
         location: 'Kantinen',
         users: []
     }
-    ]
+    ];
 }

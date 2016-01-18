@@ -8,11 +8,11 @@ module.exports = function () {
     return service;
 
     function save(element) {
-        dataRepository.add(element);
+        //dataRepository.add(element);
     }
 
     function get() {
-        return dataRepository.get();
+        //return dataRepository.get();
     }
 
     function getGroup(id) {
@@ -26,6 +26,6 @@ module.exports = function () {
     }
 
     function getEvents() {
-        return dataRepository.getEvents();
+        //return dataRepository.getEvents();
     }
 };
