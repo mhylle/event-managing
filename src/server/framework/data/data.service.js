@@ -24,4 +24,8 @@ module.exports = function () {
     function remove() {
 
     }
+
+    function getEvents() {
+        return dataRepository.getEvents();
+    }
 };
