@@ -1,6 +1,8 @@
+var utils = require('../utils/generator');
 module.exports = {
     users: getUsers(),
-    groups: getGroups()
+    groups: getGroups(),
+    events: getEvents()
 };
 
 function getUsers() {
@@ -98,7 +100,7 @@ function getEvents() {
     return [{
         'id': 1,
         'name': 'Fastelavn',
-        internalId: utils.uniqueID(),
+        internalId: utils.uniqueID,
         signstart: new Date(),
         signend: new Date(),
         signoutend: new Date(),
