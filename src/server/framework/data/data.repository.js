@@ -2,12 +2,12 @@
  * Created by mhylle on 21-11-2015.
  */
 
-var data = require('./data');
+var Data = require('./data');
 
 var dataRepository = function() {
     var service = this;
     service.getEvents = function() {
-        var dataInstance = new data();
+        var dataInstance = new Data();
         var events = dataInstance.events();
         return events;
     };
