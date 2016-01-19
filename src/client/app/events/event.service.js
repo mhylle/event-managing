@@ -8,10 +8,10 @@
         .module('event-managing-events')
         .factory('EventService', EventService);
 
-    EventService.$inject = ['$http'];
+    EventService.$inject = ['$http', 'Logger'];
 
     /* @ngInject */
-    function EventService($http) {
+    function EventService($http, Logger) {
         var service = {
             getEvents: getEvents
         };
@@ -25,7 +25,7 @@
                 .catch(onGetEventsError);
 
             function onGetEventsSuccess(response) {
-                //Logger.info('getting events, response was ' + response);
+                Logger.info('getting events, response was ' + response);
                 if (response.data) {
                     return response.data;
                 }
@@ -33,7 +33,7 @@
             }
 
             function onGetEventsError(error) {
-                //Logger.error('Error during getEvents: ' + error);
+                Logger.error('Error during getEvents: ' + error);
                 return [];
             }
         }
