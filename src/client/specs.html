@@ -64,11 +64,14 @@
     <!-- inject:js -->
     <script src="/src/client/app/app.module.js"></script>
     <script src="/src/client/app/common/logger/logger.module.js"></script>
+    <script src="/src/client/app/events/event.module.js"></script>
     <script src="/src/client/app/layout/header.module.js"></script>
     <script src="/src/client/app/security/security.module.js"></script>
     <script src="/src/client/app/tsoutput/groups/group.module.js"></script>
     <script src="/src/client/app/tsoutput/users/user.module.js"></script>
     <script src="/src/client/app/common/logger/logger.service.js"></script>
+    <script src="/src/client/app/events/event.controller.js"></script>
+    <script src="/src/client/app/events/event.service.js"></script>
     <script src="/src/client/app/layout/header.controller.js"></script>
     <script src="/src/client/app/security/login.directive.js"></script>
     <script src="/src/client/app/security/security.constants.js"></script>
@@ -96,10 +99,12 @@
 
     <!-- inject:spechelpers:js -->
     <script src="/src/client/test-helpers/bind-polyfill.js"></script>
+    <script src="/src/client/test-helpers/event-managing-event.mock-services.js"></script>
     <script src="/src/client/test-helpers/mock-data.js"></script>
     <!-- endinject -->
 
     <!-- inject:specs:js -->
+    <script src="/src/client/app/events/event.controller.spec.js"></script>
     <script src="/src/client/app/security/security.controller.spec.js"></script>
     <script src="/src/client/app/users/create/user.create.controller.spec.js"></script>
     <!-- endinject -->

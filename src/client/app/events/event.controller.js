@@ -8,10 +8,10 @@
         .module('event-managing-events')
         .controller('EventController', EventController);
 
-    EventController.$inject = ['Logger', 'EventService'];
+    EventController.$inject = ['EventService'];
 
     /* @ngInject */
-    function EventController(Logger, EventService) {
+    function EventController( EventService) {
         var vm = this;
         vm.title = 'EventController';
         vm.events = [];
@@ -27,7 +27,7 @@
         ////////////////
 
         function activate() {
-            Logger.info('Activated Eventcontroller');
+            //Logger.info('Activated Eventcontroller');
             fetchEvents();
         }
 
