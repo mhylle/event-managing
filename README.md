@@ -29,4 +29,6 @@ A user guide and wiki will be created for the system.
 
 [![Build Status](https://travis-ci.org/mhylle/event-managing.svg)](https://travis-ci.org/mhylle/event-managing)
 
+[ ![Codeship Status for mhylle/event-managing](https://codeship.com/projects/3139fa60-a0ce-0133-aeb1-76eadfcae33d/status?branch=master)](https://codeship.com/projects/128262)
+
 [![Coverage Status](https://coveralls.io/repos/mhylle/event-managing/badge.svg?branch=master&service=github)](https://coveralls.io/github/mhylle/event-managing?branch=master)
