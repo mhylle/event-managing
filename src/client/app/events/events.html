@@ -1,7 +1,9 @@
+<div class="header">Events</div>
 <div ng-controller="EventController as vm">
-    <div class="card col-xs-3" ng-repeat="vm.events">
+    <div><label>Number of events:</label> {{vm.events.length}}</div>
+    <div class="card col-xs-3" ng-repeat="event in vm.events">
         <div class="card-caption row">
-            <div class="event-title col-xs-11">Fastelavn</div>
+            <div class="event-title col-xs-11">{{event.name}}</div>
             <div class="event-status col-xs-1">X</div>
         </div>
         <div class="card-content">

@@ -67,7 +67,9 @@ function getGroup(req, res, next) {
 }
 
 function getEvents(req, res, next) {
+    console.log('Getting events');
     var dataRepositoryInstance = new dataRepository();
     var events = dataRepositoryInstance.getEvents();
+    console.log('returning ' + events.length + ' events');
     res.status(200).send(events);
 }

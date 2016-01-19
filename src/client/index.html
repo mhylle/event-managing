@@ -80,18 +80,19 @@
     <div id="main-wrapper" class="col-md-11 pull-right">
         <div id="main">
             <div class="page-header">
-                <div class="card col-xs-3">
-                    <div class="card-caption row">
-                        <div class="event-title col-xs-11">Fastelavn</div>
-                        <div class="event-status col-xs-1">X</div>
-                    </div>
-                    <div class="card-content">
-                        <div class="event-time-remaining">Tilmelding: 14 dage.</div>
-                        <div class="event-date">7/2-12</div>
-                        <div class="event-time">13:00-15:00</div>
-                        <div class="event-location">Kantinen</div>
-                    </div>
-                </div>
+                <div ui-view></div>
+                <!--<div class="card col-xs-3">-->
+                    <!--<div class="card-caption row">-->
+                        <!--<div class="event-title col-xs-11">Fastelavn</div>-->
+                        <!--<div class="event-status col-xs-1">X</div>-->
+                    <!--</div>-->
+                    <!--<div class="card-content">-->
+                        <!--<div class="event-time-remaining">Tilmelding: 14 dage.</div>-->
+                        <!--<div class="event-date">7/2-12</div>-->
+                        <!--<div class="event-time">13:00-15:00</div>-->
+                        <!--<div class="event-location">Kantinen</div>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
         </div>
     </div>
@@ -102,7 +103,7 @@
     <!--</div>-->
 <!--</div>-->
 <!--<div class="usercontent">-->
-    <!--<div ui-view></div>-->
+
 <!--</div>-->
 <!--<div class="footer">-->
     <!--<div class="container">-->
@@ -143,11 +144,14 @@
 <!-- inject:js -->
 <script src="/src/client/app/app.module.js"></script>
 <script src="/src/client/app/common/logger/logger.module.js"></script>
+<script src="/src/client/app/events/event.module.js"></script>
 <script src="/src/client/app/layout/header.module.js"></script>
 <script src="/src/client/app/security/security.module.js"></script>
 <script src="/src/client/app/tsoutput/groups/group.module.js"></script>
 <script src="/src/client/app/tsoutput/users/user.module.js"></script>
 <script src="/src/client/app/common/logger/logger.service.js"></script>
+<script src="/src/client/app/events/event.controller.js"></script>
+<script src="/src/client/app/events/event.service.js"></script>
 <script src="/src/client/app/layout/header.controller.js"></script>
 <script src="/src/client/app/security/login.directive.js"></script>
 <script src="/src/client/app/security/security.constants.js"></script>

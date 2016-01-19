@@ -108,9 +108,20 @@ function getGroups() {
 }
 
 function getEvents() {
-    return [{
+    return [
+        {
         'id': 1,
         'name': 'Fastelavn',
+        internalId: utils.uniqueID,
+        signstart: new Date(),
+        signend: new Date(),
+        signoutend: new Date(),
+        location: 'Kantinen',
+        users: []
+    },
+        {
+        'id': 2,
+        'name': 'Julefrokost',
         internalId: utils.uniqueID,
         signstart: new Date(),
         signend: new Date(),

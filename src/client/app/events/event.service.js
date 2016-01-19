@@ -20,18 +20,24 @@
         ////////////////
 
         function getEvents() {
-            Logger.info('getting events');
-            var defer = $q.defer;
-            $http.get('/api/events')
-                .then(function (response) {
-                    var data = response.data;
-                    defer.resolve(data);
-                })
-                .catch(function (error) {
-                    defer.resolve(error);
-                });
-            return defer.promise;
+
+            return $http.get('/api/events')
+                .then(onGetEventsSuccess)
+                .catch(onGetEventsError);
+
+
+            function onGetEventsSuccess(response) {
+                Logger.info('getting events, response was ' +response);
+                if (response.data) {
+                    return response.data;
+                }
+                return [];
+            }
+
+            function onGetEventsError(error) {
+                Logger.error('Error during getEvents: ' + error);
+                return [];
+            }
         }
     }
 })();
-

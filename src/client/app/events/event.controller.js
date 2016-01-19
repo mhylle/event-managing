@@ -29,10 +29,9 @@
 
         function fetchEvents() {
             EventService.getEvents().then(function(response) {
-                vm.events = response.data;
+                vm.events = response;
             })
         }
-
     }
 
 })();
