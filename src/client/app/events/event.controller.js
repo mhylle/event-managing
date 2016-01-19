@@ -11,7 +11,7 @@
     EventController.$inject = ['EventService'];
 
     /* @ngInject */
-    function EventController( EventService) {
+    function EventController(EventService) {
         var vm = this;
         vm.title = 'EventController';
         vm.events = [];
@@ -32,7 +32,7 @@
         }
 
         function fetchEvents() {
-            EventService.getEvents().then(function(response) {
+            EventService.getEvents().then(function (response) {
                 if (response.status === 'RESPONSE_OK') {
                     vm.events = response.events;
                     vm.status.code = 'ok';
