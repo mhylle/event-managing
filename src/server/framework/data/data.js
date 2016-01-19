@@ -5,9 +5,11 @@ var data = function() {
     service.events = function() {
         return getEvents();
     };
+
     service.users = function() {
         return getUsers();
     };
+
     service.groups = function() {
         return getGroups();
     };

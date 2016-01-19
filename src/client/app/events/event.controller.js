@@ -15,6 +15,10 @@
         var vm = this;
         vm.title = 'EventController';
         vm.events = [];
+        vm.status = {
+            code: 'ok',
+            message: ''
+        };
 
         vm.fetchEvents = fetchEvents;
 
@@ -29,7 +33,18 @@
 
         function fetchEvents() {
             EventService.getEvents().then(function(response) {
-                vm.events = response;
+                if (response.status === 'RESPONSE_OK') {
+                    vm.events = response;
+                    vm.status.code = 'ok';
+                    vm.status.message = '';
+                } else {
+                    if (response.status === 'RESPONSE_ERROR') {
+                        vm.status.code = 'error';
+                    } else {
+                        vm.status.code = 'warning';
+                    }
+                    vm.status.message = response.message;
+                }
             })
         }
     }
