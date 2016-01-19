@@ -1,7 +1,20 @@
-module.exports = {
-    users: getUsers(),
-    groups: getGroups()
+var utils = require('../utils/generator');
+
+var data = function() {
+    var service = this;
+    service.events = function() {
+        return getEvents();
+    };
+    service.users = function() {
+        return getUsers();
+    };
+    service.groups = function() {
+        return getGroups();
+    };
 };
+
+module.exports = data;
+
 
 function getUsers() {
     return [
@@ -98,12 +111,12 @@ function getEvents() {
     return [{
         'id': 1,
         'name': 'Fastelavn',
-        internalId: utils.uniqueID(),
+        internalId: utils.uniqueID,
         signstart: new Date(),
         signend: new Date(),
         signoutend: new Date(),
         location: 'Kantinen',
         users: []
     }
-    ]
+    ];
 }

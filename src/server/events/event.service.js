@@ -16,7 +16,7 @@ module.exports = function () {
     return service;
 
     function getEvents() {
-        return [];//dataService.getEvents();
+        return data.events();
     }
 
     function getEvent(req, res, next) {
