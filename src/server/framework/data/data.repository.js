@@ -2,15 +2,16 @@
  * Created by mhylle on 21-11-2015.
  */
 
-var seededData = require('./data');
-var data = [];
+var data = require('./data');
 
 var dataRepository = function() {
-    var self = this;
-    self.getEvents = function() {
-        return data.getEvents();
+    var service = this;
+    service.getEvents = function() {
+        var dataInstance = new data();
+        var events = dataInstance.events();
+        return events;
     }
-}
+};
 
 module.exports = dataRepository;
 //var getEvents = function() {

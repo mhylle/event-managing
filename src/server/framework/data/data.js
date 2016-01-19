@@ -1,9 +1,20 @@
 var utils = require('../utils/generator');
-module.exports = {
-    users: getUsers(),
-    groups: getGroups(),
-    events: getEvents()
+
+var data = function() {
+    var service = this;
+    service.events = function() {
+        return getEvents();
+    };
+    service.users = function() {
+        return getUsers();
+    };
+    service.groups = function() {
+        return getGroups();
+    };
 };
+
+module.exports = data;
+
 
 function getUsers() {
     return [
