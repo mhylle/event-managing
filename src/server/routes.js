@@ -9,7 +9,7 @@ var users = require('./users/user.service')();
 var groups = require('./groups/group.service')();
 var events = require('./events/event.service')();
 
-var dataRepository = require('./framework/data/data.repository');
+var DataRepository = require('./framework/data/data.repository');
 //var data = require('./framework/data/data');
 
 var app = express();
@@ -68,7 +68,7 @@ function getGroup(req, res, next) {
 
 function getEvents(req, res, next) {
     console.log('Getting events');
-    var dataRepositoryInstance = new dataRepository();
+    var dataRepositoryInstance = new DataRepository();
     var events = dataRepositoryInstance.getEvents();
     var result = {};
     result.events = events;
