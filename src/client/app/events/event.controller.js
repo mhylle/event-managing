@@ -34,7 +34,7 @@
         function fetchEvents() {
             EventService.getEvents().then(function(response) {
                 if (response.status === 'RESPONSE_OK') {
-                    vm.events = response;
+                    vm.events = response.events;
                     vm.status.code = 'ok';
                     vm.status.message = '';
                 } else {
@@ -45,7 +45,7 @@
                     }
                     vm.status.message = response.message;
                 }
-            })
+            });
         }
     }
 

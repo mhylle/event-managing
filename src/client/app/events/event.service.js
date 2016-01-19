@@ -18,16 +18,14 @@
         return service;
 
         ////////////////
-
         function getEvents() {
 
             return $http.get('/api/events')
                 .then(onGetEventsSuccess)
                 .catch(onGetEventsError);
 
-
             function onGetEventsSuccess(response) {
-                Logger.info('getting events, response was ' +response);
+                Logger.info('getting events, response was ' + response);
                 if (response.data) {
                     return response.data;
                 }

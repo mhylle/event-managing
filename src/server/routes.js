@@ -70,7 +70,9 @@ function getEvents(req, res, next) {
     console.log('Getting events');
     var dataRepositoryInstance = new dataRepository();
     var events = dataRepositoryInstance.getEvents();
-    event.status = 'RESPONSE_OK';
+    var result = {};
+    result.events = events;
+    result.status = 'RESPONSE_OK';
     console.log('returning ' + events.length + ' events');
-    res.status(200).send(events);
+    res.status(200).send(result);
 }

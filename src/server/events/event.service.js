@@ -4,7 +4,6 @@ var data = require('../framework/data/data');
 var dataService = require('../framework/data/data.service')();
 //var event = require('./event')
 
-
 module.exports = function () {
 
     var service = {
@@ -36,9 +35,9 @@ module.exports = function () {
         event.internalId = req.body.internalId;
         event.name = req.body.name;
         event.signend = req.body.signend;
-        event.signstart= req.body.signstart;
-        event.signoutend= req.body.signoutend;
-        event.location= req.body.location;
+        event.signstart = req.body.signstart;
+        event.signoutend = req.body.signoutend;
+        event.location = req.body.location;
 
         console.log(event);
         dataService.save(event);

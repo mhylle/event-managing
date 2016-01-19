@@ -1,3 +1,4 @@
+/* jshint -W030, -W117 */
 /**
  * Created by mah on 05-01-2016.
  */

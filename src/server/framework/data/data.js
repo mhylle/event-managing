@@ -1,22 +1,21 @@
 var utils = require('../utils/generator');
 
-var data = function() {
+var data = function () {
     var service = this;
-    service.events = function() {
+    service.events = function () {
         return getEvents();
     };
 
-    service.users = function() {
+    service.users = function () {
         return getUsers();
     };
 
-    service.groups = function() {
+    service.groups = function () {
         return getGroups();
     };
 };
 
 module.exports = data;
-
 
 function getUsers() {
     return [
@@ -112,24 +111,24 @@ function getGroups() {
 function getEvents() {
     return [
         {
-        'id': 1,
-        'name': 'Fastelavn',
-        internalId: utils.uniqueID,
-        signstart: new Date(),
-        signend: new Date(),
-        signoutend: new Date(),
-        location: 'Kantinen',
-        users: []
-    },
+            'id': 1,
+            'name': 'Fastelavn',
+            internalId: utils.uniqueID,
+            signstart: new Date(),
+            signend: new Date(),
+            signoutend: new Date(),
+            location: 'Kantinen',
+            users: []
+        },
         {
-        'id': 2,
-        'name': 'Julefrokost',
-        internalId: utils.uniqueID,
-        signstart: new Date(),
-        signend: new Date(),
-        signoutend: new Date(),
-        location: 'Kantinen',
-        users: []
-    }
+            'id': 2,
+            'name': 'Julefrokost',
+            internalId: utils.uniqueID,
+            signstart: new Date(),
+            signend: new Date(),
+            signoutend: new Date(),
+            location: 'Kantinen',
+            users: []
+        }
     ];
 }

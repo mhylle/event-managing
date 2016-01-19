@@ -10,7 +10,7 @@ var dataRepository = function() {
         var dataInstance = new data();
         var events = dataInstance.events();
         return events;
-    }
+    };
 };
 
 module.exports = dataRepository;
