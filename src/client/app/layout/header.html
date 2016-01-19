@@ -1,43 +1,32 @@
-<div ng-controller="HeaderController as vm" class="container">
-    <div class="icon-logo col-xs-1">
-        <a ui-sref="home"><img ng-src="{{vm.logo}}" width="100" class="logo"/></a>
+<div  id="header" class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-header">
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+            <i class="icon-reorder"></i>
+        </button>
+        <a class="navbar-brand" ui-sref="home">
+            <img ng-src="images/logo.png" width="100" class="logo" alt="[HI]"/>
+            <!--<img ng-src="{{vm.logo}}" width="100" class="logo" alt="[HI]"/>-->
+        </a>
     </div>
-    <div class="box col-xs-8">
-        <ul class="list-inline">
-            <li><a ui-sref="home">Home</a></li>
-            <!--<li ng-if="!currentUser"><a href="#" data-toggle="modal" data-target="#login-modal">Login</a></li>-->
-            <li ng-if="!currentUser"><a ui-sref="login">login</a></li>
-            <li ng-if="currentUser"><a ui-sref="logout">logout</a></li>
-            <li ng-if="isAuthorized(userRoles.admin)"><a ui-sref="users">User Management</a></li>
-            <li ng-if="isAuthorized(userRoles.admin)"><a ui-sref="groups">Group Management</a></li>
+    <nav class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li><a ui-sref="events">Events</a></li>
+            <li class="dropdown">
+                <a ui-sref="groups" class="dropdown-toggle" data-toggle="dropdown">Groups<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a ui-sref="groups.list">Show</a></li>
+                    <li><a ui-sref="groups.create">Create</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Users</a></li>
         </ul>
-    </div>
-    <div class="col-xs-3">
-        <div ng-if="currentUser">Welcome, {{ currentUser.name }}</div>
-        <div ng-if="isAuthorized(userRoles.admin)">You're admin.</div>
-        <div ng-switch on="currentUser.role">
-            <div ng-switch-when="userRoles.admin">You're admin.</div>
-            <div ng-switch-when="userRoles.editor">You're editor.</div>
-            <div ng-switch-default>You're something else.</div>
-        </div>
-    </div>
-
-    <!--<div login-dialog ng-if="!isLoginPage"></div>-->
-</div>
-
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="loginmodal-container">
-            <h1>Login to Your Account</h1><br>
-            <form>
-                <input type="text" name="user" placeholder="Username">
-                <input type="password" name="pass" placeholder="Password">
-                <input type="submit" name="login" class="login loginmodal-submit" value="Login">
-            </form>
-
-            <div class="login-help">
-                <a href="#">Register</a> - <a href="#">Forgot Password</a>
-            </div>
-        </div>
-    </div>
+        <ul class="nav navbar-nav pull-right">
+            <li class="dropdown">
+                <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>Username<i class="icon-sort-down"></i></a>
+                <ul class="dropdown-menu pull-right">
+                    <li><a href="#">Log Out</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
 </div>
