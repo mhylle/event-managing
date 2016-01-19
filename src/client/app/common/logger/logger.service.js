@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('eventmanaging.logger')
+        .module('event-managing-logger')
         .factory('Logger', Logger);
 
     Logger.$inject = ['$log'];
