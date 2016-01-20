@@ -174,7 +174,7 @@ module.exports = function () {
                 reporters: [
                     // reporters not supporting the `file` property
                     {type: 'html', subdir: 'report-html'},
-                    {type: 'lcov', subdir: 'report-lcov'},
+                    {type: 'lcov', subdir: 'coverage', repoToken: 'uD9yAMalIM595lCjY9sDZ5Z6cAGbVMD3L'},
                     {type: 'text-summary'} //, subdir: '.', file: 'text-summary.txt'}
                 ]
             },
