@@ -29,7 +29,7 @@ describe('EventController', function () {
         });
 
         describe('After activation', function () {
-            beforeEach(function() {
+            beforeEach(function () {
                 $rootScope.$apply();
             });
 
@@ -41,11 +41,15 @@ describe('EventController', function () {
                 expect(controller.events).to.have.length(2);
             });
 
-            it('should have a response.status', function() {
+            it('should have an empty status message', function () {
+               expect(controller.status.message).to.be.empty;
+            });
+
+            it('should have a status.response', function () {
                 expect(controller.status.response).to.exist;
             });
 
-            it('should have a response.status that is ok', function() {
+            it('should have a response.status that is ok', function () {
                 expect(controller.status.response).to.equal('RESPONSE_OK');
             });
         });
