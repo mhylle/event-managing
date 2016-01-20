@@ -42,7 +42,7 @@ describe('EventController', function () {
             });
 
             it('should have an empty status message', function () {
-               expect(controller.status.message).to.be.empty;
+                expect(controller.status.message).to.be.empty;
             });
 
             it('should have a status.response', function () {
