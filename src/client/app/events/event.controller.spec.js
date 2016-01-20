@@ -1,57 +1,54 @@
 /* jshint -W117, -W030 */
 describe('EventController', function () {
-    var scope;
     var controller;
+
+    var events = mockData.getMockEvents();
 
     bard.verifyNoOutstandingHttpRequests();
 
     beforeEach(function () {
-        bard.inject('$controller', '$rootScope', 'EventService');
-        scope = window.$rootScope.$new();
-        bard.mockService(EventService, appMockServices.eventResult);
-        controller = newAppController();
-        $rootScope.$apply();
+        bard.appModule('event-managing-events');
+        bard.inject('$controller', '$rootScope', '$q');
+        var es = {
+            getEvents: function () {
+                return $q.when(events);
+            }
+        };
+        controller = $controller('EventController', {
+            EventService: es
+        });
     });
 
     describe('Controller Initialization', function () {
-        var activateSpy;
-        var getEventsSpy;
-
-        beforeEach(function () {
-            controller = newAppController(appMockServices.eventResult);
-            //var activateSpy = sinon.spy(controller.activate);
-            //var getEventsSpy = sinon.spy(EventService.getEvents);
+        it('Should exist', function () {
+            expect(controller).to.exist;
         });
 
-        it('creates controller', function () {
-            expect(controller, 'controller obj').to.exist;
+        it('should have empty events array before activation', function () {
+            expect(controller.events).to.exist;
         });
 
-        //it('calls activate', function () {
-        //    expect(controller.activate).to.have.been.calledOnce;
-        //});
-        //
-        //describe('After activate', function () {
-        //    it('to have called eventservice', function () {
-        //        expect(EventService.getEvens).to.have.been.calledOnce;
-        //    });
-        //
-        //    it('has events', function () {
-        //        expect(controller.events).not.to.be.empty;
-        //    });
-        //
-        //    it('has 2 events', function () {
-        //        expect(controller.events.length).to.equal(2);
-        //    });
-        //})
+        describe('After activation', function () {
+            beforeEach(function() {
+                $rootScope.$apply();
+            });
+
+            it('should have events', function () {
+                expect(controller.events).to.have.length.above(0);
+            });
+
+            it('should have mock events', function () {
+                expect(controller.events).to.have.length(2);
+            });
+
+            it('should have a response.status', function() {
+                expect(controller.status.response).to.exist;
+            });
+
+            it('should have a response.status that is ok', function() {
+                expect(controller.status.response).to.equal('RESPONSE_OK');
+            });
+        });
+
     });
-
-    function newAppController(bsMock) {
-        //if (bsMock != null) {
-        //    EventService.getEvents.returns(bsMock.getEvents);
-        //}
-        var newController = $controller('EventController', {$scope: scope});
-        $rootScope.$apply();
-        return newController;
-    }
 });

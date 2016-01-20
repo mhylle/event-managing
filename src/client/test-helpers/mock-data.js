@@ -1,8 +1,9 @@
 /* jshint -W079 */
-var mockData = (function() {
+var mockData = (function () {
     return {
         getMockPeople: getMockPeople,
-        getMockStates: getMockStates
+        getMockPeople: getMockPeople,
+        getMockEvents: getMockEvents
     };
 
     function getMockStates() {
@@ -33,4 +34,33 @@ var mockData = (function() {
             {firstName: 'Haley', lastName: 'Guthrie', age: 35, location: 'Wyoming'}
         ];
     }
+
+    function getMockEvents() {
+        return {
+            events: [
+                {
+                    'id': 1,
+                    'name': 'Fastelavn',
+                    internalId: 1,
+                    signstart: new Date(),
+                    signend: new Date(),
+                    signoutend: new Date(),
+                    location: 'Kantinen',
+                    users: []
+                },
+                {
+                    'id': 2,
+                    'name': 'Julefrokost',
+                    internalId: 2,
+                    signstart: new Date(),
+                    signend: new Date(),
+                    signoutend: new Date(),
+                    location: 'Kantinen',
+                    users: []
+                }
+            ],
+            status: 'RESPONSE_OK'
+        }
+    }
+
 })();

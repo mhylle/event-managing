@@ -45,9 +45,9 @@
                     }
                     vm.status.message = response.message;
                 }
+                vm.status.response = response.status;
             });
         }
     }
-
 })();
 
