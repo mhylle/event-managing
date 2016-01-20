@@ -118,6 +118,7 @@ function getEvents() {
             signend: new Date(),
             signoutend: new Date(),
             location: 'Kantinen',
+            decription: 'En festlig dag for børnene.',
             users: []
         },
         {
@@ -128,6 +129,7 @@ function getEvents() {
             signend: new Date(),
             signoutend: new Date(),
             location: 'Kantinen',
+            description: 'Så skal der festes',
             users: []
         }
     ];
