@@ -1,7 +1,7 @@
 /* jshint -W079 */
 var mockData = (function () {
     return {
-        getMockPeople: getMockPeople,
+        getMockStates: getMockStates,
         getMockPeople: getMockPeople,
         getMockEvents: getMockEvents
     };
@@ -60,7 +60,6 @@ var mockData = (function () {
                 }
             ],
             status: 'RESPONSE_OK'
-        }
+        };
     }
-
 })();
