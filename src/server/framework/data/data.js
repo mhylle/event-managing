@@ -131,6 +131,17 @@ function getEvents() {
             location: 'Kantinen',
             description: 'Så skal der festes',
             users: []
+        },
+        {
+            'id': 3,
+            'name': 'Sensommerfest',
+            internalId: utils.uniqueID,
+            signstart: new Date(),
+            signend: new Date(),
+            signoutend: new Date(),
+            location: 'Varna',
+            description: 'Så skal der festes',
+            users: []
         }
     ];
 }
