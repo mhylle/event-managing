@@ -1,4 +1,5 @@
 var utils = require('../utils/generator');
+var moment = require('moment');
 
 var data = function () {
     var service = this;
@@ -111,37 +112,49 @@ function getGroups() {
 function getEvents() {
     return [
         {
-            'id': 1,
-            'name': 'Fastelavn',
+            id: 1,
+            name: 'Fastelavn',
             internalId: utils.uniqueID,
-            signstart: new Date(),
-            signend: new Date(),
-            signoutend: new Date(),
+            start: moment('07-02-2016 14:00:00', 'DD-MM-YYYY HH:mm'),
+            end: moment('07-02-2016 16:00:00', 'DD-MM-YYYY HH:mm'),
+            signstart: moment('17-01-2016', 'DD-MM-YYYY'),
+            signend: moment('02-02-2016', 'DD-MM-YYYY'),
+            signoutend: moment('02-02-2016', 'DD-MM-YYYY'),
             location: 'Kantinen',
+            logo: '',
             decription: 'En festlig dag for børnene.',
-            users: []
+            users: [],
+            activities: []
         },
         {
-            'id': 2,
-            'name': 'Julefrokost',
+            id: 2,
+            name: 'Julefrokost',
             internalId: utils.uniqueID,
-            signstart: new Date(),
-            signend: new Date(),
-            signoutend: new Date(),
+            start: moment('05-12-2016 12:00:00', 'DD-MM-YYYY HH:mm'),
+            end: moment('05-12-2016 23:59:59', 'DD-MM-YYYY HH:mm'),
+            signstart: moment('17-11-2016', 'DD-MM-YYYY'),
+            signend: moment('02-12-2016', 'DD-MM-YYYY'),
+            signoutend: moment('02-12-2016', 'DD-MM-YYYY'),
             location: 'Kantinen',
+            logo: '',
             description: 'Så skal der festes',
-            users: []
+            users: [],
+            activities: []
         },
         {
-            'id': 3,
-            'name': 'Sensommerfest',
+            id: 3,
+            name: 'Sensommerfest',
             internalId: utils.uniqueID,
-            signstart: new Date(),
-            signend: new Date(),
-            signoutend: new Date(),
+            start: moment('22-09-2016 18:00:00', 'DD-MM-YYYY HH:mm'),
+            end: moment('23-09-2016 02:00:00', 'DD-MM-YYYY HH:mm'),
+            signstart: moment('01-09-2016', 'DD-MM-YYYY'),
+            signend: moment('15-09-2016', 'DD-MM-YYYY'),
+            signoutend: moment('16-09-2016', 'DD-MM-YYYY'),
             location: 'Varna',
+            logo: '',
             description: 'Så skal der festes',
-            users: []
+            users: [],
+            activities: []
         }
     ];
 }

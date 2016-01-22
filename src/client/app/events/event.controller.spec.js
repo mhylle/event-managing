@@ -52,6 +52,13 @@ describe('EventController', function () {
             it('should have a response.status that is ok', function () {
                 expect(controller.status.response).to.equal('RESPONSE_OK');
             });
+
+            it('should calculate time to last sign up date from now', function () {
+                //var event = controller.events[0];
+                //var signend = event.signend;
+                //var fromNow = moment(signend).fromNow();
+                //expect(event.timeToLastSign).to.equal(fromNow);
+            });
         });
 
     });

@@ -1,6 +1,6 @@
 {
   "name": "event-managing",
-  "version": "0.0.4-211",
+  "version": "0.0.4-222",
   "description": "event-managing",
   "authors": [
     "Martin Hylleberg <mhylle@yahoo.com>"
@@ -25,11 +25,12 @@
     "bootstrap": "^3.3.5",
     "extras.angular.plus": "^0.9.2",
     "font-awesome": "^4.3.0",
-    "moment": "^2.10.3",
+    "moment": "~2.11.1",
     "angular-ui-router": "^0.2.15",
     "toastr": "~2.1.2",
     "angular-animate": "^1.4.5",
-    "angular-route": "~1.4.7"
+    "angular-route": "~1.4.7",
+    "angular-moment": "~0.10.3"
   },
   "overrides": {
     "bootstrap": {

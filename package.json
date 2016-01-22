@@ -1,7 +1,7 @@
 {
   "name": "event-managing",
   "description": "event-managing Project Generated from HotTowel Angular",
-  "version": "0.0.4-211",
+  "version": "0.0.4-223",
   "main": "src/server/app.js",
   "scripts": {
     "init": "npm install",
@@ -38,6 +38,7 @@
     "express-session": "^1.12.1",
     "helmet": "^0.15.0",
     "jwt-simple": "^0.3.1",
+    "moment": "^2.11.1",
     "morgan": "^1.6.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.0.0",
