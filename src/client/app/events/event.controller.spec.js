@@ -93,6 +93,10 @@ describe('EventController', function () {
                     expect(controller.status.response).to.equal('RESPONSE_ERROR');
                 });
 
+                it('should have a response.status.code error', function () {
+                    expect(controller.status.code).to.equal('error');
+                });
+
                 it('should have a status message', function () {
                     expect(controller.status.message).not.to.be.empty;
                 });
