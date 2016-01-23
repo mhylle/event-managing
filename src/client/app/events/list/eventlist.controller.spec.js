@@ -78,8 +78,8 @@ describe('EventController', function () {
                     //controller.gotoEvent(1);
                     //$rootScope.$apply();
                     //expect($state).is('events.view');
-                })
-            })
+                });
+            });
         });
 
         describe('With failed service', function () {

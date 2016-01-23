@@ -8,7 +8,6 @@ angular
     ])
     .config(['$stateProvider', 'USER_ROLES', configuration]);
 
-
 function configuration($stateProvider, USER_ROLES) {
     $stateProvider
         .state('events', {
@@ -31,5 +30,5 @@ function configuration($stateProvider, USER_ROLES) {
             data: {
                 authorizedRoles: [USER_ROLES.all]
             }
-        })
+        });
 }

@@ -8,10 +8,10 @@
         .module('event-managing-events')
         .controller('EventController', EventController);
 
-    EventController.$inject = ['$state', 'EventService'];
+    EventController.$inject = ['$state', '$rootScope', 'EventService'];
 
     /* @ngInject */
-    function EventController($state, EventService) {
+    function EventController($state, $rootScope, EventService) {
         var vm = this;
         vm.title = 'EventController';
         vm.events = [];
