@@ -9,6 +9,7 @@
 
     /* @ngInject */
     function eventviewcontroller($stateParams, EventService) {
+        /* jshint -W040 */
         var vm = this;
         vm.title = 'eventviewcontroller';
 
