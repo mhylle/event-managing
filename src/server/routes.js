@@ -22,6 +22,7 @@ router.get('/groups', requiresAuthentication, getGroups);
 router.post('/groups', requiresAuthentication, saveGroup);
 router.get('/groups/:id', requiresAuthentication, getGroup);
 router.get('/events', getEvents);
+router.get('/event/id/:id', getEvent);
 router.post('/login/', login);
 router.get('/logout/', logout);
 router.get('/*', four0four.notFoundMiddleware);
@@ -75,4 +76,19 @@ function getEvents(req, res, next) {
     result.status = 'RESPONSE_OK';
     console.log('returning ' + events.length + ' events');
     res.status(200).send(result);
+}
+function getEvent(req, res, next) {
+    console.log('Getting events');
+    var dataRepositoryInstance = new DataRepository();
+    var events = dataRepositoryInstance.getEvents();
+    var id = +req.params.id;
+    var event = events.filter(function(e) {
+        return e.id === id;
+    })[0];
+
+    if (event) {
+        res.status(200).send(event);
+    } else {
+        four0four.send404(req, res, 'event ' + id + ' not found');
+    }
 }

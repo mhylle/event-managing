@@ -1,0 +1,24 @@
+<div ng-controller="eventviewcontroller as vm">
+    <div>{{vm.eventid}}</div>
+    <div><label>{{vm.event.name}}</label></div>
+    <div>
+        <label>Held at </label> {{vm.event.start | date: 'dd-MM-yyyy'}}
+        <label>from</label> {{vm.event.start | date: 'HH:mm'}}
+        <label>Ending at </label> {{vm.event.end | date: 'dd-MM-yyyy'}}
+        <label>at</label> {{vm.event.end | date: 'HH:mm'}}
+    </div>
+
+    <div><label>Signup starts from</label> {{vm.event.signstart | date: 'dd-MM-yyyy'}} at {{vm.event.signstart | date:
+        'HH:mm'}}
+    </div>
+    <div><label>Signup ends at</label> {{vm.event.signend | date: 'dd-MM-yyyy'}} at {{vm.event.signend | date: 'HH:mm'}}
+    </div>
+    <div><label>Deadline for signout again is</label> {{vm.event.signoutend| date: 'dd-MM-yyyy'}} at
+        {{vm.event.signoutend | date: 'HH:mm'}}
+    </div>
+    <div><label>The event is held at </label> {{vm.event.location}}</div>
+    <div>{{vm.event.logo}}</div>
+    <div>{{vm.event.description}}</div>
+    <div><label>Amount of people attending </label> {{vm.event.users.length}}</div>
+    <div ng-show="vm.event.activities.length>0">{{vm.event.activities.length}}</div>
+</div>

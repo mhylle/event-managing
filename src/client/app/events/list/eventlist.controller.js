@@ -8,10 +8,10 @@
         .module('event-managing-events')
         .controller('EventController', EventController);
 
-    EventController.$inject = ['EventService'];
+    EventController.$inject = ['$state', 'EventService'];
 
     /* @ngInject */
-    function EventController(EventService) {
+    function EventController($state, EventService) {
         var vm = this;
         vm.title = 'EventController';
         vm.events = [];
@@ -21,6 +21,7 @@
         };
 
         vm.fetchEvents = fetchEvents;
+        vm.gotoEvent = gotoEvent;
 
         activate();
 
@@ -47,6 +48,11 @@
                 }
                 vm.status.response = response.status;
             });
+        }
+
+        function gotoEvent(id) {
+            console.log('trying to navigate to event ' + id);
+            $state.go('events.view', {'id': id});
         }
     }
 })();

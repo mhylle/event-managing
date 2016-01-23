@@ -1,9 +1,9 @@
 <div class="header headermedium">Events</div>
 <div ng-controller="EventController as vm">
     <div><label>Number of events:</label> {{vm.events.length}}</div>
-    <div class="card col-xs-3" ng-repeat="event in vm.events">
+    <div class="card col-xs-3" ng-repeat="event in vm.events" ng-click="vm.gotoEvent(event.id)">
         <div class="header headersmall row">
-            <div class="event-title col-xs-10">{{event.name}}</div>
+            <div class="event-title col-xs-10">{{event.name}} {{event.id}}</div>
             <div class="event-status col-xs-2 text-right">X</div>
         </div>
         <div class="card-content">
