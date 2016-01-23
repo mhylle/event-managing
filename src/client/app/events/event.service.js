@@ -50,7 +50,7 @@
 
             function onGetEventError(error) {
                 Logger.error(error);
-            };
+            }
         }
     }
 })();
