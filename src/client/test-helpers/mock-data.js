@@ -4,7 +4,8 @@ var mockData = (function () {
         getMockStates: getMockStates,
         getMockPeople: getMockPeople,
         getMockEvents: getMockEvents,
-        getFailedMockEvents: getFailedMockEvents
+        getFailedMockEvents: getFailedMockEvents,
+        getCrashedMockEvents: getCrashedMockEvents
     };
 
     function getMockStates() {
@@ -69,5 +70,9 @@ var mockData = (function () {
             status: 'RESPONSE_ERROR',
             message: 'Unable to retrieve data from database'
         };
+    }
+
+    function getCrashedMockEvents() {
+        return {};
     }
 })();

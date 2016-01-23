@@ -50,9 +50,10 @@
             });
         }
 
-        function gotoEvent(id) {
-            console.log('trying to navigate to event ' + id);
-            $state.go('events.view', {'id': id});
+        function gotoEvent(e) {
+            console.log('trying to navigate to event ' + e.name);
+            $state.go('events.view', {id: e.id});
+            $rootScope.$apply();
         }
     }
 })();

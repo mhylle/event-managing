@@ -4,21 +4,24 @@ describe('EventController', function () {
 
     var events = mockData.getMockEvents();
     var failedEvents = mockData.getFailedMockEvents();
+    var crashedEvents = mockData.getCrashedMockEvents;
 
     bard.verifyNoOutstandingHttpRequests();
 
     beforeEach(function () {
-        bard.appModule('event-managing-events');
-        bard.inject('$controller', '$rootScope', '$q');
+        module('event-managing-events');
+        bard.inject('$controller', '$rootScope', '$q', '$state');
     });
 
     describe('Controller Initialization', function () {
-
         describe('With valid data', function () {
             beforeEach(function () {
                 var es = {
                     getEvents: function () {
                         return $q.when(events);
+                    },
+                    getEvent: function() {
+                        return $q.when();
                     }
                 };
                 controller = $controller('EventController', {
@@ -66,7 +69,17 @@ describe('EventController', function () {
                     //expect(event.timeToLastSign).to.equal(fromNow);
                 });
             });
-
+            describe('Should navigate to the correct state when choosing an event', function () {
+                beforeEach(function() {
+                    //bard.inject('$state');
+                    $rootScope.$apply();
+                });
+                it('should navigate to event.view on gotoEvent', function () {
+                    //controller.gotoEvent(1);
+                    //$rootScope.$apply();
+                    //expect($state).is('events.view');
+                })
+            })
         });
 
         describe('With failed service', function () {
@@ -74,6 +87,9 @@ describe('EventController', function () {
                 var es = {
                     getEvents: function () {
                         return $q.when(failedEvents);
+                    },
+                    getEvent: function() {
+                        return $q.when();
                     }
                 };
                 controller = $controller('EventController', {
@@ -99,6 +115,40 @@ describe('EventController', function () {
 
                 it('should have a status message', function () {
                     expect(controller.status.message).not.to.be.empty;
+                });
+
+            });
+        });
+        describe('With crashed service', function () {
+            beforeEach(function () {
+                var es = {
+                    getEvents: function () {
+                        return $q.when(crashedEvents);
+                    }
+                };
+                controller = $controller('EventController', {
+                    EventService: es
+                });
+            });
+            describe('After activation', function () {
+                beforeEach(function () {
+                    $rootScope.$apply();
+                });
+
+                it('should not have events', function () {
+                    expect(controller.events).to.have.length(0);
+                });
+
+                it('should have no response.status ', function () {
+                    expect(controller.status.response).not.to.exist;
+                });
+
+                it('should have a response.status.code warning', function () {
+                    expect(controller.status.code).to.equal('warning');
+                });
+
+                it('should have not have a status message', function () {
+                    expect(controller.status.message).to.be.empty;
                 });
 
             });
