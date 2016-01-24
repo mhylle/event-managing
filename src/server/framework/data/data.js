@@ -110,6 +110,7 @@ function getGroups() {
 }
 
 function getEvents() {
+    var users = getUsers();
     return [
         {
             id: 1,
@@ -123,7 +124,7 @@ function getEvents() {
             location: 'Kantinen',
             logo: '',
             decription: 'En festlig dag for børnene.',
-            users: [],
+            users: [users[1], users[2]],
             activities: []
         },
         {
@@ -138,7 +139,7 @@ function getEvents() {
             location: 'Kantinen',
             logo: '',
             description: 'Så skal der festes',
-            users: [],
+            users: [users[1], users[2], users[3]],
             activities: []
         },
         {
@@ -153,7 +154,7 @@ function getEvents() {
             location: 'Varna',
             logo: '',
             description: 'Så skal der festes',
-            users: [],
+            users: [users[4], users[5]],
             activities: []
         }
     ];
