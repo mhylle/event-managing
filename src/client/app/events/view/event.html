@@ -1,6 +1,5 @@
 <div ng-controller="eventviewcontroller as vm">
-    <div>{{vm.eventid}}</div>
-    <div><label>{{vm.event.name}}</label></div>
+    <div><h2>{{vm.event.name}}</h2></div>
     <div>
         <label>Held at </label> {{vm.event.start | date: 'dd-MM-yyyy'}}
         <label>from</label> {{vm.event.start | date: 'HH:mm'}}
@@ -20,5 +19,5 @@
     <div>{{vm.event.logo}}</div>
     <div>{{vm.event.description}}</div>
     <div><label>Amount of people attending </label> {{vm.event.users.length}}</div>
-    <div ng-show="vm.event.activities.length>0">{{vm.event.activities.length}}</div>
+    <div ng-show="vm.event.activities.length > 0">{{vm.event.activities.length}}</div>
 </div>
