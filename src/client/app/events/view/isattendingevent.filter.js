@@ -9,9 +9,10 @@
         return isattendingeventfilterFilter;
 
         ////////////////
-
         function isattendingeventfilterFilter(event, user) {
-            return event.users.indexOf(user) > -1;
+            return event.users.filter(function(u) {
+                return u.id === user.id;
+            }).length > 0 ;
         }
     }
 })();
