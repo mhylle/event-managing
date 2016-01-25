@@ -21,4 +21,5 @@
     <div><label>Amount of people attending </label> {{vm.event.users.length}}</div>
     <div ng-show="vm.event.activities.length > 0">{{vm.event.activities.length}}</div>
     <div>{{vm.signstatus}}</div>
+    <div><button ng-click="vm.signup()">{{vm.isSigned ? 'Unattend' : 'Attend'}}</button></div>
 </div>

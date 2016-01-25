@@ -14,7 +14,9 @@
     function EventService($http, Logger) {
         var service = {
             getEvents: getEvents,
-            getEvent: getEvent
+            getEvent: getEvent,
+            attend: attend,
+            unattend: unattend
         };
         return service;
 
@@ -39,6 +41,7 @@
         }
 
         function getEvent(id) {
+            Logger.info('Trying to retrieve event by id ' + id);
             return $http.get('/api/event/id/' + id)
                 .then(onGetEventSuccess)
                 .catch(onGetEventError);
@@ -51,6 +54,24 @@
             function onGetEventError(error) {
                 Logger.error(error);
             }
+        }
+
+        function attend(event, user) {
+            return $http.get('/api/event/attend/eid/' + event.id + '/uid/' + user.id)
+                .then(onAttendEventSuccess)
+                .catch(onAttendEventError);
+
+            function onAttendEventSuccess(response) {
+                return response.data;
+            }
+
+            function onAttendEventError(error) {
+                Logger.error(error);
+            }
+        }
+
+        function unattend() {
+            return true;
         }
     }
 })();

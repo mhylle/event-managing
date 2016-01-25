@@ -6,10 +6,14 @@ var Data = require('./data');
 
 var dataRepository = function() {
     var service = this;
+    var dataInstance = new Data();
     service.getEvents = function() {
-        var dataInstance = new Data();
         var events = dataInstance.events();
         return events;
+    };
+    service.getUsers = function() {
+        var users = dataInstance.users();
+        return users;
     };
 };
 

@@ -23,6 +23,7 @@ router.post('/groups', requiresAuthentication, saveGroup);
 router.get('/groups/:id', requiresAuthentication, getGroup);
 router.get('/events', getEvents);
 router.get('/event/id/:id', getEvent);
+router.get('/event/attend/eid/:eid/uid/:uid', attend);
 router.post('/login/', login);
 router.get('/logout/', logout);
 router.get('/*', four0four.notFoundMiddleware);
@@ -91,4 +92,23 @@ function getEvent(req, res, next) {
     } else {
         four0four.send404(req, res, 'event ' + id + ' not found');
     }
+}
+
+function attend(req, res, next) {
+    console.log('Trying to signup a user for an event');
+    var dataRepositoryInstance = new DataRepository();
+    var events = dataRepositoryInstance.getEvents();
+    var users = dataRepositoryInstance.getUsers();
+    var eid = +req.params.eid;
+    var uid = +req.params.uid;
+    var event = events.filter(function(e) {
+        return e.id === eid;
+    })[0];
+    var user = users.filter(function(u) {
+        return u.id === uid;
+    })[0];
+
+    var result = event.signup(user);
+
+    res.status(200).send(result);
 }
