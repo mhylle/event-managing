@@ -17,15 +17,15 @@
         this.destroy = destroy;
 
         ////////////////
-        function create(sessionId, userId, userRole) {
+        function create(sessionId, user, userRole) {
             this.id = sessionId;
-            this.userId = userId;
+            this.user = user;
             this.userRole = userRole;
         }
 
         function destroy() {
             this.id = null;
-            this.userId = null;
+            this.user = null;
             this.userRole = null;
         }
     }

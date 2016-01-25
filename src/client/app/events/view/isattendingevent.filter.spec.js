@@ -35,8 +35,17 @@ describe('isattendingeventfilter', function () {
     it('should return true if the user is attending an event', function () {
         expect(filter(event, attendinguser)).to.be.true;
     });
+
     it('should return false if the user is not attending an event', function () {
         expect(filter(event, notattendinguser)).to.be.false;
+    });
+
+    it('should return false if no user is specified', function () {
+        expect(filter(event, null)).to.be.false;
+    });
+
+    it('should throw an error if no event is specified', function () {
+        expect(function() {filter(null, attendinguser);}).to.throw();
     });
 });
 

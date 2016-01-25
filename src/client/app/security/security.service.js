@@ -25,7 +25,7 @@
             return $http
                 .post('/api/login', credentials)
                 .then(function (result) {
-                    Session.create(result.data.id, result.data.user.id, result.data.user.role);
+                    Session.create(result.data.id, result.data.user, result.data.user.role);
                     return result.data.user;
                 });
         }
