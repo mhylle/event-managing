@@ -9,8 +9,8 @@ module.exports = function () {
     var service = {
         getEvents: getEvents,
         getEvent: getEvent,
-        createEvent: createEvent,
-        deleteEvent: deleteEvent
+        //createEvent: createEvent,
+        //deleteEvent: deleteEvent
     };
     return service;
 
@@ -28,20 +28,20 @@ module.exports = function () {
         }
     }
 
-    function createEvent(req, res, next) {
-        var event = new Event();
-
-        // todo Create ID utility --> DB Responsibility, does it have to be assigned?
-        event.internalId = req.body.internalId;
-        event.name = req.body.name;
-        event.signend = req.body.signend;
-        event.signstart = req.body.signstart;
-        event.signoutend = req.body.signoutend;
-        event.location = req.body.location;
-
-        console.log(event);
-        dataService.save(event);
-    }
+    //function createEvent(req, res, next) {
+    //    var event = new Event();
+    //
+    //    // todo Create ID utility --> DB Responsibility, does it have to be assigned?
+    //    event.internalId = req.body.internalId;
+    //    event.name = req.body.name;
+    //    event.signend = req.body.signend;
+    //    event.signstart = req.body.signstart;
+    //    event.signoutend = req.body.signoutend;
+    //    event.location = req.body.location;
+    //
+    //    console.log(event);
+    //    dataService.save(event);
+    //}
 
     function deleteEvent(req, res, next) {
 
