@@ -1,4 +1,3 @@
-var dataRepository = require('./data.repository.js')();
 module.exports = function () {
     var service = {
         save: save,
@@ -18,7 +17,7 @@ module.exports = function () {
     function getGroup(id) {
         // something wrong here, figure out how to handle different object types in a proper, simple, but
         // generic manner.
-        return dataRepository.getGroup(id);
+        //return dataRepository.getGroup(id);
     }
 
     function remove() {

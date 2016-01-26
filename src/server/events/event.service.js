@@ -9,11 +9,12 @@ module.exports = function () {
     return service;
 
     function attend(event, user) {
-        var isSigned = event.users.filter(function (u) {
-                if (user) {
-                    return u.id === user.id;
-                }
-            }) > 0;
+        var ts = event.users.filter(function (u) {
+            if (user) {
+                return u.id === user.id;
+            }
+        });
+        var isSigned = ts.length > 0;
         if (!isSigned) {
             event.users.push(user);
         } else {

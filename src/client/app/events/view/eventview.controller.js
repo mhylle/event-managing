@@ -41,7 +41,15 @@
 
         function signup() {
             EventService.attend(vm.event, Session.user).then(function (response) {
-                vm.isSigned = response.data;
+                vm.event = response;
+                var attendingEvent = $filter('isattendingeventfilter')(vm.event, Session.user);
+                if (attendingEvent) {
+                    vm.isSigned = true;
+                    vm.signstatus = 'Attending';
+                } else {
+                    vm.signstatus = 'Not attending';
+                    vm.isSigned = false;
+                }
             });
         }
     }
