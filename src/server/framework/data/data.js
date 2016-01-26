@@ -1,7 +1,12 @@
 var utils = require('../utils/generator');
 var moment = require('moment');
+var eventdef = require('../../events/event');
+
+var eventdb = [];
 
 var data = function () {
+    initializeEvents();
+
     var service = this;
     service.events = function () {
         return getEvents();
@@ -15,18 +20,18 @@ var data = function () {
         return getGroups();
     };
 
-    service.updateEvent = function(event) {
+    service.updateEvent = function (event) {
         var eid = event.id;
         var counter = 0;
-        var events = getEvents();
-        for (var i = 0; i < events.length; i++) {
-            var evt = events[i];
+
+        for (var i = 0; i < eventdb.length; i++) {
+            var evt = eventdb[i];
             if (evt.id === eid) {
                 break;
             }
             counter++;
         }
-        getEvents()[i] = event;
+        eventdb[i] = event;
     };
 };
 
@@ -123,53 +128,70 @@ function getGroups() {
     ];
 }
 
-function getEvents() {
+function initializeEvents() {
     var users = getUsers();
-    return [
-        {
-            id: 1,
-            name: 'Fastelavn',
-            internalId: utils.uniqueID,
-            start: moment('07-02-2016 14:00:00', 'DD-MM-YYYY HH:mm'),
-            end: moment('07-02-2016 16:00:00', 'DD-MM-YYYY HH:mm'),
-            signstart: moment('17-01-2016', 'DD-MM-YYYY'),
-            signend: moment('02-02-2016', 'DD-MM-YYYY'),
-            signoutend: moment('02-02-2016', 'DD-MM-YYYY'),
-            location: 'Kantinen',
-            logo: '',
-            decription: 'En festlig dag for børnene.',
-            users: [users[1], users[2]],
-            activities: []
-        },
-        {
-            id: 2,
-            name: 'Julefrokost',
-            internalId: utils.uniqueID,
-            start: moment('05-12-2016 12:00:00', 'DD-MM-YYYY HH:mm'),
-            end: moment('05-12-2016 23:59:59', 'DD-MM-YYYY HH:mm'),
-            signstart: moment('17-11-2016', 'DD-MM-YYYY'),
-            signend: moment('02-12-2016', 'DD-MM-YYYY'),
-            signoutend: moment('02-12-2016', 'DD-MM-YYYY'),
-            location: 'Kantinen',
-            logo: '',
-            description: 'Så skal der festes',
-            users: [users[1], users[2], users[3]],
-            activities: []
-        },
-        {
-            id: 3,
-            name: 'Sensommerfest',
-            internalId: utils.uniqueID,
-            start: moment('22-09-2016 18:00:00', 'DD-MM-YYYY HH:mm'),
-            end: moment('23-09-2016 02:00:00', 'DD-MM-YYYY HH:mm'),
-            signstart: moment('01-09-2016', 'DD-MM-YYYY'),
-            signend: moment('15-09-2016', 'DD-MM-YYYY'),
-            signoutend: moment('16-09-2016', 'DD-MM-YYYY'),
-            location: 'Varna',
-            logo: '',
-            description: 'Så skal der festes',
-            users: [users[4], users[5]],
-            activities: []
-        }
-    ];
+
+    function createEvent1() {
+        var evt1 = eventdef.create();
+        evt1.id = 1;
+        evt1.name = 'Fastelavn';
+        evt1.start = moment('07-02-2016 14:00:00', 'DD-MM-YYYY HH:mm');
+        evt1.end = moment('07-02-2016 16:00:00', 'DD-MM-YYYY HH:mm');
+        evt1.signstart = moment('17-01-2016', 'DD-MM-YYYY');
+        evt1.signend = moment('02-02-2016', 'DD-MM-YYYY');
+        evt1.signoutend = moment('02-02-2016', 'DD-MM-YYYY');
+        evt1.location = 'Kantinen';
+        evt1.logo = '';
+        evt1.decription = 'En festlig dag for børnene.';
+        evt1.users = [users[1], users[2]];
+        evt1.activities = [];
+
+        eventdb.push(evt1);
+    }
+
+    createEvent1();
+    function createEvent2() {
+        var evt2 = eventdef.create();
+        evt2.id = 2;
+        evt2.name = 'Julefrokost';
+        evt2.start = moment('05-12-2016 12:00:00', 'DD-MM-YYYY HH:mm');
+        evt2.end = moment('05-12-2016 23:59:59', 'DD-MM-YYYY HH:mm');
+        evt2.signstart = moment('17-11-2016', 'DD-MM-YYYY');
+        evt2.signend = moment('02-12-2016', 'DD-MM-YYYY');
+        evt2.signoutend = moment('02-12-2016', 'DD-MM-YYYY');
+        evt2.location = 'Kantinen';
+        evt2.logo = '';
+        evt2.description = 'Så skal der festes';
+        evt2.users = [users[1], users[2], users[3]];
+        evt2.activities = [];
+
+        eventdb.push(evt2);
+    }
+
+    createEvent2();
+
+    function createEvent3() {
+        var evt3 = eventdef.create();
+        evt3.id = 3;
+        evt3.name = 'Sensommerfest';
+        evt3.start = moment('22-09-2016 18:00:00', 'DD-MM-YYYY HH:mm');
+        evt3.end = moment('23-09-2016 02:00:00', 'DD-MM-YYYY HH:mm');
+        evt3.signstart = moment('01-09-2016', 'DD-MM-YYYY');
+        evt3.signend = moment('15-09-2016', 'DD-MM-YYYY');
+        evt3.signoutend = moment('16-09-2016', 'DD-MM-YYYY');
+        evt3.location = 'Varna';
+        evt3.logo = '';
+        evt3.description = 'Så skal der festes';
+        evt3.users = [users[4], users[5]];
+        evt3.activities = [];
+
+        eventdb.push(evt3);
+    }
+
+    createEvent3();
+    return eventdb;
+}
+
+function getEvents() {
+    return eventdb;
 }

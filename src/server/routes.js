@@ -12,6 +12,8 @@ var eventservice = require('./events/event.service')();
 var DataRepository = require('./framework/data/data.repository');
 //var data = require('./framework/data/data');
 
+var dataRepositoryInstance;
+
 var app = express();
 //app.set('jwtTokenSecret', '123456ABCDEF');
 app.use(errorhandler);
@@ -70,7 +72,10 @@ function getGroup(req, res, next) {
 
 function getEvents(req, res, next) {
     console.log('Getting events');
-    var dataRepositoryInstance = new DataRepository();
+    if (!dataRepositoryInstance) {
+        dataRepositoryInstance = new DataRepository();
+    }
+
     var events = dataRepositoryInstance.getEvents();
     var result = {};
     result.events = events;
@@ -78,9 +83,12 @@ function getEvents(req, res, next) {
     console.log('returning ' + events.length + ' events');
     res.status(200).send(result);
 }
+
 function getEvent(req, res, next) {
     console.log('Getting events');
-    var dataRepositoryInstance = new DataRepository();
+    if (!dataRepositoryInstance) {
+        dataRepositoryInstance = new DataRepository();
+    }
     var events = dataRepositoryInstance.getEvents();
     var id = +req.params.id;
     var event = events.filter(function(e) {
@@ -96,7 +104,9 @@ function getEvent(req, res, next) {
 
 function attend(req, res, next) {
     console.log('Trying to signup a user for an event');
-    var dataRepositoryInstance = new DataRepository();
+    if (!dataRepositoryInstance) {
+        dataRepositoryInstance = new DataRepository();
+    }
     var events = dataRepositoryInstance.getEvents();
     var users = dataRepositoryInstance.getUsers();
     var eid = +req.params.eid;
