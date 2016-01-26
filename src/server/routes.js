@@ -7,7 +7,7 @@ var four0four = require('./framework/utils/404')();
 var security = require('./framework/security/security.service')();
 var users = require('./users/user.service')();
 var groups = require('./groups/group.service')();
-var events = require('./events/event.service')();
+var eventservice = require('./events/event.service')();
 
 var DataRepository = require('./framework/data/data.repository');
 //var data = require('./framework/data/data');
@@ -108,7 +108,7 @@ function attend(req, res, next) {
         return u.id === uid;
     })[0];
 
-    var result = event.signup(user);
-
+    var result = eventservice.attend(event, user);
+    dataRepositoryInstance.updateEvent(event);
     res.status(200).send(result);
 }

@@ -14,6 +14,20 @@ var data = function () {
     service.groups = function () {
         return getGroups();
     };
+
+    service.updateEvent = function(event) {
+        var eid = event.id;
+        var counter = 0;
+        var events = getEvents();
+        for (var i = 0; i < events.length; i++) {
+            var evt = events[i];
+            if (evt.id === eid) {
+                break;
+            }
+            counter++;
+        }
+        getEvents()[i] = event;
+    };
 };
 
 module.exports = data;

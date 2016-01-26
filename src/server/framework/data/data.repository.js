@@ -15,6 +15,9 @@ var dataRepository = function() {
         var users = dataInstance.users();
         return users;
     };
+    service.updateEvent = function(event) {
+        dataInstance.updateEvent(event);
+    };
 };
 
 module.exports = dataRepository;
