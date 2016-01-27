@@ -11,7 +11,7 @@
     EventController.$inject = ['$state', 'EventService', 'Session'];
 
     /* @ngInject */
-    function EventController($state, EventService) {
+    function EventController($state, EventService, Session) {
         var vm = this;
         vm.title = 'EventController';
         vm.events = [];
@@ -20,8 +20,10 @@
             message: ''
         };
 
+        vm.user = Session.user;
         vm.fetchEvents = fetchEvents;
         vm.gotoEvent = gotoEvent;
+        vm.signup = signup;
 
         activate();
 
@@ -53,6 +55,15 @@
         function gotoEvent(e) {
             console.log('trying to navigate to event ' + e.name);
             $state.go('events.view', {id: e.id});
+        }
+
+        function signup(e) {
+            EventService.attend(e, Session.user).then(function (response) {
+                // todo Need to get the ui to update the button when we are done with the call.
+                // easy but wrong way to do it would be to update the entire event list, but that
+                // since we are only changing one event it would be better to figure out how to trigger
+                // the change for the specific event changed..
+            });
         }
     }
 })();
