@@ -1,7 +1,7 @@
 {
   "name": "event-managing",
   "description": "event-managing Project Generated from HotTowel Angular",
-  "version": "0.0.4-264",
+  "version": "0.0.4-265",
   "main": "src/server/app.js",
   "scripts": {
     "init": "npm install",

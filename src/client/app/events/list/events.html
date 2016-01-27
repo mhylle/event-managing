@@ -1,12 +1,12 @@
 <div class="header headermedium">Events</div>
 <div ng-controller="EventController as vm">
     <div><label>Number of events:</label> {{vm.events.length}}</div>
-    <div class="card col-xs-3" ng-repeat="event in vm.events" ng-click="vm.gotoEvent(event)">
-        <div class="header headersmall row">
+    <div class="card col-xs-3" ng-repeat="event in vm.events">
+        <div class="header headersmall row" ng-click="vm.gotoEvent(event)">
             <div class="event-title col-xs-10">{{event.name}} {{event.id}}</div>
             <div class="event-status col-xs-2 text-right">X</div>
         </div>
-        <div class="card-content">
+        <div class="card-content" ng-click="vm.gotoEvent(event)">
             <div class="event-time-remaining-label">Tilmelding:</div>
             <div class="event-time-remaining-content">14 dage.</div>
             <div class="clearfix"></div>
@@ -17,5 +17,6 @@
             <div class="event-location-content">{{event.location}}</div>
             <div class="clearfix"></div>
         </div>
+        <div><button ng-click="vm.signup(event.id)">{{event | isattendingeventfilter: Session.user}}</button></div>
     </div>
 </div>
