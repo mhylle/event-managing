@@ -59,10 +59,16 @@
 
         function signup(e) {
             EventService.attend(e, Session.user).then(function (response) {
-                // todo Need to get the ui to update the button when we are done with the call.
-                // easy but wrong way to do it would be to update the entire event list, but that
-                // since we are only changing one event it would be better to figure out how to trigger
-                // the change for the specific event changed..
+                var counter = 0;
+                for (var i = 0; i < vm.events.length; i++) {
+                    var event = vm.events[i];
+                    if (event.id === e.id) {
+                        break;
+                    }
+                    counter++;
+                }
+
+                vm.events[counter] = response;
             });
         }
     }

@@ -3,6 +3,7 @@
 
     angular.module('eventmanaging', [
         'ui.router',
+        'angularMoment',
         'event-managing-logger',
         'eventmanaging.header',
         'event-managing-events',

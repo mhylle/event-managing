@@ -8,7 +8,7 @@
         </div>
         <div class="card-content" ng-click="vm.gotoEvent(event)">
             <div class="event-time-remaining-label">Tilmelding:</div>
-            <div class="event-time-remaining-content">14 dage.</div>
+            <div class="event-time-remaining-content">{{event.signend}}</div>
             <div class="clearfix"></div>
             <div class="event-date-content">{{event.start | date: 'dd-MM-yyyy'}}</div>
             <div class="clearfix"></div>
