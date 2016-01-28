@@ -32,8 +32,7 @@ module.exports = function () {
         group.internalId = req.body.internalId;
         group.name = req.body.name;
         group.type = req.body.type;
-
-        console.log(group);
+        //console.log(group);
         dataService.save(group);
     }
 };
