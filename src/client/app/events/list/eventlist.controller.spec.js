@@ -3,6 +3,8 @@ describe('EventController', function () {
     var controller;
 
     var events = mockData.getMockEvents();
+    var signedevents = mockData.getMockSignedEvents();
+    var users = mockData.getMockUsers();
     var failedEvents = mockData.getFailedMockEvents();
     var crashedEvents = mockData.getCrashedMockEvents;
 
@@ -10,7 +12,7 @@ describe('EventController', function () {
 
     beforeEach(function () {
         module('event-managing-events');
-        bard.inject('$controller', '$rootScope', '$q', '$state');
+        bard.inject('$controller', '$rootScope', '$q', '$state', '$filter');
     });
 
     describe('Controller Initialization', function () {
@@ -20,8 +22,11 @@ describe('EventController', function () {
                     getEvents: function () {
                         return $q.when(events);
                     },
-                    getEvent: function() {
+                    getEvent: function () {
                         return $q.when();
+                    },
+                    attend: function () {
+                        return $q.when(signedevents[0]);
                     }
                 };
                 controller = $controller('EventController', {
@@ -62,15 +67,30 @@ describe('EventController', function () {
                     expect(controller.status.response).to.equal('RESPONSE_OK');
                 });
 
-                it('should calculate time to last sign up date from now', function () {
-                    //var event = controller.events[0];
-                    //var signend = event.signend;
-                    //var fromNow = moment(signend).fromNow();
-                    //expect(event.timeToLastSign).to.equal(fromNow);
+                it('should calculate time to last sign up date from now');
+
+                describe('Signup/off', function () {
+                    it('should not have the current user signed in', function () {
+                        var event = controller.events[0];
+                        var isAttending = $filter('isattendingeventfilter')(event, users[0]);
+                        expect(isAttending).to.be.false;
+                    });
+                    it.skip('should signup a user when pressing the attend button', function () {
+                        var event = controller.events[0];
+                        controller.signup(event);
+                        event = controller.events[0];
+                        var isAttending = $filter('isattendingeventfilter')(event, users[0]);
+                        expect(isAttending).to.be.true;
+                    });
                 });
+                describe('It should signout a user when pressing the attend button and the user is signed',
+                    function () {
+                        it('should have the current user signed in');
+                        it('should signout the user when pressing the cancel button');
+                    });
             });
             describe('Should navigate to the correct state when choosing an event', function () {
-                beforeEach(function() {
+                beforeEach(function () {
                     //bard.inject('$state');
                     $rootScope.$apply();
                 });
@@ -88,7 +108,7 @@ describe('EventController', function () {
                     getEvents: function () {
                         return $q.when(failedEvents);
                     },
-                    getEvent: function() {
+                    getEvent: function () {
                         return $q.when();
                     }
                 };

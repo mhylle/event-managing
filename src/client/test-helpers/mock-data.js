@@ -2,8 +2,9 @@
 var mockData = (function () {
     return {
         getMockStates: getMockStates,
-        getMockPeople: getMockPeople,
+        getMockUsers: getMockUsers,
         getMockEvents: getMockEvents,
+        getMockSignedEvents: getMockSignedEvents,
         getFailedMockEvents: getFailedMockEvents,
         getCrashedMockEvents: getCrashedMockEvents
     };
@@ -25,40 +26,111 @@ var mockData = (function () {
         ];
     }
 
-    function getMockPeople() {
+    function getMockUsers() {
         return [
-            {firstName: 'John', lastName: 'Papa', age: 25, location: 'Florida'},
-            {firstName: 'Ward', lastName: 'Bell', age: 31, location: 'California'},
-            {firstName: 'Colleen', lastName: 'Jones', age: 21, location: 'New York'},
-            {firstName: 'Madelyn', lastName: 'Green', age: 18, location: 'North Dakota'},
-            {firstName: 'Ella', lastName: 'Jobs', age: 18, location: 'South Dakota'},
-            {firstName: 'Landon', lastName: 'Gates', age: 11, location: 'South Carolina'},
-            {firstName: 'Haley', lastName: 'Guthrie', age: 35, location: 'Wyoming'}
+            {
+                'id': 1,
+                'firstname': 'Ted',
+                'lastname': 'Tedson',
+                'username': 'tte',
+                'passtring': 'tte',
+                'address': 'Someroad 1234, 576923 NA, Illinois, USA',
+                'mail': 'ted@something.com',
+                'phone': '22446677',
+                'logicalId': '2020147'
+            },
+            {
+                'id': 2,
+                'firstname': 'Martin',
+                'lastname': 'Hylleberg',
+                'username': 'mah',
+                'passtring': 'mah',
+                'address': 'Tousvej 6a, 8230 Åbyhøj, Danmark',
+                'mail': 'mhylle@gmail.com',
+                'phone': '61791394',
+                'logicalId': '2020743'
+            },
+            {
+                'id': 3,
+                'firstname': 'Zed',
+                'lastname': 'Zedson',
+                'username': 'zze',
+                'passtring': 'zze',
+                'address': '',
+                'mail': 'zed@something.com',
+                'phone': '54461564',
+                'logicalId': '2020149'
+            }
         ];
     }
 
     function getMockEvents() {
+        var mockUsers = getMockUsers();
         return {
             events: [
                 {
-                    'id': 1,
-                    'name': 'Fastelavn',
-                    internalId: 1,
-                    signstart: new Date(),
-                    signend: new Date(),
-                    signoutend: new Date(),
+                    id: 1,
+                    name: 'Fastelavn',
+                    start: '07-02-2016 14:00:00',
+                    end: '07-02-2016 16:00:00',
+                    signstart: '17-01-2016',
+                    signend: '02-02-2016',
+                    signoutend: '02-02-2016',
                     location: 'Kantinen',
-                    users: []
+                    logo: '',
+                    decription: 'En festlig dag for børnene.',
+                    users: [],
+                    activities: []
                 },
                 {
-                    'id': 2,
-                    'name': 'Julefrokost',
-                    internalId: 2,
-                    signstart: new Date(),
-                    signend: new Date(),
-                    signoutend: new Date(),
+                    id: 2,
+                    name: 'Julefrokost',
+                    start: '05-12-2016 12:00:00',
+                    end: '05-12-2016 23:59:59',
+                    signstart: '17-11-2016',
+                    signend: '02-12-2016',
+                    signoutend: '02-12-2016',
                     location: 'Kantinen',
-                    users: []
+                    logo: '',
+                    description: 'Så skal der festes',
+                    users: [mockUsers[0], mockUsers[1], mockUsers[2]],
+                    activities: []
+                }
+            ],
+            status: 'RESPONSE_OK'
+        };
+    }
+    function getMockSignedEvents() {
+        var mockUsers = getMockUsers();
+        return {
+            events: [
+                {
+                    id: 1,
+                    name: 'Fastelavn',
+                    start: '07-02-2016 14:00:00',
+                    end: '07-02-2016 16:00:00',
+                    signstart: '17-01-2016',
+                    signend: '02-02-2016',
+                    signoutend: '02-02-2016',
+                    location: 'Kantinen',
+                    logo: '',
+                    decription: 'En festlig dag for børnene.',
+                    users: [],
+                    activities: [mockUsers[1]]
+                },
+                {
+                    id: 2,
+                    name: 'Julefrokost',
+                    start: '05-12-2016 12:00:00',
+                    end: '05-12-2016 23:59:59',
+                    signstart: '17-11-2016',
+                    signend: '02-12-2016',
+                    signoutend: '02-12-2016',
+                    location: 'Kantinen',
+                    logo: '',
+                    description: 'Så skal der festes',
+                    users: [mockUsers[1]],
+                    activities: []
                 }
             ],
             status: 'RESPONSE_OK'
