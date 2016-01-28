@@ -335,6 +335,15 @@ gulp.task('test', ['vet', 'templatecache'], function (done) {
     startTests(true /*singleRun*/, done);
 });
 
+gulp.task('codacy', function codacyTask() {
+    return gulp
+        .src(['/report/coverage/lcov.info'], {read: false})
+        .pipe($.codacy({
+            token: '516bd9d0b5c44bf6bb8c368e3143d4eb'
+        }))
+        ;
+});
+
 /**
  * Run specs and wait.
  * Watch for file changes and re-run tests on each change
