@@ -23,33 +23,29 @@
         activate();
 
         ////////////////
+        function setEventStatus(response) {
+            vm.event = response;
+            var attendingEvent = $filter('isattendingeventfilter')(vm.event, Session.user);
+            if (attendingEvent) {
+                vm.isSigned = true;
+                vm.signstatus = 'Attending';
+            } else {
+                vm.signstatus = 'Not attending';
+                vm.isSigned = false;
+            }
+        }
+
         function activate() {
             vm.eventid = $stateParams.id;
             console.log('got id ' + vm.eventid + ' passed in as start parameter.');
             EventService.getEvent(vm.eventid).then(function (response) {
-                vm.event = response;
-                var attendingEvent = $filter('isattendingeventfilter')(vm.event, Session.user);
-                if (attendingEvent) {
-                    vm.isSigned = true;
-                    vm.signstatus = 'Attending';
-                } else {
-                    vm.signstatus = 'Not attending';
-                    vm.isSigned = false;
-                }
+                setEventStatus(response);
             });
         }
 
         function signup() {
             EventService.attend(vm.event, Session.user).then(function (response) {
-                vm.event = response;
-                var attendingEvent = $filter('isattendingeventfilter')(vm.event, Session.user);
-                if (attendingEvent) {
-                    vm.isSigned = true;
-                    vm.signstatus = 'Attending';
-                } else {
-                    vm.signstatus = 'Not attending';
-                    vm.isSigned = false;
-                }
+                setEventStatus(response);
             });
         }
     }
