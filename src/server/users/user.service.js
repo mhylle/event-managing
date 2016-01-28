@@ -25,7 +25,7 @@ module.exports = function () {
         return [{name: 'mah', password: 'mah'}];
     }
 
-    function getUser(req, res, next) {
+    function getUser(req, res) {
         var id = +req.param.id;
         var user = data.users.filter(function (p) {
             return p.id === id;
@@ -37,7 +37,7 @@ module.exports = function () {
         }
     }
 
-    function saveUser(req, res, next) {
+    function saveUser(req, res) {
 
         var user = new User();
         // todo Create ID utility --> DB Responsibility, does it have to be assigned?

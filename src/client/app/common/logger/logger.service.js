@@ -24,22 +24,22 @@
 
         function error(message, data, title) {
             //this.toastr.error(message, title);
-            $log.info('Error: ' + message, data);
+            $log.info('Error: ' + title + ' ' + message, data);
         }
 
         function info(message, data, title) {
             //this.toastr.info(message, title);
-            $log.info('Info: ' + message, data);
+            $log.info('Info: ' + title + ' ' + message, data);
         }
 
         function success(message, data, title) {
             //this.toastr.success(message, title);
-            $log.info('Success: ' + message, data);
+            $log.info('Success: ' + title + ' ' + message, data);
         }
 
         function warning(message, data, title) {
             //this.toastr.warning(message, title);
-            $log.info('Warning: ' + message, data);
+            $log.info('Warning: ' + title + ' ' + message, data);
         }
     }
 
