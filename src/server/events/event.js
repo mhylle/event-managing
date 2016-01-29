@@ -1,5 +1,4 @@
 var utils = require('../framework/utils/generator');
-var evt;
 
 exports.create = function () {
     // structure of an event.
