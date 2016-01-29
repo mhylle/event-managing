@@ -5,7 +5,7 @@ var router = express.Router();
 
 var four0four = require('./framework/utils/404')();
 var security = require('./framework/security/security.service')();
-var users = require('./users/user.service')();
+//var users = require('./users/user.service')();
 var groups = require('./groups/group.service')();
 var eventservice = require('./events/event.service')();
 
@@ -17,12 +17,12 @@ var dataRepositoryInstance;
 var app = express();
 //app.set('jwtTokenSecret', '123456ABCDEF');
 app.use(errorhandler);
-router.get('/users', requiresAuthentication, getUsers);
-router.post('/users', requiresAuthentication, saveUser);
-router.get('/user/:id', requiresAuthentication, getUser);
-router.get('/groups', requiresAuthentication, getGroups);
-router.post('/groups', requiresAuthentication, saveGroup);
-router.get('/groups/:id', requiresAuthentication, getGroup);
+router.get('/users', getUsers);
+router.post('/users', saveUser);
+router.get('/user/:id', getUser);
+router.get('/groups', getGroups);
+router.post('/groups', saveGroup);
+router.get('/groups/:id', getGroup);
 router.get('/events', getEvents);
 router.get('/event/id/:id', getEvent);
 router.get('/event/attend/eid/:eid/uid/:uid', attend);
@@ -41,20 +41,26 @@ function logout(req, res, next) {
     security.logout(req, res, next);
 }
 
-function requiresAuthentication(req, res, next) {
-    security.requiresAuthentication(req, res, next);
-}
+//function requiresAuthentication(req, res, next) {
+//    security.requiresAuthentication(req, res, next);
+//}
+
 function getUsers(req, res, next) {
-    var users2 = users.getUsers();
-    res.status(200).send(users2);
+    if (!dataRepositoryInstance) {
+        dataRepositoryInstance = new DataRepository();
+    }
+    var users = dataRepositoryInstance.getUsers();
+    var result = {};
+    result.events = users;
+    result.status = 'RESPONSE_OK';
+    console.log('returning ' + users.length + ' users');
+    res.status(200).send(result);
 }
 
 function saveUser(req, res, next) {
-    users.saveUser(req, res, next);
 }
 
 function getUser(req, res, next) {
-    users.getUser(req, res, next);
 }
 
 function getGroups(req, res, next) {

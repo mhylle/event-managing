@@ -7,7 +7,7 @@
         'event-managing-logger',
         'eventmanaging.header',
         'event-managing-events',
-        //'eventmanaging.user',
+        'eventmanaging.user',
         //'eventmanaging.group',
         'eventmanaging.security'
     ]).config(['$stateProvider', 'USER_ROLES', configuration])

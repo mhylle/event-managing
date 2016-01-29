@@ -17,6 +17,7 @@
         vm.eventid = '';
         vm.signstatus = '';
         vm.isSigned = false;
+        vm.showAttendees = true;
 
         vm.signup = signup;
 
