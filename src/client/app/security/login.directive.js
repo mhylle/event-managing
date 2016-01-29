@@ -11,8 +11,6 @@
     function loginDialog(AUTH_EVENTS) {
         var directive = {
             bindToController: true,
-            controller: LoginDialogController,
-            controllerAs: 'vm',
             link: link,
             restrict: 'A',
             template: '<div ng-if="visible" ng-include="\'login.html\'">',
@@ -20,7 +18,7 @@
         };
         return directive;
 
-        function link(scope, element, attrs) {
+        function link(scope) {
             var showDialog = function () {
                 scope.visible = true;
             };
@@ -29,12 +27,4 @@
             scope.$on(AUTH_EVENTS.sessionTimeout, showDialog);
         }
     }
-
-    LoginDialogController.$inject = ['AUTH_EVENTS'];
-
-    /* @ngInject */
-    function LoginDialogController(AUTH_EVENTS) {
-
-    }
-
 })();
