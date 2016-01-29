@@ -3,16 +3,11 @@ var four0four = require('../framework/utils/404')();
 module.exports = function () {
 
     var service = {
-        getGroups: getGroups,
         getGroup: getGroup,
         createGroup: createGroup
     };
     return service;
 
-    function getGroups() {
-        res.status(200).send(null);
-        //return null;//dataService.getGroups();
-    }
 
     function getGroup(req, res) {
         var id = +req.param.id;
