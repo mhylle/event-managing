@@ -1,5 +1,4 @@
 var four0four = require('../framework/utils/404')();
-var dataService = require('../framework/data/data.service')();
 
 module.exports = function () {
 
@@ -11,7 +10,8 @@ module.exports = function () {
     return service;
 
     function getGroups() {
-        return dataService.getGroups();
+        res.status(200).send(null);
+        //return null;//dataService.getGroups();
     }
 
     function getGroup(req, res) {
@@ -31,7 +31,7 @@ module.exports = function () {
         group.name = req.body.name;
         group.type = req.body.type;
         //console.log(group);
-        dataService.save(group);
+        //dataService.save(group);
         res.status(200).send(group);
     }
 };
