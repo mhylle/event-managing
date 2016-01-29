@@ -33,8 +33,8 @@
             });
     }
 
-    ApplicationController.$inject = ['$scope', 'USER_ROLES', 'SecurityService', 'Logger', 'Session'];
-    function ApplicationController($scope, USER_ROLES, SecurityService, Logger, Session) {
+    ApplicationController.$inject = ['$scope', 'USER_ROLES', 'SecurityService', 'Logger'];
+    function ApplicationController($scope, USER_ROLES, SecurityService, Logger) {
         var vm = this;
 
         vm.logger = Logger;
