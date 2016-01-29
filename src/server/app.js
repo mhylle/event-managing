@@ -1,10 +1,7 @@
 /*jshint node:true*/
 'use strict';
 
-var fs = require('fs');
 var http = require('http');
-var https = require('https');
-
 var express = require('express');
 var app = express();
 
@@ -53,7 +50,7 @@ switch (environment) {
         app.use(express.static('./build/'));
         // Any invalid calls for templateUrls are under app/* and should return 404
         app.use('/app/*', function (req, res, next) {
-            four0four.send404(req, res);
+            four0four.send404(req, res, next);
         });
         // Any deep link calls should return index.html
         app.use('/*', express.static('./build/index.html'));
