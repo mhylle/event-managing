@@ -1,10 +1,10 @@
-var data = require('../data/data');
+//var data = require('../data/data');
 var userService = require('../../users/user.service')();
 var _ = require('underscore');
-var jwt = require('jwt-simple');
-var secret = '4757hgf87348gfhj3rf89fhj8rgerg345';
+//var jwt = require('jwt-simple');
+//var secret = '4757hgf87348gfhj3rf89fhj8rgerg345';
 var tokens = [];
-var sha256 = require('crypto-hashing').sha256;
+//var sha256 = require('crypto-hashing').sha256;
 var bcrypt = require('bcrypt-nodejs');
 module.exports = function () {
     var service = {
@@ -14,7 +14,7 @@ module.exports = function () {
     };
     return service;
 
-    function login(req, res, next) {
+    function login(req) {
         // TODO Create a proper login method. This one seems a tad broken and unpleasant..
         var userName = req.body.username;
         var passtring = req.body.password;
@@ -57,7 +57,7 @@ module.exports = function () {
 
     }
 
-    function logout(req, res, description) {
+    function logout(req, res) {
         var token = req.headers.accesstoken;
         removeFromTokens(token);
         res.send(200);
