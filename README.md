@@ -27,16 +27,12 @@ And much much more..
 
 A user guide and wiki will be created for the system.
 
-[![Build Status](https://travis-ci.org/mhylle/event-managing.svg)](https://travis-ci.org/mhylle/event-managing)
-
-[ ![Codeship Status for mhylle/event-managing](https://codeship.com/projects/3139fa60-a0ce-0133-aeb1-76eadfcae33d/status?branch=master)](https://codeship.com/projects/128262)
+[![Build Status](https://travis-ci.org/mhylle/event-managing.svg)](https://travis-ci.org/mhylle/event-managing) [ ![Codeship Status for mhylle/event-managing](https://codeship.com/projects/3139fa60-a0ce-0133-aeb1-76eadfcae33d/status?branch=master)](https://codeship.com/projects/128262)
 
 [![Coverage Status](https://coveralls.io/repos/mhylle/event-managing/badge.svg?branch=master&service=github)](https://coveralls.io/github/mhylle/event-managing?branch=master)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/a9c4f05804814191abe13d71aba0fb97)](https://www.codacy.com/app/mhylle/event-managing)
 
-[![Code Climate](https://codeclimate.com/github/mhylle/event-managing/badges/gpa.svg)](https://codeclimate.com/github/mhylle/event-managing)
-
+[![Code Climate](https://codeclimate.com/github/mhylle/event-managing/badges/gpa.svg)](https://codeclimate.com/github/mhylle/event-managing)  
 [![Test Coverage](https://codeclimate.com/github/mhylle/event-managing/badges/coverage.svg)](https://codeclimate.com/github/mhylle/event-managing/coverage)
-
 [![Issue Count](https://codeclimate.com/github/mhylle/event-managing/badges/issue_count.svg)](https://codeclimate.com/github/mhylle/event-managing)
