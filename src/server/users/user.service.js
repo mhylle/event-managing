@@ -37,7 +37,7 @@ module.exports = function () {
         }
     }
 
-    function saveUser(req, res) {
+    function saveUser(req) {
 
         var user = new User();
         // todo Create ID utility --> DB Responsibility, does it have to be assigned?

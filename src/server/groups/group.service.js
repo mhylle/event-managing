@@ -14,7 +14,7 @@ module.exports = function () {
         return dataService.getGroups();
     }
 
-    function getGroup(req, res, next) {
+    function getGroup(req, res) {
         var id = +req.param.id;
         var result = dataService.getGroup(id);
         if (result) {
@@ -24,7 +24,7 @@ module.exports = function () {
         }
     }
 
-    function createGroup(req, res, next) {
+    function createGroup(req, res) {
         var group = {};
         // todo Create ID utility --> DB Responsibility, does it have to be assigned?
         group.internalId = req.body.internalId;
@@ -32,5 +32,6 @@ module.exports = function () {
         group.type = req.body.type;
         //console.log(group);
         dataService.save(group);
+        res.status(200).send(group);
     }
 };
