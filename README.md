@@ -34,3 +34,9 @@ A user guide and wiki will be created for the system.
 [![Coverage Status](https://coveralls.io/repos/mhylle/event-managing/badge.svg?branch=master&service=github)](https://coveralls.io/github/mhylle/event-managing?branch=master)
 
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/a9c4f05804814191abe13d71aba0fb97)](https://www.codacy.com/app/mhylle/event-managing)
+
+[![Code Climate](https://codeclimate.com/github/mhylle/event-managing/badges/gpa.svg)](https://codeclimate.com/github/mhylle/event-managing)
+
+[![Test Coverage](https://codeclimate.com/github/mhylle/event-managing/badges/coverage.svg)](https://codeclimate.com/github/mhylle/event-managing/coverage)
+
+[![Issue Count](https://codeclimate.com/github/mhylle/event-managing/badges/issue_count.svg)](https://codeclimate.com/github/mhylle/event-managing)
