@@ -11,12 +11,12 @@ module.exports = function () {
 
     function getGroup(req, res) {
         var id = +req.param.id;
-        var result = dataService.getGroup(id);
-        if (result) {
-            res.status(200).send(result);
-        } else {
-            four0four.send404(req, res, 'group ' + id + ' not found');
-        }
+        //var result = dataService.getGroup(id);
+        //if (result) {
+        //    res.status(200).send(null);
+        //} else {
+        four0four.send404(req, res, 'group ' + id + ' not found');
+        //}
     }
 
     function createGroup(req, res) {
@@ -29,4 +29,5 @@ module.exports = function () {
         //dataService.save(group);
         res.status(200).send(group);
     }
-};
+}
+;
