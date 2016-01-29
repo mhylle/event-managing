@@ -8,7 +8,6 @@ module.exports = function () {
     };
     return service;
 
-
     function getGroup(req, res) {
         var id = +req.param.id;
         //var result = dataService.getGroup(id);
