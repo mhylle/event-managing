@@ -19,7 +19,7 @@ var app = express();
 app.use(errorhandler);
 router.get('/users', getUsers);
 router.post('/users', saveUser);
-router.get('/user/:id', getUser);
+router.get('/user/id/:id', getUser);
 router.get('/groups', getGroups);
 router.post('/groups', saveGroup);
 router.get('/groups/:id', getGroup);
@@ -61,6 +61,21 @@ function saveUser(req, res, next) {
 }
 
 function getUser(req, res, next) {
+    console.log('Getting events');
+    if (!dataRepositoryInstance) {
+        dataRepositoryInstance = new DataRepository();
+    }
+    var users = dataRepositoryInstance.getUsers();
+    var id = +req.params.id;
+    var user = users.filter(function(u) {
+        return u.id === id;
+    })[0];
+
+    if (user) {
+        res.status(200).send(user);
+    } else {
+        four0four.send404(req, res, 'user ' + id + ' not found');
+    }
 }
 
 function getGroups(req, res, next) {

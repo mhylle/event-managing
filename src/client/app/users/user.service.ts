@@ -4,6 +4,7 @@ module eventmanaging.user.services {
     'use strict';
     export interface IUserService {
         users: () => ng.IPromise<IUser[]>;
+        user: (id:string) => ng.IPromise<IUser>;
         createUser(user:IUser):ng.IPromise<boolean>;
     }
 
@@ -28,6 +29,19 @@ module eventmanaging.user.services {
         users():ng.IPromise<any> {
             var defer = this.$q.defer();
             this.$http.get('/api/users')
+                .then(response => {
+                    var data = response.data;
+                    return defer.resolve(data);
+                })
+                .catch(error => {
+                    return defer.resolve(error);
+                });
+            return defer.promise;
+        }
+
+        user(id:string):ng.IPromise<any> {
+            var defer = this.$q.defer();
+            this.$http.get('/api/user/id/' + id)
                 .then(response => {
                     var data = response.data;
                     return defer.resolve(data);

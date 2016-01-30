@@ -51,7 +51,7 @@
         }
 
         function gotoUser(u) {
-            console.log('trying to navigate to event ' + u.name);
+            console.log('trying to navigate to user ' + u.firstname + ' ' + u.lastname);
             $state.go('users.view', {id: u.id});
         }
     }

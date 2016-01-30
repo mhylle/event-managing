@@ -26,6 +26,13 @@ module eventmanaging.user {
                     authorizedRoles: [USER_ROLES.user]
                 }
             })
+            .state('users.view', {
+                url: '/view/:id',
+                templateUrl: 'app/users/view/user.html',
+                data: {
+                    authorizedRoles: [USER_ROLES.user]
+                }
+            })
             .state('users.create', {
                 url: '/create',
                 templateUrl: 'app/users/create/createUser.html',
