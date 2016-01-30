@@ -1,12 +1,12 @@
 /* jshint -W117, -W030 */
-describe('UserListController', function () {
+describe.skip('UserListController', function () {
     var controller;
     var users = mockData.getMockUsers();
 
     bard.verifyNoOutstandingHttpRequests();
 
     beforeEach(function () {
-        module('eventmanaging.user');
+        module('usermanaging.user');
         bard.inject('$controller', '$rootScope', '$q', '$state', '$filter');
     });
 
