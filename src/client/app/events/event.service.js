@@ -35,7 +35,7 @@
             }
 
             function onGetEventsError(error) {
-                //Logger.error('Error during getEvents: ' + error);
+                Logger.error('Error during getEvents: ' + error);
                 return [];
             }
         }

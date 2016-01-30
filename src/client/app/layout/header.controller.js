@@ -24,7 +24,7 @@
             vm.logo = 'images/logo.png';
             $scope.$watch(function () {
                 return null;//that.securityService.getSecurityToken();
-            }, function (newVal, oldVal) {
+            }, function (newVal) {
                 if (Logger) {
                     Logger.info('watch triggered..');
                 }

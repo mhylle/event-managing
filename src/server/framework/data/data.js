@@ -1,4 +1,4 @@
-var utils = require('../utils/generator');
+//var utils = require('../utils/generator');
 //var moment = require('moment');
 //var eventdef = require('../../events/event');
 var eventdb = [];
@@ -33,7 +33,7 @@ var data = function () {
             }
             counter++;
         }
-        eventdb[i] = event;
+        eventdb[counter] = event;
     };
 };
 
@@ -132,7 +132,7 @@ function getGroups() {
 }
 
 function initializeEvents() {
-    var users = getUsers();
+    //var users = getUsers();
 
     //function createEvent1() {
     //    var evt1 = eventdef.create();

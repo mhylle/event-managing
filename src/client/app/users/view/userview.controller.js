@@ -5,10 +5,10 @@
         .module('eventmanaging.user')
         .controller('userviewcontroller', userviewcontroller);
 
-    userviewcontroller.$inject = ['$stateParams', 'userservice', 'Session'];
+    userviewcontroller.$inject = ['$stateParams', 'userservice'];
 
     /* @ngInject */
-    function userviewcontroller($stateParams, userservice, Session) {
+    function userviewcontroller($stateParams, userservice) {
         /* jshint -W040 */
         var vm = this;
         vm.title = 'userviewcontroller';

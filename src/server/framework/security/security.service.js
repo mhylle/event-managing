@@ -19,7 +19,6 @@ module.exports = function () {
         var userName = req.body.username;
         var passtring = req.body.password;
         var users = userService.getUsers();
-        var foundUser = false;
         if (users === undefined || users === null) {
             return {status: 401, accesstoken: null, userName: null};
         }
@@ -38,7 +37,6 @@ module.exports = function () {
                 var hash = bcrypt.hashSync(passtring, salt);
                 if (userhash === undefined) {
                     tokens.push(token);
-                    foundUser = true;
                     return {status: 200, accesstoken: token, userName: userName};
                 }
 
@@ -48,7 +46,6 @@ module.exports = function () {
                     //var expires = new Date();
                     //expires.setDate((new Date()).getDate() + 5);
                     tokens.push(token);
-                    foundUser = true;
                     return {status: 200, accesstoken: token, userName: userName};
                 }
             }

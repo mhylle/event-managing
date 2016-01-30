@@ -45,7 +45,7 @@ function logout(req, res, next) {
 //    security.requiresAuthentication(req, res, next);
 //}
 
-function getUsers(req, res, next) {
+function getUsers(req, res) {
     if (!dataRepositoryInstance) {
         dataRepositoryInstance = new DataRepository();
     }
@@ -60,7 +60,7 @@ function getUsers(req, res, next) {
 function saveUser(req, res, next) {
 }
 
-function getUser(req, res, next) {
+function getUser(req, res) {
     console.log('Getting events');
     if (!dataRepositoryInstance) {
         dataRepositoryInstance = new DataRepository();
@@ -78,7 +78,7 @@ function getUser(req, res, next) {
     }
 }
 
-function getGroups(req, res, next) {
+function getGroups(req, res) {
     var groups2 = groups.getGroups();
     res.status(200).send(groups2);
 }
@@ -91,7 +91,7 @@ function getGroup(req, res, next) {
     groups.getGroup(req, res, next);
 }
 
-function getEvents(req, res, next) {
+function getEvents(req, res) {
     console.log('Getting events');
     if (!dataRepositoryInstance) {
         dataRepositoryInstance = new DataRepository();
@@ -105,7 +105,7 @@ function getEvents(req, res, next) {
     res.status(200).send(result);
 }
 
-function getEvent(req, res, next) {
+function getEvent(req, res) {
     console.log('Getting events');
     if (!dataRepositoryInstance) {
         dataRepositoryInstance = new DataRepository();
@@ -123,7 +123,7 @@ function getEvent(req, res, next) {
     }
 }
 
-function attend(req, res, next) {
+function attend(req, res) {
     console.log('Trying to signup a user for an event');
     if (!dataRepositoryInstance) {
         dataRepositoryInstance = new DataRepository();
