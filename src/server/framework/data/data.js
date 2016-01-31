@@ -5,6 +5,7 @@ var eventdb = [];
 
 var userdata = require('./User_mock_data');
 var eventdata = require('./Event_mock_data');
+var groupdata = require('./Group_mock_data');
 
 var data = function () {
     initializeEvents();
@@ -119,16 +120,17 @@ function getUsers() {
     //];
 }
 function getGroups() {
-    return [{
-        'id': 1,
-        'name': 'default',
-        'type': 'open'
-    }, {
-        'id': 2,
-        'name': 'Example Closed Group',
-        'type': 'open'
-    }
-    ];
+    return groupdata;
+    //return [{
+    //    'id': 1,
+    //    'name': 'default',
+    //    'type': 'open'
+    //}, {
+    //    'id': 2,
+    //    'name': 'Example Closed Group',
+    //    'type': 'open'
+    //}
+    //];
 }
 
 function initializeEvents() {

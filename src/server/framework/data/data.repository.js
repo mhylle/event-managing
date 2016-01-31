@@ -8,12 +8,13 @@ var dataRepository = function() {
     var service = this;
     var dataInstance = new Data();
     service.getEvents = function() {
-        var events = dataInstance.events();
-        return events;
+        return dataInstance.events();
     };
     service.getUsers = function() {
-        var users = dataInstance.users();
-        return users;
+        return dataInstance.users();
+    };
+    service.getGroups = function() {
+        return dataInstance.groups();
     };
     service.updateEvent = function(event) {
         dataInstance.updateEvent(event);

@@ -4,6 +4,7 @@ var mockData = (function () {
         getMockStates: getMockStates,
         getMockUsers: getMockUsers,
         getMockEvents: getMockEvents,
+        getMockGroups: getMockGroups,
         getMockSignedEvents: getMockSignedEvents,
         getFailedMockEvents: getFailedMockEvents,
         getCrashedMockEvents: getCrashedMockEvents
@@ -100,6 +101,7 @@ var mockData = (function () {
             status: 'RESPONSE_OK'
         };
     }
+
     function getMockSignedEvents() {
         var mockUsers = getMockUsers();
         return {
@@ -146,5 +148,17 @@ var mockData = (function () {
 
     function getCrashedMockEvents() {
         return {};
+    }
+
+    function getMockGroups() {
+        return [
+            {id: 1, name: 'bibendum imperdiet', type: 'private'},
+            {id: 2, name: 'venenatis non', type: 'private'},
+            {id: 3, name: 'estibulum sed', type: 'private'},
+            {id: 4, name: 'dis parturient', type: 'private'},
+            {id: 5, name: 'nec nisi', type: 'open'},
+            {id: 6, name: 'semper rutrum', type: 'open'},
+            {id: 7, name: 'id', type: 'open'},
+            {id: 8, name: 'ultricies', type: 'private'}];
     }
 })();

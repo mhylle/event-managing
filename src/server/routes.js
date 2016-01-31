@@ -79,8 +79,17 @@ function getUser(req, res) {
 }
 
 function getGroups(req, res) {
-    var groups2 = groups.getGroups();
-    res.status(200).send(groups2);
+    console.log('Getting groups');
+    if (!dataRepositoryInstance) {
+        dataRepositoryInstance = new DataRepository();
+    }
+
+    var groups = dataRepositoryInstance.getGroups();
+    var result = {};
+    result.groups = groups;
+    result.status = 'RESPONSE_OK';
+    console.log('returning ' + groups.length + ' groups');
+    res.status(200).send(result);
 }
 
 function saveGroup(req, res, next) {

@@ -8,7 +8,7 @@
         'eventmanaging.header',
         'event-managing-events',
         'eventmanaging.user',
-        //'eventmanaging.group',
+        'event-managing-groups',
         'eventmanaging.security'
     ]).config(['$stateProvider', 'USER_ROLES', configuration])
         .controller('ApplicationController', ApplicationController)
