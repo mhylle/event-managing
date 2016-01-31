@@ -22,3 +22,5 @@ ratings:
   - "**.py"
   - "**.rb"
 exclude_paths: []
+- "gulp.config.js"
+- "gulpfile.js"
