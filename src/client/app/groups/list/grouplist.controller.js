@@ -18,8 +18,8 @@
         vm.groups = [];
         activate();
 
+        vm.getIcon = getIcon;
         ////////////////
-
         function activate() {
             Logger.info('activating');
             groupservice.getGroups().then(function (response) {
@@ -39,7 +39,16 @@
                 vm.status.response = response.status;
             });
         }
-    }
 
+        function getIcon(group) {
+            if (group.type === 'public') {
+                return 'open.png';
+            }
+            if (group.type === 'private') {
+                return 'lock.jpg';
+            }
+            return 'na.png';
+        }
+    }
 })();
 

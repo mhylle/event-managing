@@ -156,9 +156,9 @@ var mockData = (function () {
             {id: 2, name: 'venenatis non', type: 'private'},
             {id: 3, name: 'estibulum sed', type: 'private'},
             {id: 4, name: 'dis parturient', type: 'private'},
-            {id: 5, name: 'nec nisi', type: 'open'},
-            {id: 6, name: 'semper rutrum', type: 'open'},
-            {id: 7, name: 'id', type: 'open'},
-            {id: 8, name: 'ultricies', type: 'private'}];
+            {id: 5, name: 'nec nisi', type: 'public'},
+            {id: 6, name: 'semper rutrum', type: 'public'},
+            {id: 7, name: 'id', type: 'public'},
+            {id: 8, name: 'ultricies', type: 'public'}];
     }
 })();
