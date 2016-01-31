@@ -4,6 +4,7 @@
     angular.module('eventmanaging', [
         'ui.router',
         'angularMoment',
+        'ui.bootstrap',
         'event-managing-logger',
         'eventmanaging.header',
         'event-managing-events',

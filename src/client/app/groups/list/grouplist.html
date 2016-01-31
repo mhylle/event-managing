@@ -1,7 +1,14 @@
-<div ng-controller="grouplistcontroller as vm">
-    <div ng-repeat="group in vm.groups" class="col-xs-12 card">
-        <div class="col-xs-1"><img ng-src="{{'images/' + vm.getIcon(group)}}" height="24"/></div>
-        <div class="col-xs-11">{{group.name}}</div>
+<div ng-controller="grouplistcontroller as vm" class="text-center">
+    <ul ng-repeat="group in vm.groups" class="list-inline">
+        <li class="card col-xs-6" ng-click="vm.gotoGroup(group)">
+            <div class="col-xs-1"><img ng-src="{{'images/' + vm.getIcon(group)}}" height="24"/></div>
+            <div class="col-xs-3">{{group.name}}</div>
+            <div class="col-xs-2">
+                <button>...</button>
+            </div>
+        </li>
+
+
         <!--<div class="col-xs-6">{{group.name}}</div>-->
-    </div>
+    </ul>
 </div>

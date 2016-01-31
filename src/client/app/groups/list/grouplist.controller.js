@@ -5,10 +5,10 @@
         .module('event-managing-groups')
         .controller('grouplistcontroller', GroupListController);
 
-    GroupListController.$inject = ['Logger', 'groupservice'];
+    GroupListController.$inject = ['$state', 'Logger', 'groupservice'];
 
     /* @ngInject */
-    function GroupListController(Logger, groupservice) {
+    function GroupListController($state, Logger, groupservice) {
         var vm = this;
         vm.title = 'GroupListController';
         vm.status = {
@@ -19,6 +19,7 @@
         activate();
 
         vm.getIcon = getIcon;
+        vm.gotoGroup = gotoGroup;
         ////////////////
         function activate() {
             Logger.info('activating');
@@ -38,6 +39,11 @@
                 }
                 vm.status.response = response.status;
             });
+        }
+
+        function gotoGroup(g) {
+            console.log('trying to navigate to group ' + g.name);
+            $state.go('groups.view', {id: g.id});
         }
 
         function getIcon(group) {

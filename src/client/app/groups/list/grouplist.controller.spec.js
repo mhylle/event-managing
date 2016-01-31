@@ -9,6 +9,21 @@ describe('GroupListController', function () {
         bard.inject('$controller', '$rootScope', '$q', '$state');
     });
 
+    //describe('Generate Group to User data', function () {
+    //    it('should generate some data :) ', function () {
+    //        var propability = 0.2;
+    //        var result = '[';
+    //        for (var i = 0; i < 6; i++) {
+    //            for (var j = 0; j < 999; j++) {
+    //                var percentage = Math.random();
+    //                if (percentage < propability) {
+    //                    result += '{ groupid: ' + i + ', userid:' + j + '}';
+    //                }
+    //            }
+    //        }
+    //        result += ']';
+    //    });
+    //});
     describe('Controller Initialization', function () {
         beforeEach(function () {
             var gs = {

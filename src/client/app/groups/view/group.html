@@ -1,0 +1,15 @@
+<div ng-controller="groupviewcontroller as vm">
+    <div><img ng-src="{{'images/' + vm.getIcon(vm.group)}}" height="24"/>{{vm.group.type}}</div>
+    <div>{{vm.group.name}}</div>
+    <div>Add Users ({{vm.users.length}})</div>
+
+    <div ng-repeat="user in vm.filteredUsers">
+        <div>{{user.firstname}} {{user.lastname}}</div>
+    </div>
+    <pagination total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></pagination>
+    <p>
+        total Items: {{vm.users.length}}<br />
+        Items per page: {{vm.itemsPerPage}}<br />
+        Current Page: {{vm.currentPage}}
+    </p>
+</div>

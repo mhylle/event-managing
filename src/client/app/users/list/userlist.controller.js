@@ -35,7 +35,7 @@
         function fetchUsers() {
             userservice.users().then(function (response) {
                 if (response.status === 'RESPONSE_OK') {
-                    vm.users = response.events;
+                    vm.users = response.users;
                     vm.status.code = 'ok';
                     vm.status.message = '';
                 } else {

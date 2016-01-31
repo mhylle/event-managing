@@ -22,7 +22,7 @@ router.post('/users', saveUser);
 router.get('/user/id/:id', getUser);
 router.get('/groups', getGroups);
 router.post('/groups', saveGroup);
-router.get('/groups/:id', getGroup);
+router.get('/groups/id/:id', getGroup);
 router.get('/events', getEvents);
 router.get('/event/id/:id', getEvent);
 router.get('/event/attend/eid/:eid/uid/:uid', attend);
@@ -51,7 +51,7 @@ function getUsers(req, res) {
     }
     var users = dataRepositoryInstance.getUsers();
     var result = {};
-    result.events = users;
+    result.users = users;
     result.status = 'RESPONSE_OK';
     console.log('returning ' + users.length + ' users');
     res.status(200).send(result);
@@ -97,7 +97,21 @@ function saveGroup(req, res, next) {
 }
 
 function getGroup(req, res, next) {
-    groups.getGroup(req, res, next);
+    console.log('Getting groups');
+    if (!dataRepositoryInstance) {
+        dataRepositoryInstance = new DataRepository();
+    }
+    var groups = dataRepositoryInstance.getGroups();
+    var id = +req.params.id;
+    var group = groups.filter(function(g) {
+        return g.id === id;
+    })[0];
+
+    if (group) {
+        res.status(200).send(group);
+    } else {
+        four0four.send404(req, res, 'group ' + id + ' not found');
+    }
 }
 
 function getEvents(req, res) {
@@ -115,7 +129,7 @@ function getEvents(req, res) {
 }
 
 function getEvent(req, res) {
-    console.log('Getting events');
+    console.log('Getting event');
     if (!dataRepositoryInstance) {
         dataRepositoryInstance = new DataRepository();
     }
