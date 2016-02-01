@@ -43,7 +43,7 @@ describe('GroupListController', function () {
                 });
 
                 it('should have mock events', function () {
-                    expect(controller.groups).to.have.length(8);
+                    expect(controller.groups).to.have.length(9);
                 });
 
                 it('should have an empty status message', function () {
@@ -57,8 +57,22 @@ describe('GroupListController', function () {
                 it('should have a response.status that is ok', function () {
                     expect(controller.status.response).to.equal('RESPONSE_OK');
                 });
+                describe('Icon management', function () {
+                    it('Should get the open.png icon when the group is public', function () {
+                        var groupIcon = controller.getIcon(controller.groups[0]);
+                        expect(groupIcon).to.equal('open.png');
+                    });
+                    it('Should get the lock.jpg icon when the group is private', function () {
+                        var groupIcon = controller.getIcon(controller.groups[1]);
+                        expect(groupIcon).to.equal('lock.jpg');
+                    });
+                    it('Should get the na.png icon when the group type is unknown', function () {
+                        var groupIcon = controller.getIcon(controller.groups[2]);
+                        expect(groupIcon).to.equal('na.png');
+                    });
+                });
             });
-            describe('Should navigate to the correct state when choosing a group', function () {
+            describe.skip('Should navigate to the correct state when choosing a group', function () {
                 beforeEach(function () {
                     //bard.inject('$state');
                     $rootScope.$apply();
@@ -69,6 +83,7 @@ describe('GroupListController', function () {
                     //expect($state).is('events.view');
                 });
             });
+
         });
 
         describe('With failed service', function () {

@@ -155,11 +155,12 @@ var mockData = (function () {
     function getMockGroups() {
         return {
             groups: [
-                {id: 1, name: 'bibendum imperdiet', type: 'private'},
+                {id: 5, name: 'Public Standard Group', type: 'public'},
+                {id: 1, name: 'Private Standard Group', type: 'private'},
+                {id: 2, name: 'Unknown Group Type'},
                 {id: 2, name: 'venenatis non', type: 'private'},
                 {id: 3, name: 'estibulum sed', type: 'private'},
                 {id: 4, name: 'dis parturient', type: 'private'},
-                {id: 5, name: 'nec nisi', type: 'public'},
                 {id: 6, name: 'semper rutrum', type: 'public'},
                 {id: 7, name: 'id', type: 'public'},
                 {id: 8, name: 'ultricies', type: 'public'}],
