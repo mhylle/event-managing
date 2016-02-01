@@ -35,9 +35,5 @@ A user guide and wiki will be created for the system.
 
 [![Code Climate](https://codeclimate.com/github/mhylle/event-managing/badges/gpa.svg)](https://codeclimate.com/github/mhylle/event-managing)
 [![Test Coverage](https://codeclimate.com/github/mhylle/event-managing/badges/coverage.svg)](https://codeclimate.com/github/mhylle/event-managing/coverage)
-<a href="https://codeclimate.com/github/mhylle/event-managing/coverage"><img src="https://codeclimate.com/github/mhylle/event-managing/badges/coverage.svg" /></a>
 [![Issue Count](https://codeclimate.com/github/mhylle/event-managing/badges/issue_count.svg)](https://codeclimate.com/github/mhylle/event-managing)
 
-
-[![Code Climate](https://codeclimate.com/github/mhylle/event-managing/badges/gpa.svg)](https://codeclimate.com/github/mhylle/event-managing)
-[![Code Climate](https://codeclimate.com/github/mhylle/event-managing/badges/coverage.svg)](https://codeclimate.com/github/mhylle/event-managing/coverage)
