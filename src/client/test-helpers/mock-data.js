@@ -164,7 +164,7 @@ var mockData = (function () {
                 {id: 7, name: 'id', type: 'public'},
                 {id: 8, name: 'ultricies', type: 'public'}],
             status: 'RESPONSE_OK'
-        }
+        };
     }
 
     function getFailedMockGroups() {
