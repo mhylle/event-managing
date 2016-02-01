@@ -7,7 +7,8 @@
     "init": "npm install",
     "install": "tsd install & bower install",
     "start": "node src/server/app.js",
-    "test": "gulp test"
+    "test": "gulp test",
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec src/client/**/*.spec.js src/client/test-helpers/*.js"
   },
   "engines": {
     "node": ">=4.1.1"
