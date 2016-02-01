@@ -6,10 +6,16 @@
     <div ng-repeat="user in vm.filteredUsers">
         <div>{{user.firstname}} {{user.lastname}}</div>
     </div>
-    <pagination total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.currentPage" ng-change="vm.pageChanged()"></pagination>
+    <button ng-click="vm.pageChanged(1)">First</button>
+    <button ng-click="vm.pageChanged(vm.currentPage-1)">&lt;</button>
+    <span ng-repeat="i in vm.paginationButtons" ng-show="i>vm.firstButton && i <vm.lastButton">
+        <button ng-click="vm.pageChanged(i)">{{i}}</button>
+    </span>
+    <button ng-click="vm.pageChanged(vm.currentPage+1)"> &gt; </button>
+    <button ng-click="vm.pageChanged(vm.totalPages-1)">Last</button>
     <p>
-        total Items: {{vm.users.length}}<br />
-        Items per page: {{vm.itemsPerPage}}<br />
+        total Items: {{vm.users.length}}<br/>
+        Items per page: {{vm.itemsPerPage}}<br/>
         Current Page: {{vm.currentPage}}
     </p>
 </div>
