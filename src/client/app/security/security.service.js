@@ -38,7 +38,7 @@
             if (!angular.isArray(authorizedRoles)) {
                 authorizedRoles = [authorizedRoles];
             }
-            var authorized = authorizedRoles.indexOf(Session.userRole) !== -1;
+            //var authorized = authorizedRoles.indexOf(Session.userRole) !== -1;
             return true;//(isAuthenticated() && authorized);
         }
     }

@@ -57,8 +57,8 @@ function getUsers(req, res) {
     res.status(200).send(result);
 }
 
-function saveUser(req, res, next) {
-}
+//function saveUser(req, res, next) {
+//}
 
 function getUser(req, res) {
     console.log('Getting events');
@@ -96,7 +96,7 @@ function saveGroup(req, res, next) {
     groups.saveGroup(req, res, next);
 }
 
-function getGroup(req, res, next) {
+function getGroup(req, res) {
     console.log('Getting groups');
     if (!dataRepositoryInstance) {
         dataRepositoryInstance = new DataRepository();
