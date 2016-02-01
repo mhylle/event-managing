@@ -2,6 +2,9 @@
 describe('GroupListController', function () {
     var controller;
     var groups = mockData.getMockGroups();
+    var failedGroups = mockData.getFailedMockGroups();
+    var crashedGroups = mockData.getCrashedMockGroups();
+
     bard.verifyNoOutstandingHttpRequests();
 
     beforeEach(function () {
@@ -9,21 +12,6 @@ describe('GroupListController', function () {
         bard.inject('$controller', '$rootScope', '$q', '$state');
     });
 
-    //describe('Generate Group to User data', function () {
-    //    it('should generate some data :) ', function () {
-    //        var propability = 0.2;
-    //        var result = '[';
-    //        for (var i = 0; i < 6; i++) {
-    //            for (var j = 0; j < 999; j++) {
-    //                var percentage = Math.random();
-    //                if (percentage < propability) {
-    //                    result += '{ groupid: ' + i + ', userid:' + j + '}';
-    //                }
-    //            }
-    //        }
-    //        result += ']';
-    //    });
-    //});
     describe('Controller Initialization', function () {
         beforeEach(function () {
             var gs = {
@@ -45,17 +33,17 @@ describe('GroupListController', function () {
                 expect(controller.groups).to.exist;
             });
 
-            describe.skip('After activation', function () {
+            describe('After activation', function () {
                 beforeEach(function () {
                     $rootScope.$apply();
                 });
 
-                it('should have events', function () {
+                it('should have groups', function () {
                     expect(controller.groups).to.have.length.above(0);
                 });
 
                 it('should have mock events', function () {
-                    expect(controller.groups).to.have.length(2);
+                    expect(controller.groups).to.have.length(8);
                 });
 
                 it('should have an empty status message', function () {
@@ -83,11 +71,11 @@ describe('GroupListController', function () {
             });
         });
 
-        describe.skip('With failed service', function () {
+        describe('With failed service', function () {
             beforeEach(function () {
                 var gs = {
                     getGroups: function () {
-                        return $q.when({});
+                        return $q.when(failedGroups);
                     }
                 };
                 controller = $controller('grouplistcontroller', {
@@ -121,7 +109,7 @@ describe('GroupListController', function () {
             beforeEach(function () {
                 var gs = {
                     getGroups: function () {
-                        return $q.when({});
+                        return $q.when(crashedGroups);
                     }
                 };
                 controller = $controller('grouplistcontroller', {

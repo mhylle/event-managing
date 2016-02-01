@@ -21,8 +21,13 @@
         vm.getIcon = getIcon;
         vm.gotoGroup = gotoGroup;
         ////////////////
+
         function activate() {
             Logger.info('activating');
+            getGroups();
+        }
+
+        function getGroups() {
             groupservice.getGroups().then(function (response) {
                 Logger.info('getting initial groups');
                 if (response.status === 'RESPONSE_OK') {

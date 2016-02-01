@@ -6,7 +6,7 @@ describe('EventController', function () {
     var signedevents = mockData.getMockSignedEvents();
     var users = mockData.getMockUsers();
     var failedEvents = mockData.getFailedMockEvents();
-    var crashedEvents = mockData.getCrashedMockEvents;
+    var crashedEvents = mockData.getCrashedMockEvents();
 
     bard.verifyNoOutstandingHttpRequests();
 

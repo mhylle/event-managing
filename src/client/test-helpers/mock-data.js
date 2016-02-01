@@ -5,6 +5,8 @@ var mockData = (function () {
         getMockUsers: getMockUsers,
         getMockEvents: getMockEvents,
         getMockGroups: getMockGroups,
+        getFailedMockGroups: getFailedMockGroups,
+        getCrashedMockGroups: getCrashedMockGroups,
         getMockSignedEvents: getMockSignedEvents,
         getFailedMockEvents: getFailedMockEvents,
         getCrashedMockEvents: getCrashedMockEvents
@@ -151,14 +153,29 @@ var mockData = (function () {
     }
 
     function getMockGroups() {
-        return [
-            {id: 1, name: 'bibendum imperdiet', type: 'private'},
-            {id: 2, name: 'venenatis non', type: 'private'},
-            {id: 3, name: 'estibulum sed', type: 'private'},
-            {id: 4, name: 'dis parturient', type: 'private'},
-            {id: 5, name: 'nec nisi', type: 'public'},
-            {id: 6, name: 'semper rutrum', type: 'public'},
-            {id: 7, name: 'id', type: 'public'},
-            {id: 8, name: 'ultricies', type: 'public'}];
+        return {
+            groups: [
+                {id: 1, name: 'bibendum imperdiet', type: 'private'},
+                {id: 2, name: 'venenatis non', type: 'private'},
+                {id: 3, name: 'estibulum sed', type: 'private'},
+                {id: 4, name: 'dis parturient', type: 'private'},
+                {id: 5, name: 'nec nisi', type: 'public'},
+                {id: 6, name: 'semper rutrum', type: 'public'},
+                {id: 7, name: 'id', type: 'public'},
+                {id: 8, name: 'ultricies', type: 'public'}],
+            status: 'RESPONSE_OK'
+        }
     }
+
+    function getFailedMockGroups() {
+        return {
+            status: 'RESPONSE_ERROR',
+            message: 'Unable to retrieve data from database'
+        };
+    }
+
+    function getCrashedMockGroups() {
+        return {};
+    }
+
 })();
