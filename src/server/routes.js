@@ -57,8 +57,9 @@ function getUsers(req, res) {
     res.status(200).send(result);
 }
 
-//function saveUser(req, res, next) {
-//}
+function saveUser(req, res, next) {
+    return null;
+}
 
 function getUser(req, res) {
     console.log('Getting events');

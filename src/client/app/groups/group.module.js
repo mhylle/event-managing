@@ -3,7 +3,7 @@ angular
         'ui.router',
         'event-managing-logger',
         'eventmanaging.security',
-        'eventmanaging.user'
+        'event-managing-users'
     ])
     .config(['$stateProvider', 'USER_ROLES', configuration]);
 

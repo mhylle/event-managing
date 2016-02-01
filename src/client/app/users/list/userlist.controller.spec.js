@@ -6,7 +6,7 @@ describe.skip('UserListController', function () {
     bard.verifyNoOutstandingHttpRequests();
 
     beforeEach(function () {
-        module('usermanaging.user');
+        module('event-managing-users');
         bard.inject('$controller', '$rootScope', '$q', '$state', '$filter');
     });
 

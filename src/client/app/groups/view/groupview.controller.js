@@ -64,7 +64,7 @@
 
         function getUsers() {
             Logger.info('getting users');
-            userservice.users().then(function (response) {
+            userservice.getUsers().then(function (response) {
                 if (response.status === 'RESPONSE_OK') {
                     vm.users = response.users;
                     $scope.$watch('vm.currentPage + vm.itemsPerPage', function () {

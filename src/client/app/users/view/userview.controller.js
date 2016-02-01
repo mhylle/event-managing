@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('eventmanaging.user')
+        .module('event-managing-users')
         .controller('userviewcontroller', userviewcontroller);
 
     userviewcontroller.$inject = ['$stateParams', 'userservice'];

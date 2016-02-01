@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('eventmanaging.user')
+        .module('event-managing-users')
         .controller('userlistcontroller', UserListController);
 
     UserListController.$inject = ['$state', 'userservice', 'Session'];
@@ -33,7 +33,7 @@
         }
 
         function fetchUsers() {
-            userservice.users().then(function (response) {
+            userservice.getUsers().then(function (response) {
                 if (response.status === 'RESPONSE_OK') {
                     vm.users = response.users;
                     vm.status.code = 'ok';
