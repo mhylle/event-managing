@@ -13,7 +13,3 @@ script:
 after_script:
   - cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js
   - codeclimate-test-reporter < ./coverage/lcov.info
-
-addons:
-    code_climate:
-        repo_token: cc7753cc1d1d53cda2e7bd7647011163689e73e7d616eec6b22365456b102b45
