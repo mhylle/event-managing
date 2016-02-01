@@ -10,7 +10,9 @@ script:
   -  npm test
 
 # Send coverage data to Coveralls
-after_script: "cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
+after_script:
+  - cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js
+  - codeclimate-test-reporter < ./coverage/lcov.info
 
 addons:
     code_climate:
