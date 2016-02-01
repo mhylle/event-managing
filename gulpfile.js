@@ -343,11 +343,10 @@ gulp.task('travis', function () {
 
 gulp.task('codacy', function codacyTask() {
     return gulp
-        .src(['/report/coverage/lcov.info'], {read: false})
+        .src(['./coverage/lcov.info'], {read: false})
         .pipe($.codacy({
             token: '516bd9d0b5c44bf6bb8c368e3143d4eb'
-        }))
-        ;
+        }));
 });
 
 /**

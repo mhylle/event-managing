@@ -22,5 +22,8 @@ ratings:
   - "**.py"
   - "**.rb"
 exclude_paths: []
+- "src/client/app/groups/list/grouplist.controller.spec.js"
 - "gulp.config.js"
 - "gulpfile.js"
+
+
