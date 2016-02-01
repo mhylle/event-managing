@@ -9,7 +9,7 @@
     "start": "node src/server/app.js",
     "test": "gulp test",
     "cover": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec src/server/**/*",
-    "test-on-travis": "./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test-on-travis": "./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha && cat ./report/coverage/report-lcov/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "engines": {
     "node": ">=4.1.1"
