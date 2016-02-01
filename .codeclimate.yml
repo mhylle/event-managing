@@ -28,6 +28,9 @@ exclude_paths:
 - "gulp.config.js"
 - "gulpfile.js"
 - "karma.conf.js"
-- "*.spec.js"
+- "src/client/app/events/list/eventlist.controller.spec.js"
+- "src/client/app/events/view/isattendingevent.filter.spec.js"
+- "src/client/app/groups/list/grouplist.controller.spec.js"
+- "src/client/app/users/list/userlist.controller.spec.js"
 
 
