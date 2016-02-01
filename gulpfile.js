@@ -335,6 +335,12 @@ gulp.task('test', ['vet', 'templatecache'], function (done) {
     startTests(true /*singleRun*/, done);
 });
 
+gulp.task('travis', function () {
+    gulp.src('spec/**/*spec.js')
+        .pipe($.cover.format(['lcov']))
+        .pipe($.coveralls()); // directly pipe into coveralls
+});
+
 gulp.task('codacy', function codacyTask() {
     return gulp
         .src(['/report/coverage/lcov.info'], {read: false})

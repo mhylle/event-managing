@@ -7,10 +7,10 @@ before_install:
   - npm install -g istanbul
 
 script:
-  - npm run cover
+  -  npm run-script test-on-travis
 
 # Send coverage data to Coveralls
-after_script: "cat report/coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
+after_script: "cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
 
 addons:
     code_climate:
