@@ -34,3 +34,4 @@ exclude_paths:
 - "src/client/app/users/list/userlist.controller.spec.js"
 - "src/client/app/groups/view/groupview.controller.spec.js"
 - "src/client/app/groups/groupicon.service.spec.js"
+- "src/client/test-helpers/mock-data.js"
