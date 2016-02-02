@@ -32,5 +32,5 @@ exclude_paths:
 - "src/client/app/events/view/isattendingevent.filter.spec.js"
 - "src/client/app/groups/list/grouplist.controller.spec.js"
 - "src/client/app/users/list/userlist.controller.spec.js"
-
-
+- "src/client/app/groups/view/groupview.controller.spec.js"
+- "src/client/app/groups/groupicon.service.spec.js"
