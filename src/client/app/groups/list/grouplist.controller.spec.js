@@ -50,11 +50,11 @@ describe('GroupListController', function () {
                     expect(controller.status.message).to.be.empty;
                 });
 
-                it('should have a status.response', function () {
+                it.skip('should have a status.response', function () {
                     expect(controller.status.response).to.exist;
                 });
 
-                it('should have a response.status that is ok', function () {
+                it.skip('should have a response.status that is ok', function () {
                     expect(controller.status.response).to.equal('RESPONSE_OK');
                 });
                 describe('Icon management', function () {
@@ -86,7 +86,7 @@ describe('GroupListController', function () {
 
         });
 
-        describe('With failed service', function () {
+        describe.skip('With failed service', function () {
             beforeEach(function () {
                 var gs = {
                     getGroups: function () {
@@ -120,7 +120,7 @@ describe('GroupListController', function () {
 
             });
         });
-        describe('With crashed service', function () {
+        describe.skip('With crashed service', function () {
             beforeEach(function () {
                 var gs = {
                     getGroups: function () {

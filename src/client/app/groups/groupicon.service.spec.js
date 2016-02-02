@@ -1,6 +1,6 @@
 /* jshint -W117, -W030 */
 describe('Group Icons', function () {
-    var groups = mockData.getMockGroups().groups;
+    var groups = mockData.getMockGroups();
     bard.verifyNoOutstandingHttpRequests();
 
     beforeEach(function () {

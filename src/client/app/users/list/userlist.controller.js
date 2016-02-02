@@ -34,19 +34,26 @@
 
         function fetchUsers() {
             userservice.getUsers().then(function (response) {
-                if (response.status === 'RESPONSE_OK') {
-                    vm.users = response.users;
-                    vm.status.code = 'ok';
-                    vm.status.message = '';
-                } else {
-                    if (response.status === 'RESPONSE_ERROR') {
-                        vm.status.code = 'error';
-                    } else {
-                        vm.status.code = 'warning';
-                    }
-                    vm.status.message = response.message;
+                if (!response) {
+                    vm.status.code = 'error';
+                    vm.status.message = 'No response returned from the server';
+                    return;
                 }
-                vm.status.response = response.status;
+                vm.users = response;
+                vm.status.code = 'ok';
+                //if (response.status === 'RESPONSE_OK') {
+                //    vm.users = response;
+                //    vm.status.code = 'ok';
+                //    vm.status.message = '';
+                //} else {
+                //    if (response.status === 'RESPONSE_ERROR') {
+                //        vm.status.code = 'error';
+                //    } else {
+                //        vm.status.code = 'warning';
+                //    }
+                //    vm.status.message = response.message;
+                //}
+                //vm.status.response = response.status;
             });
         }
 

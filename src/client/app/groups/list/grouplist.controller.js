@@ -8,7 +8,7 @@
     GroupListController.$inject = ['$state', 'Logger', 'groupservice', 'groupiconservice'];
 
     /* @ngInject */
-    function GroupListController($state, Logger, groupservice,groupiconservice) {
+    function GroupListController($state, Logger, groupservice, groupiconservice) {
         var vm = this;
         vm.title = 'GroupListController';
         vm.status = {
@@ -30,19 +30,26 @@
         function getGroups() {
             groupservice.getGroups().then(function (response) {
                 Logger.info('getting initial groups');
-                if (response.status === 'RESPONSE_OK') {
-                    vm.groups = response.groups;
-                    vm.status.code = 'ok';
-                    vm.status.message = '';
-                } else {
-                    if (response.status === 'RESPONSE_ERROR') {
-                        vm.status.code = 'error';
-                    } else {
-                        vm.status.code = 'warning';
-                    }
-                    vm.status.message = response.message;
+                if (!response) {
+                    vm.status.code = 'error';
+                    vm.status.message = 'No response returned from the server';
+                    return;
                 }
-                vm.status.response = response.status;
+                vm.groups = response;
+                vm.status.code = 'ok';
+                //if (response.status === 'RESPONSE_OK') {
+                //    vm.groups = response.groups;
+                //    vm.status.code = 'ok';
+                //    vm.status.message = '';
+                //} else {
+                //    if (response.status === 'RESPONSE_ERROR') {
+                //        vm.status.code = 'error';
+                //    } else {
+                //        vm.status.code = 'warning';
+                //    }
+                //    vm.status.message = response.message;
+                //}
+                //vm.status.response = response.status;
             });
         }
 

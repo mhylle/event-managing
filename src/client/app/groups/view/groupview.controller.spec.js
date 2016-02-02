@@ -21,7 +21,7 @@ describe('GroupViewController', function () {
                     return $q.when(groups);
                 },
                 getGroup: function () {
-                    return $q.when(groups.groups[1]);
+                    return $q.when(groups[1]);
                 }
             };
 

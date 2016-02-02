@@ -18,7 +18,7 @@
 
         ////////////////
         function getUsers() {
-            return $http.get('/api/users')
+            return $http.get('/api/user')
                 .then(onGetUsersSuccess)
                 .catch(onGetUsersError);
 
@@ -48,7 +48,7 @@
         }
 
         function createUser(user) {
-            return $http.post('/api/users/', user)
+            return $http.post('/api/user/', user)
                 .then(onCreateUserSuccess)
                 .catch(onCreateUserError);
 
@@ -59,9 +59,7 @@
             function onCreateUserError(error) {
                 Logger.error(error);
             }
-
         }
     }
-
 })();
 

@@ -259,39 +259,38 @@ var mockData = (function () {
 
     function getMockEvents() {
         var mockUsers = getMockUsers();
-        return {
-            events: [
-                {
-                    id: 1,
-                    name: 'Fastelavn',
-                    start: '07-02-2016 14:00:00',
-                    end: '07-02-2016 16:00:00',
-                    signstart: '17-01-2016',
-                    signend: '02-02-2016',
-                    signoutend: '02-02-2016',
-                    location: 'Kantinen',
-                    logo: '',
-                    decription: 'En festlig dag for børnene.',
-                    users: [],
-                    activities: []
-                },
-                {
-                    id: 2,
-                    name: 'Julefrokost',
-                    start: '05-12-2016 12:00:00',
-                    end: '05-12-2016 23:59:59',
-                    signstart: '17-11-2016',
-                    signend: '02-12-2016',
-                    signoutend: '02-12-2016',
-                    location: 'Kantinen',
-                    logo: '',
-                    description: 'Så skal der festes',
-                    users: [mockUsers[0], mockUsers[1], mockUsers[2]],
-                    activities: []
-                }
-            ],
-            status: 'RESPONSE_OK'
-        };
+        var events = [
+            {
+                id: 1,
+                name: 'Fastelavn',
+                start: '07-02-2016 14:00:00',
+                end: '07-02-2016 16:00:00',
+                signstart: '17-01-2016',
+                signend: '02-02-2016',
+                signoutend: '02-02-2016',
+                location: 'Kantinen',
+                logo: '',
+                decription: 'En festlig dag for børnene.',
+                users: [],
+                activities: []
+            },
+            {
+                id: 2,
+                name: 'Julefrokost',
+                start: '05-12-2016 12:00:00',
+                end: '05-12-2016 23:59:59',
+                signstart: '17-11-2016',
+                signend: '02-12-2016',
+                signoutend: '02-12-2016',
+                location: 'Kantinen',
+                logo: '',
+                description: 'Så skal der festes',
+                users: [mockUsers[0], mockUsers[1], mockUsers[2]],
+                activities: []
+            }
+        ];
+
+        return events;
     }
 
     function getMockSignedEvents() {
@@ -343,19 +342,16 @@ var mockData = (function () {
     }
 
     function getMockGroups() {
-        return {
-            groups: [
-                {id: 5, name: 'Public Standard Group', type: 'public'},
-                {id: 1, name: 'Private Standard Group', type: 'private'},
-                {id: 2, name: 'Unknown Group Type'},
-                {id: 2, name: 'venenatis non', type: 'private'},
-                {id: 3, name: 'estibulum sed', type: 'private'},
-                {id: 4, name: 'dis parturient', type: 'private'},
-                {id: 6, name: 'semper rutrum', type: 'public'},
-                {id: 7, name: 'id', type: 'public'},
-                {id: 8, name: 'ultricies', type: 'public'}],
-            status: 'RESPONSE_OK'
-        };
+        return [
+            {id: 5, name: 'Public Standard Group', type: 'public'},
+            {id: 1, name: 'Private Standard Group', type: 'private'},
+            {id: 2, name: 'Unknown Group Type'},
+            {id: 2, name: 'venenatis non', type: 'private'},
+            {id: 3, name: 'estibulum sed', type: 'private'},
+            {id: 4, name: 'dis parturient', type: 'private'},
+            {id: 6, name: 'semper rutrum', type: 'public'},
+            {id: 7, name: 'id', type: 'public'},
+            {id: 8, name: 'ultricies', type: 'public'}];
     }
 
     function getFailedMockGroups() {

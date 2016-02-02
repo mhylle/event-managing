@@ -18,7 +18,7 @@
         ////////////////
 
         function getGroups() {
-            return $http.get('/api/groups')
+            return $http.get('/api/group')
                 .then(onGetGroupsSuccess)
                 .catch(onGetGroupsError);
 
@@ -33,7 +33,7 @@
 
         function getGroup(id) {
             Logger.info('Trying to retrieve group by id ' + id);
-            return $http.get('/api/groups/id/' + id)
+            return $http.get('/api/group/id/' + id)
                 .then(onGetGroupSuccess)
                 .catch(onGetGroupError);
 

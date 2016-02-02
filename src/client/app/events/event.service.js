@@ -22,7 +22,7 @@
 
         ////////////////
         function getEvents() {
-            return $http.get('/api/events')
+            return $http.get('/api/event')
                 .then(onGetEventsSuccess)
                 .catch(onGetEventsError);
 
