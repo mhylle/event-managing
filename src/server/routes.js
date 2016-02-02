@@ -56,7 +56,13 @@ function getUsers(req, res) {
 }
 
 function saveUser(req, res, next) {
-    return null;
+    initializeDataRepository();
+
+    var users = dataRepositoryInstance.getUsers();
+
+    var index = _.findIndex(users, {id: req.params.id});
+    _.merge(users[index], req.body);
+    res.json({info: 'user updated successfully'});
 }
 
 function getUser(req, res) {
@@ -86,7 +92,13 @@ function getGroups(req, res) {
 }
 
 function saveGroup(req, res, next) {
-    groups.saveGroup(req, res, next);
+    initializeDataRepository();
+
+    var groups = dataRepositoryInstance.getGroups();
+
+    var index = _.findIndex(groups, {id: req.params.id});
+    _.merge(groups[index], req.body);
+    res.json({info: 'group updated successfully'});
 }
 
 function getGroup(req, res) {
