@@ -55,7 +55,7 @@ function getUsers(req, res) {
     res.status(200).send(result);
 }
 
-function saveUser(req, res, next) {
+function saveUser(req, res) {
     initializeDataRepository();
 
     var users = dataRepositoryInstance.getUsers();
@@ -91,7 +91,7 @@ function getGroups(req, res) {
     res.status(200).send(result);
 }
 
-function saveGroup(req, res, next) {
+function saveGroup(req, res) {
     initializeDataRepository();
 
     var groups = dataRepositoryInstance.getGroups();
