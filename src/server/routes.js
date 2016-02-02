@@ -46,9 +46,8 @@ function logout(req, res, next) {
 //}
 
 function getUsers(req, res) {
-    if (!dataRepositoryInstance) {
-        dataRepositoryInstance = new DataRepository();
-    }
+    initializeDataRepository();
+
     var users = dataRepositoryInstance.getUsers();
     var result = {};
     result.users = users;
@@ -61,16 +60,20 @@ function saveUser(req, res, next) {
     return null;
 }
 
-function getUser(req, res) {
-    console.log('Getting events');
-    if (!dataRepositoryInstance) {
-        dataRepositoryInstance = new DataRepository();
-    }
-    var users = dataRepositoryInstance.getUsers();
-    var id = +req.params.id;
-    var user = users.filter(function(u) {
+function getObjectById(id, object) {
+    var user = object.filter(function (u) {
         return u.id === id;
     })[0];
+    return {id: id, user: user};
+}
+
+function getUser(req, res) {
+    console.log('Getting events');
+    initializeDataRepository();
+    var id = +req.params.id;
+
+    var users = dataRepositoryInstance.getUsers();
+    var user = getObjectById(id, users);
 
     if (user) {
         res.status(200).send(user);
@@ -81,9 +84,7 @@ function getUser(req, res) {
 
 function getGroups(req, res) {
     console.log('Getting groups');
-    if (!dataRepositoryInstance) {
-        dataRepositoryInstance = new DataRepository();
-    }
+    initializeDataRepository();
 
     var groups = dataRepositoryInstance.getGroups();
     var result = {};
@@ -99,14 +100,11 @@ function saveGroup(req, res, next) {
 
 function getGroup(req, res) {
     console.log('Getting groups');
-    if (!dataRepositoryInstance) {
-        dataRepositoryInstance = new DataRepository();
-    }
-    var groups = dataRepositoryInstance.getGroups();
+    initializeDataRepository();
+
     var id = +req.params.id;
-    var group = groups.filter(function(g) {
-        return g.id === id;
-    })[0];
+    var groups = dataRepositoryInstance.getGroups();
+    var group = getObjectById(id, groups);
 
     if (group) {
         res.status(200).send(group);
@@ -115,11 +113,14 @@ function getGroup(req, res) {
     }
 }
 
-function getEvents(req, res) {
-    console.log('Getting events');
+function initializeDataRepository() {
     if (!dataRepositoryInstance) {
         dataRepositoryInstance = new DataRepository();
     }
+}
+function getEvents(req, res) {
+    console.log('Getting events');
+    initializeDataRepository();
 
     var events = dataRepositoryInstance.getEvents();
     var result = {};
@@ -131,14 +132,12 @@ function getEvents(req, res) {
 
 function getEvent(req, res) {
     console.log('Getting event');
-    if (!dataRepositoryInstance) {
-        dataRepositoryInstance = new DataRepository();
-    }
+    initializeDataRepository();
+
     var events = dataRepositoryInstance.getEvents();
+
     var id = +req.params.id;
-    var event = events.filter(function(e) {
-        return e.id === id;
-    })[0];
+    var event = getObjectById(id, events);
 
     if (event) {
         res.status(200).send(event);
@@ -149,19 +148,15 @@ function getEvent(req, res) {
 
 function attend(req, res) {
     console.log('Trying to signup a user for an event');
-    if (!dataRepositoryInstance) {
-        dataRepositoryInstance = new DataRepository();
-    }
+    initializeDataRepository();
+
     var events = dataRepositoryInstance.getEvents();
     var users = dataRepositoryInstance.getUsers();
+
     var eid = +req.params.eid;
     var uid = +req.params.uid;
-    var event = events.filter(function(e) {
-        return e.id === eid;
-    })[0];
-    var user = users.filter(function(u) {
-        return u.id === uid;
-    })[0];
+    var event = getObjectById(eid, events);
+    var user = getObjectById(uid, users);
 
     var result = eventservice.attend(event, user);
     dataRepositoryInstance.updateEvent(event);
