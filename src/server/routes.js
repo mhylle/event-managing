@@ -69,7 +69,7 @@ function getUser(req, res) {
     if (user) {
         res.status(200).send(user);
     } else {
-        four0four.send404(req, res, 'user ' + id + ' not found');
+        four0four.send404(req, res, 'user ' + req.params.id + ' not found');
     }
 }
 
@@ -99,7 +99,7 @@ function getGroup(req, res) {
     if (group) {
         res.status(200).send(group);
     } else {
-        four0four.send404(req, res, 'group ' + id + ' not found');
+        four0four.send404(req, res, 'group ' + req.params.id + ' not found');
     }
 }
 
@@ -130,7 +130,7 @@ function getEvent(req, res) {
     if (event) {
         res.status(200).send(event);
     } else {
-        four0four.send404(req, res, 'event ' + id + ' not found');
+        four0four.send404(req, res, 'event ' + req.params.id + ' not found');
     }
 }
 
