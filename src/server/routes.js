@@ -5,12 +5,11 @@ var router = express.Router();
 
 var four0four = require('./framework/utils/404')();
 var security = require('./framework/security/security.service')();
-//var users = require('./users/user.service')();
-var groups = require('./groups/group.service')();
 var eventservice = require('./events/event.service')();
 
 var DataRepository = require('./framework/data/data.repository');
-//var data = require('./framework/data/data');
+
+var _ = require('lodash');
 
 var dataRepositoryInstance;
 
@@ -60,20 +59,12 @@ function saveUser(req, res, next) {
     return null;
 }
 
-function getObjectById(id, object) {
-    var user = object.filter(function (u) {
-        return u.id === id;
-    })[0];
-    return {id: id, user: user};
-}
-
 function getUser(req, res) {
     console.log('Getting events');
     initializeDataRepository();
-    var id = +req.params.id;
 
     var users = dataRepositoryInstance.getUsers();
-    var user = getObjectById(id, users);
+    var user = _.find(users, {id: req.params.id});
 
     if (user) {
         res.status(200).send(user);
@@ -102,9 +93,8 @@ function getGroup(req, res) {
     console.log('Getting groups');
     initializeDataRepository();
 
-    var id = +req.params.id;
     var groups = dataRepositoryInstance.getGroups();
-    var group = getObjectById(id, groups);
+    var group = _.find(groups, {id: req.params.id});
 
     if (group) {
         res.status(200).send(group);
@@ -135,9 +125,7 @@ function getEvent(req, res) {
     initializeDataRepository();
 
     var events = dataRepositoryInstance.getEvents();
-
-    var id = +req.params.id;
-    var event = getObjectById(id, events);
+    var event = _.find(events, {id: req.params.id});
 
     if (event) {
         res.status(200).send(event);
@@ -153,10 +141,8 @@ function attend(req, res) {
     var events = dataRepositoryInstance.getEvents();
     var users = dataRepositoryInstance.getUsers();
 
-    var eid = +req.params.eid;
-    var uid = +req.params.uid;
-    var event = getObjectById(eid, events);
-    var user = getObjectById(uid, users);
+    var event = _.find(events, {id: req.params.eid});
+    var user = _.find(users, {id: req.params.uid});
 
     var result = eventservice.attend(event, user);
     dataRepositoryInstance.updateEvent(event);
