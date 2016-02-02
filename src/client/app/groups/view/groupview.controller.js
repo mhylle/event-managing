@@ -5,10 +5,16 @@
         .module('event-managing-groups')
         .controller('groupviewcontroller', GroupViewController);
 
-    GroupViewController.$inject = ['$scope', '$stateParams', 'Logger', 'groupservice', 'userservice'];
+    GroupViewController.$inject = [
+        '$scope',
+        '$stateParams',
+        'Logger',
+        'groupservice',
+        'groupiconservice',
+        'userservice'];
 
     /* @ngInject */
-    function GroupViewController($scope, $stateParams, Logger, groupservice, userservice) {
+    function GroupViewController($scope, $stateParams, Logger, groupservice, groupiconservice, userservice) {
         /* jshint -W040 */
         var vm = this;
         vm.title = 'groupviewcontroller';
@@ -16,22 +22,22 @@
         vm.group = null;
         vm.users = [];
         vm.groupid = '';
-        vm.status = {};
+        vm.response = {};
 
         vm.totalItems = vm.users.length;
         vm.itemsPerPage = 12;
-        vm.totalPages = 1;
-        vm.currentPage = 1;
+        vm.totalPages = 0;
+        vm.currentPage = 0;
         vm.firstButton = 1;
         vm.lastButton = 1;
 
         activate();
 
-        vm.getIcon = getIcon;
         vm.getUsers = getUsers;
         vm.pageChanged = pageChanged;
         vm.setPage = setPage;
         vm.pageCount = pageCount;
+        vm.getIcon = getIcon;
 
         vm.paginationButtons = [];
 
@@ -43,6 +49,10 @@
             getGroup();
             getUsers();
             populatePaginationButtons();
+        }
+
+        function getIcon(group) {
+            return groupiconservice.getIcon(group);
         }
 
         function pageCount() {
@@ -74,20 +84,6 @@
             }
         }
 
-        // TODO This method need to be merged into a common routine.
-        function getIcon(group) {
-            if (!group) {
-                return 'na.png';
-            }
-            if (group.type === 'public') {
-                return 'open.png';
-            }
-            if (group.type === 'private') {
-                return 'lock.jpg';
-            }
-            return 'na.png';
-        }
-
         function getUsers() {
             Logger.info('getting users');
             userservice.getUsers().then(function (response) {
@@ -101,7 +97,7 @@
                         populatePaginationButtons();
                     });
                 }
-                vm.status.response = response.status;
+                vm.response.response = response.status;
             });
         }
 

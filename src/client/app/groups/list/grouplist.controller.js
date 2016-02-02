@@ -5,10 +5,10 @@
         .module('event-managing-groups')
         .controller('grouplistcontroller', GroupListController);
 
-    GroupListController.$inject = ['$state', 'Logger', 'groupservice'];
+    GroupListController.$inject = ['$state', 'Logger', 'groupservice', 'groupiconservice'];
 
     /* @ngInject */
-    function GroupListController($state, Logger, groupservice) {
+    function GroupListController($state, Logger, groupservice,groupiconservice) {
         var vm = this;
         vm.title = 'GroupListController';
         vm.status = {
@@ -52,13 +52,7 @@
         }
 
         function getIcon(group) {
-            if (group.type === 'public') {
-                return 'open.png';
-            }
-            if (group.type === 'private') {
-                return 'lock.jpg';
-            }
-            return 'na.png';
+            return groupiconservice.getIcon(group);
         }
     }
 })();
