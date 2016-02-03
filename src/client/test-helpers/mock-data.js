@@ -251,7 +251,7 @@ var mockData = (function () {
                 phone: '420-(934)772-9127',
                 logicalid: '6236a410-594a-4975-a0e7-5a5e3646842b'
             }
-        ]
+        ];
     }
 
     function getMockEvents() {
@@ -321,7 +321,7 @@ var mockData = (function () {
                 users: [mockUsers[1]],
                 activities: []
             }
-        ]
+        ];
     }
 
     function getFailedMockEvents() {
