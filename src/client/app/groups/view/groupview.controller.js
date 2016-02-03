@@ -87,17 +87,14 @@
         function getUsers() {
             Logger.info('getting users');
             userservice.getUsers().then(function (response) {
-                if (response.status === 'RESPONSE_OK') {
-                    vm.users = response.users;
-                    $scope.$watch('vm.currentPage + vm.itemsPerPage', function () {
-                        var begin = ((vm.currentPage - 1) * vm.itemsPerPage);
-                        var end = begin + vm.itemsPerPage;
-                        vm.filteredUsers = vm.users.slice(begin, end);
-                        vm.totalPages = pageCount();
-                        populatePaginationButtons();
-                    });
-                }
-                vm.response.response = response.status;
+                vm.users = response;
+                $scope.$watch('vm.currentPage + vm.itemsPerPage', function () {
+                    var begin = ((vm.currentPage - 1) * vm.itemsPerPage);
+                    var end = begin + vm.itemsPerPage;
+                    vm.filteredUsers = vm.users.slice(begin, end);
+                    vm.totalPages = pageCount();
+                    populatePaginationButtons();
+                });
             });
         }
 
