@@ -8,10 +8,10 @@
         .module('event-managing-events')
         .controller('EventController', EventController);
 
-    EventController.$inject = ['$state', 'EventService', 'Session'];
+    EventController.$inject = ['$state', 'EventService', 'Session', 'lodash'];
 
     /* @ngInject */
-    function EventController($state, EventService, Session) {
+    function EventController($state, EventService, Session, lodash) {
         var vm = this;
         vm.title = 'EventController';
         vm.events = [];
@@ -66,16 +66,13 @@
 
         function signup(e) {
             EventService.attend(e, Session.user).then(function (response) {
-                var counter = 0;
-                for (var i = 0; i < vm.events.length; i++) {
-                    var event = vm.events[i];
-                    if (event.id === e.id) {
-                        break;
+                var index = lodash.findIndex(
+                    vm.events,
+                    {
+                        id: e.id
                     }
-                    counter++;
-                }
-
-                vm.events[counter] = response;
+                );
+                lodash.merge(vm.events[index], response);
             });
         }
     }

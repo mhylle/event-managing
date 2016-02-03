@@ -4,6 +4,7 @@
 angular
     .module('event-managing-events', [
         'ui.router',
+        'ngLodash',
         'eventmanaging.security'
     ])
     .config(['$stateProvider', 'USER_ROLES', configuration]);

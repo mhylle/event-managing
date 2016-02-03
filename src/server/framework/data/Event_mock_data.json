@@ -91,7 +91,7 @@
     },
     {
         "id": 7,
-        "name": "Influenza A Virus, Influenza B Virus, Antimon. tart., Arsenicum alb., Bryonia, Camphora, Chelidonium majus, Cinchona, Drosera, Eucalyptus, Hepar sulph. calc., Histaminum hydrochloricum, Ipecac., Kali bic., Kali carb., Kali iod., Lycopodium, Myrrha, Natrum sulphuricum, Nux vom., Phosphorus, Pulsatilla, Sanguinaria, Spongia , Stannum met., Tussilago farfara, Verbascum, Echinacea, Lappa, Rumex crisp.",
+        "name": "Influenza A Virus",
         "start": "30.12.2016",
         "end": "24.08.2016",
         "signstart": "21.12.2016",

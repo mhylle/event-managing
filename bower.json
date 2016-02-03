@@ -1,6 +1,6 @@
 {
   "name": "event-managing",
-  "version": "0.0.4-369",
+  "version": "0.0.4-374",
   "description": "event-managing",
   "authors": [
     "Martin Hylleberg <mhylle@yahoo.com>"
@@ -31,7 +31,8 @@
     "angular-route": "~1.4.7",
     "angular-moment": "~0.10.3",
     "angular-bootstrap": "~1.1.1",
-    "angular-smart-table": "~2.1.7"
+    "angular-smart-table": "~2.1.7",
+    "ng-lodash": "~0.4.0"
   },
   "overrides": {
     "bootstrap": {
