@@ -31,6 +31,11 @@
         vm.firstButton = 1;
         vm.lastButton = 1;
 
+        vm.status = {
+            groups: 'ok',
+            users: 'ok'
+        };
+
         activate();
 
         vm.getUsers = getUsers;
@@ -88,13 +93,17 @@
             Logger.info('getting users');
             userservice.getUsers().then(function (response) {
                 vm.users = response;
-                $scope.$watch('vm.currentPage + vm.itemsPerPage', function () {
-                    var begin = ((vm.currentPage - 1) * vm.itemsPerPage);
-                    var end = begin + vm.itemsPerPage;
-                    vm.filteredUsers = vm.users.slice(begin, end);
-                    vm.totalPages = pageCount();
-                    populatePaginationButtons();
-                });
+                if (vm.users) {
+                    $scope.$watch('vm.currentPage + vm.itemsPerPage', function () {
+                        var begin = ((vm.currentPage - 1) * vm.itemsPerPage);
+                        var end = begin + vm.itemsPerPage;
+                        vm.filteredUsers = vm.users.slice(begin, end);
+                        vm.totalPages = pageCount();
+                        populatePaginationButtons();
+                    });
+                } else {
+                    vm.status.users = 'failed';
+                }
             });
         }
 
