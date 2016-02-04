@@ -47,8 +47,8 @@
                 .catch(onGetEventError);
 
             function onGetEventSuccess(response) {
-                Logger.info(response.data.name);
-                return response.data;
+                Logger.info(response.name);
+                return response;
             }
 
             function onGetEventError(error) {

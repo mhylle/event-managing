@@ -1,0 +1,11 @@
+id,mongoId,name,contactinformation.phone,contactinformation.address
+1,56b3504d4d6f6379f06c0700,Locale A,63-(636)769-5200,6987 Esker Court
+2,56b3504d4d6f6379f06d0700,Locale B,63-(136)867-3133,27 Warrior Court
+3,56b3504d4d6f6379f06e0700,Locale D,86-(355)851-7068,81964 Lakeland Way
+4,56b3504d4d6f6379f06f0700,canteen,30-(850)519-8734,5749 Debra Street
+5,56b3504d4d6f6379f0700700,canteen,66-(736)376-5153,39563 Stone Corner Center
+6,56b3504d4d6f6379f0710700,canteen,62-(998)277-2373,05799 2nd Pass
+7,56b3504d4d6f6379f0720700,Locale C,48-(129)351-2281,601 Victoria Point
+8,56b3504d4d6f6379f0730700,canteen,57-(873)159-0657,835 Mitchell Way
+9,56b3504d4d6f6379f0740700,Restaurant Varna,55-(112)541-0616,0951 Buena Vista Court
+10,56b3504d4d6f6379f0750700,Locale D,372-(850)445-8568,157 Magdeline Plaza

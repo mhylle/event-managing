@@ -15,11 +15,14 @@ module.exports = function (app) {
     });
 
     app.get('/event/id/:id', function (req, res) {
+        var event = _.find(
+            _events, function (event) {
+                return event.id === req.params.id;
+            }
+        );
+        console.log('search for event with id ' + req.params.id + ' resulted in this event: ' + event + ' ! ');
         res.send(
-            _.find(
-                _events,
-                {id: req.params.id}
-            )
+            event
         );
     });
 

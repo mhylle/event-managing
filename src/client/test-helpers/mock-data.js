@@ -358,5 +358,4 @@ var mockData = (function () {
     function getCrashedMockGroups() {
         return {};
     }
-
 })();
