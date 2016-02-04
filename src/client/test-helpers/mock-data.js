@@ -9,6 +9,7 @@ var mockData = (function () {
         getCrashedMockGroups: getCrashedMockGroups,
         getMockSignedEvents: getMockSignedEvents,
         getFailedMockEvents: getFailedMockEvents,
+        getNoMockEvents: getNoMockEvents,
         getCrashedMockEvents: getCrashedMockEvents
     };
 
@@ -324,15 +325,14 @@ var mockData = (function () {
         ];
     }
 
+    function getNoMockEvents() {
+        return [];
+    }
     function getFailedMockEvents() {
-        return {
-            status: 'RESPONSE_ERROR',
-            message: 'Unable to retrieve data from database'
-        };
+        return undefined;
     }
 
     function getCrashedMockEvents() {
-        return {};
     }
 
     function getMockGroups() {

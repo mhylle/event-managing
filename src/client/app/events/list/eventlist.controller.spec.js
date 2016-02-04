@@ -1,5 +1,5 @@
 /* jshint -W117, -W030 */
-describe('EventController', function () {
+describe('EventListController', function () {
     var controller;
 
     var events = mockData.getMockEvents();
@@ -7,6 +7,7 @@ describe('EventController', function () {
     var users = mockData.getMockUsers();
     var failedEvents = mockData.getFailedMockEvents();
     var crashedEvents = mockData.getCrashedMockEvents();
+    var noEvents = mockData.getNoMockEvents();
 
     bard.verifyNoOutstandingHttpRequests();
 
@@ -59,12 +60,8 @@ describe('EventController', function () {
                     expect(controller.status.message).to.be.empty;
                 });
 
-                it.skip('should have a status.response', function () {
-                    expect(controller.status.response).to.exist;
-                });
-
-                it.skip('should have a response.status that is ok', function () {
-                    expect(controller.status.response).to.equal('RESPONSE_OK');
+                it('should have a response.cpde that is ok', function () {
+                    expect(controller.status.code).to.equal('ok');
                 });
 
                 it('should calculate time to last sign up date from now');
@@ -102,7 +99,28 @@ describe('EventController', function () {
             });
         });
 
-        describe.skip('With failed service', function () {
+        describe('With no data returned', function () {
+            beforeEach(function () {
+                var es = {
+                    getEvents: function () {
+                        return $q.when(noEvents);
+                    },
+                    getEvent: function () {
+                        return $q.when();
+                    }
+                };
+                controller = $controller('EventController', {
+                    EventService: es
+                });
+                $rootScope.$apply();
+            });
+
+            it('should have an empty event array', function () {
+                expect(controller.events).to.have.length(0);
+            });
+        });
+
+        describe('With failed service', function () {
             beforeEach(function () {
                 var es = {
                     getEvents: function () {
@@ -126,7 +144,7 @@ describe('EventController', function () {
                 });
 
                 it('should have a response.status that failed', function () {
-                    expect(controller.status.response).to.equal('RESPONSE_ERROR');
+                    expect(controller.status.response).to.undefined;
                 });
 
                 it('should have a response.status.code error', function () {
@@ -136,10 +154,9 @@ describe('EventController', function () {
                 it('should have a status message', function () {
                     expect(controller.status.message).not.to.be.empty;
                 });
-
             });
         });
-        describe.skip('With crashed service', function () {
+        describe('With crashed service', function () {
             beforeEach(function () {
                 var es = {
                     getEvents: function () {
@@ -159,18 +176,17 @@ describe('EventController', function () {
                     expect(controller.events).to.have.length(0);
                 });
 
-                it('should have no response.status ', function () {
-                    expect(controller.status.response).not.to.exist;
+                it('should have a response.status that failed', function () {
+                    expect(controller.status.response).to.undefined;
                 });
 
-                it('should have a response.status.code warning', function () {
-                    expect(controller.status.code).to.equal('warning');
+                it('should have a response.status.code error', function () {
+                    expect(controller.status.code).to.equal('error');
                 });
 
-                it('should have not have a status message', function () {
-                    expect(controller.status.message).to.be.empty;
+                it('should have a status message', function () {
+                    expect(controller.status.message).not.to.be.empty;
                 });
-
             });
         });
     });

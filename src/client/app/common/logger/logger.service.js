@@ -15,16 +15,15 @@
         var service = {
             error: error,
             info: info,
-            success: success,
+            debug: debug,
             warning: warning
         };
         return service;
 
         ////////////////
-
         function error(message, data, title) {
             //this.toastr.error(message, title);
-            $log.info('Error: ' + title + ' ' + message, data);
+            $log.error('Error: ' + title + ' ' + message, data);
         }
 
         function info(message, data, title) {
@@ -32,14 +31,14 @@
             $log.info('Info: ' + title + ' ' + message, data);
         }
 
-        function success(message, data, title) {
+        function debug(message, data, title) {
             //this.toastr.success(message, title);
-            $log.info('Success: ' + title + ' ' + message, data);
+            $log.debug('Success: ' + title + ' ' + message, data);
         }
 
         function warning(message, data, title) {
             //this.toastr.warning(message, title);
-            $log.info('Warning: ' + title + ' ' + message, data);
+            $log.warn('Warning: ' + title + ' ' + message, data);
         }
     }
 

@@ -43,19 +43,6 @@
                 }
                 vm.events = response;
                 vm.status.code = 'ok';
-                //if (response.status === 'RESPONSE_OK') {
-                //    vm.events = response.events;
-                //    vm.status.code = 'ok';
-                //    vm.status.message = '';
-                //} else {
-                //    if (response.status === 'RESPONSE_ERROR') {
-                //        vm.status.code = 'error';
-                //    } else {
-                //        vm.status.code = 'warning';
-                //    }
-                //    vm.status.message = response.message;
-                //}
-                //vm.status.response = response.status;
             });
         }
 
