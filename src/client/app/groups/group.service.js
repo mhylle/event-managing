@@ -5,7 +5,7 @@
         .module('event-managing-groups')
         .factory('groupservice', groupservice);
 
-    groupservice.$inject = ['$http', 'Logger'];
+    groupservice.$inject = ['$http', '$q', 'Logger'];
 
     /* @ngInject */
     function groupservice($http, Logger) {
