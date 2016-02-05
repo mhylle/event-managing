@@ -43,7 +43,7 @@ describe('GroupListController', function () {
                 });
 
                 it('should have mock events', function () {
-                    expect(controller.groups).to.have.length(9);
+                    expect(controller.groups).to.have.length(3);
                 });
 
                 it('should have an empty status message', function () {

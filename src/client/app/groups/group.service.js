@@ -10,6 +10,7 @@
     /* @ngInject */
     function groupservice($http, Logger) {
         var service = {
+            name: 'groupservice',
             getGroups: getGroups,
             getGroup: getGroup
         };
@@ -32,13 +33,13 @@
         }
 
         function getGroup(id) {
-            Logger.info('Trying to retrieve group by id ' + id);
+            //Logger.info('Trying to retrieve group by id ' + id);
             return $http.get('/api/group/id/' + id)
                 .then(onGetGroupSuccess)
                 .catch(onGetGroupError);
 
             function onGetGroupSuccess(response) {
-                Logger.info(response.data.name);
+                //Logger.info(response.data.name);
                 return response.data;
             }
 
