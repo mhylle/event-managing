@@ -1,19 +1,19 @@
 <div ng-controller="userlistcontroller as vm">
     <div class="header-name col-lg-12" ng-show="vm.users.length >0">
+        <span class="col-lg-1 text-left"></span>
         <span class="col-lg-2 text-left">Id</span>
         <span class="col-lg-2 text-left">Name</span>
         <span class="col-lg-1 text-left">Username</span>
-        <span class="col-lg-3 text-left">Adress</span>
         <span class="col-lg-2 text-left">Mail</span>
         <span class="col-lg-1 text-right">Phone</span>
         <span class="col-lg-1 text-right">Action</span>
     </div>
     <div ng-repeat="user in vm.users" class="card col-lg-12" ng-click="vm.gotoUser(user)">
         <div class="user.basedata">
+            <p class="col-lg-1 text-left"><img ng-src="{{user.avatar}}" height="24"/></p>
             <p class="col-lg-2 text-left">{{user.logicalid}}</p>
-            <p class="col-lg-2 text-left">{{user.firstname}} {{user.lastname}}</p>
+            <p class="col-lg-2 text-left">{{user.name.firstname}} {{user.name.lastname}}</p>
             <p class="col-lg-1 text-left">{{user.username}}</p>
-            <p class="col-lg-3 text-left">{{user.address ? user.address:  'NA'}}</p>
             <p class="col-lg-2 text-left">{{user.email}}</p>
             <p class="col-lg-1 text-right">{{user.phone}}</p>
             <p class="col-lg-1 text-right"><a ui-sref="useraction">...</a></p>

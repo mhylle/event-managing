@@ -5,10 +5,10 @@
         .module('event-managing-users')
         .factory('userservice', userservice);
 
-    userservice.$inject = ['$http', '$q', 'Logger'];
+    userservice.$inject = ['$http', 'Logger'];
 
     /* @ngInject */
-    function userservice($http, $q, Logger) {
+    function userservice($http, Logger) {
         var service = {
             getUsers: getUsers,
             getUser: getUser,

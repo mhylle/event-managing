@@ -12,13 +12,12 @@
         /* jshint -W040 */
         var vm = this;
         vm.title = 'userviewcontroller';
-        vm.user = {};
+        vm.user = null;
 
         activate();
 
         ////////////////
         function activate() {
-
             console.log('got id ' + $stateParams.id + ' passed in as start parameter.');
             userservice.getUser($stateParams.id).then(function (response) {
                 vm.user = response;
