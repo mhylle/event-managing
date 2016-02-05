@@ -5,7 +5,7 @@
         .module('event-managing-groups')
         .factory('groupservice', groupservice);
 
-    groupservice.$inject = ['$http', '$q', 'Logger'];
+    groupservice.$inject = ['$http', 'Logger'];
 
     /* @ngInject */
     function groupservice($http, Logger) {
@@ -33,13 +33,13 @@
         }
 
         function getGroup(id) {
-            //Logger.info('Trying to retrieve group by id ' + id);
+            Logger.info('Trying to retrieve group by id ' + id);
             return $http.get('/api/group/id/' + id)
                 .then(onGetGroupSuccess)
                 .catch(onGetGroupError);
 
             function onGetGroupSuccess(response) {
-                //Logger.info(response.data.name);
+                Logger.info(response.data.name);
                 return response.data;
             }
 
