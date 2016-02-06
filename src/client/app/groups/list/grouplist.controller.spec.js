@@ -24,13 +24,21 @@ describe('GroupListController', function () {
             });
         });
         describe('With valid data', function () {
-
             it('Should exist', function () {
                 expect(controller).to.exist;
             });
 
             it('should have empty groups array before activation', function () {
                 expect(controller.groups).to.exist;
+            });
+
+            describe('Status property', function () {
+                it('should have a status.message field', function () {
+                    expect(controller.status).to.exist;
+                });
+                it('should have a status.message field', function () {
+                    expect(controller.status.message).to.exist;
+                });
             });
 
             describe('After activation', function () {

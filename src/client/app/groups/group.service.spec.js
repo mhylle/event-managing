@@ -1,10 +1,11 @@
 /* jshint -W117, -W030 */
 describe('GroupService', function () {
     var groups = mockData.getMockGroups();
+    var users = mockData.getMockUsers();
 
     beforeEach(function () {
         module('event-managing-groups');
-        bard.inject('$rootScope', '$httpBackend', 'groupservice');
+        bard.inject('$rootScope', '$httpBackend', 'groupservice', 'userservice');
     });
 
     it('is the groupservice', function () {
@@ -64,6 +65,23 @@ describe('GroupService', function () {
         });
     });
 
+    describe('addUserToGroup', function () {
+        it('Should not add null users to a group', function() {
+            var group = getGroup(1);
+            expect(group.users).not.to.exist;
+            var resultGroup = groupservice.addUserToGroup(group, null);
+            expect(resultGroup.users).not.to.exist;
+        });
+        it.skip('Should add users to a group', function() {
+            var group = getGroup(1);
+            expect(group.users).not.to.exist;
+            var user = getUser(1);
+            expect(user).to.exist;
+            var resultGroup = groupservice.addUserToGroup(group, user);
+            expect(resultGroup.users).to.exist;
+        });
+    });
+
     function getGroup(id) {
         var group = {};
         $httpBackend.expectGET('/api/group/id/' + id).respond(
@@ -74,5 +92,16 @@ describe('GroupService', function () {
         });
         $httpBackend.flush();
         return group;
+    }
+    function getUser(id) {
+        var user = {};
+        $httpBackend.expectGET('/api/user/id/' + id).respond(
+            users[id - 1]
+        );
+        userservice.getUser(id).then(function (results) {
+            user = results;
+        });
+        $httpBackend.flush();
+        return user;
     }
 });

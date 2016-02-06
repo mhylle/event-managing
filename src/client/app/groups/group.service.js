@@ -12,7 +12,8 @@
         var service = {
             name: 'groupservice',
             getGroups: getGroups,
-            getGroup: getGroup
+            getGroup: getGroup,
+            addUserToGroup: addUserToGroup
         };
         return service;
 
@@ -44,6 +45,21 @@
             }
 
             function onGetGroupError(error) {
+                Logger.error(error);
+            }
+        }
+
+        function addUserToGroup(group, user) {
+            return $http.put('/api/group/', group, user)
+                .then(onAddUserToGroupSuccess)
+                .catch(onAddUserToGroupError);
+
+            function onAddUserToGroupSuccess(response) {
+                Logger.info(response);
+                return response.data;
+            }
+
+            function onAddUserToGroupError(error) {
                 Logger.error(error);
             }
         }

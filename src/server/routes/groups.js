@@ -34,6 +34,11 @@ module.exports = function (app) {
         res.json({info: 'group updated successfully'});
     });
 
+    app.put('/group', function (req, res) {
+
+        res.json({info: 'called put on group updated successfully'});
+    });
+
     app.delete('/group/id/:id', function (req, res) {
         _.remove(_groups, function (group) {
             return group.id === req.params.id;

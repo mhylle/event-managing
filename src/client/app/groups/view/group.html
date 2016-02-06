@@ -4,7 +4,8 @@
     <div>Add Users ({{vm.users.length}})</div>
 
     <div ng-repeat="user in vm.filteredUsers">
-        <div>{{user.firstname}} {{user.lastname}}</div>
+        <div>{{user.name.firstname}} {{user.name.lastname}}</div>
+        <div><button ng-click="vm.addUserToGroup(user)">Add to group</button></div>
     </div>
     <button ng-click="vm.pageChanged(1)">First</button>
     <button ng-click="vm.pageChanged(vm.currentPage-1)">&lt;</button>

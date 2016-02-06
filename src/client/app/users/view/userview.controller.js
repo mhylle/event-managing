@@ -14,6 +14,9 @@
         vm.title = 'userviewcontroller';
         vm.user = null;
 
+        vm.status = {
+            message : '',
+        };
         activate();
 
         ////////////////

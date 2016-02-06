@@ -32,6 +32,7 @@
         vm.lastButton = 1;
 
         vm.status = {
+            message: '',
             groups: 'ok',
             users: 'ok'
         };
@@ -43,6 +44,7 @@
         vm.setPage = setPage;
         vm.pageCount = pageCount;
         vm.getIcon = getIcon;
+        vm.addUserToGroup = addUserToGroup;
 
         vm.paginationButtons = [];
 
@@ -116,6 +118,16 @@
 
         function setPage(pageNo) {
             vm.currentPage = pageNo;
+        }
+
+        function addUserToGroup(user) {
+            Logger.info('Trying to add user to group');
+            groupservice.addUserToGroup(vm.group, user).then(function (response) {
+                vm.group = response.group;
+                if (response.status === 'ok') {
+                    vm.status.message = 'User successfully added to group';
+                }
+            });
         }
     }
 })();

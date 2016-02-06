@@ -43,6 +43,15 @@ describe('EventListController', function () {
                 expect(controller.events).to.exist;
             });
 
+            describe('Status property', function () {
+                it('should have a status.message field', function () {
+                    expect(controller.status).to.exist;
+                });
+                it('should have a status.message field', function () {
+                    expect(controller.status.message).to.exist;
+                });
+            });
+
             describe('After activation', function () {
                 beforeEach(function () {
                     $rootScope.$apply();
