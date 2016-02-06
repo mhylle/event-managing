@@ -35,8 +35,29 @@ module.exports = function (app) {
     });
 
     app.put('/group', function (req, res) {
+        var group = req.body.group;
+        var user = req.body.user;
+        var dataGroup = _.find(_groups,
+            {id: group.id});
+        if (!dataGroup) {
+            res.json({info: 'no group found'});
+        }
 
-        res.json({info: 'called put on group updated successfully'});
+        var users = dataGroup.users;
+        var dataUser = _.find(users, {id: user.id});
+        if (!dataUser || dataUser === null || dataUser === undefined) {
+            users.push(user);
+        }
+        group.users = users;
+        var index = _.findIndex(
+            _groups,
+            {
+                id: req.params.id
+            }
+        );
+        _.merge(_groups[index], group);
+
+        res.json(group);
     });
 
     app.delete('/group/id/:id', function (req, res) {

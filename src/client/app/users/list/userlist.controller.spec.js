@@ -31,8 +31,13 @@ describe.skip('UserListController', function () {
                 expect(controller.users).to.exist;
             });
 
-            it('should have a status.message field', function() {
-                expect(controller.status.message).to.exist;
+            describe('Status property', function () {
+                it('should have a status.message field', function () {
+                    expect(controller.status).to.exist;
+                });
+                it('should have a status.message field', function () {
+                    expect(controller.status.message).to.exist;
+                });
             });
 
             describe('After activation', function () {

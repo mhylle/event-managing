@@ -50,9 +50,18 @@
         }
 
         function addUserToGroup(group, user) {
-            return $http.put('/api/group/', group, user)
-                .then(onAddUserToGroupSuccess)
+            return $http({
+                url: '/api/group',
+                method: 'put',
+                data: {
+                    'group': group,
+                    'user': user
+                }
+            }).then(onAddUserToGroupSuccess)
                 .catch(onAddUserToGroupError);
+            //return $http.put('/api/group/', group, user)
+            //    .then(onAddUserToGroupSuccess)
+            //    .catch(onAddUserToGroupError);
 
             function onAddUserToGroupSuccess(response) {
                 Logger.info(response);

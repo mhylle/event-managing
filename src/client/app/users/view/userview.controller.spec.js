@@ -39,7 +39,7 @@ describe('UserViewController', function () {
             });
 
             describe('Status property', function () {
-                it('should have a status.message field', function () {
+                it('should have a status field', function () {
                     expect(controller.status).to.exist;
                 });
                 it('should have a status.message field', function () {
