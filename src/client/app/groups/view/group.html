@@ -1,7 +1,17 @@
 <div ng-controller="groupviewcontroller as vm">
     <div><img ng-src="{{'images/' + vm.getIcon(vm.group)}}" height="24"/>{{vm.group.type}}</div>
     <div>{{vm.group.name}}</div>
+    <div class="panel panel-default">
+        <div class="panel panel-heading">Users in group</div>
+        <div class="panel panel-body">
+            <div ng-repeat="user in vm.group.users">
+                {{user.name.firstname}} {{user.name.lastname}}
+            </div>
+        </div>
+    </div>
+    <div class="row"><label>{{vm.status.message}}</label></div>
     <div>Add Users ({{vm.users.length}})</div>
+
 
     <div ng-repeat="user in vm.filteredUsers">
         <div>{{user.name.firstname}} {{user.name.lastname}}</div>

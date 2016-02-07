@@ -1,9 +1,11 @@
 var _ = require('lodash');
 
-var seedData = require('../framework/data/Group_mock_data.json');
+var groupData = require('../framework/data/Group_mock_data.json');
+var userData = require('../framework/data/User_mock_data.json');
 
 module.exports = function (app) {
-    var _groups = seedData;
+    var _groups = groupData;
+    var _users = userData;
 
     app.post('/group', function (req, res) {
         _groups.push(req.body);
@@ -15,11 +17,12 @@ module.exports = function (app) {
     });
 
     app.get('/group/id/:id', function (req, res) {
+        var result = _.find(
+            _groups, function (g) {
+                return g.id === parseInt(req.params.id);
+            });
         res.send(
-            _.find(
-                _groups,
-                {id: req.params.id}
-            )
+            result
         );
     });
 
@@ -34,30 +37,40 @@ module.exports = function (app) {
         res.json({info: 'group updated successfully'});
     });
 
-    app.put('/group', function (req, res) {
-        var group = req.body.group;
-        var user = req.body.user;
-        var dataGroup = _.find(_groups,
-            {id: group.id});
+    app.put('/group/id/:gid/user/id/:uid', function (req, res) {
+        var gid = req.params.gid;
+        var uid = req.params.uid;
+        var index = _.findIndex(
+            _groups,
+            function (g) {
+                return g.id === parseInt(gid);
+            }
+        );
+        var dataGroup = _groups[index];
         if (!dataGroup) {
-            res.json({info: 'no group found'});
+            res.json({status: 'failed', info: 'no group found'});
+            return;
+        }
+
+        var dataUser = _.find(_users, function (u) {
+            return u.id === parseInt(uid);
+        });
+
+        if (!dataUser || dataUser === null || dataUser === undefined) {
+            res.json({status: 'failed', info: 'user not found'});
+            return;
         }
 
         var users = dataGroup.users;
-        var dataUser = _.find(users, {id: user.id});
-        if (!dataUser || dataUser === null || dataUser === undefined) {
-            users.push(user);
+        if (!users || users === null || users === undefined) {
+            dataGroup.users = [dataUser];
+        } else {
+            users.push(dataUser);
+            dataGroup.users = users;
         }
-        group.users = users;
-        var index = _.findIndex(
-            _groups,
-            {
-                id: req.params.id
-            }
-        );
-        _.merge(_groups[index], group);
-
-        res.json(group);
+        _.merge(_groups[index], dataGroup);
+        var result = {status: 'ok', data: dataGroup};
+        res.json(result);
     });
 
     app.delete('/group/id/:id', function (req, res) {
@@ -66,5 +79,6 @@ module.exports = function (app) {
         });
         res.json({info: 'group removed successfully'});
     });
-};
+}
+;
 

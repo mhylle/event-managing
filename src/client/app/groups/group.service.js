@@ -5,10 +5,10 @@
         .module('event-managing-groups')
         .factory('groupservice', groupservice);
 
-    groupservice.$inject = ['$http', 'Logger'];
+    groupservice.$inject = ['$http', '$q', 'Logger'];
 
     /* @ngInject */
-    function groupservice($http, Logger) {
+    function groupservice($http, $q, Logger) {
         var service = {
             name: 'groupservice',
             getGroups: getGroups,
@@ -50,22 +50,17 @@
         }
 
         function addUserToGroup(group, user) {
-            return $http({
-                url: '/api/group',
-                method: 'put',
-                data: {
-                    'group': group,
-                    'user': user
-                }
-            }).then(onAddUserToGroupSuccess)
+            if (!group || !user) {
+                return;
+            }
+
+            return $http.put('/api/group/id/' + group.id + '/user/id/' + user.id)
+                .then(onAddUserToGroupSuccess)
                 .catch(onAddUserToGroupError);
-            //return $http.put('/api/group/', group, user)
-            //    .then(onAddUserToGroupSuccess)
-            //    .catch(onAddUserToGroupError);
 
             function onAddUserToGroupSuccess(response) {
-                Logger.info(response);
-                return response.data;
+                Logger.info('Response from addUserToGroup: ' + response);
+                return response;
             }
 
             function onAddUserToGroupError(error) {
