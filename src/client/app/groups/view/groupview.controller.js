@@ -138,7 +138,7 @@
             });
         }
         function removeUserFromGroup(user) {
-            Logger.info('Trying to add user ' + user.id + ' to group ' + vm.group.id);
+            Logger.info('Trying to remove user ' + user.id + ' from group ' + vm.group.id);
             groupservice.removeUserFromGroup(vm.group, user).then(function (response) {
                 if (!response.data) {
                     vm.status.message = 'Failed in removing user from group';
