@@ -69,7 +69,7 @@ module.exports = function (app) {
             dataGroup.users = users;
         }
         _.merge(_groups[index], dataGroup);
-        var result = {status: 'ok', data: dataGroup};
+        var result = {status: 'ok', group: dataGroup};
         res.json(result);
     });
 

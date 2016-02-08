@@ -123,9 +123,9 @@
         function addUserToGroup(user) {
             Logger.info('Trying to add user ' + user.id + ' to group ' + vm.group.id);
             groupservice.addUserToGroup(vm.group, user).then(function (response) {
-                vm.group = response;
                 if (response.data.status === 'ok') {
                     vm.status.message = 'User successfully added to group';
+                    vm.group = response.data.group;
                 }
                 if (response.data.status === 'failed') {
                     vm.status.message = response.data.info;

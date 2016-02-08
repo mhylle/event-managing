@@ -73,22 +73,25 @@ describe('GroupService', function () {
             expect(resultGroup).not.to.exist;
         });
 
-        it.skip('Should add users to a group', function () {
-            var group = getGroup(1);
-            expect(group.users).not.to.exist;
+        it('Should add users to a group', function () {
+            var workingGroup = getGroup(1);
+            expect(workingGroup.users).not.to.exist;
             var user = getUser(1);
             expect(user).to.exist;
 
-            group.users = [user];
+            workingGroup.users = [user];
 
-            $httpBackend.expectPUT('/api/group/id/' + group.id + '/user/id/' + user.id).respond(
-                group
+            $httpBackend.expectPUT('/api/group/id/' + workingGroup.id + '/user/id/' + user.id).respond(
+                {status: 'ok', group: workingGroup}
             );
-            var resultGroup;
-            groupservice.addUserToGroup(group, user).then(function (response) {
-                resultGroup = response;
+
+            var status;
+            groupservice.addUserToGroup(workingGroup, user).then(function (response) {
+                status = response.data.status;
+                resultGroup = response.data.group;
             });
             $httpBackend.flush();
+            expect(status).to.equal('ok');
             expect(resultGroup.users).to.exist;
         });
     });
