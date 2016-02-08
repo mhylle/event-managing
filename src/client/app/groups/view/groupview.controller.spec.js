@@ -8,18 +8,37 @@ describe('GroupViewController', function () {
 
     beforeEach(function () {
         module('event-managing-groups');
-        bard.inject('$controller', '$rootScope', '$stateParams', '$q', 'Logger', 'groupservice', 'userservice');
+        bard.inject('$controller',
+            '$rootScope',
+            '$stateParams',
+            '$q',
+            'Logger',
+            'groupservice',
+            'userservice',
+            'lodash');
     });
 
     describe('Controller Initialization', function () {
+        var groupWithUserAdded;
+        var userToAddToGroup;
         beforeEach(function () {
             var scope = $rootScope.$new();
+            groupWithUserAdded = lodash.cloneDeep(groups[1]);
+            userToAddToGroup = users[0];
+            groupWithUserAdded.users = [userToAddToGroup];
             var gs = {
                 getGroups: function () {
                     return $q.when(groups);
                 },
                 getGroup: function () {
                     return $q.when(groups[1]);
+                },
+                addUserToGroup: function () {
+                    return $q.when({data: {status: 'ok', group: groupWithUserAdded}});
+                },
+                removeUserFromGroup: function () {
+                    groups[1].users = [];
+                    return $q.when({data: {status: 'ok', group: groups[1]}});
                 }
             };
 
@@ -83,12 +102,21 @@ describe('GroupViewController', function () {
                             });
                         });
 
-                        describe('Add/remove users', function() {
-                            it.skip('should add a user to a group when calling the add user function', function() {
-                                controller.addUserToGroup(users[0]);
-                                expect(controller.group.users).to.contain(users[0]);
+                        describe('Add/remove users', function () {
+                            it('should add a user to a group when calling the add user function', function () {
+                                controller.addUserToGroup(userToAddToGroup);
+                                $rootScope.$apply();
+                                expect(controller.group).to.exist;
+                                expect(controller.group.users).to.exist;
+                                expect(controller.group.users).to.contain(userToAddToGroup);
                             });
-                            it('should remove a user to a group when calling the remove user function');
+                            it('should remove a user to a group when calling the remove user function', function () {
+                                controller.removeUserFromGroup(userToAddToGroup);
+                                $rootScope.$apply();
+                                expect(controller.group).to.exist;
+                                expect(controller.group.users).to.exist;
+                                expect(controller.group.users).not.to.contain(userToAddToGroup);
+                            });
                         });
 
                         describe('Failed user service', function () {

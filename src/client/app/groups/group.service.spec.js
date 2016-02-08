@@ -35,33 +35,60 @@ describe('GroupService', function () {
     });
 
     describe('getGroup', function () {
-        it('Should contain a group', function () {
-            $httpBackend.expectGET('/api/group/id/1').respond(
-                groups[0]
-            );
-            var groupResult = [];
-            groupservice.getGroup(1).then(function (results) {
-                groupResult = results;
+        describe('Success', function () {
+            it('Should contain a group', function () {
+                $httpBackend.expectGET('/api/group/id/1').respond(
+                    groups[0]
+                );
+                var groupResult = [];
+                groupservice.getGroup(1).then(function (results) {
+                    groupResult = results;
+                });
+                $httpBackend.flush();
+                expect(groupResult).to.exists;
             });
-            $httpBackend.flush();
-            expect(groupResult).to.exists;
+
+            it('Should get the same group if the same id is supplied', function () {
+                var group1;
+                var group2;
+
+                group1 = getGroup(1);
+                group2 = getGroup(1);
+
+                expect(group1.id).to.equal(group2.id);
+            });
+
+            it('Should get different groups based on the id supplied', function () {
+                var group1 = getGroup(2);
+                var group2 = getGroup(3);
+
+                expect(group1).to.not.equal(group2);
+            });
         });
+        describe('Failure', function () {
+            it.skip('Should log an error if the server returns an error', function () {
+                $httpBackend.expectGET('/api/group/id/1').respond(
+                    groups[0]
+                );
+                var groupResult = [];
+                groupservice.getGroup(1).then(function (results) {
+                    groupResult = results;
+                });
+                $httpBackend.flush();
+                expect(groupResult).to.exists;
+            });
 
-        it('Should get the same group if the same id is supplied', function () {
-            var group1;
-            var group2;
-
-            group1 = getGroup(1);
-            group2 = getGroup(1);
-
-            expect(group1.id).to.equal(group2.id);
-        });
-
-        it('Should get different groups based on the id supplied', function () {
-            var group1 = getGroup(2);
-            var group2 = getGroup(3);
-
-            expect(group1).to.not.equal(group2);
+            it.skip('Should return an error value if the server returns an error', function () {
+                $httpBackend.expectGET('/api/group/id/1').respond(
+                    groups[0]
+                );
+                var groupResult = [];
+                groupservice.getGroup(1).then(function (results) {
+                    groupResult = results;
+                });
+                $httpBackend.flush();
+                expect(groupResult).to.exists;
+            });
         });
     });
 

@@ -45,6 +45,7 @@
         vm.pageCount = pageCount;
         vm.getIcon = getIcon;
         vm.addUserToGroup = addUserToGroup;
+        vm.removeUserFromGroup = removeUserFromGroup;
 
         vm.paginationButtons = [];
 
@@ -123,8 +124,28 @@
         function addUserToGroup(user) {
             Logger.info('Trying to add user ' + user.id + ' to group ' + vm.group.id);
             groupservice.addUserToGroup(vm.group, user).then(function (response) {
+                if (!response.data) {
+                    vm.status.message = 'Failed in adding user to group';
+                }
+
                 if (response.data.status === 'ok') {
                     vm.status.message = 'User successfully added to group';
+                    vm.group = response.data.group;
+                }
+                if (response.data.status === 'failed') {
+                    vm.status.message = response.data.info;
+                }
+            });
+        }
+        function removeUserFromGroup(user) {
+            Logger.info('Trying to add user ' + user.id + ' to group ' + vm.group.id);
+            groupservice.removeUserFromGroup(vm.group, user).then(function (response) {
+                if (!response.data) {
+                    vm.status.message = 'Failed in removing user from group';
+                }
+
+                if (response.data.status === 'ok') {
+                    vm.status.message = 'User successfully removed from group';
                     vm.group = response.data.group;
                 }
                 if (response.data.status === 'failed') {

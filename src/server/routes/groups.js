@@ -73,6 +73,33 @@ module.exports = function (app) {
         res.json(result);
     });
 
+    app.delete('/group/id/:gid/user/id/:uid', function (req, res) {
+        var gid = req.params.gid;
+        var uid = req.params.uid;
+        var index = _.findIndex(
+            _groups,
+            function (g) {
+                return g.id === parseInt(gid);
+            }
+        );
+        var dataGroup = _groups[index];
+        if (!dataGroup) {
+            res.json({status: 'failed', info: 'no group found'});
+            return;
+        }
+
+        var users = dataGroup.users;
+        if (!(!users || users === null || users === undefined)) {
+            _.remove(users, function (user) {
+                return user.id === uid;
+            });
+            dataGroup.users = users;
+        }
+        _.merge(_groups[index], dataGroup);
+        var result = {status: 'ok', group: dataGroup};
+        res.json(result);
+    });
+
     app.delete('/group/id/:id', function (req, res) {
         _.remove(_groups, function (group) {
             return group.id === req.params.id;
