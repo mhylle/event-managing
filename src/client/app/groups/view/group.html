@@ -4,8 +4,15 @@
     <div class="panel panel-default">
         <div class="panel panel-heading">Users in group</div>
         <div class="panel panel-body">
+            <div class="col-xs-8">User</div>
+            <div class="col-xs-4">Action</div>
             <div ng-repeat="user in vm.group.users">
-                {{user.name.firstname}} {{user.name.lastname}}
+                <div class="col-xs-8">
+                    {{user.name.firstname}} {{user.name.lastname}}
+                </div>
+                <div class="col-xs-4">
+                    <button ng-click="vm.removeUserFromGroup(user)">Remove</button>
+                </div>
             </div>
         </div>
     </div>
@@ -13,9 +20,11 @@
     <div>Add Users ({{vm.users.length}})</div>
 
 
-    <div ng-repeat="user in vm.filteredUsers">
+    <div ng-repeat="user in vm.availableUsers">
         <div>{{user.name.firstname}} {{user.name.lastname}}</div>
-        <div><button ng-click="vm.addUserToGroup(user)">Add to group</button></div>
+        <div>
+            <button ng-click="vm.addUserToGroup(user)">Add to group</button>
+        </div>
     </div>
     <button ng-click="vm.pageChanged(1)">First</button>
     <button ng-click="vm.pageChanged(vm.currentPage-1)">&lt;</button>

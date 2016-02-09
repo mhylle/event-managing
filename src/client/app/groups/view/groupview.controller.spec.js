@@ -11,6 +11,7 @@ describe('GroupViewController', function () {
         bard.inject('$controller',
             '$rootScope',
             '$stateParams',
+            '$httpBackend',
             '$q',
             'Logger',
             'groupservice',
@@ -117,6 +118,13 @@ describe('GroupViewController', function () {
                                 expect(controller.group.users).to.exist;
                                 expect(controller.group.users).not.to.contain(userToAddToGroup);
                             });
+                            it('should handle a service 500 response correctly', function () {
+                                controller.removeUserFromGroup(userToAddToGroup);
+                                $rootScope.$apply();
+                                expect(controller.group).to.exist;
+                                expect(controller.group.users).to.exist;
+                                expect(controller.group.users).not.to.contain(userToAddToGroup);
+                            });
                         });
 
                         describe('Failed user service', function () {
@@ -149,6 +157,30 @@ describe('GroupViewController', function () {
                         });
                     });
                 });
+            });
+        });
+        describe.skip('Backend failures', function () {
+            beforeEach(function () {
+                var scope = $rootScope.$new();
+
+                controller = $controller('groupviewcontroller', {
+                    $scope: scope,
+                    $stateParams: {id: 1}
+                });
+            });
+            it('should handle a service 500 response correctly', function () {
+                var user = _.find(users, function (u) {
+                    return parseInt(u.id) === 1;
+                });
+                var group = _.find(groups, function (g) {
+                    return parseInt(g.id) === 1;
+                });
+                $httpBackend.whenDELETE('/api/group/id/1/user/id/1').respond(500, null);
+                controller.removeUserFromGroup(user);
+                //        $rootScope.$apply();
+                //        //expect(controller.group).to.exist;
+                //        //expect(controller.group.users).to.exist;
+                //        //expect(controller.group.users).not.to.contain(userToAddToGroup);
             });
         });
     });

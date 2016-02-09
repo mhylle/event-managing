@@ -5,7 +5,7 @@ describe('GroupService', function () {
 
     beforeEach(function () {
         module('event-managing-groups');
-        bard.inject('$rootScope', '$httpBackend', 'groupservice', 'userservice');
+        bard.inject('$rootScope', '$httpBackend', '$log', 'groupservice', 'userservice');
     });
 
     it('is the groupservice', function () {
@@ -65,20 +65,20 @@ describe('GroupService', function () {
                 expect(group1).to.not.equal(group2);
             });
         });
-        describe('Failure', function () {
-            it.skip('Should log an error if the server returns an error', function () {
-                $httpBackend.expectGET('/api/group/id/1').respond(
-                    groups[0]
-                );
+        describe.skip('Failure', function () {
+            it('Should log an error if the server returns an error', function () {
+                $httpBackend.expectGET('/api/group/id/1').respond(500, null);
                 var groupResult = [];
                 groupservice.getGroup(1).then(function (results) {
                     groupResult = results;
                 });
                 $httpBackend.flush();
-                expect(groupResult).to.exists;
+                expect(groupResult).not.to.exist;
+                expect($log.error.log).not.to.be.empty;
+                expect($log.error.log).not.to.be.undefined;
             });
 
-            it.skip('Should return an error value if the server returns an error', function () {
+            it('Should return an error value if the server returns an error', function () {
                 $httpBackend.expectGET('/api/group/id/1').respond(
                     groups[0]
                 );
@@ -87,7 +87,7 @@ describe('GroupService', function () {
                     groupResult = results;
                 });
                 $httpBackend.flush();
-                expect(groupResult).to.exists;
+                expect(groupResult).not.to.exist;
             });
         });
     });
