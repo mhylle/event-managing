@@ -21,12 +21,11 @@
         vm.title = 'groupviewcontroller';
 
         vm.group = null;
-        vm.users = [];
         vm.availableUsers = [];
         vm.groupid = '';
         vm.response = {};
 
-        vm.totalItems = vm.users.length;
+        vm.totalItems = vm.availableUsers.length;
         vm.itemsPerPage = 12;
         vm.totalPages = 0;
         vm.currentPage = 0;
@@ -66,7 +65,7 @@
         }
 
         function pageCount() {
-            return Math.ceil(vm.users.length / vm.itemsPerPage);
+            return Math.ceil(vm.availableUsers.length / vm.itemsPerPage);
         }
 
         function getGroup() {
@@ -107,7 +106,7 @@
             Logger.info('getting users');
             userservice.getUsers().then(function (response) {
                 vm.availableUsers = response;
-                if (vm.users) {
+                if (vm.availableUsers) {
                     $scope.$watch('vm.currentPage + vm.itemsPerPage', function () {
                         var begin = ((vm.currentPage - 1) * vm.itemsPerPage);
                         var end = begin + vm.itemsPerPage;
