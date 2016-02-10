@@ -82,7 +82,7 @@ describe('GroupViewController', function () {
                     expect(controller.group).to.exist;
                 });
 
-                describe('Groups and Users', function () {
+                describe.skip('Groups and Users', function () {
                     describe('Users in a group', function () {
                         it('should have a userlist', function () {
                             expect(controller.users).to.exist;

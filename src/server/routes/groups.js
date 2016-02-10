@@ -90,10 +90,9 @@ module.exports = function (app) {
 
         var users = dataGroup.users;
         if (!(!users || users === null || users === undefined)) {
-            _.remove(users, function (user) {
+            _.remove(dataGroup.users, function (user) {
                 return user.id === uid;
             });
-            dataGroup.users = users;
         }
         _.merge(_groups[index], dataGroup);
         var result = {status: 'ok', group: dataGroup};

@@ -12,7 +12,7 @@
         'groupservice',
         'groupiconservice',
         'userservice',
-    'lodash'];
+        'lodash'];
 
     /* @ngInject */
     function GroupViewController($scope, $stateParams, Logger, groupservice, groupiconservice, userservice, lodash) {
@@ -22,7 +22,6 @@
 
         vm.group = null;
         vm.users = [];
-        vm.addedUsers = [];
         vm.availableUsers = [];
         vm.groupid = '';
         vm.response = {};
@@ -78,14 +77,10 @@
         }
 
         function calculateUserLists() {
-            var addedUsers = vm.group.users;
-            if (!addedUsers) {
-                vm.availableUsers = vm.users;
-            } else {
-                vm.availableUsers = lodash.remove(vm.users, function (user) {
-                    return lodash.indexOf(vm.users, user) !== -1;
+            if (vm.group.users) {
+                vm.availableUsers = lodash.remove(vm.group.users, function (user) {
+                    return lodash.indexOf(vm.availableUsers, user) !== -1;
                 });
-                vm.addedUsers = vm.group.users;
             }
         }
 
@@ -111,12 +106,12 @@
         function getUsers() {
             Logger.info('getting users');
             userservice.getUsers().then(function (response) {
-                vm.users = response;
+                vm.availableUsers = response;
                 if (vm.users) {
                     $scope.$watch('vm.currentPage + vm.itemsPerPage', function () {
                         var begin = ((vm.currentPage - 1) * vm.itemsPerPage);
                         var end = begin + vm.itemsPerPage;
-                        vm.filteredUsers = vm.users.slice(begin, end);
+                        vm.filteredUsers = vm.availableUsers.slice(begin, end);
                         vm.totalPages = pageCount();
                         populatePaginationButtons();
                     });
@@ -147,10 +142,9 @@
                 if (response.data.status === 'ok') {
                     vm.status.message = 'User successfully added to group';
                     vm.group = response.data.group;
-                    vm.availableUsers = lodash.remove(vm.availableUsers, function(user) {
-                        return user;
+                    lodash.remove(vm.availableUsers, function (u) {
+                        return u.id === user.id;
                     });
-                    vm.addedUsers.push(user);
                 }
                 if (response.data.status === 'failed') {
                     vm.status.message = response.data.info;
@@ -168,7 +162,7 @@
                 if (response.data.status === 'ok') {
                     vm.status.message = 'User successfully removed from group';
                     vm.group = response.data.group;
-                    vm.addedUsers = lodash.remove(vm.addedUsers, function(user) {
+                    vm.addedUsers = lodash.remove(vm.addedUsers, function (user) {
                         return user;
                     });
                     vm.availableUsers.push(user);
