@@ -91,7 +91,7 @@ module.exports = function (app) {
         var users = dataGroup.users;
         if (!(!users || users === null || users === undefined)) {
             _.remove(dataGroup.users, function (user) {
-                return user.id === uid;
+                return user.id === parseInt(uid);
             });
         }
         _.merge(_groups[index], dataGroup);
