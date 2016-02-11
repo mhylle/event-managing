@@ -67,22 +67,22 @@ describe('GroupService', function () {
                 expect(group1).to.not.equal(group2);
             });
         });
-        describe.skip('Failure', function () {
+        describe('Failure', function () {
             it('Should log an error if the server returns an error', function () {
-                $httpBackend.expectGET('/api/group/id/1').respond(500, null);
+                $httpBackend.expectGET('/api/group/id/1').respond(500);
                 var groupResult = [];
                 groupservice.getGroup(1).then(function (results) {
                     groupResult = results;
                 });
+
                 $httpBackend.flush();
                 expect(groupResult).not.to.exist;
-                expect($log.error.log).not.to.be.empty;
-                expect($log.error.log).not.to.be.undefined;
+                expect($log.error.logs).not.to.be.empty;
+                expect($log.error.logs).not.to.be.undefined;
             });
 
             it('Should return an error value if the server returns an error', function () {
-                $httpBackend.expectGET('/api/group/id/1').respond(
-                    groups[0]
+                $httpBackend.expectGET('/api/group/id/1').respond(500, {status: 'failed', info: 'no group found'}
                 );
                 var groupResult = [];
                 groupservice.getGroup(1).then(function (results) {

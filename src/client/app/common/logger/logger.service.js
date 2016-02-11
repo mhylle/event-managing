@@ -21,24 +21,40 @@
         return service;
 
         ////////////////
-        function error(message, data, title) {
+        function error(message, data) {
             //this.toastr.error(message, title);
-            $log.error('Error: ' + title + ' ' + message, data);
+            if (data) {
+                $log.error('Error: ' + message, data);
+            } else {
+                $log.error('Error: ' + message);
+            }
         }
 
-        function info(message, data, title) {
+        function info(message, data) {
             //this.toastr.info(message, title);
-            $log.info('Info: ' + title + ' ' + message, data);
+            if (data) {
+                $log.info('Info: ' + message, data);
+            } else {
+                $log.info('Info: ' + message);
+            }
         }
 
-        function debug(message, data, title) {
+        function debug(message, data) {
             //this.toastr.success(message, title);
-            $log.debug('Success: ' + title + ' ' + message, data);
+            if (data) {
+                $log.debug('Success: ' + message, data);
+            } else {
+                $log.debug('Success: ' + message);
+            }
         }
 
-        function warning(message, data, title) {
+        function warning(message, data) {
             //this.toastr.warning(message, title);
-            $log.warn('Warning: ' + title + ' ' + message, data);
+            if (data) {
+                $log.warn('Warning: ' + message, data);
+            } else {
+                $log.warn('Warning: ' + message);
+            }
         }
     }
 
