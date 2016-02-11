@@ -58,12 +58,12 @@ describe('GroupListController', function () {
                     expect(controller.status.message).to.be.empty;
                 });
 
-                it.skip('should have a status.response', function () {
-                    expect(controller.status.response).to.exist;
+                it('should have a status.code', function () {
+                    expect(controller.status.code).to.exist;
                 });
 
-                it.skip('should have a response.status that is ok', function () {
-                    expect(controller.status.response).to.equal('RESPONSE_OK');
+                it('should have a response.status that is ok', function () {
+                    expect(controller.status.code).to.equal('ok');
                 });
                 describe('Icon management', function () {
                     it('Should get the open.png icon when the group is public', function () {
