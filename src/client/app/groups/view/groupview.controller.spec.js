@@ -2,7 +2,7 @@
 describe('GroupViewController', function () {
     var controller;
     var groups = groupMockData.getMockGroups();
-    var users = groupMockData.getMockUsers();
+    var mockUsers = groupMockData.getMockUsers();
     var groupWithoutUserAdded = groupMockData.getMockGroupWithUsersWithoutUsersAdded();
     var groupWithUserAdded = groupMockData.getMockGroupWithUsersWithUsersAdded();
 
@@ -36,14 +36,13 @@ describe('GroupViewController', function () {
                     return $q.when({data: {status: 'ok', group: groupWithUserAdded}});
                 },
                 removeUserFromGroup: function () {
-                    groups[1].users = [];
                     return $q.when({data: {status: 'ok', group: groupWithoutUserAdded}});
                 }
             };
 
             var us = {
                 getUsers: function () {
-                    return $q.when(users);
+                    return $q.when(mockUsers);
                 }
             };
             controller = $controller('groupviewcontroller', {
@@ -92,14 +91,13 @@ describe('GroupViewController', function () {
                                     return $q.when({data: {status: 'ok', group: groupWithUserAdded}});
                                 },
                                 removeUserFromGroup: function () {
-                                    groups[1].users = [];
                                     return $q.when({data: {status: 'ok', group: groupWithoutUserAdded}});
                                 }
                             };
 
                             var us = {
                                 getUsers: function () {
-                                    return $q.when(users);
+                                    return $q.when(mockUsers);
                                 }
                             };
                             controller = $controller('groupviewcontroller', {
@@ -116,27 +114,51 @@ describe('GroupViewController', function () {
 
                         it('should have a list of availableusers with content', function () {
                             expect(controller.availableUsers).to.have.length.above(0);
+                            expect(controller.availableUsers).to.have.length(4);
                         });
 
                         describe('adding a user to a group', function () {
-                            it.skip('When adding a user to a group it should be removed from the available users group',
+                            it('When adding a user to a group it should be removed from the available users group',
                                 function () {
-                                    //expect(controller.group.users).not.to.contain(users[1]);
-                                    expect(controller.availableUsers).to.contain(users[1]);
-                                    controller.addUserToGroup(users[1]);
+                                    var users = groupMockData.getMockUsers();
+                                    expect(controller.availableUsers).to.contain(users[3]);
+                                    controller.addUserToGroup(users[3]);
                                     $rootScope.$apply();
+                                    expect(controller.availableUsers).not.to.contain(users[3]);
                                     expect(controller.status.message).to.equal('User successfully added to group');
-                                    expect(controller.availableUsers).to.not.contain(users[1]);
                                 });
 
-                            it.skip('the list of available users should not include users already in a group',
+                            it('the list of available users should not include users already in a group',
                                 function () {
                                     expect(controller.group.users).to.exist;
+                                    expect(controller.group.users).to.have.length.above(0);
+                                    expect(controller.availableUsers).to.exist;
+                                    expect(controller.availableUsers).to.have.length.above(0);
+                                    expect(lodash.difference(controller.availableUsers, controller.group.users))
+                                        .to.deep.equal(controller.availableUsers);
+
                                 });
 
                         });
                         describe('removing a user from a group', function () {
-                            it('When removing a user from a group it should be added to the available users group');
+                            it('When removing a user from a group it should be added to the available users group',
+                                function () {
+                                    var users = groupMockData.getMockUsers();
+                                    expect(controller.availableUsers).to.contain(users[2]);
+                                    controller.addUserToGroup(users[2]);
+                                    $rootScope.$apply();
+                                    expect(controller.availableUsers).not.to.contain(users[2]);
+                                    expect(controller.status.message).to.equal('User successfully added to group');
+
+                                    controller.removeUserFromGroup(users[2]);
+                                    $rootScope.$apply();
+                                    expect(controller.availableUsers).to.contain(users[2]);
+                                    expect(controller.status.message).to.equal('User successfully removed from group');
+                                });
+                            it('no user is selected the status message should be No user selected', function () {
+                                controller.removeUserFromGroup();
+                                expect(controller.status.message).to.equal('No user selected');
+                            });
 
                             it('the list of available users should include users not in the group', function () {
                                 expect(controller.group.users).to.exist;
@@ -152,30 +174,6 @@ describe('GroupViewController', function () {
                                 expect(controller.pageCount()).to.equal(1);
                             });
                         });
-
-                        //describe('Add/remove users', function () {
-                        //    it('should add a user to a group when calling the add user function', function () {
-                        //        controller.addUserToGroup(users[0]);
-                        //        $rootScope.$apply();
-                        //        expect(controller.group).to.exist;
-                        //        expect(controller.group.users).to.exist;
-                        //        expect(controller.group.users).to.contain(users[0]);
-                        //    });
-                        //    it('should remove a user to a group when calling the remove user function', function () {
-                        //        controller.removeUserFromGroup(userToAddToGroup);
-                        //        $rootScope.$apply();
-                        //        expect(controller.group).to.exist;
-                        //        expect(controller.group.users).to.exist;
-                        //        expect(controller.group.users).not.to.contain(userToAddToGroup);
-                        //    });
-                        //    it('should handle a service 500 response correctly', function () {
-                        //        controller.removeUserFromGroup(userToAddToGroup);
-                        //        $rootScope.$apply();
-                        //        expect(controller.group).to.exist;
-                        //        expect(controller.group.users).to.exist;
-                        //        expect(controller.group.users).not.to.contain(userToAddToGroup);
-                        //    });
-                        //});
 
                         describe('Failed user service', function () {
                             beforeEach(function () {

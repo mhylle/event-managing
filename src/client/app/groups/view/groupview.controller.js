@@ -152,6 +152,14 @@
         }
 
         function removeUserFromGroup(user) {
+            if (!vm.group) {
+                vm.status.message = 'No group selected';
+                return;
+            }
+            if (!user) {
+                vm.status.message = 'No user selected';
+                return;
+            }
             Logger.info('Trying to remove user ' + user.id + ' from group ' + vm.group.id);
             groupservice.removeUserFromGroup(vm.group, user).then(function (response) {
                 if (!response.data) {
