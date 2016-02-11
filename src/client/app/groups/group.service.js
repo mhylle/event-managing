@@ -54,36 +54,36 @@
             if (!group || !user) {
                 return;
             }
-
-            return $http.put('/api/group/id/' + group.id + '/user/id/' + user.id)
-                .then(onAddUserToGroupSuccess)
-                .catch(onAddUserToGroupError);
-
-            function onAddUserToGroupSuccess(response) {
-                Logger.info('Response from addUserToGroup: ' + response);
-                return response;
-            }
-
-            function onAddUserToGroupError(error) {
-                Logger.error(error);
-            }
+            return userGroupInteraction('update', group, user);
         }
+
         function removeUserFromGroup(group, user) {
             if (!group || !user) {
                 return;
             }
+            return userGroupInteraction('delete', group, user);
+        }
 
-            return $http.delete('/api/group/id/' + group.id + '/user/id/' + user.id)
-                .then(onRemoveUserFromGroupSuccess)
-                .catch(onRemoveUserFromGroupError);
+        function userGroupInteraction(action, group, user) {
+            var url = '/api/group/id/' + group.id + '/user/id/' + user.id;
+            switch (action) {
+                case 'delete':
+                    return $http.delete(url)
+                        .then(onSuccess)
+                        .catch(onError);
+                case 'update':
+                    return $http.put(url)
+                        .then(onSuccess)
+                        .catch(onError);
+            }
 
-            function onRemoveUserFromGroupSuccess(response) {
-                Logger.info('Response from addUserToGroup: ' + response);
+            function onSuccess(response) {
                 return response;
             }
 
-            function onRemoveUserFromGroupError(error) {
+            function onError(error) {
                 Logger.error(error);
+                return {status: 'error', code: error};
             }
         }
     }
