@@ -1,7 +1,9 @@
 /* jshint -W117, -W030 */
 describe('GroupService', function () {
-    var groups = mockData.getMockGroups();
-    var users = mockData.getMockUsers();
+    var groups = groupMockData.getMockGroups();
+    var mockUsers = groupMockData.getMockUsers();
+    var groupWithoutUserAdded = groupMockData.getMockGroupWithUsersWithoutUsersAdded();
+    var groupWithUserAdded = groupMockData.getMockGroupWithUsersWithUsersAdded();
 
     beforeEach(function () {
         module('event-managing-groups');
@@ -122,6 +124,33 @@ describe('GroupService', function () {
             expect(resultGroup.users).to.exist;
         });
     });
+    describe('removeUserFromGroup', function () {
+        it('Should not remove null users from a group', function () {
+            var group = getGroup(1);
+            expect(group.users).not.to.exist;
+            var resultGroup = groupservice.removeUserFromGroup(group, null);
+            expect(resultGroup).not.to.exist;
+        });
+
+        it('Should remove users from a group', function () {
+            var resultGroup = null;
+            var status;
+            var user = getUser(3);
+            expect(user).to.exist;
+            $httpBackend.expectDELETE('/api/group/id/' + groupWithUserAdded.id + '/user/id/' + user.id).respond(
+                {status: 'ok', group: groupWithoutUserAdded}
+            );
+
+            groupservice.removeUserFromGroup(groupWithUserAdded, user).then(function (response) {
+                status = response.data.status;
+                resultGroup = response.data.group;
+            });
+            $httpBackend.flush();
+            expect(status).to.equal('ok');
+            expect(resultGroup.users).to.exist;
+            expect(resultGroup.users).not.to.contain(user);
+        });
+    });
 
     function getGroup(id) {
         var group = {};
@@ -138,7 +167,7 @@ describe('GroupService', function () {
     function getUser(id) {
         var user = {};
         $httpBackend.expectGET('/api/user/id/' + id).respond(
-            users[id - 1]
+            mockUsers[id - 1]
         );
         userservice.getUser(id).then(function (results) {
             user = results;
