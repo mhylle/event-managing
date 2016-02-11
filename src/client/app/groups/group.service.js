@@ -51,20 +51,17 @@
         }
 
         function addUserToGroup(group, user) {
-            if (!group || !user) {
-                return;
-            }
             return userGroupInteraction('update', group, user);
         }
 
         function removeUserFromGroup(group, user) {
-            if (!group || !user) {
-                return;
-            }
             return userGroupInteraction('delete', group, user);
         }
 
         function userGroupInteraction(action, group, user) {
+            if (!group || !user) {
+                return;
+            }
             var url = '/api/group/id/' + group.id + '/user/id/' + user.id;
             switch (action) {
                 case 'delete':
