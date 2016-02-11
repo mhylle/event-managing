@@ -118,13 +118,30 @@ describe('GroupViewController', function () {
                             expect(controller.availableUsers).to.have.length.above(0);
                         });
 
-                        it.skip('the list of available users should not include users already in a group', function () {
-                            expect(controller.group.users).to.exist;
+                        describe('adding a user to a group', function () {
+                            it.skip('When adding a user to a group it should be removed from the available users group',
+                                function () {
+                                    //expect(controller.group.users).not.to.contain(users[1]);
+                                    expect(controller.availableUsers).to.contain(users[1]);
+                                    controller.addUserToGroup(users[1]);
+                                    $rootScope.$apply();
+                                    expect(controller.status.message).to.equal('User successfully added to group');
+                                    expect(controller.availableUsers).to.not.contain(users[1]);
+                                });
+
+                            it.skip('the list of available users should not include users already in a group',
+                                function () {
+                                    expect(controller.group.users).to.exist;
+                                });
+
                         });
+                        describe('removing a user from a group', function () {
+                            it('When removing a user from a group it should be added to the available users group');
 
-                        it('When adding a user to a group it should be removed from the available users group');
-                        it('When removing a user from a group it should be added to the available users group');
-
+                            it('the list of available users should include users not in the group', function () {
+                                expect(controller.group.users).to.exist;
+                            });
+                        });
                         it('should have a user status code of ok', function () {
                             expect(controller.status.users).to.equal('ok');
                         });
