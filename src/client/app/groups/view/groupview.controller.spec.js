@@ -114,7 +114,7 @@ describe('GroupViewController', function () {
 
                         it('should have a list of availableusers with content', function () {
                             expect(controller.availableUsers).to.have.length.above(0);
-                            expect(controller.availableUsers).to.have.length(4);
+                            expect(controller.availableUsers).to.have.length(20);
                         });
 
                         describe('adding a user to a group', function () {
@@ -138,7 +138,6 @@ describe('GroupViewController', function () {
                                         .to.deep.equal(controller.availableUsers);
 
                                 });
-
                         });
                         describe('removing a user from a group', function () {
                             it('When removing a user from a group it should be added to the available users group',
@@ -171,7 +170,13 @@ describe('GroupViewController', function () {
                         describe('Pagination', function () {
                             it('should calculate the amount of pages needed to show all users', function () {
                                 expect(controller.pageCount()).to.be.above(0);
-                                expect(controller.pageCount()).to.equal(1);
+                                expect(controller.pageCount()).to.equal(2);
+                            });
+                            it('should change page to specified page', function () {
+                                expect(controller.totalPages).to.be.above(1);
+                                controller.pageChanged(1);
+                                $rootScope.$apply();
+                                expect(controller.currentPage).to.equal(1);
                             });
                         });
 
