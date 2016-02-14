@@ -35,7 +35,7 @@ app.use(session({
 app.use(helmet());
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(logger('dev'));
 //
 app.use('/api', require('./routes'));

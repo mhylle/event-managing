@@ -46,6 +46,7 @@
         vm.pageCount = pageCount;
         vm.getIcon = getIcon;
         vm.addUserToGroup = addUserToGroup;
+        vm.addAllUsersToGroup = addAllUsersToGroup;
         vm.removeUserFromGroup = removeUserFromGroup;
 
         vm.paginationButtons = [];
@@ -132,6 +133,14 @@
         }
 
         function addUserToGroup(user) {
+            if (!vm.group) {
+                vm.status.message = 'No group selected';
+                return;
+            }
+            if (!user) {
+                vm.status.message = 'No user selected';
+                return;
+            }
             Logger.info('Trying to add user ' + user.id + ' to group ' + vm.group.id);
             groupservice.addUserToGroup(vm.group, user).then(function (response) {
                 if (!response.data) {
@@ -149,6 +158,36 @@
                     vm.status.message = response.data.info;
                 }
             });
+        }
+
+        function addAllUsersToGroup() {
+            var success = false;
+            vm.status.message = 'Adding users to group';
+            if (!vm.group) {
+                vm.status.message = 'No group selected';
+                return;
+            }
+
+            groupservice.addUsersToGroup(vm.group, vm.availableUsers).then(function(response) {
+                if (!response.data) {
+                    vm.status.message = 'Failed in adding all available to group';
+                    success = true;
+                }
+
+                if (response.data.status === 'ok') {
+                    vm.status.message = 'Available users successfully added to group';
+                    vm.group = response.data.group;
+                    vm.availableUsers = [];
+                    success = true;
+                }
+                if (response.data.status === 'failed') {
+                    vm.status.message = response.data.info;
+                    success = true;
+                }
+            });
+            if (!success) {
+                vm.status.message = 'Something went wrong while trying to add users to the group';
+            }
         }
 
         function removeUserFromGroup(user) {
@@ -169,9 +208,6 @@
                 if (response.data.status === 'ok') {
                     vm.status.message = 'User successfully removed from group';
                     vm.group = response.data.group;
-                    vm.addedUsers = lodash.remove(vm.addedUsers, function (user) {
-                        return user;
-                    });
                     vm.availableUsers.push(user);
                 }
                 if (response.data.status === 'failed') {

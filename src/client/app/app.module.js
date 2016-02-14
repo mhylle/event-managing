@@ -5,6 +5,8 @@
         'ui.router',
         'angularMoment',
         'ui.bootstrap',
+        'blockUI',
+        'angular-loading-bar',
         'event-managing-logger',
         'eventmanaging.header',
         'event-managing-events',

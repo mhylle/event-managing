@@ -14,6 +14,7 @@
             getGroups: getGroups,
             getGroup: getGroup,
             addUserToGroup: addUserToGroup,
+            addUsersToGroup: addUsersToGroup,
             removeUserFromGroup: removeUserFromGroup
         };
         return service;
@@ -54,6 +55,16 @@
             return userGroupInteraction('update', group, user);
         }
 
+        function addUsersToGroup(group, users) {
+            if (!group || !users) {
+                return;
+            }
+
+            return $http.put('/api/group/id/' + group.id + '/users', users)
+                .then(onSuccess)
+                .catch(onError);
+        }
+
         function removeUserFromGroup(group, user) {
             return userGroupInteraction('delete', group, user);
         }
@@ -73,15 +84,15 @@
                         .then(onSuccess)
                         .catch(onError);
             }
+        }
 
-            function onSuccess(response) {
-                return response;
-            }
+        function onSuccess(response) {
+            return response;
+        }
 
-            function onError(error) {
-                Logger.error(error);
-                return {status: 'error', code: error};
-            }
+        function onError(error) {
+            Logger.error(error);
+            return {status: 'error', code: error};
         }
     }
 })();

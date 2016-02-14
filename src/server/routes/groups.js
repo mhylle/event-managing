@@ -37,6 +37,20 @@ module.exports = function (app) {
         res.json({info: 'group updated successfully'});
     });
 
+    app.put('/group/id/:id/users', function (req, res) {
+        var index = _.findIndex(
+            _groups,
+            {
+                id: parseInt(req.params.id)
+            }
+        );
+        var group = _groups[index];
+        var users = req.body;
+        group.users = _.union(group.users, users);
+        _.merge(_groups[index], group.users);
+        res.json({info: 'group updated successfully'});
+    });
+
     app.put('/group/id/:gid/user/id/:uid', function (req, res) {
         var gid = req.params.gid;
         var uid = req.params.uid;
