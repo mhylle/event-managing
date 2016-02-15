@@ -14,13 +14,16 @@ describe('GroupListController', function () {
 
     describe('Controller Initialization', function () {
         beforeEach(function () {
+            var scope = $rootScope.$new();
+
             var gs = {
                 getGroups: function () {
                     return $q.when(groups);
                 }
             };
             controller = $controller('grouplistcontroller', {
-                groupservice: gs
+                groupservice: gs,
+                $scope: scope
             });
         });
         describe('With valid data', function () {
@@ -102,7 +105,7 @@ describe('GroupListController', function () {
                     }
                 };
                 controller = $controller('grouplistcontroller', {
-                    groupservice: gs
+                    groupservice: gs,
                 });
             });
             describe('After activation', function () {

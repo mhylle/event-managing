@@ -5,10 +5,10 @@
         .module('event-managing-groups')
         .controller('grouplistcontroller', GroupListController);
 
-    GroupListController.$inject = ['$state', 'Logger', 'groupservice', 'groupiconservice'];
+    GroupListController.$inject = ['$scope','$state', 'Logger', 'groupservice', 'groupiconservice'];
 
     /* @ngInject */
-    function GroupListController($state, Logger, groupservice, groupiconservice) {
+    function GroupListController($scope, $state, Logger, groupservice, groupiconservice) {
         var vm = this;
         vm.title = 'GroupListController';
         vm.status = {
@@ -16,6 +16,7 @@
             message: ''
         };
         vm.groups = [];
+        $scope.pageClass = 'page-grouplist';
         activate();
 
         vm.getIcon = getIcon;

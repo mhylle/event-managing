@@ -32,30 +32,16 @@
 </head>
 <body ng-controller="ApplicationController">
 <div ng-include="'app/layout/header.html'"></div>
-<div id="wrapper">
-    <!--<div id="sidebar-wrapper"  class="col-md-1">-->
-        <!--<div id="sidebar">-->
-            <!--<ul class="nav list-group">-->
-                <!--<li>-->
-                    <!--<a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 1</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 2</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a class="list-group-item" href="#"><i class="icon-home icon-1x"></i>Sidebar Item 3</a>-->
-                <!--</li>-->
-            <!--</ul>-->
+<div class="page {{ pageClass }}" ui-view></div>
+<!--<div id="wrapper">-->
+    <!--<div id="main-wrapper" class="col-md-11 pull-right">-->
+        <!--<div id="main">-->
+            <!--<div class="page-header">-->
+                <!--<div class="page {{ pageClass }}" ui-view></div>-->
+            <!--</div>-->
         <!--</div>-->
     <!--</div>-->
-    <div id="main-wrapper" class="col-md-11 pull-right">
-        <div id="main">
-            <div class="page-header">
-                <div ui-view></div>
-            </div>
-        </div>
-    </div>
-</div>
+<!--</div>-->
 <!--<div class="wrapper">-->
     <!--<div class="navbar-fixed-top header">-->
         <!--<div ng-include="'app/layout/header.html'"></div>-->

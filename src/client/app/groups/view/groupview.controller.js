@@ -19,6 +19,7 @@
         /* jshint -W040 */
         var vm = this;
         vm.title = 'groupviewcontroller';
+        $scope.pageClass = 'page-groupview';
 
         vm.group = null;
         vm.availableUsers = [];
