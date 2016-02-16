@@ -6,7 +6,6 @@
         .controller('groupviewcontroller', GroupViewController);
 
     GroupViewController.$inject = [
-        '$rootScope',
         '$scope',
         '$stateParams',
         'Logger',
@@ -16,7 +15,7 @@
         'lodash'];
 
     /* @ngInject */
-    function GroupViewController($rootScope, $scope, $stateParams, Logger, groupservice, groupiconservice, userservice, lodash) {
+    function GroupViewController($scope, $stateParams, Logger, groupservice, groupiconservice, userservice, lodash) {
         /* jshint -W040 */
         var vm = this;
         vm.title = 'groupviewcontroller';
