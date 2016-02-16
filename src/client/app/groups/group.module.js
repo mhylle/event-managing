@@ -1,6 +1,7 @@
 angular
     .module('event-managing-groups', [
         'ui.router',
+        'ngAnimate',
         'event-managing-logger',
         'eventmanaging.security',
         'event-managing-users'

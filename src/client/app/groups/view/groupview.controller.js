@@ -6,6 +6,7 @@
         .controller('groupviewcontroller', GroupViewController);
 
     GroupViewController.$inject = [
+        '$rootScope',
         '$scope',
         '$stateParams',
         'Logger',
@@ -15,11 +16,12 @@
         'lodash'];
 
     /* @ngInject */
-    function GroupViewController($scope, $stateParams, Logger, groupservice, groupiconservice, userservice, lodash) {
+    function GroupViewController($rootScope, $scope, $stateParams, Logger, groupservice, groupiconservice, userservice, lodash) {
         /* jshint -W040 */
         var vm = this;
         vm.title = 'groupviewcontroller';
-        $scope.pageClass = 'page-groupview';
+
+        $scope.pageClass = 'scrolled';
 
         vm.group = null;
         vm.availableUsers = [];

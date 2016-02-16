@@ -8,10 +8,10 @@
         .module('event-managing-events')
         .controller('EventController', EventController);
 
-    EventController.$inject = ['$state', 'EventService', 'Session', 'lodash'];
+    EventController.$inject = ['$scope', '$state', 'EventService', 'Session', 'lodash'];
 
     /* @ngInject */
-    function EventController($state, EventService, Session, lodash) {
+    function EventController($scope, $state, EventService, Session, lodash) {
         var vm = this;
         vm.title = 'EventController';
         vm.events = [];
@@ -19,6 +19,7 @@
             code: 'ok',
             message: ''
         };
+        $scope.pageClass = 'scrolled';
 
         vm.user = Session.user;
         vm.fetchEvents = fetchEvents;

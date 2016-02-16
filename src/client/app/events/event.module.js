@@ -5,6 +5,7 @@ angular
     .module('event-managing-events', [
         'ui.router',
         'ngLodash',
+        'ngAnimate',
         'eventmanaging.security'
     ])
     .config(['$stateProvider', 'USER_ROLES', configuration]);
