@@ -19,6 +19,7 @@ describe('EventListController', function () {
     describe('Controller Initialization', function () {
         describe('With valid data', function () {
             beforeEach(function () {
+                var scope = $rootScope.$new();
                 var es = {
                     getEvents: function () {
                         return $q.when(events);
@@ -31,7 +32,8 @@ describe('EventListController', function () {
                     }
                 };
                 controller = $controller('EventController', {
-                    EventService: es
+                    EventService: es,
+                    $scope: scope
                 });
             });
 
@@ -110,6 +112,7 @@ describe('EventListController', function () {
 
         describe('With no data returned', function () {
             beforeEach(function () {
+                var scope = $rootScope.$new();
                 var es = {
                     getEvents: function () {
                         return $q.when(noEvents);
@@ -119,7 +122,8 @@ describe('EventListController', function () {
                     }
                 };
                 controller = $controller('EventController', {
-                    EventService: es
+                    EventService: es,
+                    $scope: scope
                 });
                 $rootScope.$apply();
             });
@@ -131,6 +135,7 @@ describe('EventListController', function () {
 
         describe('With failed service', function () {
             beforeEach(function () {
+                var scope = $rootScope.$new();
                 var es = {
                     getEvents: function () {
                         return $q.when(failedEvents);
@@ -140,7 +145,8 @@ describe('EventListController', function () {
                     }
                 };
                 controller = $controller('EventController', {
-                    EventService: es
+                    EventService: es,
+                    $scope: scope
                 });
             });
             describe('After activation', function () {
@@ -167,13 +173,15 @@ describe('EventListController', function () {
         });
         describe('With crashed service', function () {
             beforeEach(function () {
+                var scope = $rootScope.$new();
                 var es = {
                     getEvents: function () {
                         return $q.when(crashedEvents);
                     }
                 };
                 controller = $controller('EventController', {
-                    EventService: es
+                    EventService: es,
+                    $scope: scope
                 });
             });
             describe('After activation', function () {
