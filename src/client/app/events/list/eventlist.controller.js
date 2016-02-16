@@ -55,9 +55,8 @@
         function signup(e) {
             EventService.attend(e, Session.user).then(function (response) {
                 var index = lodash.findIndex(
-                    vm.events,
-                    {
-                        id: e.id
+                    vm.events, function(evt) {
+                        return e.id === evt.id;
                     }
                 );
                 lodash.merge(vm.events[index], response);

@@ -17,9 +17,10 @@ module.exports = function (app) {
     });
 
     app.get('/group/id/:id', function (req, res) {
+        var gid = parseInt(req.params.id);
         var result = _.find(
             _groups, function (g) {
-                return g.id === parseInt(req.params.id);
+                return g.id === gid;
             });
         res.send(
             result
@@ -27,10 +28,11 @@ module.exports = function (app) {
     });
 
     app.put('/group/id/:id', function (req, res) {
+        var gid = parseInt(req.params.id);
         var index = _.findIndex(
             _groups,
             {
-                id: req.params.id
+                id: gid
             }
         );
         _.merge(_groups[index], req.body);
@@ -38,10 +40,11 @@ module.exports = function (app) {
     });
 
     app.put('/group/id/:id/users', function (req, res) {
+        var gid = parseInt(req.params.id);
         var index = _.findIndex(
             _groups,
             {
-                id: parseInt(req.params.id)
+                id: gid
             }
         );
         var group = _groups[index];
@@ -52,12 +55,12 @@ module.exports = function (app) {
     });
 
     app.put('/group/id/:gid/user/id/:uid', function (req, res) {
-        var gid = req.params.gid;
-        var uid = req.params.uid;
+        var gid = parseInt(req.params.gid);
+        var uid = parseInt(req.params.uid);
         var index = _.findIndex(
             _groups,
             function (g) {
-                return g.id === parseInt(gid);
+                return g.id === gid;
             }
         );
         var dataGroup = _groups[index];
@@ -67,7 +70,7 @@ module.exports = function (app) {
         }
 
         var dataUser = _.find(_users, function (u) {
-            return u.id === parseInt(uid);
+            return u.id === uid;
         });
 
         if (!dataUser || dataUser === null || dataUser === undefined) {
@@ -88,12 +91,12 @@ module.exports = function (app) {
     });
 
     app.delete('/group/id/:gid/user/id/:uid', function (req, res) {
-        var gid = req.params.gid;
-        var uid = req.params.uid;
+        var gid = parseInt(req.params.gid);
+        var uid = parseInt(req.params.uid);
         var index = _.findIndex(
             _groups,
             function (g) {
-                return g.id === parseInt(gid);
+                return g.id === gid;
             }
         );
         var dataGroup = _groups[index];
@@ -105,7 +108,7 @@ module.exports = function (app) {
         var users = dataGroup.users;
         if (!(!users || users === null || users === undefined)) {
             _.remove(dataGroup.users, function (user) {
-                return user.id === parseInt(uid);
+                return user.id === uid;
             });
         }
         _.merge(_groups[index], dataGroup);
@@ -114,11 +117,10 @@ module.exports = function (app) {
     });
 
     app.delete('/group/id/:id', function (req, res) {
+        var gid = parseInt(req.params.id);
         _.remove(_groups, function (group) {
-            return group.id === req.params.id;
+            return group.id === gid;
         });
         res.json({info: 'group removed successfully'});
     });
-}
-;
-
+};

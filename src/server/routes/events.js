@@ -1,9 +1,11 @@
 var _ = require('lodash');
 
 var seedData = require('../framework/data/Event_mock_data.json');
+var userData = require('../framework/data/User_mock_data.json');
 
 module.exports = function (app) {
     var _events = seedData;
+    var _users = userData;
 
     app.post('/event', function (req, res) {
         _events.push(req.body);
@@ -15,9 +17,10 @@ module.exports = function (app) {
     });
 
     app.get('/event/id/:id', function (req, res) {
+        var eid = parseInt(req.params.id);
         var event = _.find(
             _events, function (event) {
-                return event.id === req.params.id;
+                return event.id === eid;
             }
         );
         console.log('search for event with id ' + req.params.id + ' resulted in this event: ' + event + ' ! ');
@@ -27,10 +30,11 @@ module.exports = function (app) {
     });
 
     app.put('/event/id/:id', function (req, res) {
+        var eid = parseInt(req.params.id);
         var index = _.findIndex(
             _events,
             {
-                id: req.params.id
+                id: eid
             }
         );
         _.merge(_events[index], req.body);
@@ -38,8 +42,9 @@ module.exports = function (app) {
     });
 
     app.delete('/event/id/:id', function (req, res) {
+        var eid = parseInt(req.params.id);
         _.remove(_events, function (event) {
-            return event.id === req.params.id;
+            return event.id === eid;
         });
         res.json({info: 'event removed successfully'});
     });
@@ -47,12 +52,39 @@ module.exports = function (app) {
     app.get('/event/attend/eid/:eid/uid/:uid', function (req, res) {
         console.log('Trying to signup a user for an event');
 
-        //var users = dataRepositoryInstance.getUsers();
+        var eid = parseInt(req.params.eid);
+        var uid = parseInt(req.params.uid);
+        var index = _.findIndex(
+            _events,
+            function (e) {
+                return e.id === eid;
+            }
+        );
+        var dataEvent = _events[index];
+        if (!dataEvent) {
+            res.json({status: 'failed', info: 'no event found'});
+            return;
+        }
 
-        //var event = _.find(events, {id: req.params.eid});
-        //var user = _.find(users, {id: req.params.uid});
+        var dataUser = _.find(_users, function (u) {
+            return u.id === uid;
+        });
 
-        res.json({info: 'attend is not implemented yet.'});
+        if (!dataUser || dataUser === null || dataUser === undefined) {
+            res.json({status: 'failed', info: 'user not found'});
+            return;
+        }
+
+        var users = dataEvent.users;
+        if (!users || users === null || users === undefined) {
+            dataEvent.users = [dataUser];
+        } else {
+            users.push(dataUser);
+            dataEvent.users = users;
+        }
+        _.merge(_events[index], dataEvent);
+        var result = {status: 'ok', event: dataEvent};
+        res.json(result);
     });
 };
 

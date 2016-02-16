@@ -1,22 +1,52 @@
-<div class="header headermedium">Events</div>
 <div ng-controller="EventController as vm">
-    <div><label>Number of events:</label> {{vm.events.length}}</div>
-    <div class="card col-xs-3" ng-repeat="event in vm.events">
-        <div class="header headersmall row" ng-click="vm.gotoEvent(event)">
-            <div class="event-title col-xs-10">{{event.name}} {{event.id}}</div>
-            <div class="event-status col-xs-2 text-right">X</div>
+    <div class="row">
+        <div class="header headermedium">Current Events</div>
+        <div><label>Number of events:</label> {{vm.events.length}}</div>
+        <div class="card col-xs-3" ng-repeat="event in vm.events | iscurrentventfilter | orderBy:  'start' : true">
+            <div class="header headersmall row" ng-click="vm.gotoEvent(event)">
+                <div class="event-title col-xs-10">{{event.name}} {{event.id}}</div>
+                <div class="event-status col-xs-2 text-right">X</div>
+            </div>
+            <div class="card-content" ng-click="vm.gotoEvent(event)">
+                <div class="event-time-remaining-label">Tilmelding:</div>
+                <div class="event-time-remaining-content">{{event.signend}}</div>
+                <div class="clearfix"></div>
+                <div class="event-date-content">{{event.start | date: 'dd-MM-yyyy'}}</div>
+                <div class="clearfix"></div>
+                <div class="event-time-content">{{event.start | date: 'HH:mm'}}-{{event.end | date: 'HH:mm'}}</div>
+                <div class="clearfix"></div>
+                <div class="event-location-content">{{event.location}}</div>
+                <div class="clearfix"></div>
+            </div>
+            <div>
+                <button ng-click="vm.signup(event)">{{(event | isattendingeventfilter: vm.user) ? 'Attend' : 'Cancel'}}
+                </button>
+            </div>
         </div>
-        <div class="card-content" ng-click="vm.gotoEvent(event)">
-            <div class="event-time-remaining-label">Tilmelding:</div>
-            <div class="event-time-remaining-content">{{event.signend}}</div>
-            <div class="clearfix"></div>
-            <div class="event-date-content">{{event.start | date: 'dd-MM-yyyy'}}</div>
-            <div class="clearfix"></div>
-            <div class="event-time-content">{{event.start | date: 'HH:mm'}}-{{event.end | date: 'HH:mm'}}</div>
-            <div class="clearfix"></div>
-            <div class="event-location-content">{{event.location}}</div>
-            <div class="clearfix"></div>
+    </div>
+    <div class="row">
+        <div class="header headermedium">Older Events</div>
+        <div><label>Number of events:</label> {{vm.events.length}}</div>
+        <div class="card col-xs-3" ng-repeat="event in vm.events  | orderBy:  'start' : true">
+            <div class="header headersmall row" ng-click="vm.gotoEvent(event)">
+                <div class="event-title col-xs-10">{{event.name}} {{event.id}}</div>
+                <div class="event-status col-xs-2 text-right">X</div>
+            </div>
+            <div class="card-content" ng-click="vm.gotoEvent(event)">
+                <div class="event-time-remaining-label">Tilmelding:</div>
+                <div class="event-time-remaining-content">{{event.signend}}</div>
+                <div class="clearfix"></div>
+                <div class="event-date-content">{{event.start | date: 'dd-MM-yyyy'}}</div>
+                <div class="clearfix"></div>
+                <div class="event-time-content">{{event.start | date: 'HH:mm'}}-{{event.end | date: 'HH:mm'}}</div>
+                <div class="clearfix"></div>
+                <div class="event-location-content">{{event.location}}</div>
+                <div class="clearfix"></div>
+            </div>
+            <div>
+                <button ng-click="vm.signup(event)">{{(event | isattendingeventfilter: vm.user) ? 'Attend' : 'Cancel'}}
+                </button>
+            </div>
         </div>
-        <div><button ng-click="vm.signup(event)">{{(event | isattendingeventfilter: vm.user) ? 'Attend' : 'Cancel'}}</button></div>
     </div>
 </div>

@@ -12,11 +12,13 @@
         <div class="row"><label>{{vm.status.message}}</label></div>
         <div class="col-xs-6">
             <div class="panel panel-default">
-                <div class="panel panel-heading">
-                    Users in the group
+                <div class="panel panel-heading col-xs-12">
+                    <div class="text-left col-xs-6"><label>Search:</label> <input ng-model="addedUserfilter"></div>
+                    <div class="col-xs-6">Users in the group</div>
                 </div>
                 <div class="panel panel-body">
-                    <div ng-repeat="user in vm.group.users" class="row col-xs-12">
+
+                    <div ng-repeat="user in vm.group.users | orderBy:  'name.firstname' | filter:addedUserfilter" class="row col-xs-12">
                         <div class="col-xs-8">
                             {{user.name.firstname}} {{user.name.lastname}}
                         </div>
@@ -29,8 +31,9 @@
         </div>
         <div class="col-xs-6">
             <div class="panel panel-default">
-                <div class="panel panel-heading">
-                    Users Available
+                <div class="panel panel-heading col-xs-12">
+                    <div class="row text-left col-xs-6"><label>Search:</label> <input ng-model="availableUserfilter"></div>
+                    <div class="col-xs-6">Users Available</div>
                 </div>
                 <div class="panel panel-body">
                     <!--<div class="row col-xs-12">-->
@@ -42,8 +45,9 @@
                         <!--<button ng-click="vm.pageChanged(vm.currentPage+1)"> &gt; </button>-->
                         <!--<button ng-click="vm.pageChanged(vm.totalPages-1)">Last</button>-->
                     <!--</div>-->
+
                     <button ng-click="vm.addAllUsersToGroup()">Add All</button>
-                    <div ng-repeat="user in vm.availableUsers" class="row col-xs-12">
+                    <div ng-repeat="user in vm.availableUsers  | orderBy:  'name.firstname' | filter:availableUserfilter" class="row col-xs-12">
                         <div class="col-xs-8">
                             {{user.name.firstname}} {{user.name.lastname}}
                         </div>

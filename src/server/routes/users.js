@@ -15,19 +15,21 @@ module.exports = function (app) {
     });
 
     app.get('/user/id/:id', function (req, res) {
+        var uid = parseInt(req.params.id);
         res.send(
             _.find(
                 _users,
-                {id: req.params.id}
+                {id: uid}
             )
         );
     });
 
     app.put('/user/id/:id', function (req, res) {
+        var uid = parseInt(req.params.id);
         var index = _.findIndex(
             _users,
             {
-                id: req.params.id
+                id: uid
             }
         );
         _.merge(_users[index], req.body);
@@ -35,8 +37,9 @@ module.exports = function (app) {
     });
 
     app.delete('/user/id/:id', function (req, res) {
+        var uid = parseInt(req.params.id);
         _.remove(_users, function (user) {
-            return user.id === req.params.id;
+            return user.id === uid;
         });
         res.json({info: 'user removed successfully'});
     });

@@ -5,7 +5,6 @@
         'ui.router',
         'angularMoment',
         'ui.bootstrap',
-        'blockUI',
         'ngAnimate',
         'angular-loading-bar',
         'event-managing-logger',
