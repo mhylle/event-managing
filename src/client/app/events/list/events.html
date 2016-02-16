@@ -2,7 +2,7 @@
     <div class="row">
         <div class="header headermedium">Current Events</div>
         <div><label>Number of events:</label> {{vm.events.length}}</div>
-        <div class="card col-xs-3" ng-repeat="event in vm.events | iscurrentventfilter | orderBy:  'start' : true">
+        <div class="card col-xs-3" ng-repeat="event in vm.events | iscurrenteventfilter | orderBy:  'start' : true">
             <div class="header headersmall row" ng-click="vm.gotoEvent(event)">
                 <div class="event-title col-xs-10">{{event.name}} {{event.id}}</div>
                 <div class="event-status col-xs-2 text-right">X</div>

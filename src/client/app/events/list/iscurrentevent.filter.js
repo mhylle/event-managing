@@ -1,25 +1,43 @@
+/* jshint -W117 */
 (function () {
     'use strict';
 
     angular
         .module('event-managing-events')
-        .filter('iscurrentventfilter', isattendingeventfilter);
+        .filter('iscurrenteventfilter', IsCurrentEventFilter);
 
-    isattendingeventfilter.$inject = ['lodash', 'moment'];
+    IsCurrentEventFilter.$inject = ['lodash'];
 
-    function isattendingeventfilter(moment) {
+    function IsCurrentEventFilter(lodash) {
         return filterFunction;
 
         ////////////////
-        function filterFunction(event, before) {
-            if (!event) {
-                throw new Error('You must specify at least an event for this filter to work.');
+        function filterFunction(events, before) {
+            if (!events) {
+                throw new Error('You must specify at least one event for this filter to work.');
             }
-            //if (!event.start) {
-            //    throw new Error('The event did not have a start time, cannot determine it\'s location.');
-            //}
-
-            return before ? moment.isBefore(moment(event.start)) : !moment.isBefore(moment(event.start));
+            if (_.isArray(events)) {
+                var result = lodash.filter(events, function (event) {
+                    if (before || before === undefined) {
+                        return moment(event.start).isAfter(moment());
+                    } else {
+                        return moment(event.start).isBefore(moment());
+                    }
+                });
+                return result;
+            } else {
+                if (events.start) {
+                    if (before || before === undefined) {
+                        if (moment(events.start).isAfter(moment())) {
+                            return events;
+                        }
+                    } else {
+                        if (moment(events.start).isBefore(moment())) {
+                            return events;
+                        }
+                    }
+                }
+            }
         }
     }
 })();

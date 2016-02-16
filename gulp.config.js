@@ -166,7 +166,8 @@ module.exports = function () {
                 clientApp + '**/*.module.js',
                 clientApp + '**/*.js',
                 temp + config.templateCache.file,
-                config.serverIntegrationSpecs
+                config.serverIntegrationSpecs,
+                'app/bower_components/moment/moment.js'
             ),
             exclude: [],
             coverage: {
