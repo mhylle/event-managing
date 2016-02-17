@@ -12,6 +12,7 @@
         'event-managing-events',
         'event-managing-users',
         'event-managing-groups',
+        'event-managing-locations',
         'eventmanaging.security'
     ]).config(['$stateProvider', 'USER_ROLES', configuration])
         .controller('ApplicationController', ApplicationController)

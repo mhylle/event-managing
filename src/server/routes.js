@@ -19,7 +19,8 @@ app.use(errorhandler);
 
 var groups = require('./routes/groups.js')(router);
 var users = require('./routes/users.js')(router);
-var evemts = require('./routes/events.js')(router);
+var events = require('./routes/events.js')(router);
+var locations = require('./routes/locations.js')(router);
 
 router.post('/login/', login);
 router.get('/logout/', logout);

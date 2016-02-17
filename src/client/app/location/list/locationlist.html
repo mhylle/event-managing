@@ -1,0 +1,15 @@
+<div ng-controller="locationlistcontroller as vm" class="text-center">
+    <div class="row text-left"><label>Search:</label> <input ng-model="locationfilter"></div>
+    <div class="row">
+        <ul ng-repeat="location in vm.locations | orderBy:  'name' | filter:locationfilter" class="list-inline">
+            <li class="card col-xs-6" ng-click="vm.gotoLocation(location)">
+                <div class="col-xs-3 text-left">{{location.name}}</div>
+                <div class="col-xs-2">{{location.contactinformation.phone}}</div>
+                <div class="col-xs-2">{{location.contactinformation.address}}</div>
+                <div class="col-xs-2">
+                    <button>...</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

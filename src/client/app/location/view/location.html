@@ -1,0 +1,14 @@
+<div ng-controller="locationviewcontroller as vm">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel panel-heading">
+                {{vm.location.name}}
+            </div>
+            <div class="panel panel-body">
+                <div class="col-xs-6">{{vm.location.contactinformation.phone}}</div>
+                <div class="col-xs-6">{{vm.location.contactinformation.address}}</div>
+            </div>
+        </div>
+        <div class="row"><label>{{vm.status.message}}</label></div>
+    </div>
+</div>
