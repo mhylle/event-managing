@@ -8,12 +8,11 @@
     LocationViewController.$inject = [
         '$scope',
         '$stateParams',
-        'lodash',
         'Logger',
         'locationservice'];
 
     /* @ngInject */
-    function LocationViewController($scope, $stateParams, lodash, Logger, locationservice) {
+    function LocationViewController($scope, $stateParams, Logger, locationservice) {
         /* jshint -W040 */
         var vm = this;
         vm.title = 'locationviewcontroller';

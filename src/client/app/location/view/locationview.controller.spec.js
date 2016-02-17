@@ -1,29 +1,32 @@
 /* jshint -W117, -W030 */
 describe('LocationViewController', function () {
     var controller;
-    //var locations = locationMockData.getMockLocations();
+    var locations = locationMockData.getMockLocations();
 
     bard.verifyNoOutstandingHttpRequests();
 
     beforeEach(function () {
-        module('event-managing-locationss');
+        module('event-managing-locations');
         bard.inject('$controller',
             '$rootScope',
             '$stateParams',
             '$httpBackend',
             '$q',
             'Logger',
-            'locationservice',
-            'lodash');
+            'locationservice'
+        );
     });
 
-    describe.skip('Controller Initialization', function () {
+    describe('Controller Initialization', function () {
         beforeEach(function () {
             var scope = $rootScope.$new();
 
             var ls = {
                 getLocations: function () {
                     return $q.when(locations);
+                },
+                getLocation: function () {
+                    return $q.when(locations[0]);
                 }
             };
 
@@ -60,6 +63,15 @@ describe('LocationViewController', function () {
                     expect(controller.location).to.exist;
                 });
 
+                describe('Location name', function() {
+                    it('should exist', function () {
+                        expect(controller.location.name).to.exist;
+                    });
+
+                    it('should have a value', function () {
+                        expect(controller.location.name).not.to.be.empty;
+                    });
+                });
             });
         });
         describe.skip('Backend failures', function () {
