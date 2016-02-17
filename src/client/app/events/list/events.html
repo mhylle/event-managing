@@ -1,8 +1,9 @@
 <div ng-controller="EventController as vm">
     <div class="row">
         <div class="header headermedium">Current Events</div>
-        <div><label>Number of events:</label> {{vm.events.length}}</div>
-        <div class="card col-xs-3" ng-repeat="event in vm.events | iscurrenteventfilter | orderBy:  'start' : true">
+        <div><label>Number of events:</label> {{currentevents.length}}</div>
+        <div class="card col-xs-3"
+             ng-repeat="event in vm.events | orderBy:  'start' : true | iscurrenteventfilter as currentevents">
             <div class="header headersmall row" ng-click="vm.gotoEvent(event)">
                 <div class="event-title col-xs-10">{{event.name}} {{event.id}}</div>
                 <div class="event-status col-xs-2 text-right">X</div>
@@ -25,9 +26,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="header headermedium">Older Events</div>
-        <div><label>Number of events:</label> {{vm.events.length}}</div>
-        <div class="card col-xs-3" ng-repeat="event in vm.events  | orderBy:  'start' : true">
+        <div class="header headermedium">Expired Events</div>
+        <div><label>Number of events:</label> {{expiredevents.length}}</div>
+        <div class="card col-xs-3"
+             ng-repeat="event in vm.events  | orderBy:  'start' : true | iscurrenteventfilter: false as expiredevents">
             <div class="header headersmall row" ng-click="vm.gotoEvent(event)">
                 <div class="event-title col-xs-10">{{event.name}} {{event.id}}</div>
                 <div class="event-status col-xs-2 text-right">X</div>
