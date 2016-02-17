@@ -1,9 +1,9 @@
 /* jshint -W117, -W030 */
 describe('LocationListController', function () {
     var controller;
-    //var groups = mockData.getMockGroups();
-    //var failedGroups = mockData.getFailedMockGroups();
-    //var crashedGroups = mockData.getCrashedMockGroups();
+    var locations = locationMockData.getMockLocations();
+    var failedLocations = locationMockData.getMockFailedLocations();
+    var emptyLocations = locationMockData.getMockEmptyLocations();
 
     bard.verifyNoOutstandingHttpRequests();
 
@@ -12,17 +12,17 @@ describe('LocationListController', function () {
         bard.inject('$controller', '$rootScope', '$q', '$state');
     });
 
-    describe.skip('Controller Initialization', function () {
+    describe('Controller Initialization', function () {
         beforeEach(function () {
             var scope = $rootScope.$new();
 
-            var gs = {
-                getGroups: function () {
-                    return $q.when(groups);
+            var ls = {
+                getLocations: function () {
+                    return $q.when(locations);
                 }
             };
             controller = $controller('locationlistcontroller', {
-                groupservice: gs,
+                locationservice: ls,
                 $scope: scope
             });
         });
@@ -54,7 +54,7 @@ describe('LocationListController', function () {
                 });
 
                 it('should have mock locations', function () {
-                    expect(controller.locations).to.have.length(3);
+                    expect(controller.locations).to.have.length(10);
                 });
 
                 it('should have an empty status message', function () {
@@ -83,8 +83,9 @@ describe('LocationListController', function () {
 
         });
 
-        describe.skip('With failed service', function () {
+        describe('With failed service', function () {
             beforeEach(function () {
+                var scope = $rootScope.$new();
                 var ls = {
                     getLocations: function () {
                         return $q.when(failedLocations);
@@ -92,6 +93,7 @@ describe('LocationListController', function () {
                 };
                 controller = $controller('locationlistcontroller', {
                     locationservice: ls,
+                    $scope: scope
                 });
             });
             describe('After activation', function () {
@@ -101,10 +103,6 @@ describe('LocationListController', function () {
 
                 it('should not have locations', function () {
                     expect(controller.locations).to.have.length(0);
-                });
-
-                it('should have a response.status that failed', function () {
-                    expect(controller.status.response).to.equal('RESPONSE_ERROR');
                 });
 
                 it('should have a response.status.code error', function () {
@@ -117,15 +115,17 @@ describe('LocationListController', function () {
 
             });
         });
-        describe.skip('With crashed service', function () {
+        describe('With empty result', function () {
             beforeEach(function () {
+                var scope = $rootScope.$new();
                 var ls = {
                     getLocations: function () {
-                        return $q.when(crashedLocations);
+                        return $q.when(emptyLocations);
                     }
                 };
                 controller = $controller('locationlistcontroller', {
-                    locationservice: ls
+                    locationservice: ls,
+                    $scope: scope
                 });
             });
             describe('After activation', function () {
@@ -133,16 +133,16 @@ describe('LocationListController', function () {
                     $rootScope.$apply();
                 });
 
+                it('should have locations array', function () {
+                    expect(controller.locations).to.exist;
+                });
+
                 it('should not have locations', function () {
                     expect(controller.locations).to.have.length(0);
                 });
 
-                it('should have no response.status ', function () {
-                    expect(controller.status.response).not.to.exist;
-                });
-
                 it('should have a response.status.code warning', function () {
-                    expect(controller.status.code).to.equal('warning');
+                    expect(controller.status.code).to.equal('ok');
                 });
 
                 it('should have not have a status message', function () {
