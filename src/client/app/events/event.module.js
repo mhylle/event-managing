@@ -6,6 +6,8 @@ angular
         'ui.router',
         'ngLodash',
         'ngAnimate',
+        'textAngular',
+        'ui.bootstrap',
         'eventmanaging.security'
     ])
     .config(['$stateProvider', 'USER_ROLES', configuration]);
@@ -14,7 +16,7 @@ function configuration($stateProvider, USER_ROLES) {
     $stateProvider
         .state('events', {
             url: '/events',
-            templateUrl: 'app/events/eventlayout.html',
+            templateUrl: 'app/events/events.html',
             data: {
                 authorizedRoles: [USER_ROLES.all]
             }
@@ -29,6 +31,13 @@ function configuration($stateProvider, USER_ROLES) {
         .state('events.view', {
             url: '/view/:id',
             templateUrl: 'app/events/view/event.html',
+            data: {
+                authorizedRoles: [USER_ROLES.all]
+            }
+        })
+        .state('events.create', {
+            url: '/create',
+            templateUrl: 'app/events/create/createevent.html',
             data: {
                 authorizedRoles: [USER_ROLES.all]
             }

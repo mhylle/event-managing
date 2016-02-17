@@ -64,49 +64,5 @@
             "phone": "62-(664)956-7876",
             "address": "48 Graedel Plaza"
         }
-    },
-    {
-        "id": 7,
-        "mongoId": {
-            "$oid": "56b352014d6f6379f8740f00"
-        },
-        "name": "Locale A",
-        "contactinformation": {
-            "phone": "33-(460)696-4506",
-            "address": "2 Pankratz Place"
-        }
-    },
-    {
-        "id": 8,
-        "mongoId": {
-            "$oid": "56b352014d6f6379f8750f00"
-        },
-        "name": "The Lawn",
-        "contactinformation": {
-            "phone": "63-(633)113-3914",
-            "address": "61 Valley Edge Alley"
-        }
-    },
-    {
-        "id": 9,
-        "mongoId": {
-            "$oid": "56b352014d6f6379f8760f00"
-        },
-        "name": "Locale B",
-        "contactinformation": {
-            "phone": "86-(174)835-1560",
-            "address": "3287 Schlimgen Street"
-        }
-    },
-    {
-        "id": 10,
-        "mongoId": {
-            "$oid": "56b352014d6f6379f8770f00"
-        },
-        "name": "The Lawn",
-        "contactinformation": {
-            "phone": "86-(941)571-8034",
-            "address": "03 International Road"
-        }
     }
 ]
