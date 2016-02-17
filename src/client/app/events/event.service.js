@@ -15,6 +15,7 @@
         var service = {
             getEvents: getEvents,
             getEvent: getEvent,
+            createEvent: createEvent,
             attend: attend,
             unattend: unattend
         };
@@ -52,6 +53,21 @@
             }
 
             function onGetEventError(error) {
+                Logger.error(error);
+            }
+        }
+        function createEvent(event) {
+            Logger.info('Trying to retrieve event by id ' + event.id);
+            return $http.post('/api/event', event)
+                .then(onCreateEventSuccess)
+                .catch(onCreateEventError);
+
+            function onCreateEventSuccess(response) {
+                Logger.info(response.name);
+                return response;
+            }
+
+            function onCreateEventError(error) {
                 Logger.error(error);
             }
         }
