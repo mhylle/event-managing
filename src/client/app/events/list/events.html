@@ -1,8 +1,8 @@
 <div ng-controller="EventController as vm">
-    <div class="row">
+    <div class="row example-animate-container">
         <div class="header headermedium">Current Events</div>
         <div><label>Number of events:</label> {{currentevents.length}}</div>
-        <div class="card col-xs-3"
+        <div class="card col-xs-3 animate-repeat"
              ng-repeat="event in vm.events | orderBy:  'start' : true | iscurrenteventfilter as currentevents">
             <div class="header headersmall row" ng-click="vm.gotoEvent(event)">
                 <div class="event-title col-xs-10">{{event.name}} {{event.id}}</div>
@@ -25,10 +25,10 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row example-animate-container">
         <div class="header headermedium">Expired Events</div>
         <div><label>Number of events:</label> {{expiredevents.length}}</div>
-        <div class="card col-xs-3"
+        <div class="card col-xs-3 animate-repeat"
              ng-repeat="event in vm.events  | orderBy:  'start' : true | iscurrenteventfilter: false as expiredevents">
             <div class="header headersmall row" ng-click="vm.gotoEvent(event)">
                 <div class="event-title col-xs-10">{{event.name}} {{event.id}}</div>

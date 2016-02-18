@@ -1,7 +1,7 @@
 <div ng-controller="grouplistcontroller as vm" class="text-center">
     <div class="row text-left"><label>Search:</label> <input ng-model="groupfilter"></div>
     <div class="row">
-        <ul ng-repeat="group in vm.groups | orderBy:  'name' | filter:groupfilter" class="list-inline">
+        <ul ng-repeat="group in vm.groups | orderBy:  'name' | filter:groupfilter" class="list-inline animate-repeat">
             <li class="card col-xs-6" ng-click="vm.gotoGroup(group)">
                 <div class="col-xs-1"><img ng-src="{{group.logo}}" height="24"/></div>
                 <div class="col-xs-3 text-left">{{group.name}}</div>

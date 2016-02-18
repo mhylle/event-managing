@@ -25,7 +25,7 @@ var mockData = (function () {
                     title: 'dashboard',
                     settings: {
                         nav: 1,
-                        content: '<i class='fa fa-dashboard'></i> Dashboard'
+                        content: '<i class="fa fa-dashboard"></i> Dashboard'
                     }
                 }
             }
@@ -258,6 +258,7 @@ var mockData = (function () {
     }
 
     function getMockCreateEvent() {
+        // jscs:disable
         return {
             'id': 3,
             'mongoid': {
@@ -278,6 +279,7 @@ var mockData = (function () {
                 'default': '341.57'
             }
         };
+        // jscs:enable
     }
 
     function getMockEvents() {
@@ -318,6 +320,7 @@ var mockData = (function () {
 
     function getMockEventsWithEventCreated() {
         var mockUsers = getMockUsers();
+        // jscs:disable
         var events = [
             {
                 id: 1,
@@ -367,6 +370,7 @@ var mockData = (function () {
                     'default': '341.57'
                 }
             }
+            // jscs:enable
         ];
 
         return events;
