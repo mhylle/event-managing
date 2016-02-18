@@ -8,10 +8,10 @@
         .module('event-managing-events')
         .factory('EventService', EventService);
 
-    EventService.$inject = ['$http', 'Logger'];
+    EventService.$inject = ['$http'];
 
     /* @ngInject */
-    function EventService($http, Logger) {
+    function EventService($http) {
         var service = {
             getEvents: getEvents,
             getEvent: getEvent,
@@ -36,39 +36,39 @@
             }
 
             function onGetEventsError(error) {
-                Logger.error('Error during getEvents: ' + error);
+                //Logger.error('Error during getEvents: ' + error);
                 return [];
             }
         }
 
         function getEvent(id) {
-            Logger.info('Trying to retrieve event by id ' + id);
+            //Logger.info('Trying to retrieve event by id ' + id);
             return $http.get('/api/event/id/' + id)
                 .then(onGetEventSuccess)
                 .catch(onGetEventError);
 
             function onGetEventSuccess(response) {
-                Logger.info(response.name);
+                //Logger.info(response.name);
                 return response;
             }
 
             function onGetEventError(error) {
-                Logger.error(error);
+                //Logger.error(error);
             }
         }
         function createEvent(event) {
-            Logger.info('Trying to retrieve event by id ' + event.id);
+            //Logger.info('Trying to retrieve event by id ' + event.id);
             return $http.post('/api/event', event)
                 .then(onCreateEventSuccess)
                 .catch(onCreateEventError);
 
             function onCreateEventSuccess(response) {
-                Logger.info(response.name);
+                //Logger.info(response.name);
                 return response;
             }
 
             function onCreateEventError(error) {
-                Logger.error(error);
+                //Logger.error(error);
             }
         }
 
@@ -82,7 +82,7 @@
             }
 
             function onAttendEventError(error) {
-                Logger.error(error);
+                //Logger.error(error);
             }
         }
 

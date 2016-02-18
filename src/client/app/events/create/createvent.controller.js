@@ -44,25 +44,26 @@
             }
         };
 
-        vm.datepicker.start.today();
-        vm.datepicker.end.today();
-
         ////////////////
-
         function activate() {
-            locationservice.getLocations().then(function(response) {
+            locationservice.getLocations().then(function (response) {
                 vm.locations = response;
             });
         }
 
         function create() {
             EventService.createEvent(vm.event).then(function (response) {
-                if (response.status.code === 'ok') {
-                    vm.status.code = 'ok';
-                    vm.status.message = 'Event create ok';
-                }
+                if (response) {
+                    if (response.status.code === 'ok') {
+                        vm.status.code = 'ok';
+                        vm.status.message = 'Event create ok';
+                    }
 
-                if (response.status.code === 'failed') {
+                    if (response.status.code === 'failed') {
+                        vm.status.code = 'failed';
+                        vm.status.message = 'An error occured while creating the event';
+                    }
+                } else {
                     vm.status.code = 'failed';
                     vm.status.message = 'An error occured while creating the event';
                 }
