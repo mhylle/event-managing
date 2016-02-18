@@ -30,6 +30,7 @@ exclude_paths:
 - "karma.conf.js"
 - "src/client/app/events/list/eventlist.controller.spec.js"
 - "src/client/app/events/view/isattendingevent.filter.spec.js"
+- "src/client/app/events/create/createevent.controller.spec.js"
 - "src/client/app/users/list/userlist.controller.spec.js"
 - "src/client/app/users/view/userview.controller.spec.js"
 - "src/client/app/users/create/user.create.controller.spec.js"
