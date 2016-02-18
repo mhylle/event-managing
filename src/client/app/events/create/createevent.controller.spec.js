@@ -17,7 +17,7 @@ describe('CreateEventController', function () {
                 return $q.when(eventsBeforeCreation);
             },
             createEvent: function () {
-                return $q.when(eventsAfterCreation);
+                return $q.when({status: 'ok', event: eventsAfterCreation});
             },
             _default: $q.when()
         });
