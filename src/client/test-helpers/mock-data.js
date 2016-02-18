@@ -4,6 +4,8 @@ var mockData = (function () {
         getMockStates: getMockStates,
         getMockUsers: getMockUsers,
         getMockEvents: getMockEvents,
+        getMockEventsWithEventCreated: getMockEventsWithEventCreated,
+        getMockCreateEvent: getMockCreateEvent,
         getMockGroups: getMockGroups,
         getFailedMockGroups: getFailedMockGroups,
         getCrashedMockGroups: getCrashedMockGroups,
@@ -23,7 +25,7 @@ var mockData = (function () {
                     title: 'dashboard',
                     settings: {
                         nav: 1,
-                        content: '<i class="fa fa-dashboard"></i> Dashboard'
+                        content: '<i class='fa fa-dashboard'></i> Dashboard'
                     }
                 }
             }
@@ -255,6 +257,29 @@ var mockData = (function () {
         ];
     }
 
+    function getMockCreateEvent() {
+        return {
+            'id': 3,
+            'mongoid': {
+                '$oid': '56c33d97fc13ae23c000b326'
+            },
+            'name': 'aliquam augue',
+            'location': 7,
+            'logo': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJCSURBVDjLpZNNiI1xFMZ/73vfuXemmQn3IhqfCQul2ExIkq98bSw0QmSBLCyslBIlO4UUWdkpWREJSc1Y2PmIhVKUGTNmTJm5733v//8//3MsZsTCYmqezbM55zmd55wnMTOmg5RpYtoC2cX7w//dQVQJQXEihACFGIUTXBAKb+RBKQohA+he3vZPqyFqxDjBEo0gRlAlBCOIEqLiRbn9YmhCAGCsIURlsknxcbJYDC+Kk4gPhhPFB6XakVHUZcIDNWPb6k5ciOxe08n+dbM4tKHK0U01NqzsoJwlHFg/m9ZywrHNc6m7SMNFtAikToQgSiVLcEGptKTcevaDJIErD7+zoNbCivkVuqpl2sspS+ZUyJuRIiiaC1nuhKYolZaEgxtrZGlC7gQzo+4iqtC9vAMDmkGpNyMNH3EhxfJIWi8M55XCK9ceD+JFaTQVA/JmJJrx/muDD3evs/beVt7ta+dI73aWfbyNOk/2q/A0fRtmTE6G+iTnLqJqvL5zlZ3pczYdPk5l6SqKd0/50PuMt9Yg2XLpo+1dM4tvow4fFCeKC3+cnzjX4b5d7Dl5mrbPL6G/D2bMZCRbzJMnn8jGxoXCRzpbS/iWhNaQECqGSEKQlKBGNR+gdd5S2HXm7wdemM88fpKNFoEbj/uxYKhTzAsWFHMRvGJR2Vqu0njziPYHp3DFIA1gfKzESFIjmUoa+3q6LpQ7288trEmWpd8YHxa+DJViaNr5ZKpxftWz6Gw+OnCiFJPFsWT9Bjd3PJXLvwGPS3Y/UZc50wAAAABJRU5ErkJggg==',
+            'start': '2011-03-07T17:17:14Z',
+            'end': '2011-03-12T17:17:14Z',
+            'signstart': '2011-02-17T17:17:14Z',
+            'signend': '2011-02-23T17:17:14Z',
+            'canceldeadline': '2011-03-06T17:17:14Z',
+            'description': 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.',
+            'financials': {
+                'memberprice': '89.36',
+                'nonmemberprice': '92.24',
+                'default': '341.57'
+            }
+        };
+    }
+
     function getMockEvents() {
         var mockUsers = getMockUsers();
         var events = [
@@ -285,6 +310,62 @@ var mockData = (function () {
                 description: 'Så skal der festes',
                 users: [mockUsers[0], mockUsers[1], mockUsers[2]],
                 activities: []
+            }
+        ];
+
+        return events;
+    }
+
+    function getMockEventsWithEventCreated() {
+        var mockUsers = getMockUsers();
+        var events = [
+            {
+                id: 1,
+                name: 'Fastelavn',
+                start: '07-02-2016 14:00:00',
+                end: '07-02-2016 16:00:00',
+                signstart: '17-01-2016',
+                signend: '02-02-2016',
+                signoutend: '02-02-2016',
+                location: 'Kantinen',
+                logo: '',
+                decription: 'En festlig dag for børnene.',
+                users: [],
+                activities: []
+            },
+            {
+                id: 2,
+                name: 'Julefrokost',
+                start: '05-12-2016 12:00:00',
+                end: '05-12-2016 23:59:59',
+                signstart: '17-11-2016',
+                signend: '02-12-2016',
+                signoutend: '02-12-2016',
+                location: 'Kantinen',
+                logo: '',
+                description: 'Så skal der festes',
+                users: [mockUsers[0], mockUsers[1], mockUsers[2]],
+                activities: []
+            },
+            {
+                'id': 3,
+                'mongoid': {
+                    '$oid': '56c33d97fc13ae23c000b326'
+                },
+                'name': 'aliquam augue',
+                'location': 7,
+                'logo': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJCSURBVDjLpZNNiI1xFMZ/73vfuXemmQn3IhqfCQul2ExIkq98bSw0QmSBLCyslBIlO4UUWdkpWREJSc1Y2PmIhVKUGTNmTJm5733v//8//3MsZsTCYmqezbM55zmd55wnMTOmg5RpYtoC2cX7w//dQVQJQXEihACFGIUTXBAKb+RBKQohA+he3vZPqyFqxDjBEo0gRlAlBCOIEqLiRbn9YmhCAGCsIURlsknxcbJYDC+Kk4gPhhPFB6XakVHUZcIDNWPb6k5ciOxe08n+dbM4tKHK0U01NqzsoJwlHFg/m9ZywrHNc6m7SMNFtAikToQgSiVLcEGptKTcevaDJIErD7+zoNbCivkVuqpl2sspS+ZUyJuRIiiaC1nuhKYolZaEgxtrZGlC7gQzo+4iqtC9vAMDmkGpNyMNH3EhxfJIWi8M55XCK9ceD+JFaTQVA/JmJJrx/muDD3evs/beVt7ta+dI73aWfbyNOk/2q/A0fRtmTE6G+iTnLqJqvL5zlZ3pczYdPk5l6SqKd0/50PuMt9Yg2XLpo+1dM4tvow4fFCeKC3+cnzjX4b5d7Dl5mrbPL6G/D2bMZCRbzJMnn8jGxoXCRzpbS/iWhNaQECqGSEKQlKBGNR+gdd5S2HXm7wdemM88fpKNFoEbj/uxYKhTzAsWFHMRvGJR2Vqu0njziPYHp3DFIA1gfKzESFIjmUoa+3q6LpQ7288trEmWpd8YHxa+DJViaNr5ZKpxftWz6Gw+OnCiFJPFsWT9Bjd3PJXLvwGPS3Y/UZc50wAAAABJRU5ErkJggg==',
+                'start': '2011-03-07T17:17:14Z',
+                'end': '2011-03-12T17:17:14Z',
+                'signstart': '2011-02-17T17:17:14Z',
+                'signend': '2011-02-23T17:17:14Z',
+                'canceldeadline': '2011-03-06T17:17:14Z',
+                'description': 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.',
+                'financials': {
+                    'memberprice': '89.36',
+                    'nonmemberprice': '92.24',
+                    'default': '341.57'
+                }
             }
         ];
 

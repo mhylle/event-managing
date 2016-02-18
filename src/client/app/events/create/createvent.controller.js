@@ -54,14 +54,16 @@
         function create() {
             EventService.createEvent(vm.event).then(function (response) {
                 if (response) {
-                    if (response.status.code === 'ok') {
-                        vm.status.code = 'ok';
-                        vm.status.message = 'Event create ok';
-                    }
+                    if (response.status) {
+                        if (response.status.code === 'ok') {
+                            vm.status.code = 'ok';
+                            vm.status.message = 'Event created ok';
+                        }
 
-                    if (response.status.code === 'failed') {
-                        vm.status.code = 'failed';
-                        vm.status.message = 'An error occured while creating the event';
+                        if (response.status.code === 'failed') {
+                            vm.status.code = 'failed';
+                            vm.status.message = 'An error occured while creating the event';
+                        }
                     }
                 } else {
                     vm.status.code = 'failed';

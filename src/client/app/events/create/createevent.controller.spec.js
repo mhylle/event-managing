@@ -2,7 +2,9 @@
 describe('CreateEventController', function () {
     var controller;
 
-    var events = mockData.getMockEvents();
+    var eventsBeforeCreation = mockData.getMockEvents();
+    var eventsAfterCreation = mockData.getMockEventsWithEventCreated();
+    var eventToCreate = mockData.getMockCreateEvent();
     var locations = locationMockData.getMockLocations();
     bard.verifyNoOutstandingHttpRequests();
 
@@ -11,8 +13,11 @@ describe('CreateEventController', function () {
         bard.inject('$controller', '$rootScope', '$q', '$state', '$filter', 'EventService');
 
         bard.mockService(EventService, {
+            getEvents: function() {
+                return $q.when(eventsBeforeCreation);
+            },
             createEvent: function () {
-                return $q.when();
+                return $q.when(eventsAfterCreation);
             },
             _default: $q.when()
         });
@@ -59,6 +64,7 @@ describe('CreateEventController', function () {
 
                 describe('Creating event', function () {
                     beforeEach(function() {
+                        controller.event = eventToCreate;
                         controller.create();
                     });
 
@@ -68,6 +74,14 @@ describe('CreateEventController', function () {
 
                     it('should have a status code of ok if response.status.code is ok', function () {
                         expect(controller.status.code).to.equal('ok');
+                    });
+
+                    it.skip('should have added the event to the new list', function() {
+
+                    });
+
+                    it.skip('should have a status code of ok if response.status.code is ok', function () {
+                        expect(controller.status.message).to.equal('Event created ok');
                     });
 
                     it.skip('should have a status code of failed if response.status.code is failed', function () {
