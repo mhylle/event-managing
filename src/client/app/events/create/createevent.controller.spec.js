@@ -13,11 +13,11 @@ describe('CreateEventController', function () {
         bard.inject('$controller', '$rootScope', '$q', '$state', '$filter', 'EventService');
 
         bard.mockService(EventService, {
-            getEvents: function() {
+            getEvents: function () {
                 return $q.when(eventsBeforeCreation);
             },
             createEvent: function () {
-                return $q.when({status: 'ok', event: eventsAfterCreation});
+                return $q.when({status: 'ok', info: 'Event created successfully', event: eventsAfterCreation});
             },
             _default: $q.when()
         });
@@ -63,7 +63,7 @@ describe('CreateEventController', function () {
                 });
 
                 describe('Creating event', function () {
-                    beforeEach(function() {
+                    beforeEach(function () {
                         controller.event = eventToCreate;
                         controller.create();
                     });
@@ -76,11 +76,15 @@ describe('CreateEventController', function () {
                         expect(controller.status.code).to.equal('ok');
                     });
 
-                    it.skip('should have added the event to the new list', function() {
-
+                    it('should have a status message', function () {
+                        expect(controller.status.message).to.exist;
                     });
 
-                    it.skip('should have a status code of ok if response.status.code is ok', function () {
+                    it.skip('should have a status message that is not empty', function () {
+                        expect(controller.status.message).not.to.be.empty;
+                    });
+
+                    it.skip('should have a status message if response.status.code is ok', function () {
                         expect(controller.status.message).to.equal('Event created ok');
                     });
 

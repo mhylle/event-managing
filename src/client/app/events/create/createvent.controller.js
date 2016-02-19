@@ -55,7 +55,7 @@
             EventService.createEvent(vm.event).then(function (response) {
                 if (response) {
                     if (response.status) {
-                        if (response.status.code === 'ok') {
+                        if (response.status === 'ok') {
                             vm.status.code = 'ok';
                             vm.status.message = 'Event created ok';
                         }

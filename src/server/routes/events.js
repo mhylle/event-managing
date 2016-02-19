@@ -9,7 +9,8 @@ module.exports = function (app) {
 
     app.post('/event', function (req, res) {
         _events.push(req.body);
-        res.json({info: 'event created successfully'});
+
+        res.json({status: 'ok', info: 'Event created successfully', event: req.body});
     });
 
     app.get('/event', function (req, res) {
