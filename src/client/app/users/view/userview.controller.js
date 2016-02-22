@@ -15,7 +15,7 @@
         vm.user = null;
 
         vm.status = {
-            message : '',
+            message : ''
         };
         activate();
 
