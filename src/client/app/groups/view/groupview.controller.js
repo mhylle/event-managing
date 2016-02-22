@@ -8,14 +8,14 @@
     GroupViewController.$inject = [
         '$scope',
         '$stateParams',
+        'lodash',
         'Logger',
         'groupservice',
         'groupiconservice',
-        'userservice',
-        'lodash'];
+        'userservice'];
 
     /* @ngInject */
-    function GroupViewController($scope, $stateParams, Logger, groupservice, groupiconservice, userservice, lodash) {
+    function GroupViewController($scope, $stateParams, lodash, Logger, groupservice, groupiconservice, userservice) {
         /* jshint -W040 */
         var vm = this;
         vm.title = 'groupviewcontroller';
@@ -57,7 +57,7 @@
 
         function activate() {
             vm.groupid = $stateParams.id;
-            console.log('got id ' + vm.groupid + ' passed in as start parameter.');
+            Logger.info('got id ' + vm.groupid + ' passed in as start parameter.');
             getGroup();
             getUsers();
             populatePaginationButtons();
@@ -170,7 +170,7 @@
                 return;
             }
 
-            groupservice.addUsersToGroup(vm.group, vm.availableUsers).then(function(response) {
+            groupservice.addUsersToGroup(vm.group, vm.availableUsers).then(function (response) {
                 if (!response.data) {
                     vm.status.message = 'Failed in adding all available to group';
                     success = true;

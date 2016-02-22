@@ -34,7 +34,7 @@
 
         function activate() {
             vm.locationid = $stateParams.id;
-            console.log('got id ' + vm.locationid + ' passed in as start parameter.');
+            Logger.info('got id ' + vm.locationid + ' passed in as start parameter.');
             getLocation();
         }
 
