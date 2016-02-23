@@ -8,7 +8,8 @@ angular
         'ngAnimate',
         'textAngular',
         'ui.bootstrap',
-        'eventmanaging.security'
+        'eventmanaging.security',
+        'event-managing-logger'
     ])
     .config(['$stateProvider', 'USER_ROLES', configuration]);
 

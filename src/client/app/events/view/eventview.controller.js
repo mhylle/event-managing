@@ -5,10 +5,10 @@
         .module('event-managing-events')
         .controller('eventviewcontroller', eventviewcontroller);
 
-    eventviewcontroller.$inject = ['$stateParams', '$filter', 'EventService', 'Session'];
+    eventviewcontroller.$inject = ['$stateParams', '$filter', 'EventService', 'Session', 'Logger'];
 
     /* @ngInject */
-    function eventviewcontroller($stateParams, $filter, EventService, Session) {
+    function eventviewcontroller($stateParams, $filter, EventService, Session, Logger) {
         /* jshint -W040 */
         var vm = this;
         vm.title = 'eventviewcontroller';
@@ -18,6 +18,11 @@
         vm.signstatus = '';
         vm.isSigned = false;
         vm.showAttendees = true;
+
+        vm.status = {
+            code: 'ok',
+            message: ''
+        };
 
         vm.signup = signup;
 
@@ -38,7 +43,7 @@
 
         function activate() {
             vm.eventid = $stateParams.id;
-            console.log('got id ' + vm.eventid + ' passed in as start parameter.');
+            Logger.info('got id ' + vm.eventid + ' passed in as start parameter.');
             EventService.getEvent(vm.eventid).then(function (response) {
                 setEventStatus(response);
             });

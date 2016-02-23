@@ -1,7 +1,6 @@
 /* jshint -W079, -W101 */
 var mockData = (function () {
     return {
-        getMockStates: getMockStates,
         getMockUsers: getMockUsers,
         getMockEvents: getMockEvents,
         getMockEventsWithEventCreated: getMockEventsWithEventCreated,
@@ -12,24 +11,59 @@ var mockData = (function () {
         getMockSignedEvents: getMockSignedEvents,
         getFailedMockEvents: getFailedMockEvents,
         getNoMockEvents: getNoMockEvents,
-        getCrashedMockEvents: getCrashedMockEvents
+        getCrashedMockEvents: getCrashedMockEvents,
+        getMockEventWithUser: getMockEventWithUser,
+        getMockEventWithoutUser: getMockEventWithoutUser,
+        getMockSingleUser: getMockSingleUser
     };
 
-    function getMockStates() {
-        return [
-            {
-                state: 'dashboard',
-                config: {
-                    url: '/',
-                    templateUrl: 'app/dashboard/dashboard.html',
-                    title: 'dashboard',
-                    settings: {
-                        nav: 1,
-                        content: '<i class="fa fa-dashboard"></i> Dashboard'
-                    }
-                }
-            }
-        ];
+    function getMockEventWithUser() {
+        var user = getMockSingleUser();
+        return {
+            id: 1,
+            name: 'Fastelavn',
+            start: '07-02-2016 14:00:00',
+            end: '07-02-2016 16:00:00',
+            signstart: '17-01-2016',
+            signend: '02-02-2016',
+            signoutend: '02-02-2016',
+            location: 'Kantinen',
+            logo: '',
+            decription: 'En festlig dag for børnene.',
+            users: [user],
+            activities: []
+        };
+    }
+
+    function getMockEventWithoutUser() {
+        return {
+            id: 1,
+            name: 'Fastelavn',
+            start: '07-02-2016 14:00:00',
+            end: '07-02-2016 16:00:00',
+            signstart: '17-01-2016',
+            signend: '02-02-2016',
+            signoutend: '02-02-2016',
+            location: 'Kantinen',
+            logo: '',
+            decription: 'En festlig dag for børnene.',
+            users: [],
+            activities: []
+        };
+    }
+
+    function getMockSingleUser() {
+        return {
+            id: 1,
+            gender: 'Male',
+            firstname: 'Brandon',
+            lastname: 'Morales',
+            username: 'bmorales0',
+            email: 'bmorales0@e-recht24.de',
+            passstring: 'f927052bfca1cbadaceee849fdbbb717b8df94ab',
+            phone: '381-(499)311-9438',
+            logicalid: '51ef4033-990c-4ecf-8e50-34adfd464f5e'
+        };
     }
 
     function getMockUsers() {
