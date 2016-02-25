@@ -4,6 +4,7 @@ describe('LocationListController', function () {
     var locations = locationMockData.getMockLocations();
     var failedLocations = locationMockData.getMockFailedLocations();
     var emptyLocations = locationMockData.getMockEmptyLocations();
+    var notOkLocations = locationMockData.getMockNotOkLocation();
 
     bard.verifyNoOutstandingHttpRequests();
 
@@ -83,7 +84,7 @@ describe('LocationListController', function () {
 
         });
 
-        describe('With failed service', function () {
+        describe('With undefined service response', function () {
             beforeEach(function () {
                 var scope = $rootScope.$new();
                 var ls = {
@@ -107,6 +108,38 @@ describe('LocationListController', function () {
 
                 it('should have a response.status.code error', function () {
                     expect(controller.status.code).to.equal('error');
+                });
+
+                it('should have a status message', function () {
+                    expect(controller.status.message).not.to.be.empty;
+                });
+
+            });
+        });
+        describe('With failed service response', function () {
+            beforeEach(function () {
+                var scope = $rootScope.$new();
+                var ls = {
+                    getLocations: function () {
+                        return $q.when(notOkLocations);
+                    }
+                };
+                controller = $controller('locationlistcontroller', {
+                    locationservice: ls,
+                    $scope: scope
+                });
+            });
+            describe('After activation', function () {
+                beforeEach(function () {
+                    $rootScope.$apply();
+                });
+
+                it('should not have locations', function () {
+                    expect(controller.locations).to.have.length(0);
+                });
+
+                it('should have a response.status.code error', function () {
+                    expect(controller.status.code).to.equal('failed');
                 });
 
                 it('should have a status message', function () {

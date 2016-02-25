@@ -17,19 +17,47 @@ describe('LocationService', function () {
                 locations
             );
         });
-        it('returns a value', function () {
-            var locationResult = locationservice.getLocations().then(function (response) {
-                locationResult = response;
+        describe('success', function() {
+            it('returns a value', function () {
+                var locationResult = locationservice.getLocations().then(function (response) {
+                    locationResult = response;
+                });
+                expect(locationResult).to.exists;
             });
-            expect(locationResult).to.exists;
+            it('Retrieves an amount of locations', function () {
+                var locationResult = [];
+                locationservice.getLocations().then(function (response) {
+                    locationResult = response.locations;
+                });
+                $httpBackend.flush();
+                expect(locationResult).to.have.length.above(0);
+            });
         });
-        it('Retrieves an amount of locations', function () {
-            var locationResult = [];
-            locationservice.getLocations().then(function (response) {
-                locationResult = response.locations;
+
+        describe.skip('Failure', function () {
+            it('Should log an error if the server returns an error', function () {
+                $httpBackend.expectGET('/api/location').respond(500);
+                var locationResult = [];
+                locationservice.getLocations().then(function (results) {
+                    locationResult = results;
+                });
+                $httpBackend.flush();
+
+                expect(locationResult).not.to.exist;
+                expect($log.error.logs).not.to.be.empty;
+                expect($log.error.logs).not.to.be.undefined;
             });
-            $httpBackend.flush();
-            expect(locationResult).to.have.length.above(0);
+
+            it('Should return an error value if the server returns an error', function () {
+                $httpBackend.expectGET('/api/location').respond(500, {status: 'failed', info: 'no locations found'}
+                );
+                var locationResult = [];
+                locationservice.getLocations().then(function (results) {
+                    locationResult = results;
+                });
+                $httpBackend.flush();
+                expect(locationResult).not.to.exist;
+            });
         });
     });
 
