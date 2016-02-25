@@ -2,6 +2,7 @@
 describe('LocationViewController', function () {
     var controller;
     var locations = locationMockData.getMockLocations();
+    var location = locationMockData.getMockLocation();
 
     bard.verifyNoOutstandingHttpRequests();
 
@@ -26,7 +27,7 @@ describe('LocationViewController', function () {
                     return $q.when(locations);
                 },
                 getLocation: function () {
-                    return $q.when(locations[0]);
+                    return $q.when(location);
                 }
             };
 

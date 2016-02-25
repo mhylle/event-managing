@@ -25,8 +25,8 @@ describe('LocationService', function () {
         });
         it('Retrieves an amount of locations', function () {
             var locationResult = [];
-            locationservice.getLocations().then(function (results) {
-                locationResult = results;
+            locationservice.getLocations().then(function (response) {
+                locationResult = response.locations;
             });
             $httpBackend.flush();
             expect(locationResult).to.have.length.above(0);
@@ -36,14 +36,15 @@ describe('LocationService', function () {
     describe('getLocation', function () {
         describe('Success', function () {
             it('Should contain a location', function () {
+
                 $httpBackend.expectGET('/api/location/id/1').respond(
-                    locations[0]
+                    {status: 'ok', info: '', location: locations.locations[0]}
                 );
                 var locationResult = [];
                 locationservice.getLocation(1).then(function (results) {
                     locationResult = results;
                 });
-                $httpBackend.flush();
+                //$httpBackend.flush();
                 expect(locationResult).to.exists;
             });
 
@@ -58,8 +59,8 @@ describe('LocationService', function () {
             });
 
             it('Should get different groups based on the id supplied', function () {
-                var location1 = getLocation(2);
-                var location2 = getLocation(3);
+                var location1 = getLocation(2).location;
+                var location2 = getLocation(3).location;
 
                 expect(location1).to.not.equal(location2);
             });
@@ -94,10 +95,10 @@ describe('LocationService', function () {
     function getLocation(id) {
         var location = {};
         $httpBackend.expectGET('/api/location/id/' + id).respond(
-            locations[id - 1]
+            {status: 'ok', info: '', location: locations.locations[id - 1]}
         );
-        locationservice.getLocation(id).then(function (results) {
-            location = results;
+        locationservice.getLocation(id).then(function (response) {
+            location = response;
         });
         $httpBackend.flush();
         return location;

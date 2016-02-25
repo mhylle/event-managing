@@ -5,7 +5,7 @@
         .module('event-managing-groups')
         .controller('grouplistcontroller', GroupListController);
 
-    GroupListController.$inject = ['$scope','$state', 'Logger', 'groupservice', 'groupiconservice'];
+    GroupListController.$inject = ['$scope', '$state', 'Logger', 'groupservice', 'groupiconservice'];
 
     /* @ngInject */
     function GroupListController($scope, $state, Logger, groupservice, groupiconservice) {
@@ -34,10 +34,17 @@
                 if (!response) {
                     vm.status.code = 'error';
                     vm.status.message = 'No response returned from the server';
-                    return;
+                    vm.users = [];
+                } else {
+                    if (response.status === 'ok') {
+                        vm.groups = response.groups;
+                        vm.status.code = 'ok';
+                    } else {
+                        vm.groups = [];
+                        vm.status.code = response.status;
+                        vm.status.message = response.info;
+                    }
                 }
-                vm.groups = response;
-                vm.status.code = 'ok';
             });
         }
 

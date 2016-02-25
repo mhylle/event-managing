@@ -1,9 +1,9 @@
 /* jshint -W117, -W030 */
 describe('GroupListController', function () {
     var controller;
-    var groups = mockData.getMockGroups();
-    var failedGroups = mockData.getFailedMockGroups();
-    var crashedGroups = mockData.getCrashedMockGroups();
+    var groups = groupMockData.getMockGroups();
+    var failedGroups = groupMockData.getFailedMockGroups();
+    var crashedGroups = groupMockData.getCrashedMockGroups();
 
     bard.verifyNoOutstandingHttpRequests();
 
@@ -54,7 +54,7 @@ describe('GroupListController', function () {
                 });
 
                 it('should have mock events', function () {
-                    expect(controller.groups).to.have.length(3);
+                    expect(controller.groups).to.have.length(4);
                 });
 
                 it('should have an empty status message', function () {

@@ -1,5 +1,7 @@
 <div ng-controller="userlistcontroller as vm">
-    <div class="row text-left"><label>Search:</label> <input ng-model="userfilter"></div>
+    <div class="row text-left"><label>Search:</label>
+        <input ng-model="userfilter">
+    </div>
     <div class="header-name col-lg-12" ng-show="vm.users.length >0">
         <span class="col-lg-1 text-left"></span>
         <span class="col-lg-2 text-left">Id</span>
@@ -9,7 +11,8 @@
         <span class="col-lg-1 text-right">Phone</span>
         <span class="col-lg-1 text-right">Action</span>
     </div>
-    <div ng-repeat="user in vm.users | orderBy:  'name.firstname' | filter:userfilter" class="card col-lg-12" ng-click="vm.gotoUser(user)">
+    <div ng-repeat="user in vm.users | orderBy:  'name.firstname' | filter:userfilter" class="card col-lg-12"
+         ng-click="vm.gotoUser(user)">
         <div class="user.basedata">
             <p class="col-lg-1 text-left"><img ng-src="{{user.avatar}}" height="24"/></p>
             <p class="col-lg-2 text-left">{{user.logicalid}}</p>

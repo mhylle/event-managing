@@ -40,10 +40,17 @@
                 if (!response) {
                     vm.status.code = 'error';
                     vm.status.message = 'No response returned from the server';
-                    return;
+                    vm.events = [];
+                } else {
+                    if (response.status === 'ok') {
+                        vm.events = response.events;
+                        vm.status.code = 'ok';
+                    } else {
+                        vm.events = [];
+                        vm.status.code = response.status;
+                        vm.status.message = response.info;
+                    }
                 }
-                vm.events = response;
-                vm.status.code = 'ok';
             });
         }
 

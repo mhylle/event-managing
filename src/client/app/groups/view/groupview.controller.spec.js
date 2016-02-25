@@ -88,10 +88,10 @@ describe('GroupViewController', function () {
                                     return $q.when(groupWithoutUserAdded);
                                 },
                                 addUserToGroup: function () {
-                                    return $q.when({data: {status: 'ok', group: groupWithUserAdded}});
+                                    return $q.when(groupWithUserAdded);
                                 },
                                 removeUserFromGroup: function () {
-                                    return $q.when({data: {status: 'ok', group: groupWithoutUserAdded}});
+                                    return $q.when(groupWithoutUserAdded);
                                 }
                             };
 

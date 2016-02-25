@@ -78,19 +78,30 @@ describe('EventViewController', function () {
                 describe('attend/unattend', function () {
                     beforeEach(function () {
                         var scope = $rootScope.$new();
+                        var es = {
+                            getEvents: function () {
+                                return $q.when(events);
+                            },
+                            getEvent: function () {
+                                return $q.when(eventwithoutuser);
+                            }
+                        };
                         controller = $controller('eventviewcontroller', {
+                            EventService: es,
                             $scope: scope,
                             $stateParams: {id: 1}
                         });
                     });
 
                     it('should list if the current user is attending the event', function () {
-                        $httpBackend.whenGET('/api/event/id/1').respond(200, eventwithoutuser);
-                        $httpBackend.flush();
+                        $rootScope.$apply();
+                        //$httpBackend.whenGET('/api/event/id/1').respond(200, eventwithoutuser);
+                        //$httpBackend.flush();
                         expect(controller.isSigned).to.be.false;
                         expect(controller.signstatus).to.equal('Not attending');
-                        $rootScope.$apply();
                     });
+
+                    it('should list that a user is attending an event if the user is actually attending the event');
 
                     it.skip('should be possible to signup for an event', function () {
                         $httpBackend.whenGET('/api/event/id/1').respond(200, eventwithoutuser);

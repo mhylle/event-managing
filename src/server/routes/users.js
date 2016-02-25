@@ -7,20 +7,21 @@ module.exports = function (app) {
 
     app.post('/user', function (req, res) {
         _users.push(req.body);
-        res.json({info: 'user created successfully'});
+        res.json({status: 'ok', info: 'user created successfully', user: req.body});
     });
 
     app.get('/user', function (req, res) {
-        res.send(_users);
+        res.json({status: 'ok', info: '', users: _users});
     });
 
     app.get('/user/id/:id', function (req, res) {
         var uid = parseInt(req.params.id);
-        res.send(
-            _.find(
+        res.json({
+                status: 'ok', info: '', users: _.find(
                 _users,
                 {id: uid}
-            )
+                )
+            }
         );
     });
 
@@ -33,7 +34,7 @@ module.exports = function (app) {
             }
         );
         _.merge(_users[index], req.body);
-        res.json({info: 'group updated successfully'});
+        res.json({status: 'ok', info: 'group updated successfully', group: req.body});
     });
 
     app.delete('/user/id/:id', function (req, res) {
@@ -41,7 +42,7 @@ module.exports = function (app) {
         _.remove(_users, function (user) {
             return user.id === uid;
         });
-        res.json({info: 'user removed successfully'});
+        res.json({status: 'ok', info: 'user removed successfully'});
     });
 };
 

@@ -27,10 +27,14 @@
         vm.signup = signup;
 
         activate();
-
         ////////////////
-        function setEventStatus(response) {
-            vm.event = response;
+        function activate() {
+            vm.eventid = $stateParams.id;
+            Logger.info('got id ' + vm.eventid + ' passed in as start parameter.');
+            getEvent();
+        }
+
+        function setEventStatus() {
             var attendingEvent = $filter('isattendingeventfilter')(vm.event, Session.user);
             if (attendingEvent) {
                 vm.isSigned = true;
@@ -41,11 +45,21 @@
             }
         }
 
-        function activate() {
-            vm.eventid = $stateParams.id;
-            Logger.info('got id ' + vm.eventid + ' passed in as start parameter.');
+        function getEvent() {
             EventService.getEvent(vm.eventid).then(function (response) {
-                setEventStatus(response);
+                if (!response) {
+                    vm.status.code = 'failed';
+                    vm.status.message = 'An error occured retrieving the event from the server';
+                } else {
+                    if (response.status === 'ok') {
+                        vm.event = response.event;
+                    } else {
+                        vm.event = null;
+                        vm.status.code = 'failed';
+                        vm.status.message = response.info;
+                    }
+                }
+                setEventStatus();
             });
         }
 

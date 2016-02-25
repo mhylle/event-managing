@@ -33,10 +33,17 @@
                 if (!response) {
                     vm.status.code = 'error';
                     vm.status.message = 'No response returned from the server';
-                    return;
+                    vm.locations = [];
+                } else {
+                    if (response.status === 'ok') {
+                        vm.locations = response.locations;
+                        vm.status.code = 'ok';
+                    } else {
+                        vm.locations = [];
+                        vm.status.code = response.status;
+                        vm.status.message = response.info;
+                    }
                 }
-                vm.locations = response;
-                vm.status.code = 'ok';
             });
         }
 

@@ -20,11 +20,10 @@
         $scope.pageClass = 'scrolled';
 
         vm.location = null;
-
         vm.locationid = '';
-        vm.response = {};
 
         vm.status = {
+            code: 'ok',
             message: ''
         };
 
@@ -40,7 +39,18 @@
 
         function getLocation() {
             locationservice.getLocation(vm.locationid).then(function (response) {
-                vm.location = response;
+                if (!response) {
+                    vm.status.code = 'failed';
+                    vm.status.message = 'An error occured retrieving the location from the server';
+                } else {
+                    if (response.status === 'ok') {
+                        vm.location = response.location;
+                    } else {
+                        vm.location = null;
+                        vm.status.code = 'failed';
+                        vm.status.message = response.info;
+                    }
+                }
             });
         }
     }

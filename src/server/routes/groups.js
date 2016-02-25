@@ -9,11 +9,11 @@ module.exports = function (app) {
 
     app.post('/group', function (req, res) {
         _groups.push(req.body);
-        res.json({info: 'group created successfully'});
+        res.json({status: 'ok', info: 'group created successfully', group: req.body});
     });
 
     app.get('/group', function (req, res) {
-        res.send(_groups);
+        res.json({status: 'ok', info: '', groups: _groups});
     });
 
     app.get('/group/id/:id', function (req, res) {
@@ -22,8 +22,7 @@ module.exports = function (app) {
             _groups, function (g) {
                 return g.id === gid;
             });
-        res.send(
-            result
+        res.json({status: 'ok', info: '', group: result}
         );
     });
 
@@ -36,7 +35,7 @@ module.exports = function (app) {
             }
         );
         _.merge(_groups[index], req.body);
-        res.json({info: 'group updated successfully'});
+        res.json({status: 'ok', info: 'group updated successfully', group: req.body});
     });
 
     app.put('/group/id/:id/users', function (req, res) {
@@ -51,7 +50,7 @@ module.exports = function (app) {
         var users = req.body;
         group.users = _.union(group.users, users);
         _.merge(_groups[index], group.users);
-        res.json({info: 'group updated successfully'});
+        res.json({status: 'ok', info: 'group updated successfully', group: group});
     });
 
     app.put('/group/id/:gid/user/id/:uid', function (req, res) {

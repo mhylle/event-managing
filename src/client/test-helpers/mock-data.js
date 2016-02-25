@@ -20,35 +20,43 @@ var mockData = (function () {
     function getMockEventWithUser() {
         var user = getMockSingleUser();
         return {
-            id: 1,
-            name: 'Fastelavn',
-            start: '07-02-2016 14:00:00',
-            end: '07-02-2016 16:00:00',
-            signstart: '17-01-2016',
-            signend: '02-02-2016',
-            signoutend: '02-02-2016',
-            location: 'Kantinen',
-            logo: '',
-            decription: 'En festlig dag for børnene.',
-            users: [user],
-            activities: []
+            status: 'ok',
+            info: '',
+            event: {
+                id: 1,
+                name: 'Fastelavn',
+                start: '07-02-2016 14:00:00',
+                end: '07-02-2016 16:00:00',
+                signstart: '17-01-2016',
+                signend: '02-02-2016',
+                signoutend: '02-02-2016',
+                location: 'Kantinen',
+                logo: '',
+                decription: 'En festlig dag for børnene.',
+                users: [user],
+                activities: []
+            }
         };
     }
 
     function getMockEventWithoutUser() {
         return {
-            id: 1,
-            name: 'Fastelavn',
-            start: '07-02-2016 14:00:00',
-            end: '07-02-2016 16:00:00',
-            signstart: '17-01-2016',
-            signend: '02-02-2016',
-            signoutend: '02-02-2016',
-            location: 'Kantinen',
-            logo: '',
-            decription: 'En festlig dag for børnene.',
-            users: [],
-            activities: []
+            status: 'ok',
+            info: '',
+            event: {
+                id: 1,
+                name: 'Fastelavn',
+                start: '07-02-2016 14:00:00',
+                end: '07-02-2016 16:00:00',
+                signstart: '17-01-2016',
+                signend: '02-02-2016',
+                signoutend: '02-02-2016',
+                location: 'Kantinen',
+                logo: '',
+                decription: 'En festlig dag for børnene.',
+                users: [],
+                activities: []
+            }
         };
     }
 
@@ -349,7 +357,11 @@ var mockData = (function () {
             }
         ];
 
-        return events;
+        return {
+            status: 'ok',
+            info: '',
+            events: events
+        };
     }
 
     function getMockEventsWithEventCreated() {
@@ -407,45 +419,57 @@ var mockData = (function () {
             // jscs:enable
         ];
 
-        return events;
+        return {
+            status: 'ok',
+            info: '',
+            events: events
+        };
     }
 
     function getMockSignedEvents() {
         var mockUsers = getMockUsers();
-        return [
-            {
-                id: 1,
-                name: 'Fastelavn',
-                start: '07-02-2016 14:00:00',
-                end: '07-02-2016 16:00:00',
-                signstart: '17-01-2016',
-                signend: '02-02-2016',
-                signoutend: '02-02-2016',
-                location: 'Kantinen',
-                logo: '',
-                decription: 'En festlig dag for børnene.',
-                users: [mockUsers[0], mockUsers[1]],
-                activities: []
-            },
-            {
-                id: 2,
-                name: 'Julefrokost',
-                start: '05-12-2016 12:00:00',
-                end: '05-12-2016 23:59:59',
-                signstart: '17-11-2016',
-                signend: '02-12-2016',
-                signoutend: '02-12-2016',
-                location: 'Kantinen',
-                logo: '',
-                description: 'Så skal der festes',
-                users: [mockUsers[1]],
-                activities: []
-            }
-        ];
+        return {
+            status: 'ok',
+            info: '',
+            events: [
+                {
+                    id: 1,
+                    name: 'Fastelavn',
+                    start: '07-02-2016 14:00:00',
+                    end: '07-02-2016 16:00:00',
+                    signstart: '17-01-2016',
+                    signend: '02-02-2016',
+                    signoutend: '02-02-2016',
+                    location: 'Kantinen',
+                    logo: '',
+                    decription: 'En festlig dag for børnene.',
+                    users: [mockUsers[0], mockUsers[1]],
+                    activities: []
+                },
+                {
+                    id: 2,
+                    name: 'Julefrokost',
+                    start: '05-12-2016 12:00:00',
+                    end: '05-12-2016 23:59:59',
+                    signstart: '17-11-2016',
+                    signend: '02-12-2016',
+                    signoutend: '02-12-2016',
+                    location: 'Kantinen',
+                    logo: '',
+                    description: 'Så skal der festes',
+                    users: [mockUsers[1]],
+                    activities: []
+                }
+            ]
+        };
     }
 
     function getNoMockEvents() {
-        return [];
+        return {
+            status: 'ok',
+            info: '',
+            events: []
+        };
     }
 
     function getFailedMockEvents() {
@@ -490,12 +514,13 @@ var mockData = (function () {
 
     function getFailedMockGroups() {
         return {
-            status: 'RESPONSE_ERROR',
-            message: 'Unable to retrieve data from database'
+            status: 'failed',
+            info: 'Unable to retrieve data from database'
         };
     }
 
     function getCrashedMockGroups() {
-        return {};
+        return undefined;
     }
-})();
+})
+();

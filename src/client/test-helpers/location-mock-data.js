@@ -4,11 +4,32 @@ var locationMockData = (function () {
     return {
         getMockLocations: getMockLocations,
         getMockEmptyLocations: getMockEmptyLocations,
-        getMockFailedLocations: getMockFailedLocations
+        getMockFailedLocations: getMockFailedLocations,
+        getMockLocation: getMockLocation
     };
 
+    function getMockLocation() {
+        return {
+            status: 'ok',
+            info: '',
+            location: {
+                'id': 1,
+                'mongoId': {
+                    '$oid': '56b352014d6f6379f86e0f00'
+                },
+                'name': 'Locale D',
+                'contactinformation': {
+                    'phone': '81-(672)330-2845',
+                    'address': '47733 Sunnyside Pass'
+                }
+            }
+        };
+    }
+
     function getMockLocations() {
-        return [
+        // jscs:disable
+
+        var locations = [
             {
                 'id': 1,
                 'mongoId': {
@@ -120,11 +141,22 @@ var locationMockData = (function () {
                 }
             }
         ];
+        return {
+            status: 'ok',
+            info: '',
+            locations: locations
+        };
     }
+
     function getMockFailedLocations() {
         return undefined;
     }
+
     function getMockEmptyLocations() {
-        return [];
+        return {
+            status: 'ok',
+            info: '',
+            locations: []
+        };
     }
 })();

@@ -29,7 +29,7 @@ describe('GroupService', function () {
         it('Retrieves an amount of groups', function () {
             var groupResult = [];
             groupservice.getGroups().then(function (results) {
-                groupResult = results;
+                groupResult = results.groups;
             });
             $httpBackend.flush();
             expect(groupResult).to.have.length.above(0);
@@ -40,11 +40,11 @@ describe('GroupService', function () {
         describe('Success', function () {
             it('Should contain a group', function () {
                 $httpBackend.expectGET('/api/group/id/1').respond(
-                    groups[0]
+                    {status: 'ok', info: '', group: groups.groups[0]}
                 );
                 var groupResult = [];
                 groupservice.getGroup(1).then(function (results) {
-                    groupResult = results;
+                    groupResult = results.group;
                 });
                 $httpBackend.flush();
                 expect(groupResult).to.exists;
@@ -111,7 +111,7 @@ describe('GroupService', function () {
             workingGroup.users = [user];
 
             $httpBackend.expectPUT('/api/group/id/' + workingGroup.id + '/user/id/' + user.id).respond(
-                {status: 'ok', group: workingGroup}
+                {status: 'ok', info: '', group: workingGroup}
             );
 
             var status;
@@ -138,7 +138,7 @@ describe('GroupService', function () {
             var user = getUser(3);
             expect(user).to.exist;
             $httpBackend.expectDELETE('/api/group/id/' + groupWithUserAdded.id + '/user/id/' + user.id).respond(
-                {status: 'ok', group: groupWithoutUserAdded}
+                groupWithoutUserAdded
             );
 
             groupservice.removeUserFromGroup(groupWithUserAdded, user).then(function (response) {
@@ -155,7 +155,7 @@ describe('GroupService', function () {
     function getGroup(id) {
         var group = {};
         $httpBackend.expectGET('/api/group/id/' + id).respond(
-            groups[id - 1]
+            {status: 'ok', info:'', group: groups.groups[id - 1]}
         );
         groupservice.getGroup(id).then(function (results) {
             group = results;

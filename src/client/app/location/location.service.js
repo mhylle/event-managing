@@ -39,7 +39,7 @@
                 .catch(onGetLocationError);
 
             function onGetLocationSuccess(response) {
-                Logger.info(response.data.name);
+                Logger.info(response.data.location.name);
                 return response.data;
             }
 

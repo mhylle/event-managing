@@ -73,8 +73,13 @@
 
         function getGroup() {
             groupservice.getGroup(vm.groupid).then(function (response) {
-                vm.group = response;
-                calculateUserLists();
+                if (response.status === 'ok') {
+                    vm.group = response.group;
+                    calculateUserLists();
+                } else {
+                    vm.group = [];
+                    vm.status.message = 'An error occured when retrieving the group';
+                }
             });
         }
 
@@ -145,19 +150,19 @@
             }
             Logger.info('Trying to add user ' + user.id + ' to group ' + vm.group.id);
             groupservice.addUserToGroup(vm.group, user).then(function (response) {
-                if (!response.data) {
+                if (!response) {
                     vm.status.message = 'Failed in adding user to group';
                 }
 
-                if (response.data.status === 'ok') {
+                if (response.status === 'ok') {
                     vm.status.message = 'User successfully added to group';
-                    vm.group = response.data.group;
+                    vm.group = response.group;
                     lodash.remove(vm.availableUsers, function (u) {
                         return u.id === user.id;
                     });
                 }
-                if (response.data.status === 'failed') {
-                    vm.status.message = response.data.info;
+                if (response.status === 'failed') {
+                    vm.status.message = response.info;
                 }
             });
         }
@@ -171,19 +176,19 @@
             }
 
             groupservice.addUsersToGroup(vm.group, vm.availableUsers).then(function (response) {
-                if (!response.data) {
+                if (!response) {
                     vm.status.message = 'Failed in adding all available to group';
                     success = true;
                 }
 
-                if (response.data.status === 'ok') {
+                if (response.status === 'ok') {
                     vm.status.message = 'Available users successfully added to group';
-                    vm.group = response.data.group;
+                    vm.group = response.group;
                     vm.availableUsers = [];
                     success = true;
                 }
-                if (response.data.status === 'failed') {
-                    vm.status.message = response.data.info;
+                if (response.status === 'failed') {
+                    vm.status.message = response.info;
                     success = true;
                 }
             });
@@ -207,13 +212,13 @@
                     vm.status.message = 'Failed in removing user from group';
                 }
 
-                if (response.data.status === 'ok') {
+                if (response.status === 'ok') {
                     vm.status.message = 'User successfully removed from group';
-                    vm.group = response.data.group;
+                    vm.group = response.group;
                     vm.availableUsers.push(user);
                 }
-                if (response.data.status === 'failed') {
-                    vm.status.message = response.data.info;
+                if (response.status === 'failed') {
+                    vm.status.message = response.info;
                 }
             });
         }
