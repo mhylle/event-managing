@@ -60,10 +60,13 @@
                             vm.status.message = 'Event created ok';
                         }
 
-                        if (response.status.code === 'failed') {
+                        if (response.status === 'failed') {
                             vm.status.code = 'failed';
                             vm.status.message = 'An error occured while creating the event';
                         }
+                    } else {
+                        vm.status.code = 'failed';
+                        vm.status.message = 'An error occured while creating the event';
                     }
                 } else {
                     vm.status.code = 'failed';
