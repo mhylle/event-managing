@@ -3,6 +3,8 @@ describe('LocationViewController', function () {
     var controller;
     var locations = locationMockData.getMockLocations();
     var location = locationMockData.getMockLocation();
+    var crashedlocation = locationMockData.getMockCrashedLocations();
+    var failedlocation = locationMockData.getMockFailedLocations();
 
     bard.verifyNoOutstandingHttpRequests();
 
@@ -64,7 +66,7 @@ describe('LocationViewController', function () {
                     expect(controller.location).to.exist;
                 });
 
-                describe('Location name', function() {
+                describe('Location name', function () {
                     it('should exist', function () {
                         expect(controller.location.name).to.exist;
                     });
@@ -75,20 +77,72 @@ describe('LocationViewController', function () {
                 });
             });
         });
-        describe.skip('Backend failures', function () {
+        describe('Failed service', function () {
             beforeEach(function () {
                 var scope = $rootScope.$new();
 
+                var ls = {
+                    getLocations: function () {
+                        return $q.when(failedlocation);
+                    },
+                    getLocation: function () {
+                        return $q.when(failedlocation);
+                    }
+                };
+
                 controller = $controller('locationviewcontroller', {
+                    locationservice: ls,
                     $scope: scope,
                     $stateParams: {id: 1}
                 });
+                $rootScope.$apply();
             });
-            it('should handle a service 500 response correctly', function () {
-                var location = _.find(locations, function (l) {
-                    return parseInt(l.id) === 1;
+
+            it('should have a status code of failed', function () {
+                expect(controller.status.code).to.equal('failed');
+            });
+
+            it('should have a status message', function () {
+                expect(controller.status.message).to.equal('Unable to retrieve data from database');
+            });
+
+            it('should have not have a location', function () {
+                expect(controller.location).to.be.null;
+            });
+        });
+
+        describe('Crashed service', function () {
+            beforeEach(function () {
+                var scope = $rootScope.$new();
+
+                var ls = {
+                    getLocations: function () {
+                        return $q.when(crashedlocation);
+                    },
+                    getLocation: function () {
+                        return $q.when(crashedlocation);
+                    }
+                };
+
+                controller = $controller('locationviewcontroller', {
+                    locationservice: ls,
+                    $scope: scope,
+                    $stateParams: {id: 1}
                 });
-                $httpBackend.whenGET('/api/location/id/1').respond(500, null);
+                $rootScope.$apply();
+            });
+
+            it('should have a status code of failed', function () {
+                expect(controller.status.code).to.equal('failed');
+            });
+
+            it('should have a status message', function () {
+                expect(controller.status.message)
+                    .to.equal('An error occurred while retrieving the location from the server');
+            });
+
+            it('should have not have a location', function () {
+                expect(controller.location).to.be.null;
             });
         });
     });

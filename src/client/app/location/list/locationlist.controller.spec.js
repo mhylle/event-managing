@@ -4,7 +4,7 @@ describe('LocationListController', function () {
     var locations = locationMockData.getMockLocations();
     var failedLocations = locationMockData.getMockFailedLocations();
     var emptyLocations = locationMockData.getMockEmptyLocations();
-    var notOkLocations = locationMockData.getMockNotOkLocation();
+    var notOkLocations = locationMockData.getMockCrashedLocations();
 
     bard.verifyNoOutstandingHttpRequests();
 
@@ -107,7 +107,7 @@ describe('LocationListController', function () {
                 });
 
                 it('should have a response.status.code error', function () {
-                    expect(controller.status.code).to.equal('error');
+                    expect(controller.status.code).to.equal('failed');
                 });
 
                 it('should have a status message', function () {
@@ -139,7 +139,7 @@ describe('LocationListController', function () {
                 });
 
                 it('should have a response.status.code error', function () {
-                    expect(controller.status.code).to.equal('failed');
+                    expect(controller.status.code).to.equal('error');
                 });
 
                 it('should have a status message', function () {

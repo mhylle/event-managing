@@ -13,17 +13,35 @@
         var vm = this;
         vm.title = 'userviewcontroller';
         vm.user = null;
+        vm.userid = '';
 
         vm.status = {
-            message : ''
+            message: ''
         };
         activate();
 
         ////////////////
         function activate() {
             Logger.info('got id ' + $stateParams.id + ' passed in as start parameter.');
-            userservice.getUser($stateParams.id).then(function (response) {
-                vm.user = response;
+            vm.userid = $stateParams.id;
+            getUser();
+        }
+
+        function getUser() {
+            userservice.getUser(vm.userid).then(function (response) {
+                if (!response) {
+                    vm.status.code = 'failed';
+                    vm.status.message = 'An error occurred while retrieving the user from the server';
+                    vm.user = null;
+                } else {
+                    if (response.status === 'ok') {
+                        vm.user = response.user;
+                    } else {
+                        vm.user = null;
+                        vm.status.code = 'failed';
+                        vm.status.message = response.info;
+                    }
+                }
             });
         }
     }

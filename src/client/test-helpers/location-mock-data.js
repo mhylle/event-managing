@@ -6,7 +6,7 @@ var locationMockData = (function () {
         getMockEmptyLocations: getMockEmptyLocations,
         getMockFailedLocations: getMockFailedLocations,
         getMockLocation: getMockLocation,
-        getMockNotOkLocation: getMockNotOkLocation
+        getMockCrashedLocations: getMockCrashedLocations
     };
 
     function getMockLocation() {
@@ -150,14 +150,14 @@ var locationMockData = (function () {
     }
 
     function getMockFailedLocations() {
-        return undefined;
-    }
-
-    function getMockNotOkLocation() {
         return {
             status: 'failed',
-            info: 'An unexpected error occured'
+            info: 'Unable to retrieve data from database'
         };
+    }
+
+    function getMockCrashedLocations() {
+        return undefined;
     }
 
     function getMockEmptyLocations() {

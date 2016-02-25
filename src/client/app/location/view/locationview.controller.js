@@ -41,7 +41,7 @@
             locationservice.getLocation(vm.locationid).then(function (response) {
                 if (!response) {
                     vm.status.code = 'failed';
-                    vm.status.message = 'An error occured retrieving the location from the server';
+                    vm.status.message = 'An error occurred while retrieving the location from the server';
                 } else {
                     if (response.status === 'ok') {
                         vm.location = response.location;
