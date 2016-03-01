@@ -1,7 +1,10 @@
 /* jshint -W117, -W030 */
 describe('UserViewController', function () {
     var controller;
-    var users = mockData.getMockUsers();
+    var users = userMockData.getMockUsers();
+    var user = userMockData.getMockSingleUser();
+    var faileduser = userMockData.getFailedMockUsers();
+    var crasheduser = userMockData.getCrashedMockUsers();
 
     bard.verifyNoOutstandingHttpRequests();
 
@@ -18,8 +21,8 @@ describe('UserViewController', function () {
                 getUsers: function () {
                     return $q.when(users);
                 },
-                getUser: function (id) {
-                    return $q.when(users[id - 1]);
+                getUser: function () {
+                    return $q.when(user);
                 }
             };
             controller = $controller('userviewcontroller', {
@@ -29,7 +32,6 @@ describe('UserViewController', function () {
             });
         });
         describe('With valid data', function () {
-
             it('Should exist', function () {
                 expect(controller).to.exist;
             });
@@ -61,6 +63,67 @@ describe('UserViewController', function () {
                 it('should have a user with firstname Brandon', function () {
                     expect(controller.user.firstname).to.equal('Brandon');
                 });
+            });
+        });
+
+        describe('Failed service', function () {
+            beforeEach(function () {
+                var scope = $rootScope.$new();
+
+                var us = {
+                    getUser: function () {
+                        return $q.when(faileduser);
+                    }
+                };
+                controller = $controller('userviewcontroller', {
+                    userservice: us,
+                    $scope: scope,
+                    $stateParams: {id: 1}
+                });
+                $rootScope.$apply();
+            });
+
+            it('should have a status code of failed', function () {
+                expect(controller.status.code).to.equal('failed');
+            });
+
+            it('should have a status message', function () {
+                expect(controller.status.message).to.equal('Unable to retrieve data from database');
+            });
+
+            it('should have not have a user', function () {
+                expect(controller.user).to.be.null;
+            });
+        });
+
+        describe('Crashed service', function () {
+            beforeEach(function () {
+                var scope = $rootScope.$new();
+
+                var us = {
+                    getUser: function () {
+                        return $q.when(crasheduser);
+                    }
+                };
+                controller = $controller('userviewcontroller', {
+                    userservice: us,
+                    $scope: scope,
+                    $stateParams: {id: 1}
+                });
+                $rootScope.$apply();
+            });
+
+            it('should have a status code of failed', function () {
+                expect(controller.status.code).to.equal('failed');
+            });
+
+            it('should have a status message', function () {
+                expect(controller.status.message)
+                    .to.equal('An error occurred while retrieving the user from the server');
+            });
+
+            it('should have not have a user', function () {
+                expect(controller.user).to.be.null;
             });
         });
     });

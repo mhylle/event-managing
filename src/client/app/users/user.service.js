@@ -10,6 +10,7 @@
     /* @ngInject */
     function userservice($http, Logger) {
         var service = {
+            name: 'userservice',
             getUsers: getUsers,
             getUser: getUser,
             createUser: createUser

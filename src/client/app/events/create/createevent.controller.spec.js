@@ -63,33 +63,136 @@ describe('CreateEventController', function () {
                 });
 
                 describe('Creating event', function () {
-                    beforeEach(function () {
-                        controller.event = eventToCreate;
-                        controller.create();
+                    describe('Successfully', function () {
+                        beforeEach(function () {
+                            controller.event = eventToCreate;
+                            controller.create();
+                            $rootScope.$apply();
+                        });
+
+                        it('should call the createevent service method on creating an event.', function () {
+                            expect(EventService.createEvent).to.have.been.calledOnce;
+                        });
+
+                        it('should have a status code of ok if response.status.code is ok', function () {
+                            expect(controller.status.code).to.equal('ok');
+                        });
+
+                        it('should have a status message', function () {
+                            expect(controller.status.message).to.exist;
+                        });
+
+                        it('should have a status message that is not empty', function () {
+                            expect(controller.status.message).not.to.be.empty;
+                        });
+
+                        it('should have a status message if response.status.code is ok', function () {
+                            expect(controller.status.message).to.equal('Event created ok');
+                        });
                     });
 
-                    it('should call the createevent service method on creating an event.', function () {
-                        expect(EventService.createEvent).to.have.been.calledOnce;
+                    describe('Failure', function () {
+                        beforeEach(function () {
+                            var scope = $rootScope.$new();
+
+                            var es = {
+                                createEvent: function () {
+                                    return $q.when({status: 'failed', info: ''});
+                                }
+                            };
+
+                            var ls = {
+                                getLocations: function () {
+                                    return $q.when(locations);
+                                }
+                            };
+                            controller = $controller('createeventcontroller', {
+                                EventService: es,
+                                locationservice: ls,
+                                $scope: scope
+                            });
+                            $rootScope.$apply();
+                        });
+                        it('should have a status code of failed if response.status.code is failed', function () {
+                            controller.event = undefined;
+                            controller.create();
+                            $rootScope.$apply();
+                            expect(controller.status.code).to.equal('failed');
+                        });
                     });
 
-                    it('should have a status code of ok if response.status.code is ok', function () {
-                        expect(controller.status.code).to.equal('ok');
+                    describe('Crashed', function () {
+                        beforeEach(function () {
+                            var scope = $rootScope.$new();
+
+                            var es = {
+                                createEvent: function () {
+                                    return $q.when();
+                                }
+                            };
+
+                            var ls = {
+                                getLocations: function () {
+                                    return $q.when(locations);
+                                }
+                            };
+                            controller = $controller('createeventcontroller', {
+                                EventService: es,
+                                locationservice: ls,
+                                $scope: scope
+                            });
+                            $rootScope.$apply();
+                        });
+                        it('should have a status code of failed if response.status.code is failed', function () {
+                            controller.event = undefined;
+                            controller.create();
+                            $rootScope.$apply();
+                            expect(controller.status.code).to.equal('failed');
+                        });
                     });
 
-                    it('should have a status message', function () {
-                        expect(controller.status.message).to.exist;
-                    });
+                    describe('No Status', function () {
+                        beforeEach(function () {
+                            var scope = $rootScope.$new();
 
-                    it.skip('should have a status message that is not empty', function () {
-                        expect(controller.status.message).not.to.be.empty;
-                    });
+                            var es = {
+                                createEvent: function () {
+                                    return $q.when({});
+                                }
+                            };
 
-                    it.skip('should have a status message if response.status.code is ok', function () {
-                        expect(controller.status.message).to.equal('Event created ok');
+                            var ls = {
+                                getLocations: function () {
+                                    return $q.when(locations);
+                                }
+                            };
+                            controller = $controller('createeventcontroller', {
+                                EventService: es,
+                                locationservice: ls,
+                                $scope: scope
+                            });
+                            $rootScope.$apply();
+                        });
+                        it('should have a status code of failed if response.status.code is failed', function () {
+                            controller.event = undefined;
+                            controller.create();
+                            $rootScope.$apply();
+                            expect(controller.status.code).to.equal('failed');
+                        });
                     });
+                });
 
-                    it.skip('should have a status code of failed if response.status.code is failed', function () {
-                        expect(controller.status.code).to.equal('failed');
+                describe.skip('datepicker initialization', function () {
+                    describe('start', function () {
+                        it('should have set start.today to current date', function() {
+                            controller.datepicker.start.today();
+                            expect(controller.event.start).to.equal(new Date());
+                        });
+                        it('should set opened to be true when calling the open function');
+                    });
+                    describe('end', function () {
+                        it('should have set today to current date');
+                        it('should set opened to be true when calling the open function');
                     });
                 });
             });
