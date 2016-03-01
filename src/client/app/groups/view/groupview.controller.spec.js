@@ -1,7 +1,7 @@
 /* jshint -W117, -W030 */
 describe('GroupViewController', function () {
     var controller;
-    var groups = groupMockData.getMockGroups();
+    var mockGroups = groupMockData.getMockGroups();
     var mockUsers = groupMockData.getMockUsers();
     var groupWithoutUserAdded = groupMockData.getMockGroupWithUsersWithoutUsersAdded();
     var groupWithUserAdded = groupMockData.getMockGroupWithUsersWithUsersAdded();
@@ -27,7 +27,7 @@ describe('GroupViewController', function () {
 
             var gs = {
                 getGroups: function () {
-                    return $q.when(groups);
+                    return $q.when(mockGroups);
                 },
                 getGroup: function () {
                     return $q.when(groupWithoutUserAdded);
@@ -185,10 +185,10 @@ describe('GroupViewController', function () {
                                 var scope = $rootScope.$new();
                                 var gs = {
                                     getGroups: function () {
-                                        return $q.when(groups);
+                                        return $q.when(mockGroups);
                                     },
                                     getGroup: function () {
-                                        return $q.when(groups[1]);
+                                        return $q.when(mockGroups[1]);
                                     }
                                 };
 
@@ -212,28 +212,37 @@ describe('GroupViewController', function () {
                 });
             });
         });
-        describe.skip('Backend failures', function () {
+        describe('Backend failures', function () {
             beforeEach(function () {
                 var scope = $rootScope.$new();
 
+                var us = {
+                    getUsers: function () {
+                        return $q.when(mockUsers);
+                    }
+                };
                 controller = $controller('groupviewcontroller', {
+                    userservice: us,
                     $scope: scope,
                     $stateParams: {id: 1}
                 });
+
             });
-            it('should handle a service 500 response correctly', function () {
-                var user = _.find(users, function (u) {
+            it.skip('should handle a service 500 response correctly', function () {
+                var user = _.find(mockUsers, function (u) {
                     return parseInt(u.id) === 1;
                 });
-                var group = _.find(groups, function (g) {
-                    return parseInt(g.id) === 1;
-                });
+                //var group = _.find(mockGroups, function (g) {
+                //    return parseInt(g.id) === 1;
+                //});
+                $httpBackend.expectGET('/api/group/id/1').respond(groupWithoutUserAdded);
                 $httpBackend.whenDELETE('/api/group/id/1/user/id/1').respond(500, null);
+                $httpBackend.flush();
                 controller.removeUserFromGroup(user);
-                //        $rootScope.$apply();
-                //        //expect(controller.group).to.exist;
-                //        //expect(controller.group.users).to.exist;
-                //        //expect(controller.group.users).not.to.contain(userToAddToGroup);
+                expect(controller.group).to.exist;
+                expect(controller.group.users).to.exist;
+                //expect(controller.status.code).to.equal('failed');
+                expect(controller.status.message).to.equal('failed');
             });
         });
     });

@@ -3,8 +3,8 @@ describe('LocationViewController', function () {
     var controller;
     var locations = locationMockData.getMockLocations();
     var location = locationMockData.getMockLocation();
-    var crashedlocation = locationMockData.getMockCrashedLocations();
-    var failedlocation = locationMockData.getMockFailedLocations();
+    var crashedLocation = locationMockData.getMockCrashedLocations();
+    var failedLocation = locationMockData.getMockFailedLocations();
 
     bard.verifyNoOutstandingHttpRequests();
 
@@ -83,10 +83,10 @@ describe('LocationViewController', function () {
 
                 var ls = {
                     getLocations: function () {
-                        return $q.when(failedlocation);
+                        return $q.when(failedLocation);
                     },
                     getLocation: function () {
-                        return $q.when(failedlocation);
+                        return $q.when(failedLocation);
                     }
                 };
 
@@ -103,7 +103,7 @@ describe('LocationViewController', function () {
             });
 
             it('should have a status message', function () {
-                expect(controller.status.message).to.equal('Unable to retrieve data from database');
+                expect(controller.status.message).to.equal('An unexpected error occurred');
             });
 
             it('should have not have a location', function () {
@@ -117,10 +117,10 @@ describe('LocationViewController', function () {
 
                 var ls = {
                     getLocations: function () {
-                        return $q.when(crashedlocation);
+                        return $q.when(crashedLocation);
                     },
                     getLocation: function () {
-                        return $q.when(crashedlocation);
+                        return $q.when(crashedLocation);
                     }
                 };
 

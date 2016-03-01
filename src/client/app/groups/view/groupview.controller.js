@@ -23,6 +23,7 @@
         $scope.pageClass = 'scrolled';
 
         vm.group = null;
+        vm.groupIcon = null;
         vm.availableUsers = [];
         vm.groupid = '';
         vm.response = {};
@@ -46,7 +47,6 @@
         vm.pageChanged = pageChanged;
         vm.setPage = setPage;
         vm.pageCount = pageCount;
-        vm.getIcon = getIcon;
         vm.addUserToGroup = addUserToGroup;
         vm.addAllUsersToGroup = addAllUsersToGroup;
         vm.removeUserFromGroup = removeUserFromGroup;
@@ -63,10 +63,6 @@
             populatePaginationButtons();
         }
 
-        function getIcon(group) {
-            return groupiconservice.getIcon(group);
-        }
-
         function pageCount() {
             return Math.ceil(vm.availableUsers.length / vm.itemsPerPage);
         }
@@ -75,6 +71,7 @@
             groupservice.getGroup(vm.groupid).then(function (response) {
                 if (response.status === 'ok') {
                     vm.group = response.group;
+                    vm.groupIcon = groupiconservice.getIcon(vm.group);
                     calculateUserLists();
                 } else {
                     vm.group = [];
@@ -198,6 +195,7 @@
         }
 
         function removeUserFromGroup(user) {
+            vm.status.message = '';
             if (!vm.group) {
                 vm.status.message = 'No group selected';
                 return;
@@ -208,7 +206,7 @@
             }
             Logger.info('Trying to remove user ' + user.id + ' from group ' + vm.group.id);
             groupservice.removeUserFromGroup(vm.group, user).then(function (response) {
-                if (!response.data) {
+                if (!response) {
                     vm.status.message = 'Failed in removing user from group';
                 }
 

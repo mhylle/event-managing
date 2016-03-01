@@ -107,7 +107,7 @@ describe('LocationListController', function () {
                 });
 
                 it('should have a response.status.code error', function () {
-                    expect(controller.status.code).to.equal('failed');
+                    expect(controller.status.code).to.equal('error');
                 });
 
                 it('should have a status message', function () {

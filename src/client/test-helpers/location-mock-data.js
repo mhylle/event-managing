@@ -6,7 +6,8 @@ var locationMockData = (function () {
         getMockEmptyLocations: getMockEmptyLocations,
         getMockCrashedLocations: getMockCrashedLocations,
         getMockLocation: getMockLocation,
-        getMockFailedLocation: getMockFailedLocations
+        getMockFailedLocation: getMockFailedLocation,
+        getMockFailedLocations: getMockFailedLocations
     };
 
     function getMockLocation() {
@@ -156,7 +157,13 @@ var locationMockData = (function () {
     function getMockFailedLocations() {
         return {
             status: 'failed',
-            info: 'An unexpected error occured'
+            info: 'An unexpected error occurred'
+        };
+    }
+    function getMockFailedLocation() {
+        return {
+            status: 'failed',
+            info: 'An unexpected error occurred'
         };
     }
 
