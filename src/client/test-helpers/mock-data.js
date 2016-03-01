@@ -14,7 +14,9 @@ var mockData = (function () {
         getCrashedMockEvents: getCrashedMockEvents,
         getMockEventWithUser: getMockEventWithUser,
         getMockEventWithoutUser: getMockEventWithoutUser,
-        getMockSingleUser: getMockSingleUser
+        getMockSingleUser: getMockSingleUser,
+        getMockUnsignedEvent: getMockUnsignedEvent,
+        getMockSignedEvent: getMockSignedEvent
     };
 
     function getMockEventWithUser() {
@@ -62,15 +64,16 @@ var mockData = (function () {
 
     function getMockSingleUser() {
         return {
-            id: 1,
+            id: 2,
             gender: 'Male',
-            firstname: 'Brandon',
-            lastname: 'Morales',
-            username: 'bmorales0',
-            email: 'bmorales0@e-recht24.de',
-            passstring: 'f927052bfca1cbadaceee849fdbbb717b8df94ab',
-            phone: '381-(499)311-9438',
-            logicalid: '51ef4033-990c-4ecf-8e50-34adfd464f5e'
+            firstname: 'Martin',
+            lastname: 'Hylleberg',
+            username: 'mah',
+            passtring: 'mah',
+            address: 'Tousvej 6a, 8230 Åbyhøj, Danmark',
+            email: 'mhylle@gmail.com',
+            phone: '61791394',
+            logicalId: '2020743'
         };
     }
 
@@ -364,6 +367,49 @@ var mockData = (function () {
         };
     }
 
+    function getMockSignedEvent() {
+        var signedUser = getMockSingleUser();
+        return {
+            status: 'ok',
+            info: '',
+            event: {
+                id: 1,
+                name: 'Fastelavn',
+                start: '07-02-2016 14:00:00',
+                end: '07-02-2016 16:00:00',
+                signstart: '17-01-2016',
+                signend: '02-02-2016',
+                signoutend: '02-02-2016',
+                location: 'Kantinen',
+                logo: '',
+                decription: 'En festlig dag for børnene.',
+                users: [signedUser],
+                activities: []
+            }
+        };
+    }
+
+    function getMockUnsignedEvent() {
+        return {
+            status: 'ok',
+            info: '',
+            event: {
+                id: 1,
+                name: 'Fastelavn',
+                start: '07-02-2016 14:00:00',
+                end: '07-02-2016 16:00:00',
+                signstart: '17-01-2016',
+                signend: '02-02-2016',
+                signoutend: '02-02-2016',
+                location: 'Kantinen',
+                logo: '',
+                decription: 'En festlig dag for børnene.',
+                users: [],
+                activities: []
+            }
+        };
+    }
+
     function getMockEventsWithEventCreated() {
         var mockUsers = getMockUsers();
         // jscs:disable
@@ -473,10 +519,14 @@ var mockData = (function () {
     }
 
     function getFailedMockEvents() {
-        return undefined;
+        return {
+            status: 'failed',
+            info: 'An unexpected error occured'
+        };
     }
 
     function getCrashedMockEvents() {
+        return undefined;
     }
 
     function getMockGroups() {

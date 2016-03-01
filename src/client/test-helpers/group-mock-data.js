@@ -8,6 +8,7 @@ var groupMockData = (function () {
         getMockGroupWithUsers: getMockGroupWithUsers,
         getFailedMockGroups: getFailedMockGroups,
         getCrashedMockGroups: getCrashedMockGroups,
+        getMockEmptyGroups: getMockEmptyGroups,
         getMockGroupWithoutUsersArray: getMockGroupWithoutUsersArray,
         getMockGroupWithUsersWithoutData: getMockGroupWithUsersWithoutData,
         getMockGroupWithUsersWithoutUsersAdded: getMockGroupWithUsersWithoutUsersAdded,
@@ -398,5 +399,13 @@ var groupMockData = (function () {
 
     function getCrashedMockGroups() {
         return undefined;
+    }
+
+    function getMockEmptyGroups() {
+        return {
+            status: 'ok',
+            info: '',
+            groups: []
+        };
     }
 })();

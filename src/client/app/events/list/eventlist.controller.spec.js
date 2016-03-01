@@ -3,8 +3,11 @@ describe('EventListController', function () {
     var controller;
 
     var events = mockData.getMockEvents();
-    var signedevents = mockData.getMockSignedEvents();
+    //var signedevents = mockData.getMockSignedEvents();
     var users = mockData.getMockUsers();
+    var unsignedEvent = mockData.getMockUnsignedEvent();
+    var signedUser = mockData.getMockSingleUser();
+    var signedEvent = mockData.getMockSignedEvent();
     var failedEvents = mockData.getFailedMockEvents();
     var crashedEvents = mockData.getCrashedMockEvents();
     var noEvents = mockData.getNoMockEvents();
@@ -13,7 +16,7 @@ describe('EventListController', function () {
 
     beforeEach(function () {
         module('event-managing-events');
-        bard.inject('$controller', '$rootScope', '$q', '$state', '$filter');
+        bard.inject('$controller', '$rootScope', '$q', '$state', '$filter', 'Session');
     });
 
     describe('Controller Initialization', function () {
@@ -28,7 +31,7 @@ describe('EventListController', function () {
                         return $q.when();
                     },
                     attend: function () {
-                        return $q.when(signedevents[0]);
+                        return $q.when(signedEvent);
                     }
                 };
                 controller = $controller('EventController', {
@@ -56,6 +59,7 @@ describe('EventListController', function () {
 
             describe('After activation', function () {
                 beforeEach(function () {
+                    Session.create(null, signedUser, null);
                     $rootScope.$apply();
                 });
 
@@ -75,19 +79,18 @@ describe('EventListController', function () {
                     expect(controller.status.code).to.equal('ok');
                 });
 
-                it('should calculate time to last sign up date from now');
-
                 describe('Signup/off', function () {
                     it('should not have the current user signed in', function () {
                         var event = controller.events[0];
                         var isAttending = $filter('isattendingeventfilter')(event, users[0]);
                         expect(isAttending).to.be.false;
                     });
-                    it.skip('should signup a user when pressing the attend button', function () {
+                    it('should signup a user when pressing the attend button', function () {
                         var event = controller.events[0];
                         controller.signup(event);
+                        $rootScope.$apply();
                         event = controller.events[0];
-                        var isAttending = $filter('isattendingeventfilter')(event, users[0]);
+                        var isAttending = $filter('isattendingeventfilter')(event, signedUser);
                         expect(isAttending).to.be.true;
                     });
                 });
@@ -162,8 +165,8 @@ describe('EventListController', function () {
                     expect(controller.status.response).to.undefined;
                 });
 
-                it('should have a response.status.code error', function () {
-                    expect(controller.status.code).to.equal('error');
+                it('should have a response.status.code failed', function () {
+                    expect(controller.status.code).to.equal('failed');
                 });
 
                 it('should have a status message', function () {

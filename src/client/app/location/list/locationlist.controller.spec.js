@@ -2,9 +2,9 @@
 describe('LocationListController', function () {
     var controller;
     var locations = locationMockData.getMockLocations();
-    var failedLocations = locationMockData.getMockFailedLocations();
+    var crashedLocations = locationMockData.getMockCrashedLocations();
     var emptyLocations = locationMockData.getMockEmptyLocations();
-    var notOkLocations = locationMockData.getMockNotOkLocation();
+    var failedLocations = locationMockData.getMockFailedLocation();
 
     bard.verifyNoOutstandingHttpRequests();
 
@@ -89,7 +89,7 @@ describe('LocationListController', function () {
                 var scope = $rootScope.$new();
                 var ls = {
                     getLocations: function () {
-                        return $q.when(failedLocations);
+                        return $q.when(crashedLocations);
                     }
                 };
                 controller = $controller('locationlistcontroller', {
@@ -121,7 +121,7 @@ describe('LocationListController', function () {
                 var scope = $rootScope.$new();
                 var ls = {
                     getLocations: function () {
-                        return $q.when(notOkLocations);
+                        return $q.when(failedLocations);
                     }
                 };
                 controller = $controller('locationlistcontroller', {

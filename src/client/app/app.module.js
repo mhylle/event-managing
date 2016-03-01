@@ -53,15 +53,16 @@
 
     function setupSecurity($rootScope, AUTH_EVENTS, SecurityService, Logger, Session) {
         Session.create(null, {
-            'id': 2,
-            'firstname': 'Martin',
-            'lastname': 'Hylleberg',
-            'username': 'mah',
-            'passtring': 'mah',
-            'address': 'Tousvej 6a, 8230 Åbyhøj, Danmark',
-            'mail': 'mhylle@gmail.com',
-            'phone': '61791394',
-            'logicalId': '2020743'
+            id: 2,
+            gender: 'Male',
+            firstname: 'Martin',
+            lastname: 'Hylleberg',
+            username: 'mah',
+            passtring: 'mah',
+            address: 'Tousvej 6a, 8230 Åbyhøj, Danmark',
+            email: 'mhylle@gmail.com',
+            phone: '61791394',
+            logicalId: '2020743'
         }, null);
         $rootScope.$on('$stateChangeStart', function (event, next) {
             if (next.data) {

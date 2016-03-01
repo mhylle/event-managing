@@ -4,6 +4,7 @@ describe('GroupListController', function () {
     var groups = groupMockData.getMockGroups();
     var failedGroups = groupMockData.getFailedMockGroups();
     var crashedGroups = groupMockData.getCrashedMockGroups();
+    var emptyGroups = groupMockData.getMockEmptyGroups();
 
     bard.verifyNoOutstandingHttpRequests();
 
@@ -97,15 +98,17 @@ describe('GroupListController', function () {
 
         });
 
-        describe.skip('With failed service', function () {
+        describe('With undefined service response', function () {
             beforeEach(function () {
-                var gs = {
+                var scope = $rootScope.$new();
+                var ls = {
                     getGroups: function () {
-                        return $q.when(failedGroups);
+                        return $q.when(crashedGroups);
                     }
                 };
                 controller = $controller('grouplistcontroller', {
-                    groupservice: gs,
+                    groupservice: ls,
+                    $scope: scope
                 });
             });
             describe('After activation', function () {
@@ -113,12 +116,8 @@ describe('GroupListController', function () {
                     $rootScope.$apply();
                 });
 
-                it('should not have events', function () {
+                it('should not have groups', function () {
                     expect(controller.groups).to.have.length(0);
-                });
-
-                it('should have a response.status that failed', function () {
-                    expect(controller.status.response).to.equal('RESPONSE_ERROR');
                 });
 
                 it('should have a response.status.code error', function () {
@@ -131,15 +130,18 @@ describe('GroupListController', function () {
 
             });
         });
-        describe.skip('With crashed service', function () {
+
+        describe('With failed service response', function () {
             beforeEach(function () {
+                var scope = $rootScope.$new();
                 var gs = {
                     getGroups: function () {
-                        return $q.when(crashedGroups);
+                        return $q.when(failedGroups);
                     }
                 };
                 controller = $controller('grouplistcontroller', {
-                    groupservice: gs
+                    groupservice: gs,
+                    $scope: scope
                 });
             });
             describe('After activation', function () {
@@ -147,22 +149,53 @@ describe('GroupListController', function () {
                     $rootScope.$apply();
                 });
 
-                it('should not have events', function () {
+                it('should not have groups', function () {
                     expect(controller.groups).to.have.length(0);
                 });
 
-                it('should have no response.status ', function () {
-                    expect(controller.status.response).not.to.exist;
+                it('should have a response.status.code error', function () {
+                    expect(controller.status.code).to.equal('failed');
                 });
 
-                it('should have a response.status.code warning', function () {
-                    expect(controller.status.code).to.equal('warning');
+                it('should have a status message', function () {
+                    expect(controller.status.message).not.to.be.empty;
+                });
+
+            });
+        });
+        describe('With empty result', function () {
+            beforeEach(function () {
+                var scope = $rootScope.$new();
+                var ls = {
+                    getGroups: function () {
+                        return $q.when(emptyGroups);
+                    }
+                };
+                controller = $controller('grouplistcontroller', {
+                    groupservice: ls,
+                    $scope: scope
+                });
+            });
+            describe('After activation', function () {
+                beforeEach(function () {
+                    $rootScope.$apply();
+                });
+
+                it('should have groups array', function () {
+                    expect(controller.groups).to.exist;
+                });
+
+                it('should not have groups', function () {
+                    expect(controller.groups).to.have.length(0);
+                });
+
+                it('should have a response.status.code ok', function () {
+                    expect(controller.status.code).to.equal('ok');
                 });
 
                 it('should have not have a status message', function () {
                     expect(controller.status.message).to.be.empty;
                 });
-
             });
         });
     });

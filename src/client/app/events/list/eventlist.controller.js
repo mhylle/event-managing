@@ -66,7 +66,7 @@
                         return e.id === evt.id;
                     }
                 );
-                lodash.merge(vm.events[index], response);
+                lodash.merge(vm.events[index], response.event);
             });
         }
     }
