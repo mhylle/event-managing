@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('eventmanaging.security')
+        .module('event-managing-security')
         .directive('loginDialog', loginDialog);
 
     loginDialog.$inject = ['AUTH_EVENTS'];

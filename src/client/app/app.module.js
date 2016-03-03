@@ -13,7 +13,7 @@
         'event-managing-users',
         'event-managing-groups',
         'event-managing-locations',
-        'eventmanaging.security'
+        'event-managing-security'
     ]).config(['$stateProvider', 'USER_ROLES', configuration])
         .controller('ApplicationController', ApplicationController)
         .run(setupSecurity);

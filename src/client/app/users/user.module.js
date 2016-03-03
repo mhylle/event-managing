@@ -2,7 +2,7 @@ angular
     .module('event-managing-users', [
         'ui.router',
         'eventmanaging',
-        'eventmanaging.security'
+        'event-managing-security'
     ]).config(['$stateProvider', 'USER_ROLES', configuration]);
 
 function configuration($stateProvider, USER_ROLES) {

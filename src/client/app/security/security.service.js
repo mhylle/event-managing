@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('eventmanaging.security')
+        .module('event-managing-security')
         .service('SecurityService', SecurityService);
 
     SecurityService.$inject = ['$http', 'Session'];

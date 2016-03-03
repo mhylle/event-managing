@@ -3,7 +3,7 @@ angular
         'ui.router',
         'ngAnimate',
         'event-managing-logger',
-        'eventmanaging.security'
+        'event-managing-security'
     ])
     .config(['$stateProvider', 'USER_ROLES', configuration]);
 

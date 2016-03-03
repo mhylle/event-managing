@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('eventmanaging.security')
+        .module('event-managing-security')
         .controller('SecurityController', SecurityController);
 
     SecurityController.$inject = ['$rootScope', '$scope', 'AUTH_EVENTS', 'SecurityService'];
