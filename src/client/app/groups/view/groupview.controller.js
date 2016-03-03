@@ -179,7 +179,7 @@
                 }
 
                 if (response.status === 'ok') {
-                    vm.status.message = 'Available users successfully added to group';
+                    vm.status.message = 'All users not in the group was added to the group.';
                     vm.group = response.group;
                     vm.availableUsers = [];
                     success = true;

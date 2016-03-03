@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('eventmanaging.header')
+        .module('event-managing-header')
         .controller('HeaderController', HeaderController);
 
     HeaderController.$inject = ['$scope', 'Logger'];
@@ -14,12 +14,15 @@
     function HeaderController($scope, Logger) {
         var vm = this;
         vm.title = 'HeaderController';
-
-        init();
+        vm.status = {
+            code: 'ok',
+            message: ''
+        };
+        activate();
 
         ////////////////
 
-        function init() {
+        function activate() {
             vm.title = 'Header';
             vm.logo = 'images/logo.png';
             $scope.$watch(function () {
@@ -33,7 +36,6 @@
                 } else {
                     vm.username = 'Not logged in.';
                 }
-
             });
         }
     }

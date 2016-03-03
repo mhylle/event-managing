@@ -124,6 +124,42 @@ describe('GroupService', function () {
             expect(resultGroup.users).to.exist;
         });
     });
+
+    describe('addUsersToGroup', function () {
+        it('Should not add null users to a group', function () {
+            var group = getGroup(1);
+            expect(group.users).not.to.exist;
+            var resultGroup = groupservice.addUsersToGroup(group, null);
+            expect(resultGroup).not.to.exist;
+        });
+
+        it('Should add users to a group', function () {
+            var workingGroup = getGroup(1);
+            expect(workingGroup).to.exist;
+            expect(workingGroup.users).not.to.exist;
+            var user1 = getUser(1);
+            var user2 = getUser(2);
+            var users = [user1, user2];
+            expect(user1).to.exist;
+            expect(user2).to.exist;
+
+            workingGroup.users = users;
+
+            $httpBackend.expectPUT('/api/group/id/' + workingGroup.id + '/users', users).respond(
+                {status: 'ok', info: '', group: workingGroup}
+            );
+
+            var status;
+            groupservice.addUsersToGroup(workingGroup, users).then(function (response) {
+                status = response.data.status;
+                resultGroup = response.data.group;
+            });
+            $httpBackend.flush();
+            expect(status).to.equal('ok');
+            expect(resultGroup.users).to.exist;
+
+        });
+    });
     describe('removeUserFromGroup', function () {
         it('Should not remove null users from a group', function () {
             var group = getGroup(1);
@@ -155,7 +191,7 @@ describe('GroupService', function () {
     function getGroup(id) {
         var group = {};
         $httpBackend.expectGET('/api/group/id/' + id).respond(
-            {status: 'ok', info:'', group: groups.groups[id - 1]}
+            {status: 'ok', info: '', group: groups.groups[id - 1]}
         );
         groupservice.getGroup(id).then(function (results) {
             group = results;

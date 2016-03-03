@@ -8,7 +8,7 @@
         'ngAnimate',
         'angular-loading-bar',
         'event-managing-logger',
-        'eventmanaging.header',
+        'event-managing-header',
         'event-managing-events',
         'event-managing-users',
         'event-managing-groups',

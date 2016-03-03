@@ -2,4 +2,4 @@
  * Created by mhylle on 11-12-2015.
  */
 angular
-    .module('eventmanaging.header', []);
+    .module('event-managing-header', ['event-managing-logger']);
