@@ -9,6 +9,7 @@ angular
         'textAngular',
         'ui.bootstrap',
         'event-managing-security',
+        'event-managing-users',
         'event-managing-logger'
     ])
     .config(['$stateProvider', 'USER_ROLES', configuration]);

@@ -8,10 +8,10 @@
         .module('event-managing-events')
         .factory('EventService', EventService);
 
-    EventService.$inject = ['$http', 'Logger'];
+    EventService.$inject = ['$http', '$q', 'Logger'];
 
     /* @ngInject */
-    function EventService($http, Logger) {
+    function EventService($http, $q, Logger) {
         var service = {
             name: 'EventService',
             getEvents: getEvents,
@@ -57,6 +57,7 @@
                 Logger.error(error);
             }
         }
+
         function createEvent(event) {
             Logger.info('Trying to retrieve event by id ' + event.id);
             return $http.post('/api/event', event)
@@ -74,9 +75,15 @@
         }
 
         function attend(event, user) {
+            if (!event) {
+                return {status: 'missing data', info: 'You must supply an event to attend.'};
+            }
+            if (!user) {
+                return {status: 'missing data', info: 'You must supply a user to attend.'};
+            }
             return $http.get('/api/event/attend/eid/' + event.id + '/uid/' + user.id)
-                .then(onAttendEventSuccess)
-                .catch(onAttendEventError);
+                    .then(onAttendEventSuccess)
+                    .catch(onAttendEventError);
 
             function onAttendEventSuccess(response) {
                 return response.data;

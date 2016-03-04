@@ -8,7 +8,7 @@ describe('EventService', function () {
 
     beforeEach(function () {
         module('event-managing-events');
-        bard.inject('$rootScope', '$httpBackend', '$log', 'EventService');
+        bard.inject('$rootScope', '$httpBackend', '$log', 'EventService', 'userservice');
     });
 
     it('is the eventservice', function () {
@@ -136,6 +136,36 @@ describe('EventService', function () {
         });
     });
 
+    describe('Attend', function () {
+        it('should not do anything with no event', function () {
+            var user = getUser(1);
+            var result = EventService.attend(null, user);
+            expect(result.status).to.equal('missing data');
+            expect(result.info).to.equal('You must supply an event to attend.');
+        });
+
+        it('should not do anything with no user', function() {
+            var event = getEvent(1);
+            var result = EventService.attend(event, null);
+            expect(result.status).to.equal('missing data');
+            expect(result.info).to.equal('You must supply a user to attend.');
+        });
+
+        it.skip('should add the user to the event when attending the event', function() {
+            var user = getUser(1);
+            var event = getEvent(1);
+            var result = EventService.attend(event, user);
+            expect(result).to.exist;
+            expect(result).to.be.a('promise');
+        });
+    });
+
+    describe('Unattend', function () {
+        it('should not do anything with no event');
+        it('should not do anything with no user');
+        it('should remove the user from the event when unattending the event');
+    });
+
     describe.skip('addUserToEvent', function () {
         it('Should not add null users to an event', function () {
             var event = getEvent(1);
@@ -170,7 +200,7 @@ describe('EventService', function () {
     function getEvent(id) {
         var event = {};
         $httpBackend.expectGET('/api/event/id/' + id).respond(
-            {status: 'ok', info:'', event: events.events[id - 1]}
+            {status: 'ok', info: '', event: events.events[id - 1]}
         );
         EventService.getEvent(id).then(function (results) {
             event = results;
@@ -190,4 +220,5 @@ describe('EventService', function () {
         $httpBackend.flush();
         return user;
     }
-});
+})
+;
