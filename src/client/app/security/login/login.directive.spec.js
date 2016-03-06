@@ -23,5 +23,5 @@ describe('LoginDirective', function () {
             var isolated = element.isolateScope();
             expect(isolated.visible).to.be.false;
         });
-    })
+    });
 });
