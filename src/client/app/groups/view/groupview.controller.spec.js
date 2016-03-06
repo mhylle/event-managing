@@ -142,12 +142,12 @@ describe('GroupViewController', function () {
                                         .to.deep.equal(controller.availableUsers);
 
                                 });
-                            it('should do nothing if no user was specified', function() {
+                            it('should do nothing if no user was specified', function () {
                                 controller.addUserToGroup();
                                 $rootScope.$apply();
                                 expect(controller.status.message).to.equal('No user selected');
                             });
-                            it('should do nothing if no group was selected', function() {
+                            it('should do nothing if no group was selected', function () {
                                 controller.group = null;
                                 var users = groupMockData.getMockUsers();
                                 controller.addUserToGroup(users[3]);
@@ -235,6 +235,11 @@ describe('GroupViewController', function () {
                                 $rootScope.$apply();
                                 expect(controller.currentPage).to.equal(1);
                             });
+                            it('should set the page to a specific page', function () {
+                                controller.setPage(2);
+                                $rootScope.$apply();
+                                expect(controller.currentPage).to.equal(2);
+                            });
                         });
 
                         describe('Failed user service', function () {
@@ -245,13 +250,13 @@ describe('GroupViewController', function () {
                                         return $q.when(mockGroups);
                                     },
                                     getGroup: function () {
-                                        return $q.when(mockGroups[1]);
+                                        return $q.when({status: 'ok', info: '', group: mockGroups.groups[1]});
                                     }
                                 };
 
                                 var us = {
                                     getUsers: function () {
-                                        return $q.when({});
+                                        return $q.when();
                                     }
                                 };
                                 controller = $controller('groupviewcontroller', {
@@ -260,8 +265,9 @@ describe('GroupViewController', function () {
                                     $scope: scope,
                                     $stateParams: {id: 1}
                                 });
+                                $rootScope.$apply();
                             });
-                            it.skip('should fail properly if user service is not working', function () {
+                            it('should fail properly if user service is not working', function () {
                                 expect(controller.status.users).to.equal('failed');
                             });
                         });
@@ -270,36 +276,136 @@ describe('GroupViewController', function () {
             });
         });
         describe('Backend failures', function () {
-            beforeEach(function () {
-                var scope = $rootScope.$new();
-
-                var us = {
-                    getUsers: function () {
-                        return $q.when(mockUsers);
-                    }
-                };
-                controller = $controller('groupviewcontroller', {
-                    userservice: us,
-                    $scope: scope,
-                    $stateParams: {id: 1}
+            describe('No Response', function () {
+                beforeEach(function () {
+                    var scope = $rootScope.$new();
+                    var gs = {
+                        getGroup: function () {
+                            return $q.when({status: 'failed', info: 'Unable to reach the database'});
+                        },
+                        addUserToGroup: function () {
+                            return $q.when();
+                        },
+                        removeUserFromGroup: function () {
+                            return $q.when();
+                        },
+                        addUsersToGroup: function () {
+                            return $q.when();
+                        }
+                    };
+                    var us = {
+                        getUsers: function () {
+                            return $q.when(mockUsers);
+                        }
+                    };
+                    controller = $controller('groupviewcontroller', {
+                        groupservice: gs,
+                        userservice: us,
+                        $scope: scope,
+                        $stateParams: {id: 1}
+                    });
                 });
 
+                it('should clear the group when getting an error back from getting a group', function () {
+                    expect(controller.group).to.be.null;
+                });
+
+                describe('addUserToGroup', function () {
+                    it('should set an error message', function () {
+                        var group = groupWithUserAdded;
+                        var user = mockUsers[2];
+                        controller.group = group;
+                        controller.addUserToGroup(user);
+                        $rootScope.$apply();
+                        expect(controller.status.message).to.equal('Failed in adding user to group');
+                    });
+                });
+
+                describe('removeUserFromGroup', function () {
+                    it('should set an error message', function () {
+                        var group = groupWithUserAdded;
+                        var user = mockUsers[2];
+                        controller.group = group;
+                        controller.removeUserFromGroup(user);
+                        $rootScope.$apply();
+                        expect(controller.status.message).to.equal('Failed in removing user from group');
+                    });
+                });
+
+                describe('addAllUsersToGroup', function () {
+                    it('should set an error message', function () {
+                        var group = groupWithUserAdded;
+                        controller.group = group;
+                        controller.addAllUsersToGroup();
+                        $rootScope.$apply();
+                        expect(controller.status.message).to.equal('Failed in adding all users to the group');
+                    });
+                });
             });
-            it.skip('should handle a service 500 response correctly', function () {
-                var user = _.find(mockUsers, function (u) {
-                    return parseInt(u.id) === 1;
+            describe('Failed Response', function () {
+                beforeEach(function () {
+                    var scope = $rootScope.$new();
+                    var gs = {
+                        getGroup: function () {
+                            return $q.when({status: 'failed', info: 'Unable to reach the database'});
+                        },
+                        addUserToGroup: function () {
+                            return $q.when({status: 'failed', info: 'Unable to reach the database'});
+                        },
+                        removeUserFromGroup: function () {
+                            return $q.when({status: 'failed', info: 'Unable to reach the database'});
+                        },
+                        addUsersToGroup: function () {
+                            return $q.when({status: 'failed', info: 'Unable to reach the database'});
+                        }
+                    };
+                    var us = {
+                        getUsers: function () {
+                            return $q.when(mockUsers);
+                        }
+                    };
+                    controller = $controller('groupviewcontroller', {
+                        groupservice: gs,
+                        userservice: us,
+                        $scope: scope,
+                        $stateParams: {id: 1}
+                    });
                 });
-                //var group = _.find(mockGroups, function (g) {
-                //    return parseInt(g.id) === 1;
-                //});
-                $httpBackend.expectGET('/api/group/id/1').respond(groupWithoutUserAdded);
-                $httpBackend.whenDELETE('/api/group/id/1/user/id/1').respond(500, null);
-                $httpBackend.flush();
-                controller.removeUserFromGroup(user);
-                expect(controller.group).to.exist;
-                expect(controller.group.users).to.exist;
-                //expect(controller.status.code).to.equal('failed');
-                expect(controller.status.message).to.equal('failed');
+
+                it('should clear the group when getting an error back from getting a group', function () {
+                    expect(controller.group).to.be.null;
+                });
+
+                describe('addUserToGroup', function () {
+                    it('should set the error message to the returned error message', function () {
+                        var group = groupWithUserAdded;
+                        var user = mockUsers[2];
+                        controller.group = group;
+                        controller.addUserToGroup(user);
+                        $rootScope.$apply();
+                        expect(controller.status.message).to.equal('Unable to reach the database');
+                    });
+                });
+                describe('removeUserFromGroup', function () {
+                    it('should set the error message to the returned error message', function () {
+                        var group = groupWithUserAdded;
+                        var user = mockUsers[2];
+                        controller.group = group;
+                        controller.removeUserFromGroup(user);
+                        $rootScope.$apply();
+                        expect(controller.status.message).to.equal('Unable to reach the database');
+                    });
+                });
+
+                describe('addAllUsersToGroup', function () {
+                    it('should set the error message to the returned error message', function () {
+                        var group = groupWithUserAdded;
+                        controller.group = group;
+                        controller.addAllUsersToGroup();
+                        $rootScope.$apply();
+                        expect(controller.status.message).to.equal('Unable to reach the database');
+                    });
+                });
             });
         });
     });

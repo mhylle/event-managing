@@ -74,7 +74,7 @@
                     vm.groupIcon = groupiconservice.getIcon(vm.group);
                     calculateUserLists();
                 } else {
-                    vm.group = [];
+                    vm.group = null;
                     vm.status.message = 'An error occured when retrieving the group';
                 }
             });
@@ -149,6 +149,7 @@
             groupservice.addUserToGroup(vm.group, user).then(function (response) {
                 if (!response) {
                     vm.status.message = 'Failed in adding user to group';
+                    return;
                 }
 
                 if (response.status === 'ok') {
@@ -165,7 +166,6 @@
         }
 
         function addAllUsersToGroup() {
-            var success = false;
             vm.status.message = 'Adding users to group';
             if (!vm.group) {
                 vm.status.message = 'No group selected';
@@ -174,24 +174,19 @@
 
             groupservice.addUsersToGroup(vm.group, vm.availableUsers).then(function (response) {
                 if (!response) {
-                    vm.status.message = 'Failed in adding all available to group';
-                    success = true;
+                    vm.status.message = 'Failed in adding all users to the group';
+                    return;
                 }
 
                 if (response.status === 'ok') {
                     vm.status.message = 'All users not in the group was added to the group.';
                     vm.group = response.group;
                     vm.availableUsers = [];
-                    success = true;
                 }
                 if (response.status === 'failed') {
                     vm.status.message = response.info;
-                    success = true;
                 }
             });
-            if (!success) {
-                vm.status.message = 'Something went wrong while trying to add users to the group';
-            }
         }
 
         function removeUserFromGroup(user) {
@@ -208,6 +203,7 @@
             groupservice.removeUserFromGroup(vm.group, user).then(function (response) {
                 if (!response) {
                     vm.status.message = 'Failed in removing user from group';
+                    return;
                 }
 
                 if (response.status === 'ok') {

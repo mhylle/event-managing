@@ -42,7 +42,6 @@
                 .catch(onGetGroupError);
 
             function onGetGroupSuccess(response) {
-                Logger.info(response.data.group.name);
                 return response.data;
             }
 

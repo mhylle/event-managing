@@ -119,20 +119,31 @@ describe('EventViewController', function () {
                 });
             });
         });
-        describe.skip('Backend failures', function () {
-            beforeEach(function () {
-                var scope = $rootScope.$new();
+        describe('Backend failures', function () {
+            describe.skip('No response', function () {
+                beforeEach(function () {
+                    var scope = $rootScope.$new();
+                    var es = {
+                        getEvent: function () {
+                            return $q.when();
+                        }
+                    };
+                    controller = $controller('eventviewcontroller', {
+                        $scope: scope,
+                        $stateParams: {id: 1},
+                        EventService: es
+                    });
+                    $rootScope.$apply();
+                });
 
-                controller = $controller('eventviewcontroller', {
-                    $scope: scope,
-                    $stateParams: {id: 1}
+                it('should set a status code of failed', function() {
+                    expect(controller.status.code).to.equal('failed1');
                 });
-            });
-            it('should handle a service 500 response correctly', function () {
-                var event = _.find(events, function (e) {
-                    return parseInt(e.id) === 1;
+
+                it('should have a status message', function() {
+                    expect(controller.status.message)
+                        .to.equal('An error occured retrieving the event from the server1');
                 });
-                $httpBackend.whenGET('/api/event/id/1').respond(500, null);
             });
         });
     });
