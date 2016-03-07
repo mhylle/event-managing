@@ -75,7 +75,7 @@
                     calculateUserLists();
                 } else {
                     vm.group = null;
-                    vm.status.message = 'An error occured when retrieving the group';
+                    vm.status.message = 'An error occurred when retrieving the group';
                 }
             });
         }
