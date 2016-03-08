@@ -521,7 +521,7 @@ var mockData = (function () {
     function getFailedMockEvents() {
         return {
             status: 'failed',
-            info: 'An unexpected error occured'
+            info: 'An unexpected error occurred'
         };
     }
 
