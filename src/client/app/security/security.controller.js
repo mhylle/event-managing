@@ -11,7 +11,10 @@
     function SecurityController($rootScope, $scope, AUTH_EVENTS, SecurityService) {
         var vm = this;
         vm.title = 'SecurityController';
-        vm.securityService = SecurityService;
+        vm.status = {
+            message: '',
+            code: 'ok'
+        };
         vm.credentials = {
             username: '',
             password: ''
@@ -26,17 +29,27 @@
         }
 
         function login(credentials) {
-            vm.securityService.login(credentials).then(function (user) {
-                $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-                $scope.setCurrentUser(user);
-            }, function () {
-                $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-            });
             if (credentials) {
                 console.log('Trying to login with ' + credentials.username + ' , ' + credentials.password);
             } else {
-                console.log('Trying to login with nothing entered in credentials');
+                vm.status.message = 'You must provide a username and password';
+                console.log('You must provide a username and password');
+                $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                return;
             }
+            SecurityService.login(credentials).then(function (response) {
+                if (response) {
+                    vm.status.message = 'Login Successful.';
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                } else {
+                    vm.status.message = 'Login failed';
+                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                }
+            }, function (err) {
+                vm.status.message = 'An error occurred when trying to login, please try again later, ' + err.data.info;
+                $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+            });
+
         }
     }
 

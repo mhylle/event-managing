@@ -37,7 +37,7 @@ module.exports = function () {
                 var hash = bcrypt.hashSync(passtring, salt);
                 if (userhash === undefined) {
                     tokens.push(token);
-                    return {status: 200, accesstoken: token, userName: userName};
+                    return {status: 200, accesstoken: token, user: user};
                 }
 
                 var compareSync = bcrypt.compareSync(hash, userhash);
@@ -46,11 +46,11 @@ module.exports = function () {
                     //var expires = new Date();
                     //expires.setDate((new Date()).getDate() + 5);
                     tokens.push(token);
-                    return {status: 200, accesstoken: token, userName: userName};
+                    return {status: 200, accesstoken: token, user: user};
                 }
             }
         }
-        return {status: 401, accesstoken: null, userName: null};
+        return {status: 401, accesstoken: null, user: null};
 
     }
 
