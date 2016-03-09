@@ -8,7 +8,15 @@ describe('ApplicationController', function () {
 
     beforeEach(function () {
         module('event-managing');
-        bard.inject('$controller', '$rootScope', '$stateParams', '$httpBackend', '$q', 'Logger', 'USER_ROLES', 'Session');
+        bard.inject(
+            '$controller',
+            '$rootScope',
+            '$stateParams',
+            '$httpBackend',
+            '$q',
+            'Logger',
+            'USER_ROLES',
+            'Session');
     });
 
 
@@ -35,7 +43,7 @@ describe('ApplicationController', function () {
                 isAuthorized: function () {
                     true;
                 }
-            }
+            };
             controller = $controller('ApplicationController', {
                 $scope: scope,
                 SecurityService: ss
@@ -70,7 +78,7 @@ describe('ApplicationController', function () {
                     isAuthorized: function () {
                         true;
                     }
-                }
+                };
                 controller = $controller('ApplicationController', {
                     $scope: scope,
                     SecurityService: ss
@@ -85,7 +93,7 @@ describe('ApplicationController', function () {
                 });
 
                 it('should fail verification if the user is not authorized', function () {
-                    var event = $rootScope.$broadcast('$stateChangeStart', {data: {authorizedRoles: USER_ROLES.admin}})
+                    var event = $rootScope.$broadcast('$stateChangeStart', {data: {authorizedRoles: USER_ROLES.admin}});
                     expect(event.defaultPrevented).to.be.true;
                 });
 
