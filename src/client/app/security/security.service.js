@@ -24,7 +24,7 @@
                 .post('/api/login', credentials)
                 .then(function (response) {
                     if (response.data.status === 200) {
-                        Session.create(response.data.user.id, response.data.user, response.data.user.role);
+                        Session.create(response.data.user.id, response.data.user.user, response.data.user.user.roles);
                         return true;
                     } else {
                         Session.destroy();
@@ -34,15 +34,15 @@
         }
 
         function isAuthenticated() {
-            return !!Session.userId;
+            return !!Session.id;
         }
 
         function isAuthorized() {
             if (!angular.isArray(service.authorizedRoles)) {
                 service.authorizedRoles = [service.authorizedRoles];
             }
-            //var authorized = authorizedRoles.indexOf(Session.userRole) !== -1;
-            return true;//(isAuthenticated() && authorized);
+            var authorized = service.authorizedRoles.indexOf(Session.userRoles) !== -1;
+            return (isAuthenticated() && authorized);
         }
     }
 })();

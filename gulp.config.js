@@ -90,7 +90,7 @@ module.exports = function () {
         templateCache: {
             file: 'templates.js',
             options: {
-                module: 'eventmanaging',
+                module: 'event-managing',
                 root: 'app/',
                 standalone: false
             }
@@ -124,7 +124,8 @@ module.exports = function () {
         testlibraries: [
             nodeModules + '/mocha/mocha.js',
             nodeModules + '/chai/chai.js',
-            nodeModules + '/sinon-chai/lib/sinon-chai.js'
+            nodeModules + '/sinon-chai/lib/sinon-chai.js',
+            nodeModules + '/chai-as-promised/lib/chai-as-promised.js'
         ],
         specHelpers: [client + 'test-helpers/*.js'],
         specs: [clientApp + '**/*.spec.js'],

@@ -13,20 +13,25 @@
 
     /* @ngInject */
     function Session() {
+        var session = this;
+        session.id  = null;
+        session.user = null;
+        session.userRoles = null;
+
         this.create = create;
         this.destroy = destroy;
 
         ////////////////
-        function create(sessionId, user, userRole) {
-            this.id = sessionId;
-            this.user = user;
-            this.userRole = userRole;
+        function create(sessionId, user, userRoles) {
+            session.id = sessionId;
+            session.user = user;
+            session.userRoles = userRoles;
         }
 
         function destroy() {
-            this.id = null;
-            this.user = null;
-            this.userRole = null;
+            session.id = null;
+            session.user = null;
+            session.userRoles = null;
         }
     }
 })();

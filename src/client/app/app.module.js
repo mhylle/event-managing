@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('eventmanaging', [
+    angular.module('event-managing', [
         'ui.router',
         'angularMoment',
         'ui.bootstrap',
@@ -42,13 +42,14 @@
         var vm = this;
 
         vm.logger = Logger;
+        vm.status = {
+            code: 'ok',
+            message: ''
+        };
+
         $scope.currentUser = null;
         $scope.userRoles = USER_ROLES;
         $scope.isAuthorized = SecurityService.isAuthorized;
-
-        $scope.setCurrentUser = function (user) {
-            $scope.currentUser = user;
-        };
     }
 
     function setupSecurity($rootScope, AUTH_EVENTS, SecurityService, Logger, Session) {
@@ -64,18 +65,22 @@
             phone: '61791394',
             logicalId: '2020743'
         }, null);
-        $rootScope.$on('$stateChangeStart', function (event, next) {
-            if (next.data) {
-                var authorizedRoles = next.data.authorizedRoles;
-                if (!SecurityService.isAuthorized(authorizedRoles)) {
-                    Logger.info('user was not authorized to proceed');
-                    event.preventDefault();
-                    if (SecurityService.isAuthenticated()) {
-                        // user is not allowed
-                        $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
-                    } else {
-                        // user is not logged in
-                        $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+        $rootScope.$on('$stateChangeStart', verifyAuthorization);
+
+        function verifyAuthorization(event, next) {
+            if (next) {
+                if (next.data) {
+                    var authorizedRoles = next.data.authorizedRoles;
+                    if (!SecurityService.isAuthorized(authorizedRoles)) {
+                        Logger.info('user was not authorized to proceed');
+                        event.preventDefault();
+                        if (SecurityService.isAuthenticated()) {
+                            // user is not allowed
+                            $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+                        } else {
+                            // user is not logged in
+                            $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+                        }
                     }
                 }
             } else {
@@ -83,6 +88,6 @@
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
                 Logger.error('data attribute did not exist on next object, this is an error..');
             }
-        });
+        }
     }
 })();

@@ -20,7 +20,8 @@ var userMockData = (function () {
                 email: 'bmorales0@e-recht24.de',
                 passstring: 'f927052bfca1cbadaceee849fdbbb717b8df94ab',
                 phone: '381-(499)311-9438',
-                logicalid: '51ef4033-990c-4ecf-8e50-34adfd464f5e'
+                logicalid: '51ef4033-990c-4ecf-8e50-34adfd464f5e',
+                roles: ['admin']
             }
         };
     }
