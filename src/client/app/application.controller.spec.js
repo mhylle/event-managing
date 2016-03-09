@@ -19,7 +19,6 @@ describe('ApplicationController', function () {
             'Session');
     });
 
-
     beforeEach(function () {
         sandbox = sinon.sandbox.create();
         sandbox.stub(window.console, 'log');
