@@ -24,7 +24,7 @@
         function error(message, data) {
             //this.toastr.error(message, title);
             if (data) {
-                $log.error('Error: ' + message, data);
+                $log.error('Error: ' + message, {data: data});
             } else {
                 $log.error('Error: ' + message);
             }
@@ -33,7 +33,7 @@
         function info(message, data) {
             //this.toastr.info(message, title);
             if (data) {
-                $log.info('Info: ' + message, data);
+                $log.info('Info: ' + message, {data: data});
             } else {
                 $log.info('Info: ' + message);
             }
@@ -42,7 +42,7 @@
         function debug(message, data) {
             //this.toastr.success(message, title);
             if (data) {
-                $log.debug('Success: ' + message, data);
+                $log.debug('Success: ' + message, {data: data});
             } else {
                 $log.debug('Success: ' + message);
             }
@@ -51,12 +51,11 @@
         function warning(message, data) {
             //this.toastr.warning(message, title);
             if (data) {
-                $log.warn('Warning: ' + message, data);
+                $log.warn('Warning: ' + message, {data: data});
             } else {
                 $log.warn('Warning: ' + message);
             }
         }
     }
-
 })();
 
