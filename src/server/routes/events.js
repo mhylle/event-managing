@@ -25,9 +25,7 @@ module.exports = function (app) {
             }
         );
         console.log('search for event with id ' + req.params.id + ' resulted in this event: ' + event + ' ! ');
-        res.send(
-            event
-        );
+        res.json(event);
     });
 
     app.put('/event/id/:id', function (req, res) {

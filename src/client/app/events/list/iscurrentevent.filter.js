@@ -16,7 +16,7 @@
             if (!events) {
                 throw new Error('You must specify at least one event for this filter to work.');
             }
-            if (_.isArray(events)) {
+            if (lodash.isArray(events)) {
                 var result = lodash.filter(events, function (event) {
                     if (before || before === undefined) {
                         return moment(event.start).isAfter(moment());

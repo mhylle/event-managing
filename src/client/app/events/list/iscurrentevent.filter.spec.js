@@ -142,9 +142,15 @@ describe('iscurrenteventfilter', function () {
             expect(filter(currentevent, false)).to.be.undefined;
         });
     });
-    it('should throw an error if no event is specified', function () {
-        expect(function () {
-            filter();
-        }).to.throw;
+    describe('Preconditions', function () {
+        beforeEach(function () {
+            module('event-managing-events');
+            bard.inject('$filter');
+            filter = $filter('iscurrenteventfilter');
+        });
+
+        it('should throw an error if no event is specified', function () {
+            expect(filter).to.throw(Error);
+        });
     });
 });
