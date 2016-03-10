@@ -182,17 +182,30 @@ describe('CreateEventController', function () {
                     });
                 });
 
-                describe.skip('datepicker initialization', function () {
+                describe('datepicker initialization', function () {
                     describe('start', function () {
                         it('should have set start.today to current date', function() {
+                            var now = new Date();
                             controller.datepicker.start.today();
-                            expect(controller.event.start).to.equal(new Date());
+                            var sametime = moment(controller.event.start).isSame(now, 'day');
+                            expect(sametime).to.be.true;
                         });
-                        it('should set opened to be true when calling the open function');
+                        it('should set opened to be true when calling the open function', function() {
+                            controller.datepicker.start.open();
+                            expect(controller.datepicker.start.opened).to.be.true;
+                        });
                     });
                     describe('end', function () {
-                        it('should have set today to current date');
-                        it('should set opened to be true when calling the open function');
+                        it('should have set today to current date', function() {
+                            var now = new Date();
+                            controller.datepicker.end.today();
+                            var sametime = moment(controller.event.end).isSame(now, 'day');
+                            expect(sametime).to.be.true;
+                        });
+                        it('should set opened to be true when calling the open function', function() {
+                            controller.datepicker.end.open();
+                            expect(controller.datepicker.end.opened).to.be.true;
+                        });
                     });
                 });
             });
