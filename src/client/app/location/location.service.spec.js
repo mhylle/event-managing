@@ -12,7 +12,6 @@ describe('LocationService', function () {
     });
 
     describe('getLocations', function () {
-
         describe('success', function() {
             beforeEach(function () {
                 $httpBackend.expectGET('/api/location').respond(
