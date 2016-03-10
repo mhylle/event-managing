@@ -12,12 +12,13 @@ describe('LocationService', function () {
     });
 
     describe('getLocations', function () {
-        beforeEach(function () {
-            $httpBackend.expectGET('/api/location').respond(
-                locations
-            );
-        });
+
         describe('success', function() {
+            beforeEach(function () {
+                $httpBackend.expectGET('/api/location').respond(
+                    locations
+                );
+            });
             it('returns a value', function () {
                 var locationResult = locationservice.getLocations().then(function (response) {
                     locationResult = response;
@@ -34,7 +35,7 @@ describe('LocationService', function () {
             });
         });
 
-        describe.skip('Failure', function () {
+        describe('Failure', function () {
             it('Should log an error if the server returns an error', function () {
                 $httpBackend.expectGET('/api/location').respond(500);
                 var locationResult = [];
