@@ -66,6 +66,7 @@
             logicalId: '2020743',
             roles: ['Admin']
         }, null);
+        //SecurityService.login({username: 'mah', password: 'mah'});
         // todo do an actual login, so we are running with a proper user..
         //SecurityService.login()
         $rootScope.$on('$stateChangeStart', verifyAuthorization);

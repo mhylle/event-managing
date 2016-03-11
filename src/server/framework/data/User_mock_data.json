@@ -17,7 +17,8 @@
             "street": "Tousvej",
             "number": "6a",
             "country": "Denmark"
-        }
+        },
+        "roles": ["Admin"]
     },
     {
         "id": 2,

@@ -5,10 +5,10 @@ var data = require('../framework/data/data');
 //var rand = require('csprng');
 //var sha256 = require('crypto-hashing').sha256;
 var bcrypt = require('bcrypt-nodejs');
-var User = require('./user');
 
+var userData = require('../framework/data/User_mock_data.json');
 module.exports.users = function() {
-    return [{name:'mah', password: 'mah'}];
+    return userData;
     //return dataService.get();
 };
 
@@ -22,7 +22,7 @@ module.exports = function () {
     return service;
 
     function getUsers() {
-        return [{name: 'mah', password: 'mah'}];
+        return userData;
     }
 
     function getUser(req, res) {
@@ -39,7 +39,7 @@ module.exports = function () {
 
     function saveUser(req) {
 
-        var user = new User();
+        var user = {};
         // todo Create ID utility --> DB Responsibility, does it have to be assigned?
         user.internalId = req.body.internalId;
         user.publicId = req.body.publicId;

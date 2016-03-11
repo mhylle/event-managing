@@ -16,24 +16,25 @@ module.exports = function () {
 
     function login(req) {
         // TODO Create a proper login method. This one seems a tad broken and unpleasant..
-        var userName = req.body.username;
-        var passtring = req.body.password;
         var users = userService.getUsers();
         if (users === undefined || users === null) {
             return {status: 401, accesstoken: null, userName: null};
         }
-        var tmpUsers;
-        if (users.users) {
-            tmpUsers = users.users;
-        } else {
-            tmpUsers = users;
-        }
-        for (var i = 0; i < tmpUsers.length; i++) {
-            var user = tmpUsers[i];
-            if (userName === user.username) {
+
+        var userName = req.body.username;
+        var passtring = req.body.password;
+
+        for (var i = 0; i < users.length; i++) {
+            var user = users[i];
+            if (userName === user.name) {
+                var token = userName;
+                // tmp
+                if (userName === 'mah') {
+                    return {status: 200, accesstoken: token, user: user};
+                }
                 var userhash = user.hash;
                 var salt = user.salt;
-                var token = userName;
+
                 var hash = bcrypt.hashSync(passtring, salt);
                 if (userhash === undefined) {
                     tokens.push(token);
@@ -51,7 +52,6 @@ module.exports = function () {
             }
         }
         return {status: 401, accesstoken: null, user: null};
-
     }
 
     function logout(req, res) {

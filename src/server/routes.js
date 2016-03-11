@@ -30,7 +30,7 @@ module.exports = router;
 
 //////////////
 function login(req, res, next) {
-    security.login(req, res, next);
+    res.json(security.login(req, res, next));
 }
 
 function logout(req, res, next) {
