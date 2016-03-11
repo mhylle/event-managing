@@ -1,6 +1,3 @@
-/**
- * Created by mhylle on 11-12-2015.
- */
 (function () {
     'use strict';
 
@@ -13,7 +10,6 @@
     /* @ngInject */
     function SecurityService($http, Session) {
         var service = this;
-        service.authorizedRoles = [];
         service.login = login;
         service.isAuthenticated = isAuthenticated;
         service.isAuthorized = isAuthorized;
@@ -37,11 +33,12 @@
             return !!Session.id;
         }
 
-        function isAuthorized() {
-            if (!angular.isArray(service.authorizedRoles)) {
-                service.authorizedRoles = [service.authorizedRoles];
+        function isAuthorized(authorizedRoles) {
+            if (!angular.isArray(authorizedRoles)) {
+                authorizedRoles = [authorizedRoles];
             }
-            var authorized = service.authorizedRoles.indexOf(Session.userRoles) !== -1;
+
+            var authorized = authorizedRoles.indexOf(Session.userRoles) !== -1;
             return (isAuthenticated() && authorized);
         }
     }
