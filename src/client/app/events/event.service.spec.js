@@ -152,24 +152,50 @@ describe('EventService', function () {
             expect(result.info).to.equal('You must supply a user to attend.');
         });
 
-        it.skip('should add the user to the event when attending the event', function () {
+        it('should add the user to the event when attending the event', function () {
             $httpBackend.expectGET('/api/event/attend/eid/' + eventWithoutUserAdded.id + '/uid/' + user.id)
-                .respond({status: 'ok', event: eventWithUserAdded});
+                .respond({status: 'ok', event: eventWithUserAdded.event});
 
-            var result = EventService.attend(eventWithoutUserAdded, user);
-            $rootScope.$apply();
+            var status;
+            var resultEvent;
+            EventService.attend(eventWithoutUserAdded, user).then(function (response) {
+                status = response.status;
+                resultEvent = response.event;
+            });
             $httpBackend.flush();
-            //result.resolve({status: 'ok', event: eventWithUserAdded})
-            // .should.eventually.equal({status: 'ok', event: eventWithUserAdded});
-            //return Promise.resolve(2 + 2).should.eventually.equal(4);
-            expect(result).to.equal({status: 'ok', event: eventWithUserAdded});
+            expect(status).to.equal('ok');
+            expect(resultEvent).to.deep.equal(eventWithUserAdded.event);
         });
     });
 
     describe('Unattend', function () {
-        it('should not do anything with no event');
-        it('should not do anything with no user');
-        it('should remove the user from the event when unattending the event');
+        it('should not do anything with no event', function () {
+            var user = getUser(1);
+            var result = EventService.unattend(null, user);
+            expect(result.status).to.equal('missing data');
+            expect(result.info).to.equal('You must supply an event to unattend.');
+        });
+
+        it('should not do anything with no user', function () {
+            var event = getEvent(1);
+            var result = EventService.unattend(event, null);
+            expect(result.status).to.equal('missing data');
+            expect(result.info).to.equal('You must supply a user to unattend.');
+        });
+        it('should remove the user from the event when unattending the event', function () {
+            $httpBackend.expectGET('/api/event/unattend/eid/' + eventWithUserAdded.id + '/uid/' + user.id)
+                .respond({status: 'ok', event: eventWithoutUserAdded.event});
+
+            var status;
+            var resultEvent;
+            EventService.unattend(eventWithUserAdded, user).then(function (response) {
+                status = response.status;
+                resultEvent = response.event;
+            });
+            $httpBackend.flush();
+            expect(status).to.equal('ok');
+            expect(resultEvent).to.deep.equal(eventWithoutUserAdded.event);
+        });
     });
 
     describe.skip('addUserToEvent', function () {

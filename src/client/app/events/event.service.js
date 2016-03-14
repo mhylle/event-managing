@@ -96,8 +96,26 @@
             }
         }
 
-        function unattend() {
-            return true;
+        function unattend(event, user) {
+            if (!event) {
+                return {status: 'missing data', info: 'You must supply an event to unattend.'};
+            }
+
+            if (!user) {
+                return {status: 'missing data', info: 'You must supply a user to unattend.'};
+            }
+
+            return $http.get('/api/event/unattend/eid/' + event.id + '/uid/' + user.id)
+                .then(onUnattendEventSuccess)
+                .catch(onUnattendEventError);
+
+            function onUnattendEventSuccess(response) {
+                return response.data;
+            }
+
+            function onUnattendEventError(error) {
+                Logger.error(error);
+            }
         }
     }
 })();
