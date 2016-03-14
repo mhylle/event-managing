@@ -10,24 +10,25 @@ describe('GroupListController', function () {
 
     beforeEach(function () {
         module('event-managing-groups');
-        bard.inject('$controller', '$rootScope', '$q', '$state');
+        bard.inject('$controller', '$rootScope', '$q', '$log');
     });
 
     describe('Controller Initialization', function () {
-        beforeEach(function () {
-            var scope = $rootScope.$new();
 
-            var gs = {
-                getGroups: function () {
-                    return $q.when(groups);
-                }
-            };
-            controller = $controller('grouplistcontroller', {
-                groupservice: gs,
-                $scope: scope
-            });
-        });
         describe('With valid data', function () {
+            beforeEach(function () {
+                var scope = $rootScope.$new();
+
+                var gs = {
+                    getGroups: function () {
+                        return $q.when(groups);
+                    }
+                };
+                controller = $controller('grouplistcontroller', {
+                    groupservice: gs,
+                    $scope: scope
+                });
+            });
             it('Should exist', function () {
                 expect(controller).to.exist;
             });
@@ -47,6 +48,7 @@ describe('GroupListController', function () {
 
             describe('After activation', function () {
                 beforeEach(function () {
+                    bard.inject('$state');
                     $rootScope.$apply();
                 });
 
@@ -83,19 +85,28 @@ describe('GroupListController', function () {
                         expect(groupIcon).to.equal('na.png');
                     });
                 });
-            });
-            describe.skip('Should navigate to the correct state when choosing a group', function () {
-                beforeEach(function () {
-                    //bard.inject('$state');
-                    $rootScope.$apply();
-                });
-                it('should navigate to groups.view on gotoGroup', function () {
-                    //controller.gotoEvent(1);
-                    //$rootScope.$apply();
-                    //expect($state).is('events.view');
-                });
-            });
 
+                describe.skip('Should navigate to the correct state when choosing a group', function () {
+                    beforeEach(function () {
+                        $log.info.logs = [];
+                    });
+
+                    it('should log the navigation attempt', function () {
+                        var group = controller.groups[1];
+                        controller.gotoGroup(group);
+                        $rootScope.$apply();
+                        expect($log.info.logs[0][0]).to.contain('trying to navigate to group ' + group.name);
+                    });
+
+                    it('should navigate to groups.view on gotoGroup', function () {
+                        controller.gotoGroup(controller.groups[1]);
+                        $rootScope.$apply();
+                        expect($state).to.be.defined;
+                        expect($state.go).to.be.defined;
+                        expect($state.current.name).to.equal('groups.view');
+                    });
+                });
+            });
         });
 
         describe('With undefined service response', function () {

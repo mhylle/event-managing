@@ -49,7 +49,7 @@
         }
 
         function gotoGroup(g) {
-            console.log('trying to navigate to group ' + g.name);
+            Logger.info('trying to navigate to group ' + g.name);
             $state.go('groups.view', {id: g.id});
         }
 

@@ -15,24 +15,36 @@ describe('GroupService', function () {
     });
 
     describe('getGroups', function () {
-        beforeEach(function () {
-            $httpBackend.expectGET('/api/group').respond(
-                groups
-            );
-        });
-        it('returns a value', function () {
-            var groupResult = groupservice.getGroups().then(function (response) {
-                groupResult = response;
+        describe('success', function () {
+            beforeEach(function () {
+                $httpBackend.expectGET('/api/group').respond(
+                    groups
+                );
             });
-            expect(groupResult).to.exists;
-        });
-        it('Retrieves an amount of groups', function () {
-            var groupResult = [];
-            groupservice.getGroups().then(function (results) {
-                groupResult = results.groups;
+            it('returns a value', function () {
+                var groupResult = groupservice.getGroups().then(function (response) {
+                    groupResult = response;
+                });
+                expect(groupResult).to.exists;
             });
-            $httpBackend.flush();
-            expect(groupResult).to.have.length.above(0);
+            it('Retrieves an amount of groups', function () {
+                var groupResult = [];
+                groupservice.getGroups().then(function (results) {
+                    groupResult = results.groups;
+                });
+                $httpBackend.flush();
+                expect(groupResult).to.have.length.above(0);
+            });
+        });
+        describe('failure', function() {
+            it('should log an error whan an exception occurs', function () {
+                $httpBackend.expectGET('/api/group').respond(500);
+                var result = groupservice.getGroups();
+                expect(result).to.be.fulfilled;
+                $httpBackend.flush();
+                expect($log.error.logs).not.to.be.empty;
+                expect($log.error.logs).not.to.be.undefined;
+            });
         });
     });
 
@@ -90,6 +102,13 @@ describe('GroupService', function () {
                 });
                 $httpBackend.flush();
                 expect(groupResult).not.to.exist;
+            });
+
+            it('should log an error whan an exception occurs', function () {
+                $httpBackend.expectGET('/api/group/id/1').respond(500);
+                var result = groupservice.getGroup(1);
+                expect(result).to.be.fulfilled;
+                $httpBackend.flush();
             });
         });
     });
@@ -185,6 +204,16 @@ describe('GroupService', function () {
             expect(status).to.equal('ok');
             expect(resultGroup.users).to.exist;
             expect(resultGroup.users).not.to.contain(user);
+        });
+
+        it('should log an error if the server returns an error', function() {
+            var user = getUser(3);
+            $httpBackend.expectDELETE('/api/group/id/' + groupWithUserAdded.id + '/user/id/' + user.id).respond(500);
+            var promise = groupservice.removeUserFromGroup(groupWithUserAdded, user);
+            expect(promise).to.be.fulfilled;
+            $httpBackend.flush();
+            expect($log.error.logs).not.to.be.empty;
+            expect($log.error.logs).not.to.be.undefined;
         });
     });
 

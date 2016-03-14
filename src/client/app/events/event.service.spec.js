@@ -17,24 +17,64 @@ describe('EventService', function () {
     });
 
     describe('getEvents', function () {
-        beforeEach(function () {
-            $httpBackend.expectGET('/api/event').respond(
-                events
-            );
-        });
-        it('returns a value', function () {
-            var eventResult = EventService.getEvents().then(function (response) {
-                eventResult = response;
+        describe('success', function () {
+
+            it('returns a value', function () {
+                $httpBackend.expectGET('/api/event').respond(events);
+                var eventResult = EventService.getEvents().then(function (response) {
+                    eventResult = response;
+                });
+                expect(eventResult).to.exists;
             });
-            expect(eventResult).to.exists;
-        });
-        it('Retrieves an amount of events', function () {
-            var eventResult = [];
-            EventService.getEvents().then(function (results) {
-                eventResult = results.events;
+            it('Retrieves an amount of events', function () {
+                $httpBackend.expectGET('/api/event').respond(events);
+                var eventResult = [];
+                EventService.getEvents().then(function (results) {
+                    eventResult = results.events;
+                });
+                $httpBackend.flush();
+                expect(eventResult).to.have.length.above(0);
             });
-            $httpBackend.flush();
-            expect(eventResult).to.have.length.above(0);
+        });
+
+        describe('Failure', function () {
+            it('Should return an empty array if the server returns nothing', function () {
+                $httpBackend.expectGET('/api/event').respond();
+
+                var promise = EventService.getEvents();
+
+                expect(promise).to.become([]);
+
+                $httpBackend.flush();
+            });
+            it('Should return an empty array if the server returns an error', function () {
+                $httpBackend.expectGET('/api/event').respond(500);
+
+                var promise = EventService.getEvents();
+
+                expect(promise).to.become([]);
+
+                $httpBackend.flush();
+            });
+            it('Should log an error if the server returns an error', function () {
+                $httpBackend.expectGET('/api/event').respond(500);
+
+                EventService.getEvents();
+                $httpBackend.flush();
+                expect($log.error.logs).not.to.be.empty;
+                expect($log.error.logs).not.to.be.undefined;
+            });
+
+            it('Should return an error value if the server returns an error', function () {
+                $httpBackend.expectGET('/api/event/id/1').respond(500, {status: 'failed', info: 'no event found'}
+                );
+                var eventResult = [];
+                EventService.getEvent(1).then(function (results) {
+                    eventResult = results;
+                });
+                $httpBackend.flush();
+                expect(eventResult).not.to.exist;
+            });
         });
     });
 
@@ -112,14 +152,13 @@ describe('EventService', function () {
         });
         describe('Failure', function () {
             it('Should log an error if the server returns an error', function () {
-                $httpBackend.expectGET('/api/event/id/1').respond(500);
-                var eventResult = [];
-                EventService.getEvent(1).then(function (results) {
-                    eventResult = results;
-                });
+                $httpBackend.expectPOST('/api/event', mockCreateEvent)
+                    .respond(500, {status: 'failed', info: 'an error occurred'});
 
+                var promise = EventService.createEvent(mockCreateEvent);
+
+                expect(promise).to.be.fulfilled;
                 $httpBackend.flush();
-                expect(eventResult).not.to.exist;
                 expect($log.error.logs).not.to.be.empty;
                 expect($log.error.logs).not.to.be.undefined;
             });
@@ -161,6 +200,17 @@ describe('EventService', function () {
             expect(result).to.become({status: 'ok', event: eventWithUserAdded.event});
             $httpBackend.flush();
         });
+
+        it('Should return an error value if the server returns an error', function () {
+            $httpBackend.expectGET('/api/event/attend/eid/' + eventWithoutUserAdded.id + '/uid/' + user.id)
+                .respond(500, {status: 'failed', info: 'an error occurred'});
+
+            var promise = EventService.attend(eventWithoutUserAdded, user);
+            expect(promise).to.be.fulfilled;
+            $httpBackend.flush();
+            expect($log.error.logs).not.to.be.empty;
+            expect($log.error.logs).not.to.be.undefined;
+        });
     });
 
     describe('Unattend', function () {
@@ -191,36 +241,16 @@ describe('EventService', function () {
             expect(status).to.equal('ok');
             expect(resultEvent).to.deep.equal(eventWithoutUserAdded.event);
         });
-    });
 
-    describe.skip('addUserToEvent', function () {
-        it('Should not add null users to an event', function () {
-            var event = getEvent(1);
-            expect(event.users).not.to.exist;
-            var resultEvent = EventService.addUserToEvent(event, null);
-            expect(resultEvent).not.to.exist;
-        });
+        it('Should return an error value if the server returns an error', function () {
+            $httpBackend.expectGET('/api/event/unattend/eid/' + eventWithoutUserAdded.id + '/uid/' + user.id)
+                .respond(500, {status: 'failed', info: 'an error occurred'});
 
-        it('Should add users to a event', function () {
-            var workingEvent = getEvent(1);
-            expect(workingEvent.users).not.to.exist;
-            var user = getUser(1);
-            expect(user).to.exist;
-
-            workingEvent.users = [user];
-
-            $httpBackend.expectPUT('/api/event/id/' + workingGroup.id + '/user/id/' + user.id).respond(
-                {status: 'ok', info: '', event: workingEvent}
-            );
-
-            var status;
-            groupservice.addUserToEvent(workingEvent, user).then(function (response) {
-                status = response.data.status;
-                resultEvent = response.data.event;
-            });
+            var promise = EventService.unattend(eventWithoutUserAdded, user);
+            expect(promise).to.be.fulfilled;
             $httpBackend.flush();
-            expect(status).to.equal('ok');
-            expect(resultEvent.users).to.exist;
+            expect($log.error.logs).not.to.be.empty;
+            expect($log.error.logs).not.to.be.undefined;
         });
     });
 
