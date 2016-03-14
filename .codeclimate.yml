@@ -1,11 +1,14 @@
 ---
 engines:
+  nodesecurity:
+      enabled: true
   duplication:
     enabled: true
     config:
       languages:
       - ruby
-      - javascript
+      - javascript:
+            mass_threshold: 60
       - python
       - php
   eslint:
