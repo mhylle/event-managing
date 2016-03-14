@@ -3,8 +3,9 @@ describe('EventService', function () {
     var events = mockData.getMockEvents();
     var mockUsers = mockData.getMockUsers();
     var mockCreateEvent = mockData.getMockCreateEvent;
-    //var groupWithoutUserAdded = mockData.getMockGroupWithUsersWithoutUsersAdded();
-    //var groupWithUserAdded = mockData.getMockGroupWithUsersWithUsersAdded();
+    var user = mockData.getMockSingleUser();
+    var eventWithoutUserAdded = mockData.getMockEventWithoutUser();
+    var eventWithUserAdded = mockData.getMockEventWithUser();
 
     beforeEach(function () {
         module('event-managing-events');
@@ -144,19 +145,24 @@ describe('EventService', function () {
             expect(result.info).to.equal('You must supply an event to attend.');
         });
 
-        it('should not do anything with no user', function() {
+        it('should not do anything with no user', function () {
             var event = getEvent(1);
             var result = EventService.attend(event, null);
             expect(result.status).to.equal('missing data');
             expect(result.info).to.equal('You must supply a user to attend.');
         });
 
-        it.skip('should add the user to the event when attending the event', function() {
-            var user = getUser(1);
-            var event = getEvent(1);
-            var result = EventService.attend(event, user);
-            expect(result).to.exist;
-            expect(result).to.be.a('promise');
+        it.skip('should add the user to the event when attending the event', function () {
+            $httpBackend.expectGET('/api/event/attend/eid/' + eventWithoutUserAdded.id + '/uid/' + user.id)
+                .respond({status: 'ok', event: eventWithUserAdded});
+
+            var result = EventService.attend(eventWithoutUserAdded, user);
+            $rootScope.$apply();
+            $httpBackend.flush();
+            //result.resolve({status: 'ok', event: eventWithUserAdded})
+            // .should.eventually.equal({status: 'ok', event: eventWithUserAdded});
+            //return Promise.resolve(2 + 2).should.eventually.equal(4);
+            expect(result).to.equal({status: 'ok', event: eventWithUserAdded});
         });
     });
 
