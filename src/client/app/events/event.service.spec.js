@@ -152,19 +152,14 @@ describe('EventService', function () {
             expect(result.info).to.equal('You must supply a user to attend.');
         });
 
-        it('should add the user to the event when attending the event', function () {
+        it('should add the user in a promise way to the event when attending the event', function () {
             $httpBackend.expectGET('/api/event/attend/eid/' + eventWithoutUserAdded.id + '/uid/' + user.id)
                 .respond({status: 'ok', event: eventWithUserAdded.event});
 
-            var status;
-            var resultEvent;
-            EventService.attend(eventWithoutUserAdded, user).then(function (response) {
-                status = response.status;
-                resultEvent = response.event;
-            });
+            var result = EventService.attend(eventWithoutUserAdded, user);
+
+            expect(result).to.become({status: 'ok', event: eventWithUserAdded.event});
             $httpBackend.flush();
-            expect(status).to.equal('ok');
-            expect(resultEvent).to.deep.equal(eventWithUserAdded.event);
         });
     });
 
