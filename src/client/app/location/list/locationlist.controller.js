@@ -48,7 +48,7 @@
         }
 
         function gotoLocation(l) {
-            console.log('trying to navigate to location ' + l.name);
+            Logger.info('trying to navigate to location ' + l.name);
             $state.go('locations.view', {id: l.id});
         }
     }

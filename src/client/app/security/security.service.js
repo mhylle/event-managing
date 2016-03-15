@@ -39,6 +39,9 @@
                 authorizedRoles = [authorizedRoles];
             }
 
+            if (authorizedRoles.indexOf('*') !== -1) {
+                return isAuthenticated();
+            }
             var authorized = authorizedRoles.indexOf(Session.userRoles) !== -1;
             return (isAuthenticated() && authorized);
         }

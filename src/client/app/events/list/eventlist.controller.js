@@ -8,10 +8,10 @@
         .module('event-managing-events')
         .controller('EventController', EventController);
 
-    EventController.$inject = ['$scope', '$state', 'EventService', 'Session', 'lodash'];
+    EventController.$inject = ['$scope', '$state', 'EventService', 'Session', 'lodash', 'Logger'];
 
     /* @ngInject */
-    function EventController($scope, $state, EventService, Session, lodash) {
+    function EventController($scope, $state, EventService, Session, lodash, Logger) {
         var vm = this;
         vm.title = 'EventController';
         vm.events = [];
@@ -55,14 +55,14 @@
         }
 
         function gotoEvent(e) {
-            console.log('trying to navigate to event ' + e.name);
+            Logger.info('trying to navigate to event ' + e.name);
             $state.go('events.view', {id: e.id});
         }
 
         function signup(e) {
             EventService.attend(e, Session.user).then(function (response) {
                 var index = lodash.findIndex(
-                    vm.events, function(evt) {
+                    vm.events, function (evt) {
                         return e.id === evt.id;
                     }
                 );

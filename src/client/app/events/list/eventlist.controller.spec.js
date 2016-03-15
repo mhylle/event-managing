@@ -5,6 +5,7 @@ describe('EventListController', function () {
     var events = mockData.getMockEvents();
     //var signedevents = mockData.getMockSignedEvents();
     var users = mockData.getMockUsers();
+    var mockuser = mockData.getMockSingleUser();
     var unsignedEvent = mockData.getMockUnsignedEvent();
     var signedUser = mockData.getMockSingleUser();
     var signedEvent = mockData.getMockSignedEvent();
@@ -16,7 +17,15 @@ describe('EventListController', function () {
 
     beforeEach(function () {
         module('event-managing-events');
-        bard.inject('$controller', '$rootScope', '$q', '$state', '$filter', 'Session');
+        bard.inject('$controller',
+            '$rootScope',
+            '$q',
+            '$httpBackend',
+            '$state',
+            '$filter',
+            '$log',
+            'Session',
+            'SecurityService');
     });
 
     describe('Controller Initialization', function () {
@@ -59,7 +68,6 @@ describe('EventListController', function () {
 
             describe('After activation', function () {
                 beforeEach(function () {
-                    Session.create(null, signedUser, null);
                     $rootScope.$apply();
                 });
 
@@ -102,13 +110,49 @@ describe('EventListController', function () {
             });
             describe('Should navigate to the correct state when choosing an event', function () {
                 beforeEach(function () {
-                    //bard.inject('$state');
+                    $log.info.logs = [];
                     $rootScope.$apply();
                 });
-                it('should navigate to event.view on gotoEvent', function () {
-                    //controller.gotoEvent(1);
-                    //$rootScope.$apply();
-                    //expect($state).is('events.view');
+
+                it('should log the navigation attempt', function () {
+                    var credentials = {
+                        username: 'mah', password: 'mah'
+                    };
+                    $httpBackend.expectPOST('/api/login')
+                        .respond({status: 200, accesstoken: 'mah', user: mockuser});
+                    SecurityService.login(credentials);
+                    $httpBackend.flush();
+                    var event = controller.events[0];
+                    controller.gotoEvent(event);
+                    $rootScope.$apply();
+                    expect($log.info.logs[0][0]).to.contain('trying to navigate to event ' + event.name);
+                });
+
+                it('should prevent navigation to events.view if not logged in.', function () {
+                    var event = controller.events[0];
+                    controller.gotoEvent(event);
+                    $rootScope.$apply();
+                    expect($state).to.be.defined;
+                    expect($state.go).to.be.defined;
+                    expect($state.current.name).to.equal('');
+                });
+
+                it('should navigate to events.view on gotoEvent', function () {
+                    var credentials = {
+                        username: 'mah', password: 'mah'
+                    };
+                    $httpBackend.expectPOST('/api/login')
+                        .respond({status: 200, accesstoken: 'mah', user: mockuser});
+                    SecurityService.login(credentials);
+                    $httpBackend.flush();
+                    $rootScope.$apply();
+
+                    $httpBackend.whenGET('app/events/events.html').respond();
+                    var event = controller.events[1];
+                    controller.gotoEvent(event);
+                    $rootScope.$apply();
+                    expect($state.current.name).to.equal('events.view');
+                    //$httpBackend.flush();
                 });
             });
         });

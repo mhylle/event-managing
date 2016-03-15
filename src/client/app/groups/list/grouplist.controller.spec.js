@@ -2,6 +2,7 @@
 describe('GroupListController', function () {
     var controller;
     var groups = groupMockData.getMockGroups();
+    var mockuser = mockData.getMockSingleUser();
     var failedGroups = groupMockData.getFailedMockGroups();
     var crashedGroups = groupMockData.getCrashedMockGroups();
     var emptyGroups = groupMockData.getMockEmptyGroups();
@@ -10,7 +11,7 @@ describe('GroupListController', function () {
 
     beforeEach(function () {
         module('event-managing-groups');
-        bard.inject('$controller', '$rootScope', '$q', '$log');
+        bard.inject('$controller', '$rootScope', '$q', '$httpBackend', '$log', 'SecurityService');
     });
 
     describe('Controller Initialization', function () {
@@ -86,7 +87,7 @@ describe('GroupListController', function () {
                     });
                 });
 
-                describe.skip('Should navigate to the correct state when choosing a group', function () {
+                describe('Should navigate to the correct state when choosing a group', function () {
                     beforeEach(function () {
                         $log.info.logs = [];
                     });
@@ -98,12 +99,31 @@ describe('GroupListController', function () {
                         expect($log.info.logs[0][0]).to.contain('trying to navigate to group ' + group.name);
                     });
 
-                    it('should navigate to groups.view on gotoGroup', function () {
-                        controller.gotoGroup(controller.groups[1]);
+                    it('should prevent navigation to groups.view if not logged in.', function () {
+                        var group2 = controller.groups[1];
+                        controller.gotoGroup(group2);
                         $rootScope.$apply();
                         expect($state).to.be.defined;
                         expect($state.go).to.be.defined;
+                        expect($state.current.name).to.equal('');
+                    });
+
+                    it('should navigate to groups.view on gotoGroup', function () {
+                        var credentials = {
+                            username: 'mah', password: 'mah'
+                        };
+                        $httpBackend.expectPOST('/api/login')
+                            .respond({status: 200, accesstoken: 'mah', user: mockuser});
+                        SecurityService.login(credentials);
+                        $httpBackend.flush();
+                        $rootScope.$apply();
+
+                        $httpBackend.whenGET('app/groups/groups.html').respond();
+                        var group2 = controller.groups[1];
+                        controller.gotoGroup(group2);
+                        $rootScope.$apply();
                         expect($state.current.name).to.equal('groups.view');
+                        //$httpBackend.flush();
                     });
                 });
             });

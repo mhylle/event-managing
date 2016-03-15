@@ -1,16 +1,17 @@
 /* jshint -W117, -W030 */
 describe('LocationListController', function () {
     var controller;
+    var mockuser = mockData.getMockSingleUser();
     var locations = locationMockData.getMockLocations();
     var crashedLocations = locationMockData.getMockCrashedLocations();
     var emptyLocations = locationMockData.getMockEmptyLocations();
     var failedLocations = locationMockData.getMockFailedLocation();
 
-    bard.verifyNoOutstandingHttpRequests();
+    //bard.verifyNoOutstandingHttpRequests();
 
     beforeEach(function () {
         module('event-managing-locations');
-        bard.inject('$controller', '$rootScope', '$q', '$state');
+        bard.inject('$controller', '$rootScope', '$q', '$httpBackend', '$state', '$log', 'SecurityService');
     });
 
     describe('Controller Initialization', function () {
@@ -70,18 +71,56 @@ describe('LocationListController', function () {
                     expect(controller.status.code).to.equal('ok');
                 });
             });
-            describe.skip('Should navigate to the correct state when choosing a location', function () {
+            describe('Should navigate to the correct state when choosing a location', function () {
                 beforeEach(function () {
-                    //bard.inject('$state');
+                    $log.info.logs = [];
                     $rootScope.$apply();
                 });
-                it('should navigate to locations.view on gotoLocation', function () {
-                    //controller.gotoEvent(1);
-                    //$rootScope.$apply();
-                    //expect($state).is('events.view');
+
+                it('should log the navigation attempt', function () {
+                    var credentials = {
+                        username: 'mah', password: 'mah'
+                    };
+                    $httpBackend.expectPOST('/api/login')
+                        .respond({status: 200, accesstoken: 'mah', user: mockuser});
+                    SecurityService.login(credentials);
+                    $httpBackend.flush();
+
+                    $httpBackend.whenGET('app/location/location.html').respond();
+                    var location = controller.locations[0];
+                    controller.gotoLocation(location);
+                    $rootScope.$apply();
+                    expect($log.info.logs[1][0]).to.contain('trying to navigate to location ' + location.name);
+                });
+
+                it('should prevent navigation to locations.view if not logged in.', function () {
+                    $httpBackend.whenGET('app/location/location.html').respond();
+                    var location = controller.locations[0];
+                    controller.gotoLocation(location);
+                    $rootScope.$apply();
+                    expect($state).to.be.defined;
+                    expect($state.go).to.be.defined;
+                    expect($state.current.name).to.equal('');
+                });
+
+                it.skip('should navigate to locations.view on gotoLocation', function () {
+                    var credentials = {
+                        username: 'mah', password: 'mah'
+                    };
+                    $httpBackend.expectPOST('/api/login')
+                        .respond({status: 200, accesstoken: 'mah', user: mockuser});
+                    SecurityService.login(credentials);
+                    $httpBackend.flush();
+                    $rootScope.$apply();
+
+                    $httpBackend.whenGET('app/location/location.html').respond();
+                    var location = controller.locations[1];
+                    controller.gotoLocation(location);
+                    $rootScope.$apply();
+                    expect($state.current.name).to.equal('locations.view');
+                    $httpBackend.flush();
                 });
             });
-
         });
 
         describe('With undefined service response', function () {

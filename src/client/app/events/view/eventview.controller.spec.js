@@ -119,8 +119,6 @@ describe('EventViewController', function () {
 
                     it('should list if the current user is attending the event', function () {
                         $rootScope.$apply();
-                        //$httpBackend.whenGET('/api/event/id/1').respond(200, eventwithoutuser);
-                        //$httpBackend.flush();
                         expect(controller.isSigned).to.be.false;
                         expect(controller.signstatus).to.equal('Not attending');
                     });
@@ -131,7 +129,6 @@ describe('EventViewController', function () {
                             'eid/' + eventwithoutuser.id +
                             '/uid/' + mockuser.id).respond(200, eventwithuser);
                         controller.signup();
-                        //$httpBackend.flush();
                         $rootScope.$apply();
                         expect(controller.isSigned).to.be.true;
                         expect(controller.signstatus).to.equal('Attending');

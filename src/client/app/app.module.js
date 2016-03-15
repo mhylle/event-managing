@@ -52,10 +52,8 @@
         $scope.isAuthorized = SecurityService.isAuthorized;
     }
 
-    function setupSecurity($rootScope, AUTH_EVENTS, SecurityService, Logger, Session) {
-
+    function setupSecurity($rootScope, AUTH_EVENTS, SecurityService, Logger) {
         // todo do an actual login, so we are running with a proper user..
-
         $rootScope.$on('$stateChangeStart', verifyAuthorization);
 
         function verifyAuthorization(event, next) {
