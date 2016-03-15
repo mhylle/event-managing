@@ -88,25 +88,6 @@
             }
         }
 
-        function populatePaginationButtons() {
-            var pages = pageCount();
-            Logger.info('vm.pageCount: ' + pages);
-            vm.firstButton = vm.currentPage - 3;
-            vm.lastButton = vm.currentPage + 3;
-
-            if (vm.firstButton < 1) {
-                vm.firstButton = 1;
-            }
-
-            if (vm.lastButton > pages) {
-                vm.lastButton = pages;
-            }
-            vm.paginationButtons = [];
-            for (var i = 1; i < pages; i++) {
-                vm.paginationButtons.push(i);
-            }
-        }
-
         function getUsers() {
             Logger.info('getting users');
             userservice.getUsers().then(function (response) {
@@ -123,17 +104,6 @@
                     vm.status.users = 'failed';
                 }
             });
-        }
-
-        function pageChanged(page) {
-            Logger.info('Page changed to: ' + vm.currentPage);
-            if (page >= 1 && page < vm.totalPages) {
-                vm.currentPage = page;
-            }
-        }
-
-        function setPage(pageNo) {
-            vm.currentPage = pageNo;
         }
 
         function addUserToGroup(user) {
@@ -215,6 +185,37 @@
                     vm.status.message = response.info;
                 }
             });
+        }
+
+        // pagination, to be moved away from file and into a service
+        function populatePaginationButtons() {
+            var pages = pageCount();
+            Logger.info('vm.pageCount: ' + pages);
+            vm.firstButton = vm.currentPage - 3;
+            vm.lastButton = vm.currentPage + 3;
+
+            if (vm.firstButton < 1) {
+                vm.firstButton = 1;
+            }
+
+            if (vm.lastButton > pages) {
+                vm.lastButton = pages;
+            }
+            vm.paginationButtons = [];
+            for (var i = 1; i < pages; i++) {
+                vm.paginationButtons.push(i);
+            }
+        }
+
+        function pageChanged(page) {
+            Logger.info('Page changed to: ' + vm.currentPage);
+            if (page >= 1 && page < vm.totalPages) {
+                vm.currentPage = page;
+            }
+        }
+
+        function setPage(pageNo) {
+            vm.currentPage = pageNo;
         }
     }
 })();
