@@ -53,22 +53,9 @@
     }
 
     function setupSecurity($rootScope, AUTH_EVENTS, SecurityService, Logger, Session) {
-        Session.create(null, {
-            id: 2,
-            gender: 'Male',
-            firstname: 'Martin',
-            lastname: 'Hylleberg',
-            username: 'mah',
-            passtring: 'mah',
-            address: 'Tousvej 6a, 8230 Åbyhøj, Danmark',
-            email: 'mhylle@gmail.com',
-            phone: '61791394',
-            logicalId: '2020743',
-            roles: ['Admin']
-        }, null);
-        //SecurityService.login({username: 'mah', password: 'mah'});
+
         // todo do an actual login, so we are running with a proper user..
-        //SecurityService.login()
+
         $rootScope.$on('$stateChangeStart', verifyAuthorization);
 
         function verifyAuthorization(event, next) {

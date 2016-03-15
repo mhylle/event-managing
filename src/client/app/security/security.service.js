@@ -21,7 +21,7 @@
                 .then(function (response) {
                     if (response.data.status === 200) {
                         var user = response.data.user;
-                        Session.create(user.id, user.user, user.user.roles);
+                        Session.create(user.id, user, user.roles);
                         return true;
                     } else {
                         Session.destroy();

@@ -34,13 +34,13 @@ describe('ApplicationController', function () {
             var scope = $rootScope.$new();
             var ss = {
                 login: function () {
-                    return $q.when();
+                    return $q.when({status: 200, accesstoken: 'mah', user: user});
                 },
                 isAuthenticated: function () {
                     return true;
                 },
                 isAuthorized: function () {
-                    true;
+                    return true;
                 }
             };
             controller = $controller('ApplicationController', {
@@ -75,7 +75,7 @@ describe('ApplicationController', function () {
                         return true;
                     },
                     isAuthorized: function () {
-                        true;
+                        return true;
                     }
                 };
                 controller = $controller('ApplicationController', {

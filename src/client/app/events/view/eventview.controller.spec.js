@@ -16,7 +16,8 @@ describe('EventViewController', function () {
             '$stateParams',
             '$httpBackend',
             '$q',
-            'EventService'
+            'EventService',
+            'SecurityService'
         );
     });
 
@@ -107,6 +108,13 @@ describe('EventViewController', function () {
                             $scope: scope,
                             $stateParams: {id: 1}
                         });
+                        var credentials = {
+                            username: 'mah', password: 'mah'
+                        };
+                        $httpBackend.expectPOST('/api/login')
+                            .respond({status: 200, accesstoken: 'mah', user: mockuser});
+                        SecurityService.login(credentials);
+                        $httpBackend.flush();
                     });
 
                     it('should list if the current user is attending the event', function () {

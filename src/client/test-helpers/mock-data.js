@@ -73,7 +73,8 @@ var mockData = (function () {
             address: 'Tousvej 6a, 8230 Åbyhøj, Danmark',
             email: 'mhylle@gmail.com',
             phone: '61791394',
-            logicalId: '2020743'
+            logicalId: '2020743',
+            roles: ['Admin']
         };
     }
 
