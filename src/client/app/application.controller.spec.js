@@ -14,9 +14,12 @@ describe('ApplicationController', function () {
             '$stateParams',
             '$httpBackend',
             '$q',
+            '$state',
             'Logger',
+            'AUTH_EVENTS',
             'USER_ROLES',
-            'Session');
+            'Session',
+        'SecurityService');
     });
 
     beforeEach(function () {
@@ -64,28 +67,31 @@ describe('ApplicationController', function () {
         });
 
         describe('After Activation', function () {
-            beforeEach(function () {
-                var scope = $rootScope.$new();
-
-                var ss = {
-                    login: function () {
-                        return $q.when();
-                    },
-                    isAuthenticated: function () {
-                        return true;
-                    },
-                    isAuthorized: function () {
-                        return true;
-                    }
-                };
-                controller = $controller('ApplicationController', {
-                    $scope: scope,
-                    SecurityService: ss
-                });
+            beforeEach(function() {
                 $rootScope.$apply();
             });
 
             describe('stateChanges', function () {
+                beforeEach(function () {
+                    var scope = $rootScope.$new();
+
+                    var ss = {
+                        login: function () {
+                            return $q.when();
+                        },
+                        isAuthenticated: function () {
+                            return true;
+                        },
+                        isAuthorized: function () {
+                            return true;
+                        }
+                    };
+                    controller = $controller('ApplicationController', {
+                        $scope: scope,
+                        SecurityService: ss
+                    });
+                });
+
                 it('should fail verification if no data is specified', function () {
                     var event = $rootScope.$broadcast('$stateChangeStart');
                     expect(event.defaultPrevented).to.be.truthy;
@@ -96,14 +102,69 @@ describe('ApplicationController', function () {
                     expect(event.defaultPrevented).to.be.true;
                 });
 
-                it('should distinguish between authorization and authentication');
-
                 it.skip('should allow continuation if the user is authenticated', function () {
                     Session.create(user.id, user.user, user.user.roles);
                     var event = $rootScope.$broadcast('$stateChangeStart', {data: {authorizedRoles: USER_ROLES.admin}});
                     expect(event.defaultPrevented).to.be.false;
                 });
             });
+
+            describe('authentication', function() {
+                beforeEach(function () {
+                    var scope = $rootScope.$new();
+
+                    var ss = {
+                        login: function () {
+                            return $q.when();
+                        },
+                        isAuthenticated: function () {
+                            return true;
+                        },
+                        isAuthorized: function () {
+                            return true;
+                        }
+                    };
+                    controller = $controller('ApplicationController', {
+                        $scope: scope,
+                        SecurityService: ss
+                    });
+                });
+                it('should distinguish between authorization and authentication');
+            });
+
+            describe('authorization', function() {
+                beforeEach(function () {
+                    var scope = $rootScope.$new();
+
+                    var ss = {
+                        isAuthenticated: function () {
+                            return true;
+                        },
+                        isAuthorized: function () {
+                            return false;
+                        }
+                    };
+                    controller = $controller('ApplicationController', {
+                        $scope: scope,
+                        SecurityService: ss
+                    });
+                    sinon.spy($rootScope, '$broadcast');
+                    $httpBackend.expectPOST('/api/login')
+                        .respond({status: 200, accesstoken: 'mah', user: user.user});
+                    $rootScope.$apply();
+                });
+
+                it('should distinguish between authorization and authentication', function() {
+                    var credentials = {
+                        username: 'mah', password: 'mah'
+                    };
+                    SecurityService.login(credentials);
+                    $httpBackend.flush();
+                    $rootScope.$broadcast('$stateChangeStart', {data: {authorizedRoles: USER_ROLES.guest}});
+                    $rootScope.$apply();
+                    expect($rootScope.$broadcast.calledWith(AUTH_EVENTS.notAuthorized)).to.be.true
+                });
+            })
         });
     });
 });

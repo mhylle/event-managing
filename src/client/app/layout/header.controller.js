@@ -28,17 +28,14 @@
             $scope.$watch(function () {
                 return null;//that.securityService.getSecurityToken();
             }, function (newVal) {
-                if (Logger) {
-                    Logger.info('watch triggered..');
-                }
-                if (typeof newVal !== 'undefined') {
-                    vm.username = newVal;
-                } else {
-                    vm.username = 'Not logged in.';
-                }
+                Logger.info('watch triggered..');
+                //if (typeof newVal !== 'undefined') {
+                //    vm.username = newVal;
+                //} else {
+                //    vm.username = 'Not logged in.';
+                //}
             });
         }
     }
-
 })();
 
