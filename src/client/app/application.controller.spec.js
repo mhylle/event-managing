@@ -162,9 +162,9 @@ describe('ApplicationController', function () {
                     $httpBackend.flush();
                     $rootScope.$broadcast('$stateChangeStart', {data: {authorizedRoles: USER_ROLES.guest}});
                     $rootScope.$apply();
-                    expect($rootScope.$broadcast.calledWith(AUTH_EVENTS.notAuthorized)).to.be.true
+                    expect($rootScope.$broadcast.calledWith(AUTH_EVENTS.notAuthorized)).to.be.true;
                 });
-            })
+            });
         });
     });
 });
