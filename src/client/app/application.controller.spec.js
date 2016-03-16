@@ -103,9 +103,17 @@ describe('ApplicationController', function () {
                 });
 
                 it.skip('should allow continuation if the user is authenticated', function () {
-                    Session.create(user.id, user.user, user.user.roles);
+                    var credentials = {
+                        username: 'mah', password: 'mah'
+                    };
+                    sinon.spy($rootScope, '$broadcast');
+                    $httpBackend.expectPOST('/api/login')
+                        .respond({status: 200, accesstoken: 'mah', user: user.user});
+                    SecurityService.login(credentials);
+                    $httpBackend.flush();
                     var event = $rootScope.$broadcast('$stateChangeStart', {data: {authorizedRoles: USER_ROLES.admin}});
                     expect(event.defaultPrevented).to.be.false;
+                    $rootScope.$apply();
                 });
             });
 
@@ -129,7 +137,6 @@ describe('ApplicationController', function () {
                         SecurityService: ss
                     });
                 });
-                it('should distinguish between authorization and authentication');
             });
 
             describe('authorization', function() {
