@@ -108,6 +108,7 @@ describe('EventListController', function () {
                         it('should signout the user when pressing the cancel button');
                     });
             });
+
             describe('Should navigate to the correct state when choosing an event', function () {
                 beforeEach(function () {
                     $log.info.logs = [];

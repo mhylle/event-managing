@@ -72,6 +72,7 @@ describe('GroupListController', function () {
                 it('should have a response.status that is ok', function () {
                     expect(controller.status.code).to.equal('ok');
                 });
+
                 describe('Icon management', function () {
                     it('Should get the open.png icon when the group is public', function () {
                         var groupIcon = controller.getIcon(controller.groups[0]);
@@ -123,7 +124,6 @@ describe('GroupListController', function () {
                         controller.gotoGroup(group2);
                         $rootScope.$apply();
                         expect($state.current.name).to.equal('groups.view');
-                        //$httpBackend.flush();
                     });
                 });
             });

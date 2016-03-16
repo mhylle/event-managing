@@ -2,6 +2,7 @@
 describe('UserListController', function () {
     var controller;
     var users = userMockData.getMockUsers();
+    var mockuser = mockData.getMockSingleUser();
     var failedUsers = userMockData.getFailedMockUsers();
     var crashedUsers = userMockData.getCrashedMockUsers();
 
@@ -9,7 +10,7 @@ describe('UserListController', function () {
 
     beforeEach(function () {
         module('event-managing-users');
-        bard.inject('$controller', '$rootScope', '$q', '$state');
+        bard.inject('$controller', '$rootScope', '$q', '$httpBackend', 'SecurityService');
     });
 
     describe('Controller Initialization', function () {
@@ -46,6 +47,7 @@ describe('UserListController', function () {
 
             describe('After activation', function () {
                 beforeEach(function () {
+                    bard.inject('$state');
                     $rootScope.$apply();
                 });
 
@@ -69,19 +71,58 @@ describe('UserListController', function () {
                     expect(controller.status.code).to.equal('ok');
                 });
 
-            });
-            describe.skip('Should navigate to the correct state when choosing a user', function () {
-                beforeEach(function () {
-                    //bard.inject('$state');
-                    $rootScope.$apply();
-                });
-                it('should navigate to users.view on gotoUser', function () {
-                    //controller.gotoEvent(1);
-                    //$rootScope.$apply();
-                    //expect($state).is('events.view');
-                });
-            });
+                describe('Should navigate to the correct state when choosing a user', function () {
+                    beforeEach(function () {
+                        bard.inject('$log');
+                        $log.info.logs = [];
+                        $rootScope.$apply();
+                    });
 
+                    it('should log the navigation attempt', function () {
+                        var credentials = {
+                            username: 'mah', password: 'mah'
+                        };
+                        $httpBackend.expectPOST('/api/login')
+                            .respond({status: 200, accesstoken: 'mah', user: mockuser});
+                        SecurityService.login(credentials);
+                        $httpBackend.whenGET('app/users/users.html').respond();
+                        $httpBackend.flush();
+                        var user = controller.users[0];
+                        controller.gotoUser(user);
+                        $rootScope.$apply();
+                        expect($log.info.logs[0][0]).to
+                            .contain('trying to navigate to user ' + user.firstname + ' ' + user.lastname);
+                    });
+
+                    it('should prevent navigation to users.view if not logged in.', function () {
+                        var user = controller.users[0];
+                        controller.gotoUser(user);
+                        $rootScope.$apply();
+                        expect($state).to.be.defined;
+                        expect($state.go).to.be.defined;
+                        expect($state.current.name).to.equal('');
+                    });
+
+                    it('should navigate to users.view on gotoUser', function () {
+                        var credentials = {
+                            username: 'mah', password: 'mah'
+                        };
+                        $httpBackend.expectPOST('/api/login')
+                            .respond({status: 200, accesstoken: 'mah', user: mockuser});
+                        SecurityService.login(credentials);
+                        $httpBackend.flush();
+                        $rootScope.$apply();
+                        $httpBackend.whenGET('app/users/users.html').respond();
+                        var user = controller.users[0];
+                        controller.gotoUser(user);
+                        $rootScope.$apply();
+                        expect($log.info.logs[0][0]).to
+                            .contain('trying to navigate to user ' + user.firstname + ' ' + user.lastname);
+                        expect($state.current.name).to.equal('users.view');
+                        //$httpBackend.flush();
+                    });
+                });
+            });
         });
 
         describe('With failed service', function () {

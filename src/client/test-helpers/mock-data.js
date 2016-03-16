@@ -74,7 +74,7 @@ var mockData = (function () {
             email: 'mhylle@gmail.com',
             phone: '61791394',
             logicalId: '2020743',
-            roles: ['Admin']
+            roles: ['admin']
         };
     }
 

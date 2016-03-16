@@ -5,10 +5,10 @@
         .module('event-managing-security')
         .service('SecurityService', SecurityService);
 
-    SecurityService.$inject = ['$http', 'Session'];
+    SecurityService.$inject = ['$http', 'Session', 'lodash'];
 
     /* @ngInject */
-    function SecurityService($http, Session) {
+    function SecurityService($http, Session, lodash) {
         var service = this;
         service.login = login;
         service.isAuthenticated = isAuthenticated;
@@ -42,7 +42,8 @@
             if (authorizedRoles.indexOf('*') !== -1) {
                 return isAuthenticated();
             }
-            var authorized = authorizedRoles.indexOf(Session.userRoles) !== -1;
+
+            var authorized = lodash.intersection(authorizedRoles, Session.userRoles).length > 0;
             return (isAuthenticated() && authorized);
         }
     }

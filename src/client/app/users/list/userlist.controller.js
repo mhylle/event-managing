@@ -8,10 +8,10 @@
         .module('event-managing-users')
         .controller('userlistcontroller', UserListController);
 
-    UserListController.$inject = ['$state', 'userservice', 'Session'];
+    UserListController.$inject = ['$state', 'userservice', 'Session', 'Logger'];
 
     /* @ngInject */
-    function UserListController($state, userservice, Session) {
+    function UserListController($state, userservice, Session, Logger) {
         var vm = this;
         vm.title = 'UserListController';
         vm.status = {
@@ -52,7 +52,7 @@
         }
 
         function gotoUser(u) {
-            console.log('trying to navigate to user ' + u.firstname + ' ' + u.lastname);
+            Logger.info('trying to navigate to user ' + u.firstname + ' ' + u.lastname);
             $state.go('users.view', {id: u.id});
         }
     }
