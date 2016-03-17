@@ -1,38 +1,78 @@
-<!--<form>-->
-    <!--<div ng-controller="SecurityController as vm">-->
-        <!--<div class="row panel panel-info">-->
+<md-dialog aria-label="login" ng-cloak>
+    <form  name="loginForm" data-ng-submit="vm.handleSubmit()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Login</h2>
+                <span flex></span>
+                <md-button type="button" class="md-icon-button" ng-click="vm.handleCancel(); $event.stopPropagation();">
+                    <md-icon md-svg-icon="navigation:close" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
 
-            <!--<div class="panel-body">-->
-                <!--<div class="row">-->
-                    <!--<span class="col-xs-4 text-right">Username</span>-->
-                    <!--<span class="col-xs-8"><input type="text" ng-model="vm.credentials.username"></span>-->
-                <!--</div>-->
-                <!--<div class="row">-->
-                    <!--<span class="col-xs-4 text-right">Password</span>-->
-                    <!--<span class="col-xs-8"><input type="password" ng-model="vm.credentials.password"></span>-->
-                <!--</div>-->
-                <!--<div class="row text-center">-->
-                    <!--<button class="btn btn-default" ng-click="vm.login(vm.credentials)">Login</button>-->
-                    <!--<button class="btn btn-default" ng-click="vm.logout()">Logout</button>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-input-container class="md-block">
+                    <label>Username:</label>
+                    <input ng-model="vm.username" required>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Password:</label>
+                    <input ng-model="vm.password" type="password" required>
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button type="submit" class="md-primary"
+                       ng-class="{'md-raised md-hue-1': (loginForm.$dirty && loginForm.$valid) }"
+                       aria-label="OK">
+                Login
+            </md-button>
+            <md-button type="button" ng-click="vm.handleCancel(); $event.stopPropagation();"
+                       aria-label="Cancel">
+                Cancel
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+<!--<form>-->
+<!--<div ng-controller="SecurityController as vm">-->
+<!--<div class="row panel panel-info">-->
+
+<!--<div class="panel-body">-->
+<!--<div class="row">-->
+<!--<span class="col-xs-4 text-right">Username</span>-->
+<!--<span class="col-xs-8"><input type="text" ng-model="vm.credentials.username"></span>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<span class="col-xs-4 text-right">Password</span>-->
+<!--<span class="col-xs-8"><input type="password" ng-model="vm.credentials.password"></span>-->
+<!--</div>-->
+<!--<div class="row text-center">-->
+<!--<button class="btn btn-default" ng-click="vm.login(vm.credentials)">Login</button>-->
+<!--<button class="btn btn-default" ng-click="vm.logout()">Logout</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</form>-->
 
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="loginmodal-container">
-            <h1>Login to Your Account</h1><br>
-            <form>
-                <input type="text" name="user" placeholder="Username">
-                <input type="password" name="pass" placeholder="Password">
-                <input type="submit" name="login" class="login loginmodal-submit" value="Login">
-            </form>
+<!--<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
+<!--<div class="modal-dialog">-->
+<!--<div class="loginmodal-container">-->
+<!--<h1>Login to Your Account</h1><br>-->
+<!--<form>-->
+<!--<input type="text" name="user" placeholder="Username">-->
+<!--<input type="password" name="pass" placeholder="Password">-->
+<!--<input type="submit" name="login" class="login loginmodal-submit" value="Login">-->
+<!--</form>-->
 
-            <div class="login-help">
-                <a href="#">Register</a> - <a href="#">Forgot Password</a>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="login-help">-->
+<!--<a href="#">Register</a> - <a href="#">Forgot Password</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->

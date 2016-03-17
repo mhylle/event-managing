@@ -8,16 +8,20 @@
         .module('event-managing-header')
         .controller('HeaderController', HeaderController);
 
-    HeaderController.$inject = ['$scope', 'Logger'];
+    HeaderController.$inject = ['$scope', '$mdDialog', '$mdMedia', 'Logger'];
 
     /* @ngInject */
-    function HeaderController($scope, Logger) {
+    function HeaderController($scope, $mdDialog, $mdMedia, Logger) {
         var vm = this;
         vm.title = 'HeaderController';
         vm.status = {
             code: 'ok',
             message: ''
         };
+
+        // vm.showLoginDialog = showLoginDialog;
+        // vm.handleCancel = handleCancel;
+        // vm.handleSubmit = handleSubmit;
         activate();
 
         ////////////////
@@ -26,7 +30,7 @@
             vm.title = 'Header';
             vm.logo = 'images/logo.png';
             $scope.$watch(function () {
-                return null;//that.securityService.getSecurityToken();
+                return null;//SecurityService.getSecurityToken();
             }, function (newVal) {
                 Logger.info('watch triggered..');
                 //if (typeof newVal !== 'undefined') {
@@ -36,6 +40,36 @@
                 //}
             });
         }
+        //
+        // function handleSubmit() {
+        //     return $mdDialog.hide();
+        // }
+        //
+        // function handleCancel() {
+        //     return $mdDialog.hide();
+        // }
+        //
+        // function showLoginDialog(ev) {
+        //     Logger.info('showLoginDialog');
+        //     var confirm = $mdDialog.prompt({
+        //             templateUrl: 'app/security/login/login.html',
+        //         })
+        //         .ok('Okay!')
+        //         .cancel('I\'m a cat person');
+        //     // .title('Please Login')
+        //     // .textContent('Bowser is a common name.')
+        //     // .placeholder('dog name')
+        //     // .ariaLabel('Dog name')
+        //     // .targetEvent(ev)
+        //     // .ok('Okay!')
+        //     // .cancel('I\'m a cat person');
+        //
+        //     $mdDialog.show(confirm).then(function (result) {
+        //         $scope.status = 'You decided to name your dog ' + result + '.';
+        //     }, function () {
+        //         $scope.status = 'You didn\'t name your dog.';
+        //     });
+        // }
     }
 })();
 

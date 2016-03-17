@@ -1,6 +1,6 @@
 {
   "name": "event-managing",
-  "version": "0.0.4-668",
+  "version": "0.0.4-671",
   "description": "event-managing",
   "authors": [
     "Martin Hylleberg <mhylle@yahoo.com>"
@@ -35,7 +35,8 @@
     "angular-moment": "^0.10.3",
     "moment": "#2.11.2",
     "textAngular": "^1.5.0",
-    "angular-bootstrap": "^1.1.2"
+    "angular-bootstrap": "^1.1.2",
+    "angular-material": "^1.1.0-rc1"
   },
   "overrides": {
     "bootstrap": {
@@ -45,6 +46,6 @@
   },
   "resolutions": {
     "moment": "~2.11.1",
-    "angular": "1.5.0"
+    "angular": "1.5.1"
   }
 }

@@ -1,4 +1,4 @@
-<div  id="header" class="navbar navbar-default navbar-fixed-top">
+<div id="header" class="navbar navbar-default navbar-fixed-top" ng-controller="HeaderController as vm">
     <div class="navbar-header">
         <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
             <i class="icon-reorder"></i>
@@ -28,12 +28,17 @@
             <li><a ui-sref="users">Users</a></li>
         </ul>
         <ul class="nav navbar-nav pull-right">
+
             <li class="dropdown">
-                <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>Username<i class="icon-sort-down"></i></a>
-                <ul class="dropdown-menu pull-right">
-                    <li><a href="#">Log Out</a></li>
-                </ul>
+                <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-user"></i>[{{Session.user.name.firstname}}]Username
+                    <i class="icon-sort-down"></i></a>
             </li>
+            <li><a href="#" ng-show="Session.user">Log Out</a></li>
+            <li>
+                <md-button ng-hide="Session.user" class="md-primary md-raised" ng-click="vm.showLoginDialog($event)">doLogin</md-button>
+            </li>
+
         </ul>
     </nav>
 </div>
