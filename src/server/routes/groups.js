@@ -62,11 +62,12 @@ module.exports = function (app) {
                 return g.id === gid;
             }
         );
-        var dataGroup = _groups[index];
-        if (!dataGroup) {
+        if (index === -1) {
             res.json({status: 'failed', info: 'no group found'});
             return;
         }
+
+        var dataGroup = _groups[index];
 
         var dataUser = _.find(_users, function (u) {
             return u.id === uid;
