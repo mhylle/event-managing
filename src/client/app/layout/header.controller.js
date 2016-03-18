@@ -40,7 +40,7 @@
                 //}
             });
         }
-        //
+
         // function handleSubmit() {
         //     return $mdDialog.hide();
         // }
@@ -54,6 +54,7 @@
         //     var confirm = $mdDialog.prompt({
         //             templateUrl: 'app/security/login/login.html',
         //         })
+        //         .targetEvent(ev)
         //         .ok('Okay!')
         //         .cancel('I\'m a cat person');
         //     // .title('Please Login')
@@ -64,6 +65,9 @@
         //     // .ok('Okay!')
         //     // .cancel('I\'m a cat person');
         //
+        //     function targetEvent(event){
+        //         console.log('targer: ' + event);
+        //     }
         //     $mdDialog.show(confirm).then(function (result) {
         //         $scope.status = 'You decided to name your dog ' + result + '.';
         //     }, function () {
