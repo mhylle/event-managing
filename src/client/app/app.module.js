@@ -62,7 +62,7 @@
                     var authorizedRoles = next.data.authorizedRoles;
                     if (!SecurityService.isAuthorized(authorizedRoles)) {
                         Logger.info('user was not authorized to proceed');
-                        event.preventDefault();
+                        //event.preventDefault();
                         if (SecurityService.isAuthenticated()) {
                             // user is not allowed
                             $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
