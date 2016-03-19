@@ -15,9 +15,6 @@
         vm.user = null;
         vm.userid = '';
 
-        vm.status = {
-            message: ''
-        };
         activate();
 
         ////////////////
@@ -30,16 +27,14 @@
         function getUser() {
             userservice.getUser(vm.userid).then(function (response) {
                 if (!response) {
-                    vm.status.code = 'failed';
-                    vm.status.message = 'An error occurred while retrieving the user from the server';
+                    Logger.message('An error occurred while retrieving the user from the server', 'error');
                     vm.user = null;
                 } else {
                     if (response.status === 'ok') {
                         vm.user = response.user;
                     } else {
                         vm.user = null;
-                        vm.status.code = 'failed';
-                        vm.status.message = response.info;
+                        Logger.message(response.info, 'error');
                     }
                 }
             });

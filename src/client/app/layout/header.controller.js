@@ -14,10 +14,6 @@
     function HeaderController($scope, $mdDialog, $mdMedia, Logger) {
         var vm = this;
         vm.title = 'HeaderController';
-        vm.status = {
-            code: 'ok',
-            message: ''
-        };
 
         // vm.showLoginDialog = showLoginDialog;
         // vm.handleCancel = handleCancel;

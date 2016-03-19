@@ -37,19 +37,18 @@
             });
     }
 
-    ApplicationController.$inject = ['$scope', 'USER_ROLES', 'SecurityService', 'Logger'];
-    function ApplicationController($scope, USER_ROLES, SecurityService, Logger) {
-        var vm = this;
-
-        vm.logger = Logger;
-        vm.status = {
-            code: 'ok',
-            message: ''
-        };
-
+    ApplicationController.$inject = ['$rootScope', '$scope', 'AUTH_EVENTS', 'USER_ROLES', 'SecurityService', 'Logger'];
+    function ApplicationController($rootScope, $scope, AUTH_EVENTS, USER_ROLES, SecurityService, Logger) {
         $scope.currentUser = null;
         $scope.userRoles = USER_ROLES;
         $scope.isAuthorized = SecurityService.isAuthorized;
+
+        $rootScope.$on(AUTH_EVENTS.notAuthorized, function () {
+            Logger.message('Not authorized to continue');
+        });
+        $rootScope.$on(AUTH_EVENTS.notAuthenticated, function () {
+            Logger.message('Not authenticated to continue');
+        });
     }
 
     function setupSecurity($rootScope, AUTH_EVENTS, SecurityService, Logger) {
@@ -61,8 +60,8 @@
                 if (next.data) {
                     var authorizedRoles = next.data.authorizedRoles;
                     if (!SecurityService.isAuthorized(authorizedRoles)) {
-                        Logger.info('user was not authorized to proceed');
-                        //event.preventDefault();
+                        Logger.message('user was not authorized to proceed');
+                        event.preventDefault();
                         if (SecurityService.isAuthenticated()) {
                             // user is not allowed
                             $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);

@@ -19,11 +19,6 @@
         vm.isSigned = false;
         vm.showAttendees = true;
 
-        vm.status = {
-            code: 'ok',
-            message: ''
-        };
-
         vm.signup = signup;
 
         activate();
@@ -48,18 +43,16 @@
         function getEvent() {
             EventService.getEvent(vm.eventid).then(function (response) {
                 if (!response) {
-                    vm.status.code = 'failed';
-                    vm.status.message = 'An error occured retrieving the event from the server';
+                    Logger.message('An error occured retrieving the event from the server', 'failed');
                     vm.event = null;
                 } else {
                     if (response.status === 'ok') {
                         vm.event = response.event;
-                        vm.status.message = '';
+                        Logger.status('ok');
                         setEventStatus();
                     } else {
                         vm.event = null;
-                        vm.status.code = 'failed';
-                        vm.status.message = response.info;
+                        Logger.message(response.info, 'failed');
                     }
                 }
             });
@@ -68,8 +61,7 @@
         function signup() {
             EventService.attend(vm.event, Session.user).then(function (response) {
                 if (!response) {
-                    vm.status.code = 'failed';
-                    vm.status.message = 'An error occurred when trying to sign for the event';
+                    Logger.message('An error occurred when trying to sign for the event', 'failed');
                     return;
                 }
                 // update event and set status.

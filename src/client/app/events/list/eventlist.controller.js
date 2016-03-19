@@ -15,10 +15,7 @@
         var vm = this;
         vm.title = 'EventController';
         vm.events = [];
-        vm.status = {
-            code: 'ok',
-            message: ''
-        };
+
         $scope.pageClass = 'scrolled';
 
         vm.user = Session.user;
@@ -38,17 +35,15 @@
         function fetchEvents() {
             EventService.getEvents().then(function (response) {
                 if (!response) {
-                    vm.status.code = 'error';
-                    vm.status.message = 'No response returned from the server';
+                    Logger.message('No response returned from the server', 'error');
                     vm.events = [];
                 } else {
                     if (response.status === 'ok') {
                         vm.events = response.events;
-                        vm.status.code = 'ok';
+                        Logger.status('ok');
                     } else {
                         vm.events = [];
-                        vm.status.code = response.status;
-                        vm.status.message = response.info;
+                        Logger.message(response.info, response.status);
                     }
                 }
             });

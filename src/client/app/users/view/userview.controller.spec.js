@@ -40,15 +40,6 @@ describe('UserViewController', function () {
                 expect(controller.user).to.be.null;
             });
 
-            describe('Status property', function () {
-                it('should have a status field', function () {
-                    expect(controller.status).to.exist;
-                });
-                it('should have a status.message field', function () {
-                    expect(controller.status.message).to.exist;
-                });
-            });
-
             describe('After activation', function () {
                 beforeEach(function () {
                     $rootScope.$apply();
@@ -84,11 +75,11 @@ describe('UserViewController', function () {
             });
 
             it('should have a status code of failed', function () {
-                expect(controller.status.code).to.equal('failed');
+                expect($rootScope.status.status).to.equal('error');
             });
 
             it('should have a status message', function () {
-                expect(controller.status.message).to.equal('Unable to retrieve data from database');
+                expect($rootScope.status.message).to.equal('Unable to retrieve data from database');
             });
 
             it('should have not have a user', function () {
@@ -114,11 +105,11 @@ describe('UserViewController', function () {
             });
 
             it('should have a status code of failed', function () {
-                expect(controller.status.code).to.equal('failed');
+                expect($rootScope.status.status).to.equal('error');
             });
 
             it('should have a status message', function () {
-                expect(controller.status.message)
+                expect($rootScope.status.message)
                     .to.equal('An error occurred while retrieving the user from the server');
             });
 

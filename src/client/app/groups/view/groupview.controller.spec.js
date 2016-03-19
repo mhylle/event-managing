@@ -62,15 +62,6 @@ describe('GroupViewController', function () {
                 expect(controller.group).to.be.null;
             });
 
-            describe('Status property', function () {
-                it('should have a status field', function () {
-                    expect(controller.status).to.exist;
-                });
-                it('should have a status.message field', function () {
-                    expect(controller.status.message).to.exist;
-                });
-            });
-
             describe('After activation', function () {
                 beforeEach(function () {
                     $rootScope.$apply();
@@ -129,7 +120,7 @@ describe('GroupViewController', function () {
                                     controller.addUserToGroup(users[3]);
                                     $rootScope.$apply();
                                     expect(controller.availableUsers).not.to.contain(users[3]);
-                                    expect(controller.status.message).to.equal('User successfully added to group');
+                                    expect($rootScope.status.message).to.equal('User successfully added to group');
                                 });
 
                             it('the list of available users should not include users already in a group',
@@ -145,14 +136,14 @@ describe('GroupViewController', function () {
                             it('should do nothing if no user was specified', function () {
                                 controller.addUserToGroup();
                                 $rootScope.$apply();
-                                expect(controller.status.message).to.equal('No user selected');
+                                expect($rootScope.status.message).to.equal('No user selected');
                             });
                             it('should do nothing if no group was selected', function () {
                                 controller.group = null;
                                 var users = groupMockData.getMockUsers();
                                 controller.addUserToGroup(users[3]);
                                 $rootScope.$apply();
-                                expect(controller.status.message).to.equal('No group selected');
+                                expect($rootScope.status.message).to.equal('No group selected');
                             });
                         });
                         describe('adding a list of users to a group', function () {
@@ -165,7 +156,7 @@ describe('GroupViewController', function () {
                                     $rootScope.$apply();
                                     expect(controller.availableUsers).not.to.contain(users[4]);
                                     expect(controller.availableUsers).not.to.contain(users[5]);
-                                    expect(controller.status.message).to.equal('All users not in the group ' +
+                                    expect($rootScope.status.message).to.equal('All users not in the group ' +
                                         'was added to the group.');
                                 });
 
@@ -185,7 +176,7 @@ describe('GroupViewController', function () {
                                 controller.group = null;
                                 controller.addAllUsersToGroup();
                                 $rootScope.$apply();
-                                expect(controller.status.message).to.equal('No group selected');
+                                expect($rootScope.status.message).to.equal('No group selected');
                             });
                         });
                         describe('removing a user from a group', function () {
@@ -196,17 +187,17 @@ describe('GroupViewController', function () {
                                     controller.addUserToGroup(users[2]);
                                     $rootScope.$apply();
                                     expect(controller.availableUsers).not.to.contain(users[2]);
-                                    expect(controller.status.message).to.equal('User successfully added to group');
+                                    expect($rootScope.status.message).to.equal('User successfully added to group');
 
                                     controller.removeUserFromGroup(users[2]);
                                     $rootScope.$apply();
                                     expect(controller.availableUsers).to.contain(users[2]);
-                                    expect(controller.status.message).to.equal('User successfully removed from group');
+                                    expect($rootScope.status.message).to.equal('User successfully removed from group');
                                 });
                             it('no user is selected the status message should be No user selected', function () {
                                 controller.removeUserFromGroup();
                                 $rootScope.$apply();
-                                expect(controller.status.message).to.equal('No user selected');
+                                expect($rootScope.status.message).to.equal('No user selected');
                             });
 
                             it('the list of available users should include users not in the group', function () {
@@ -217,11 +208,8 @@ describe('GroupViewController', function () {
                                 var users = groupMockData.getMockUsers();
                                 controller.removeUserFromGroup(users[2]);
                                 $rootScope.$apply();
-                                expect(controller.status.message).to.equal('No group selected');
+                                expect($rootScope.status.message).to.equal('No group selected');
                             });
-                        });
-                        it('should have a user status code of ok', function () {
-                            expect(controller.status.users).to.equal('ok');
                         });
 
                         describe('Pagination', function () {
@@ -268,7 +256,7 @@ describe('GroupViewController', function () {
                                 $rootScope.$apply();
                             });
                             it('should fail properly if user service is not working', function () {
-                                expect(controller.status.users).to.equal('failed');
+                                expect($rootScope.status.status).to.equal('error');
                             });
                         });
                     });
@@ -281,7 +269,7 @@ describe('GroupViewController', function () {
                     var scope = $rootScope.$new();
                     var gs = {
                         getGroup: function () {
-                            return $q.when({status: 'failed', info: 'Unable to reach the database'});
+                            return $q.when({status: 'error', info: 'Unable to reach the database'});
                         },
                         addUserToGroup: function () {
                             return $q.when();
@@ -317,7 +305,7 @@ describe('GroupViewController', function () {
                         controller.group = group;
                         controller.addUserToGroup(user);
                         $rootScope.$apply();
-                        expect(controller.status.message).to.equal('Failed in adding user to group');
+                        expect($rootScope.status.message).to.equal('Failed in adding user to group');
                     });
                 });
 
@@ -328,7 +316,7 @@ describe('GroupViewController', function () {
                         controller.group = group;
                         controller.removeUserFromGroup(user);
                         $rootScope.$apply();
-                        expect(controller.status.message).to.equal('Failed in removing user from group');
+                        expect($rootScope.status.message).to.equal('Failed in removing user from group');
                     });
                 });
 
@@ -338,7 +326,7 @@ describe('GroupViewController', function () {
                         controller.group = group;
                         controller.addAllUsersToGroup();
                         $rootScope.$apply();
-                        expect(controller.status.message).to.equal('Failed in adding all users to the group');
+                        expect($rootScope.status.message).to.equal('Failed in adding all users to the group');
                     });
                 });
             });
@@ -347,16 +335,16 @@ describe('GroupViewController', function () {
                     var scope = $rootScope.$new();
                     var gs = {
                         getGroup: function () {
-                            return $q.when({status: 'failed', info: 'Unable to reach the database'});
+                            return $q.when({status: 'error', info: 'Unable to reach the database'});
                         },
                         addUserToGroup: function () {
-                            return $q.when({status: 'failed', info: 'Unable to reach the database'});
+                            return $q.when({status: 'error', info: 'Unable to reach the database'});
                         },
                         removeUserFromGroup: function () {
-                            return $q.when({status: 'failed', info: 'Unable to reach the database'});
+                            return $q.when({status: 'error', info: 'Unable to reach the database'});
                         },
                         addUsersToGroup: function () {
-                            return $q.when({status: 'failed', info: 'Unable to reach the database'});
+                            return $q.when({status: 'error', info: 'Unable to reach the database'});
                         }
                     };
                     var us = {
@@ -383,7 +371,7 @@ describe('GroupViewController', function () {
                         controller.group = group;
                         controller.addUserToGroup(user);
                         $rootScope.$apply();
-                        expect(controller.status.message).to.equal('Unable to reach the database');
+                        expect($rootScope.status.message).to.equal('Unable to reach the database');
                     });
                 });
                 describe('removeUserFromGroup', function () {
@@ -393,7 +381,7 @@ describe('GroupViewController', function () {
                         controller.group = group;
                         controller.removeUserFromGroup(user);
                         $rootScope.$apply();
-                        expect(controller.status.message).to.equal('Unable to reach the database');
+                        expect($rootScope.status.message).to.equal('Unable to reach the database');
                     });
                 });
 
@@ -403,7 +391,7 @@ describe('GroupViewController', function () {
                         controller.group = group;
                         controller.addAllUsersToGroup();
                         $rootScope.$apply();
-                        expect(controller.status.message).to.equal('Unable to reach the database');
+                        expect($rootScope.status.message).to.equal('Unable to reach the database');
                     });
                 });
             });

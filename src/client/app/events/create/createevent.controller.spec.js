@@ -39,15 +39,6 @@ describe('CreateEventController', function () {
                 expect(controller).to.exist;
             });
 
-            describe('Status property', function () {
-                it('should have a status field', function () {
-                    expect(controller.status).to.exist;
-                });
-                it('should have a status.message field', function () {
-                    expect(controller.status.message).to.exist;
-                });
-            });
-
             describe('After activation', function () {
                 beforeEach(function () {
                     sinon.spy(EventService, 'createEvent');
@@ -75,19 +66,19 @@ describe('CreateEventController', function () {
                         });
 
                         it('should have a status code of ok if response.status.code is ok', function () {
-                            expect(controller.status.code).to.equal('ok');
+                            expect($rootScope.status.status).to.equal('ok');
                         });
 
                         it('should have a status message', function () {
-                            expect(controller.status.message).to.exist;
+                            expect($rootScope.status.message).to.exist;
                         });
 
                         it('should have a status message that is not empty', function () {
-                            expect(controller.status.message).not.to.be.empty;
+                            expect($rootScope.status.message).not.to.be.empty;
                         });
 
                         it('should have a status message if response.status.code is ok', function () {
-                            expect(controller.status.message).to.equal('Event created ok');
+                            expect($rootScope.status.message).to.equal('Event created ok');
                         });
                     });
 
@@ -117,7 +108,7 @@ describe('CreateEventController', function () {
                             controller.event = undefined;
                             controller.create();
                             $rootScope.$apply();
-                            expect(controller.status.code).to.equal('failed');
+                            expect($rootScope.status.status).to.equal('failed');
                         });
                     });
 
@@ -147,7 +138,7 @@ describe('CreateEventController', function () {
                             controller.event = undefined;
                             controller.create();
                             $rootScope.$apply();
-                            expect(controller.status.code).to.equal('failed');
+                            expect($rootScope.status.status).to.equal('failed');
                         });
                     });
 
@@ -177,7 +168,7 @@ describe('CreateEventController', function () {
                             controller.event = undefined;
                             controller.create();
                             $rootScope.$apply();
-                            expect(controller.status.code).to.equal('failed');
+                            expect($rootScope.status.status).to.equal('failed');
                         });
                     });
                 });

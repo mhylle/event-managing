@@ -11,10 +11,7 @@
     function GroupListController($scope, $state, Logger, groupservice, groupiconservice) {
         var vm = this;
         vm.title = 'GroupListController';
-        vm.status = {
-            code: 'ok',
-            message: ''
-        };
+
         vm.groups = [];
         $scope.pageClass = 'page-grouplist';
         activate();
@@ -32,17 +29,15 @@
             groupservice.getGroups().then(function (response) {
                 Logger.info('getting initial groups');
                 if (!response) {
-                    vm.status.code = 'error';
-                    vm.status.message = 'No response returned from the server';
+                    Logger.message('No response returned from the server', 'error');
                     vm.users = [];
                 } else {
                     if (response.status === 'ok') {
                         vm.groups = response.groups;
-                        vm.status.code = 'ok';
+                        Logger.status('ok');
                     } else {
                         vm.groups = [];
-                        vm.status.code = response.status;
-                        vm.status.message = response.info;
+                        Logger.message(response.info, response.status);
                     }
                 }
             });

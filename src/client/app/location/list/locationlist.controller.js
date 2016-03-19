@@ -11,10 +11,7 @@
     function LocationListController($scope, $state, Logger, locationservice) {
         var vm = this;
         vm.title = 'LocationListController';
-        vm.status = {
-            code: 'ok',
-            message: ''
-        };
+
         vm.locations = [];
         $scope.pageClass = 'page-locationlist';
         activate();
@@ -31,17 +28,15 @@
             locationservice.getLocations().then(function (response) {
                 Logger.info('getting initial locations');
                 if (!response) {
-                    vm.status.code = 'error';
-                    vm.status.message = 'No response returned from the server';
+                    Logger.message('No response returned from the server', 'error');
                     vm.locations = [];
                 } else {
                     if (response.status === 'ok') {
                         vm.locations = response.locations;
-                        vm.status.code = 'ok';
+                        Logger.status('ok');
                     } else {
                         vm.locations = [];
-                        vm.status.code = response.status;
-                        vm.status.message = response.info;
+                        Logger.message(response.info, response.status);
                     }
                 }
             });

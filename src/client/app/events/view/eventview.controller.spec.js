@@ -49,18 +49,6 @@ describe('EventViewController', function () {
                 expect(controller.event).to.be.null;
             });
 
-            describe('Status property', function () {
-                it('should have a status field', function () {
-                    expect(controller.status).to.exist;
-                });
-                it('should have a status.code field', function () {
-                    expect(controller.status.code).to.exist;
-                });
-                it('should have a status.message field', function () {
-                    expect(controller.status.message).to.exist;
-                });
-            });
-
             describe('After activation', function () {
                 beforeEach(function () {
                     $rootScope.$apply();
@@ -82,10 +70,7 @@ describe('EventViewController', function () {
 
                 describe('status message', function () {
                     it('should have a status code of ok', function () {
-                        expect(controller.status.code).to.equal('ok');
-                    });
-                    it('should have an empty status message', function () {
-                        expect(controller.status.message).to.equal('');
+                        expect($rootScope.status.status).to.equal('ok');
                     });
                 });
 
@@ -139,7 +124,6 @@ describe('EventViewController', function () {
                             'eid/' + eventwithoutuser.id +
                             '/uid/' + mockuser.id).respond(200, eventwithuser);
                         controller.signup();
-                        //$httpBackend.flush();
                         $rootScope.$apply();
                         expect(controller.signstatus).to.equal('Attending');
                     });
@@ -176,7 +160,7 @@ describe('EventViewController', function () {
                         '/uid/' + mockuser.id).respond(200, eventwithuser);
                     controller.signup();
                     $rootScope.$apply();
-                    expect(controller.status.code).to.equal('failed');
+                    expect($rootScope.status.status).to.equal('failed');
                 });
                 it('When trying to sign for an event the status message should be set ', function () {
                     $httpBackend.whenGET('/api/event/id/1').respond(200, eventwithoutuser);
@@ -185,7 +169,7 @@ describe('EventViewController', function () {
                         '/uid/' + mockuser.id).respond(200, eventwithuser);
                     controller.signup();
                     $rootScope.$apply();
-                    expect(controller.status.message).to.equal('An error occurred when trying to sign for the event');
+                    expect($rootScope.status.message).to.equal('An error occurred when trying to sign for the event');
                 });
             });
         });
@@ -211,14 +195,14 @@ describe('EventViewController', function () {
                     });
                 });
 
-                it('should set a status code of failed', function () {
+                it('should set status to failed', function () {
                     $rootScope.$apply();
-                    expect(controller.status.code).to.equal('failed');
+                    expect($rootScope.status.status).to.equal('failed');
                 });
 
                 it('should have a status message', function () {
                     $rootScope.$apply();
-                    expect(controller.status.message)
+                    expect($rootScope.status.message)
                         .to.equal('An error occured retrieving the event from the server');
                 });
             });
@@ -245,12 +229,12 @@ describe('EventViewController', function () {
 
                 it('should set a status code of failed', function () {
                     $rootScope.$apply();
-                    expect(controller.status.code).to.equal('failed');
+                    expect($rootScope.status.status).to.equal('failed');
                 });
 
                 it('should have a status message', function () {
                     $rootScope.$apply();
-                    expect(controller.status.message)
+                    expect($rootScope.status.message)
                         .to.equal('An unexpected error occurred');
                 });
             });

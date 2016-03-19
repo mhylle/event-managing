@@ -57,15 +57,6 @@ describe('EventListController', function () {
                 expect(controller.events).to.exist;
             });
 
-            describe('Status property', function () {
-                it('should have a status field', function () {
-                    expect(controller.status).to.exist;
-                });
-                it('should have a status.message field', function () {
-                    expect(controller.status.message).to.exist;
-                });
-            });
-
             describe('After activation', function () {
                 beforeEach(function () {
                     $rootScope.$apply();
@@ -80,11 +71,11 @@ describe('EventListController', function () {
                 });
 
                 it('should have an empty status message', function () {
-                    expect(controller.status.message).to.be.empty;
+                    expect($rootScope.status.message).to.be.empty;
                 });
 
                 it('should have a response.cpde that is ok', function () {
-                    expect(controller.status.code).to.equal('ok');
+                    expect($rootScope.status.status).to.equal('ok');
                 });
 
                 describe('Signup/off', function () {
@@ -206,16 +197,12 @@ describe('EventListController', function () {
                     expect(controller.events).to.have.length(0);
                 });
 
-                it('should have a response.status that failed', function () {
-                    expect(controller.status.response).to.undefined;
-                });
-
-                it('should have a response.status.code failed', function () {
-                    expect(controller.status.code).to.equal('failed');
+                it('should have status failed', function () {
+                    expect($rootScope.status.status).to.equal('failed');
                 });
 
                 it('should have a status message', function () {
-                    expect(controller.status.message).not.to.be.empty;
+                    expect($rootScope.status.message).not.to.be.empty;
                 });
             });
         });
@@ -241,16 +228,12 @@ describe('EventListController', function () {
                     expect(controller.events).to.have.length(0);
                 });
 
-                it('should have a response.status that failed', function () {
-                    expect(controller.status.response).to.undefined;
-                });
-
                 it('should have a response.status.code error', function () {
-                    expect(controller.status.code).to.equal('error');
+                    expect($rootScope.status.status).to.equal('error');
                 });
 
                 it('should have a status message', function () {
-                    expect(controller.status.message).not.to.be.empty;
+                    expect($rootScope.status.message).not.to.be.empty;
                 });
             });
         });

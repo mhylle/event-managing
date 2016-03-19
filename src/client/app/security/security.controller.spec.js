@@ -35,15 +35,6 @@ describe('SecurityController', function () {
             expect(controller).to.be.defined;
         });
 
-        describe('Status property', function () {
-            it('should have a status field', function () {
-                expect(controller.status).to.exist;
-            });
-            it('should have a status.message field', function () {
-                expect(controller.status.message).to.exist;
-            });
-        });
-
         describe('after activate', function () {
             beforeEach(function () {
                 $rootScope.$apply();
@@ -70,7 +61,7 @@ describe('SecurityController', function () {
                 );
                 controller.login(controller.credentials);
                 $httpBackend.flush();
-                expect(controller.status.message).to.equal('Login Successful.');
+                expect($rootScope.status.message).to.equal('Login Successful.');
             });
 
         });
@@ -92,7 +83,7 @@ describe('SecurityController', function () {
                 );
                 controller.login(controller.credentials);
                 $httpBackend.flush();
-                expect(controller.status.message).to.equal('Login failed');
+                expect($rootScope.status.message).to.equal('Login failed');
             });
         });
 
@@ -114,7 +105,7 @@ describe('SecurityController', function () {
                 controller.login(controller.credentials);
                 $httpBackend.flush();
                 //$rootScope.$apply();
-                expect(controller.status.message).to.equal(
+                expect($rootScope.status.message).to.equal(
                     'An error occurred when trying to login, please try again later, Database is down');
             });
         });
@@ -138,7 +129,7 @@ describe('SecurityController', function () {
             it('should fail login with mockNotAUser', function () {
                 controller.login();
                 $rootScope.$apply();
-                expect(controller.status.message).to.equal('You must provide a username and password');
+                expect($rootScope.status.message).to.equal('You must provide a username and password');
             });
         });
     });

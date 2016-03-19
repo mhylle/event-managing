@@ -8,15 +8,17 @@
         .module('event-managing-logger')
         .factory('Logger', Logger);
 
-    Logger.$inject = ['$log'];
+    Logger.$inject = ['$rootScope', '$log'];
 
     /* @ngInject */
-    function Logger($log) {
+    function Logger($rootScope, $log) {
         var service = {
             error: error,
             info: info,
             debug: debug,
-            warning: warning
+            warning: warning,
+            message: message,
+            status: stat
         };
         return service;
 
@@ -55,6 +57,21 @@
             } else {
                 $log.warn('Warning: ' + message);
             }
+        }
+
+        function message(text, status) {
+            if (!$rootScope.status) {
+                $rootScope.status = {};
+            }
+            $rootScope.status.status  = status;
+            $rootScope.status.message = text;
+        }
+
+        function stat(stati) {
+            if (!$rootScope.status) {
+                $rootScope.status = {};
+            }
+            $rootScope.status.status  = stati;
         }
     }
 })();

@@ -162,7 +162,7 @@ var locationMockData = (function () {
     }
     function getMockFailedLocation() {
         return {
-            status: 'failed',
+            status: 'error',
             info: 'An unexpected error occurred'
         };
     }

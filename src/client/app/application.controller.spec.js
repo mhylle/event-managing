@@ -55,15 +55,6 @@ describe('ApplicationController', function () {
             it('Should exist', function () {
                 expect(controller).to.exist;
             });
-
-            describe('Status property', function () {
-                it('should have a status field', function () {
-                    expect(controller.status).to.exist;
-                });
-                it('should have a status.message field', function () {
-                    expect(controller.status.message).to.exist;
-                });
-            });
         });
 
         describe('After Activation', function () {
@@ -100,6 +91,11 @@ describe('ApplicationController', function () {
                 it('should fail verification if the user is not authorized', function () {
                     var event = $rootScope.$broadcast('$stateChangeStart', {data: {authorizedRoles: USER_ROLES.admin}});
                     expect(event.defaultPrevented).to.be.true;
+                });
+
+                it('should set the correct message when the not authorized event is thrown', function () {
+                    var event = $rootScope.$broadcast('$stateChangeStart', {data: {authorizedRoles: USER_ROLES.admin}});
+                    expect($rootScope.status.message).not.to.empty;
                 });
 
                 it.skip('should allow continuation if the user is authenticated', function () {

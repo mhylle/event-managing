@@ -22,11 +22,6 @@
         vm.location = null;
         vm.locationid = '';
 
-        vm.status = {
-            code: 'ok',
-            message: ''
-        };
-
         activate();
 
         ////////////////
@@ -40,15 +35,14 @@
         function getLocation() {
             locationservice.getLocation(vm.locationid).then(function (response) {
                 if (!response) {
-                    vm.status.code = 'failed';
-                    vm.status.message = 'An error occurred while retrieving the location from the server';
+                    Logger.message('An error occurred while retrieving the location from the server', 'error');
                 } else {
                     if (response.status === 'ok') {
                         vm.location = response.location;
+                        Logger.status('ok');
                     } else {
                         vm.location = null;
-                        vm.status.code = 'failed';
-                        vm.status.message = response.info;
+                        Logger.message(response.info, 'error');
                     }
                 }
             });

@@ -14,10 +14,6 @@
     function UserListController($state, userservice, Session, Logger) {
         var vm = this;
         vm.title = 'UserListController';
-        vm.status = {
-            code: 'ok',
-            message: ''
-        };
 
         vm.user = Session.user;
         vm.users = [];
@@ -35,17 +31,15 @@
         function fetchUsers() {
             userservice.getUsers().then(function (response) {
                 if (!response) {
-                    vm.status.code = 'error';
-                    vm.status.message = 'No response returned from the server';
+                    Logger.message('No response returned from the server', 'error');
                     vm.users = [];
                 } else {
                     if (response.status === 'ok') {
                         vm.users = response.users;
-                        vm.status.code = 'ok';
+                        Logger.status('ok');
                     } else {
                         vm.users = [];
-                        vm.status.code = response.status;
-                        vm.status.message = response.info;
+                        Logger.message(response.info, response.status);
                     }
                 }
             });

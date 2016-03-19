@@ -38,15 +38,6 @@ describe('GroupListController', function () {
                 expect(controller.groups).to.exist;
             });
 
-            describe('Status property', function () {
-                it('should have a status field', function () {
-                    expect(controller.status).to.exist;
-                });
-                it('should have a status.message field', function () {
-                    expect(controller.status.message).to.exist;
-                });
-            });
-
             describe('After activation', function () {
                 beforeEach(function () {
                     bard.inject('$state');
@@ -62,15 +53,11 @@ describe('GroupListController', function () {
                 });
 
                 it('should have an empty status message', function () {
-                    expect(controller.status.message).to.be.empty;
+                    expect($rootScope.status.message).to.be.empty;
                 });
 
-                it('should have a status.code', function () {
-                    expect(controller.status.code).to.exist;
-                });
-
-                it('should have a response.status that is ok', function () {
-                    expect(controller.status.code).to.equal('ok');
+                it('should have a status that is ok', function () {
+                    expect($rootScope.status.status).to.equal('ok');
                 });
 
                 describe('Icon management', function () {
@@ -152,11 +139,11 @@ describe('GroupListController', function () {
                 });
 
                 it('should have a response.status.code error', function () {
-                    expect(controller.status.code).to.equal('error');
+                    expect($rootScope.status.status).to.equal('error');
                 });
 
                 it('should have a status message', function () {
-                    expect(controller.status.message).not.to.be.empty;
+                    expect($rootScope.status.message).not.to.be.empty;
                 });
 
             });
@@ -185,11 +172,11 @@ describe('GroupListController', function () {
                 });
 
                 it('should have a response.status.code error', function () {
-                    expect(controller.status.code).to.equal('failed');
+                    expect($rootScope.status.status).to.equal('failed');
                 });
 
                 it('should have a status message', function () {
-                    expect(controller.status.message).not.to.be.empty;
+                    expect($rootScope.status.message).not.to.be.empty;
                 });
 
             });
@@ -221,11 +208,11 @@ describe('GroupListController', function () {
                 });
 
                 it('should have a response.status.code ok', function () {
-                    expect(controller.status.code).to.equal('ok');
+                    expect($rootScope.status.status).to.equal('ok');
                 });
 
                 it('should have not have a status message', function () {
-                    expect(controller.status.message).to.be.empty;
+                    expect($rootScope.status.message).to.be.empty;
                 });
             });
         });

@@ -5,7 +5,7 @@ describe('LoggerService', function () {
 
     beforeEach(function () {
         module('event-managing-logger');
-        bard.inject('$log', 'Logger');
+        bard.inject('$rootScope', '$log', 'Logger');
     });
 
     describe('Logging', function () {
@@ -60,6 +60,12 @@ describe('LoggerService', function () {
             Logger.info('info', 'some data');
             var logs = $log.info.logs;
             expect(logs[0][1].data).to.equal('some data');
+        });
+
+        it('Message', function () {
+            Logger.message('some data');
+            expect($rootScope.status).to.exist;
+            expect($rootScope.status.message).to.equal('some data');
         });
     });
 });

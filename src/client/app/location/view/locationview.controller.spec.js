@@ -48,15 +48,6 @@ describe('LocationViewController', function () {
                 expect(controller.location).to.be.null;
             });
 
-            describe('Status property', function () {
-                it('should have a status field', function () {
-                    expect(controller.status).to.exist;
-                });
-                it('should have a status.message field', function () {
-                    expect(controller.status.message).to.exist;
-                });
-            });
-
             describe('After activation', function () {
                 beforeEach(function () {
                     $rootScope.$apply();
@@ -99,11 +90,11 @@ describe('LocationViewController', function () {
             });
 
             it('should have a status code of failed', function () {
-                expect(controller.status.code).to.equal('failed');
+                expect($rootScope.status.status).to.equal('error');
             });
 
             it('should have a status message', function () {
-                expect(controller.status.message).to.equal('An unexpected error occurred');
+                expect($rootScope.status.message).to.equal('An unexpected error occurred');
             });
 
             it('should have not have a location', function () {
@@ -133,11 +124,11 @@ describe('LocationViewController', function () {
             });
 
             it('should have a status code of failed', function () {
-                expect(controller.status.code).to.equal('failed');
+                expect($rootScope.status.status).to.equal('error');
             });
 
             it('should have a status message', function () {
-                expect(controller.status.message)
+                expect($rootScope.status.message)
                     .to.equal('An error occurred while retrieving the location from the server');
             });
 

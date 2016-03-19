@@ -35,12 +35,6 @@
         vm.firstButton = 1;
         vm.lastButton = 1;
 
-        vm.status = {
-            message: '',
-            groups: 'ok',
-            users: 'ok'
-        };
-
         activate();
 
         vm.getUsers = getUsers;
@@ -75,7 +69,7 @@
                     calculateUserLists();
                 } else {
                     vm.group = null;
-                    vm.status.message = 'An error occurred when retrieving the group';
+                    Logger.message('An error occurred when retrieving the group', 'error');
                 }
             });
         }
@@ -101,88 +95,87 @@
                         populatePaginationButtons();
                     });
                 } else {
-                    vm.status.users = 'failed';
+                    Logger.message('An error occurred when retrieving the user list', 'error');
                 }
             });
         }
 
         function addUserToGroup(user) {
             if (!vm.group) {
-                vm.status.message = 'No group selected';
+                Logger.message('No group selected', 'error');
                 return;
             }
             if (!user) {
-                vm.status.message = 'No user selected';
+                Logger.message('No user selected', 'error');
                 return;
             }
             Logger.info('Trying to add user ' + user.id + ' to group ' + vm.group.id);
             groupservice.addUserToGroup(vm.group, user).then(function (response) {
                 if (!response) {
-                    vm.status.message = 'Failed in adding user to group';
+                    Logger.message('Failed in adding user to group', 'error');
                     return;
                 }
 
                 if (response.status === 'ok') {
-                    vm.status.message = 'User successfully added to group';
+                    Logger.message('User successfully added to group', 'error');
                     vm.group = response.group;
                     lodash.remove(vm.availableUsers, function (u) {
                         return u.id === user.id;
                     });
                 }
-                if (response.status === 'failed') {
-                    vm.status.message = response.info;
+                if (response.status === 'error') {
+                    Logger.message(response.info);
                 }
             });
         }
 
         function addAllUsersToGroup() {
-            vm.status.message = 'Adding users to group';
+            Logger.message('Adding users to group');
             if (!vm.group) {
-                vm.status.message = 'No group selected';
+                Logger.message('No group selected');
                 return;
             }
 
             groupservice.addUsersToGroup(vm.group, vm.availableUsers).then(function (response) {
                 if (!response) {
-                    vm.status.message = 'Failed in adding all users to the group';
+                    Logger.message('Failed in adding all users to the group');
                     return;
                 }
 
                 if (response.status === 'ok') {
-                    vm.status.message = 'All users not in the group was added to the group.';
+                    Logger.message('All users not in the group was added to the group.');
                     vm.group = response.group;
                     vm.availableUsers = [];
                 }
-                if (response.status === 'failed') {
-                    vm.status.message = response.info;
+                if (response.status === 'error') {
+                    Logger.message(response.info, 'failed');
                 }
             });
         }
 
         function removeUserFromGroup(user) {
-            vm.status.message = '';
             if (!vm.group) {
-                vm.status.message = 'No group selected';
+                Logger.message('No group selected');
                 return;
             }
             if (!user) {
-                vm.status.message = 'No user selected';
+                Logger.message('No user selected');
                 return;
             }
             Logger.info('Trying to remove user ' + user.id + ' from group ' + vm.group.id);
             groupservice.removeUserFromGroup(vm.group, user).then(function (response) {
                 if (!response) {
-                    vm.status.message = 'Failed in removing user from group';
+                    Logger.message('Failed in removing user from group');
                     return;
                 }
 
                 if (response.status === 'ok') {
-                    vm.status.message = 'User successfully removed from group';
+                    Logger.message('User successfully removed from group');
                     vm.group = response.group;
                     vm.availableUsers.push(user);
                 }
-                if (response.status === 'failed') {
-                    vm.status.message = response.info;
+                if (response.status === 'error') {
+                    Logger.message(response.info, 'error');
                 }
             });
         }

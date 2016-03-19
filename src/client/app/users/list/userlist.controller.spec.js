@@ -36,15 +36,6 @@ describe('UserListController', function () {
                 expect(controller.users).to.exist;
             });
 
-            describe('Status property', function () {
-                it('should have a status field', function () {
-                    expect(controller.status).to.exist;
-                });
-                it('should have a status.message field', function () {
-                    expect(controller.status.message).to.exist;
-                });
-            });
-
             describe('After activation', function () {
                 beforeEach(function () {
                     bard.inject('$state');
@@ -57,18 +48,6 @@ describe('UserListController', function () {
 
                 it('should have mock events', function () {
                     expect(controller.users).to.have.length(20);
-                });
-
-                it('should have an empty status message', function () {
-                    expect(controller.status.message).to.be.empty;
-                });
-
-                it('should have a status.code', function () {
-                    expect(controller.status.code).to.exist;
-                });
-
-                it('should have a response.status that is ok', function () {
-                    expect(controller.status.code).to.equal('ok');
                 });
 
                 describe('Should navigate to the correct state when choosing a user', function () {
@@ -146,11 +125,11 @@ describe('UserListController', function () {
                 });
 
                 it('should have a response.status.code error', function () {
-                    expect(controller.status.code).to.equal('failed');
+                    expect($rootScope.status.status).to.equal('error');
                 });
 
                 it('should have a status message', function () {
-                    expect(controller.status.message).not.to.be.empty;
+                    expect($rootScope.status.message).not.to.be.empty;
                 });
 
             });
@@ -176,11 +155,11 @@ describe('UserListController', function () {
                 });
 
                 it('should have a response.status.code warning', function () {
-                    expect(controller.status.code).to.equal('error');
+                    expect($rootScope.status.status).to.equal('error');
                 });
 
                 it('should have not have a status message', function () {
-                    expect(controller.status.message).to.equal('No response returned from the server');
+                    expect($rootScope.status.message).to.equal('No response returned from the server');
                 });
 
             });

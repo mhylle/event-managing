@@ -8,19 +8,15 @@
         .module('event-managing-events')
         .controller('createeventcontroller', CreateEventController);
 
-    CreateEventController.$inject = ['EventService', 'locationservice'];
+    CreateEventController.$inject = ['EventService', 'locationservice', 'Logger'];
 
     /* @ngInject */
-    function CreateEventController(EventService, locationservice) {
+    function CreateEventController(EventService, locationservice, Logger) {
         var vm = this;
         vm.title = 'CreateEventController';
 
         vm.event = {};
         vm.locations = [];
-        vm.status = {
-            code: 'ok',
-            message: ''
-        };
 
         vm.create = create;
 
@@ -56,21 +52,17 @@
                 if (response) {
                     if (response.status) {
                         if (response.status === 'ok') {
-                            vm.status.code = 'ok';
-                            vm.status.message = 'Event created ok';
+                            Logger.message('Event created ok', 'ok');
                         }
 
                         if (response.status === 'failed') {
-                            vm.status.code = 'failed';
-                            vm.status.message = 'An error occured while creating the event';
+                            Logger.message('An error occured while creating the event', 'failed');
                         }
                     } else {
-                        vm.status.code = 'failed';
-                        vm.status.message = 'An error occured while creating the event';
+                        Logger.message('An error occured while creating the event', 'failed');
                     }
                 } else {
-                    vm.status.code = 'failed';
-                    vm.status.message = 'An error occured while creating the event';
+                    Logger.message('An error occured while creating the event', 'failed');
                 }
             });
         }

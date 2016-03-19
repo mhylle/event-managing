@@ -257,7 +257,7 @@ var userMockData = (function () {
 
     function getFailedMockUsers() {
         return {
-            status: 'failed',
+            status: 'error',
             info: 'Unable to retrieve data from database'
         };
     }
