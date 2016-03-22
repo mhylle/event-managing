@@ -28,9 +28,9 @@
             }, function (newVal) {
                 Logger.info('watch triggered..');
                 if (typeof newVal !== 'undefined' && newVal !== null) {
-                    vm.username = newVal.username;
+                    vm.username = newVal.name.firstname + ' ' + newVal.name.lastname;
                 } else {
-                    vm.username = 'Not logged in.';
+                    vm.username = 'Guest';
                 }
             });
         }
@@ -48,8 +48,8 @@
                 var credentials = {username: response.username, password: response.password};
                 SecurityService.login(credentials).then(function (response) {
                     if (response) {
-                        Logger.message('Logged in successfully!');
-                        vm.username = response.username;
+                        Logger.message('Welcome ' + Session.user.name.firstname + ' ' + Session.user.name.lastname + '!');
+                        vm.username = Session.user.name.firstname + ' ' + Session.user.name.lastname;
                     } else {
                         Logger.message('Login failed. Did you supply the correct username or password?');
                     }

@@ -13,21 +13,21 @@ function configuration($stateProvider, USER_ROLES) {
             url: '/location',
             templateUrl: 'app/location/location.html',
             data: {
-                authorizedRoles: [USER_ROLES.all]
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
         })
         .state('locations.list', {
             url: '/list',
             templateUrl: 'app/location/list/locationlist.html',
             data: {
-                authorizedRoles: [USER_ROLES.all]
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
         })
         .state('locations.view', {
             url: '/view/:id',
             templateUrl: 'app/location/view/location.html',
             data: {
-                authorizedRoles: [USER_ROLES.all]
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
             }
         });
 }

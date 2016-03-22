@@ -40,7 +40,7 @@
             }
 
             if (authorizedRoles.indexOf('*') !== -1) {
-                return isAuthenticated();
+                return true;
             }
 
             var authorized = lodash.intersection(authorizedRoles, Session.userRoles).length > 0;
