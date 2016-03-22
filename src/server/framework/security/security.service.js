@@ -26,7 +26,7 @@ module.exports = function () {
 
         for (var i = 0; i < users.length; i++) {
             var user = users[i];
-            if (userName === user.name) {
+            if (userName === user.username) {
                 var token = userName;
                 // tmp
                 if (userName === 'mah') {

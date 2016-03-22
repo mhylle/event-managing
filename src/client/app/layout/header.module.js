@@ -4,5 +4,8 @@
 angular
     .module('event-managing-header', [
         'ngMaterial',
-        'event-managing-logger'
+        'ngAnimate',
+        'event-managing-security',
+        'event-managing-logger',
+        'event-managing-components'
     ]);

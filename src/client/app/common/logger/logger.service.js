@@ -63,6 +63,7 @@
             if (!$rootScope.status) {
                 $rootScope.status = {};
             }
+            console.log(text);
             $rootScope.status.status  = status;
             $rootScope.status.message = text;
         }

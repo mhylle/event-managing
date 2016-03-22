@@ -8,16 +8,14 @@
         .module('event-managing-header')
         .controller('HeaderController', HeaderController);
 
-    HeaderController.$inject = ['$scope', '$mdDialog', '$mdMedia', 'Logger'];
+    HeaderController.$inject = ['$scope', 'Logger', 'modals', 'SecurityService', 'Session'];
 
     /* @ngInject */
-    function HeaderController($scope, $mdDialog, $mdMedia, Logger) {
+    function HeaderController($scope, Logger, modals, SecurityService, Session) {
         var vm = this;
         vm.title = 'HeaderController';
 
-        // vm.showLoginDialog = showLoginDialog;
-        // vm.handleCancel = handleCancel;
-        // vm.handleSubmit = handleSubmit;
+        vm.showLoginDialog = showLoginDialog;
         activate();
 
         ////////////////
@@ -26,50 +24,42 @@
             vm.title = 'Header';
             vm.logo = 'images/logo.png';
             $scope.$watch(function () {
-                return null;//SecurityService.getSecurityToken();
+                return Session.user;
             }, function (newVal) {
                 Logger.info('watch triggered..');
-                //if (typeof newVal !== 'undefined') {
-                //    vm.username = newVal;
-                //} else {
-                //    vm.username = 'Not logged in.';
-                //}
+                if (typeof newVal !== 'undefined' && newVal !== null) {
+                    vm.username = newVal.username;
+                } else {
+                    vm.username = 'Not logged in.';
+                }
             });
         }
 
-        // function handleSubmit() {
-        //     return $mdDialog.hide();
-        // }
-        //
-        // function handleCancel() {
-        //     return $mdDialog.hide();
-        // }
-        //
-        // function showLoginDialog(ev) {
-        //     Logger.info('showLoginDialog');
-        //     var confirm = $mdDialog.prompt({
-        //             templateUrl: 'app/security/login/login.html',
-        //         })
-        //         .targetEvent(ev)
-        //         .ok('Okay!')
-        //         .cancel('I\'m a cat person');
-        //     // .title('Please Login')
-        //     // .textContent('Bowser is a common name.')
-        //     // .placeholder('dog name')
-        //     // .ariaLabel('Dog name')
-        //     // .targetEvent(ev)
-        //     // .ok('Okay!')
-        //     // .cancel('I\'m a cat person');
-        //
-        //     function targetEvent(event){
-        //         console.log('targer: ' + event);
-        //     }
-        //     $mdDialog.show(confirm).then(function (result) {
-        //         $scope.status = 'You decided to name your dog ' + result + '.';
-        //     }, function () {
-        //         $scope.status = 'You didn\'t name your dog.';
-        //     });
-        // }
+        function showLoginDialog(ev) {
+            Logger.info('showLoginDialog');
+
+            var promise = modals.open('prompt', {
+                message: 'Please login',
+                placeholder: ''
+            });
+
+            promise.then(function handleResolve(response) {
+                Logger.message('Prompt resolved with ' + response, +'.');
+                var credentials = {username: response.username, password: response.password};
+                SecurityService.login(credentials).then(function (response) {
+                    if (response) {
+                        Logger.message('Logged in successfully!');
+                        vm.username = response.username;
+                    } else {
+                        Logger.message('Login failed. Did you supply the correct username or password?');
+                    }
+                });
+
+
+            }, function handleReject(error) {
+                Logger.message('Prompt rejected');
+            })
+        }
     }
 })();
 

@@ -1,0 +1,127 @@
+<div emmodals ng-show="subview" class="m-modals" ng-switch="subview">
+    <form ng-switch-when="prompt" ng-controller="promptdialogcontroller" ng-submit='submit()' class="modaly">
+        <div class="panel panel-primary">
+            <div class="panel panel-heading">
+                {{message}}
+            </div>
+            <div class="panel panel-body">
+                <div ng-if="errorMessage">
+                    <strong>Sorry:</strong> {{errorMessage}}
+                </div>
+
+                <div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label>Username:</label>
+                        </div>
+                        <div class="col-xs-8">
+                            <input type="text" ng-model="form.input.username"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-4"><label>Password:</label></div>
+                        <div class="col-xs-8"><input type="password" ng-model="form.input.password"/></div>
+                    </div>
+                </div>
+
+                <div>
+                    <a ng-click="submit()">Login</a>
+                    <a ng-click="cancel()">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!--<md-dialog aria-label="Sample Dialog">-->
+<!--<md-content>-->
+<!--<md-list>-->
+<!--<md-item ng-repeat="item in ctrl.items">-->
+<!--<p>{{item}}</p>-->
+<!--</md-item>-->
+<!--</md-list>-->
+<!--</md-content>-->
+<!--<div class="md-actions">-->
+<!--<md-button ng-click="vm.handleCancel()">-->
+<!--Close Greeting-->
+<!--</md-button>-->
+<!--</div>-->
+<!--</md-dialog>-->
+<!--<md-dialog aria-label="login" ng-cloak>-->
+<!--<form name="loginForm" data-ng-submit="vm.handleSubmit()">-->
+<!--<md-toolbar>-->
+<!--<div class="md-toolbar-tools">-->
+<!--<h2>Login</h2>-->
+<!--<span flex></span>-->
+<!--<md-button type="button" class="md-icon-button" ng-click="vm.handleCancel(); $event.stopPropagation();">-->
+<!--<md-icon md-svg-icon="navigation:close" aria-label="Close dialog"></md-icon>-->
+<!--</md-button>-->
+<!--</div>-->
+<!--</md-toolbar>-->
+
+<!--<md-dialog-content>-->
+<!--<div class="md-dialog-content">-->
+<!--<md-input-container class="md-block">-->
+<!--<label>Username:</label>-->
+<!--<input ng-model="vm.username" required>-->
+<!--</md-input-container>-->
+
+<!--<md-input-container class="md-block">-->
+<!--<label>Password:</label>-->
+<!--<input ng-model="vm.password" type="password" required>-->
+<!--</md-input-container>-->
+<!--</div>-->
+<!--</md-dialog-content>-->
+
+<!--<md-dialog-actions layout="row">-->
+<!--<span flex></span>-->
+<!--<md-button type="submit" class="md-primary"-->
+<!--ng-class="{'md-raised md-hue-1': (loginForm.$dirty && loginForm.$valid) }"-->
+<!--aria-label="OK">-->
+<!--Login-->
+<!--</md-button>-->
+<!--<md-button type="button" ng-click="vm.handleCancel(); $event.stopPropagation();"-->
+<!--aria-label="Cancel">-->
+<!--Cancel-->
+<!--</md-button>-->
+<!--</md-dialog-actions>-->
+<!--</form>-->
+<!--&lt;!&ndash;</md-dialog>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<form>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<div ng-controller="SecurityController as vm">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<div class="row panel panel-info">&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;<div class="panel-body">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<div class="row">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<span class="col-xs-4 text-right">Username</span>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<span class="col-xs-8"><input type="text" ng-model="vm.credentials.username"></span>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<div class="row">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<span class="col-xs-4 text-right">Password</span>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<span class="col-xs-8"><input type="password" ng-model="vm.credentials.password"></span>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<div class="row text-center">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<button class="btn btn-default" ng-click="vm.login(vm.credentials)">Login</button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<button class="btn btn-default" ng-click="vm.logout()">Logout</button>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</form>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<div class="modal-dialog">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<div class="loginmodal-container">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<h1>Login to Your Account</h1><br>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<form>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<input type="text" name="user" placeholder="Username">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<input type="password" name="pass" placeholder="Password">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<input type="submit" name="login" class="login loginmodal-submit" value="Login">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</form>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;<div class="login-help">&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<a href="#">Register</a> - <a href="#">Forgot Password</a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->

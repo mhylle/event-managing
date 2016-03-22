@@ -8,7 +8,9 @@ describe('HeaderController', function () {
         module('event-managing-header');
         bard.inject('$controller',
             '$rootScope',
-            'Logger');
+            '$log',
+            'Logger',
+            'SecurityService');
     });
 
     describe('Controller Initialization', function () {
@@ -44,6 +46,13 @@ describe('HeaderController', function () {
                 it('should have a logo pointing to images/logo.png', function () {
                     expect(controller.logo).to.equal('images/logo.png');
                 });
+
+                describe('login dialog', function () {
+                    it('should open the prompt modal dialog when asked', function() {
+                        controller.showLoginDialog();
+                        expect($log.info.logs[1][0]).to.contain('showLoginDialog');
+                    })
+                })
             });
         });
     });
