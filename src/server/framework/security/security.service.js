@@ -30,6 +30,7 @@ module.exports = function () {
                 var token = userName;
                 // tmp
                 if (userName === 'mah') {
+                    tokens.push(token);
                     return {status: 200, accesstoken: token, user: user};
                 }
                 var userhash = user.hash;

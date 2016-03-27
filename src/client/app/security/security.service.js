@@ -5,10 +5,10 @@
         .module('event-managing-security')
         .service('SecurityService', SecurityService);
 
-    SecurityService.$inject = ['$http', 'Session', 'lodash'];
+    SecurityService.$inject = ['$http', '$window', 'Session', 'lodash'];
 
     /* @ngInject */
-    function SecurityService($http, Session, lodash) {
+    function SecurityService($http, $window, Session, lodash) {
         var service = this;
         service.login = login;
         service.isAuthenticated = isAuthenticated;
@@ -21,6 +21,7 @@
                 .then(function (response) {
                     if (response.data.status === 200) {
                         var user = response.data.user;
+                        $window.sessionStorage.userInfo = response.data.accesstoken;
                         Session.create(user.id, user, user.roles);
                         return true;
                     } else {

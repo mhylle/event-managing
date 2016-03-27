@@ -25,9 +25,9 @@
 
         function activate() {
             params = modals.params();
-            vm.message = (params.message || "Are you sure?");
-            vm.confirmButton = (params.confirmButton || "Yes");
-            vm.denyButton = (params.denyButton || "No");
+            vm.message = (params.message || 'Are you sure?');
+            vm.confirmButton = (params.confirmButton || 'Yes');
+            vm.denyButton = (params.denyButton || 'No');
         }
     }
 

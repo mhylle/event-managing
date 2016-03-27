@@ -15,6 +15,7 @@
         var vm = this;
         vm.title = 'HeaderController';
 
+        vm.isAuthorized = isAuthorized;
         vm.showLoginDialog = showLoginDialog;
         activate();
 
@@ -48,7 +49,8 @@
                 var credentials = {username: response.username, password: response.password};
                 SecurityService.login(credentials).then(function (response) {
                     if (response) {
-                        Logger.message('Welcome ' + Session.user.name.firstname + ' ' + Session.user.name.lastname + '!');
+                        Logger.message('Welcome ' + Session.user.name.firstname +
+                            ' ' + Session.user.name.lastname + '!');
                         vm.username = Session.user.name.firstname + ' ' + Session.user.name.lastname;
                     } else {
                         Logger.message('Login failed. Did you supply the correct username or password?');
@@ -57,8 +59,12 @@
 
 
             }, function handleReject(error) {
-                Logger.message('Prompt rejected');
-            })
+                Logger.message('Prompt rejected: ' + error);
+            });
+        }
+
+        function isAuthorized(module) {
+            return true;
         }
     }
 })();

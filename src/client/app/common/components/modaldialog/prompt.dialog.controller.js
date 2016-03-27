@@ -26,7 +26,7 @@
             $scope.message = modals.params().message;
 
             $scope.form = {
-                input: (modals.params().placeholder || "")
+                input: (modals.params().placeholder || '')
             };
 
             $scope.errorMessage = null;
@@ -34,7 +34,7 @@
 
         function submit() {
             if (! $scope.form.input) {
-                return ($scope.errorMessage = "Please enter a value");
+                return ($scope.errorMessage = 'Please enter a value');
             }
 
             modals.resolve ($scope.form.input);

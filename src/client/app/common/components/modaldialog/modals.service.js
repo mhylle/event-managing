@@ -9,11 +9,12 @@
 
     /* @ngInject */
     function modals($rootScope, $q, Logger) {
-        this.open = open;
-        this.params = params;
-        this.proceedTo = proceedTo;
-        this.reject = reject;
-        this.resolve = resolve;
+        var service = this;
+        service.open = open;
+        service.params = params;
+        service.proceedTo = proceedTo;
+        service.reject = reject;
+        service.resolve = resolve;
 
         var modal = {
             deferred: null,
@@ -44,7 +45,7 @@
         }
 
         function proceedTo(type, params) {
-            return (open(type, params, true));
+            return (service.open(type, params, true));
         }
 
         function reject(reason) {

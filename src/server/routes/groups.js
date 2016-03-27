@@ -1,5 +1,6 @@
 var _ = require('lodash');
 
+var security = require('../framework/security/security.service')();
 var groupData = require('../framework/data/Group_mock_data.json');
 var userData = require('../framework/data/User_mock_data.json');
 
@@ -7,16 +8,16 @@ module.exports = function (app) {
     var _groups = groupData;
     var _users = userData;
 
-    app.post('/group', function (req, res) {
+    app.post('/group', security.requiresAuthentication, function (req, res) {
         _groups.push(req.body);
         res.json({status: 'ok', info: 'group created successfully', group: req.body});
     });
 
-    app.get('/group', function (req, res) {
+    app.get('/group', security.requiresAuthentication, function (req, res) {
         res.json({status: 'ok', info: '', groups: _groups});
     });
 
-    app.get('/group/id/:id', function (req, res) {
+    app.get('/group/id/:id', security.requiresAuthentication, function (req, res) {
         var gid = parseInt(req.params.id);
         var result = _.find(
             _groups, function (g) {
@@ -26,7 +27,7 @@ module.exports = function (app) {
         );
     });
 
-    app.put('/group/id/:id', function (req, res) {
+    app.put('/group/id/:id', security.requiresAuthentication, function (req, res) {
         var gid = parseInt(req.params.id);
         var index = _.findIndex(
             _groups,
@@ -38,7 +39,7 @@ module.exports = function (app) {
         res.json({status: 'ok', info: 'group updated successfully', group: req.body});
     });
 
-    app.put('/group/id/:id/users', function (req, res) {
+    app.put('/group/id/:id/users', security.requiresAuthentication, function (req, res) {
         var gid = parseInt(req.params.id);
         var index = _.findIndex(
             _groups,
@@ -53,7 +54,7 @@ module.exports = function (app) {
         res.json({status: 'ok', info: 'group updated successfully', group: group});
     });
 
-    app.put('/group/id/:gid/user/id/:uid', function (req, res) {
+    app.put('/group/id/:gid/user/id/:uid', security.requiresAuthentication, function (req, res) {
         var gid = parseInt(req.params.gid);
         var uid = parseInt(req.params.uid);
         var index = _.findIndex(
@@ -90,7 +91,7 @@ module.exports = function (app) {
         res.json(result);
     });
 
-    app.delete('/group/id/:gid/user/id/:uid', function (req, res) {
+    app.delete('/group/id/:gid/user/id/:uid', security.requiresAuthentication, function (req, res) {
         var gid = parseInt(req.params.gid);
         var uid = parseInt(req.params.uid);
         var index = _.findIndex(

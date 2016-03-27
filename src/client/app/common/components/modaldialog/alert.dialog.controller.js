@@ -7,11 +7,12 @@
 
     alertdialogcontroller.$inject = ['$scope', '$q', 'modals'];
 
-    /* @ngInject */
+
     /**
      * Simple alert dialog controller
      * @param modals service for the modality state.
      */
+    /* @ngInject */
     function alertdialogcontroller(modals) {
         var vm = this;
         vm.title = 'alertdialogcontroller';

@@ -4,7 +4,7 @@ angular
         var sessionInjector = {
             request: function (config) {
                 config.headers.accesstoken = $window.sessionStorage.userInfo;
-                //console.log('interceptor called.');
+                console.log('interceptor called., using ' + $window.sessionStorage.userInfo + ' as session token');
                 return config;
             }
 
@@ -12,7 +12,7 @@ angular
         return sessionInjector;
     }])
     .config(['$httpProvider', function ($httpProvider) {
-        //Logger.info('http provider config');
+        console.log('http provider config');
         $httpProvider.interceptors.push('sessionInjector');
     }]);
 

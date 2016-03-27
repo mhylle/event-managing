@@ -51,8 +51,8 @@ describe('HeaderController', function () {
                     it('should open the prompt modal dialog when asked', function() {
                         controller.showLoginDialog();
                         expect($log.info.logs[1][0]).to.contain('showLoginDialog');
-                    })
-                })
+                    });
+                });
             });
         });
     });
