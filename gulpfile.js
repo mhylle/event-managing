@@ -33,7 +33,7 @@ gulp.task('default', ['help']);
  * vet the code and create coverage report
  * @return {Stream}
  */
-gulp.task('vet',['complexity'], function () {
+gulp.task('vet', function () {
     log('Analyzing source with JSHint and JSCS');
 
     return gulp
@@ -52,7 +52,7 @@ gulp.task('complexity', false, function() {
             halstead: 20,
             maintainability: 80,
             breakOnErrors: false,
-            verbose: true
+            verbose: false
         }));
 });
 /**
