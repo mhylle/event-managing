@@ -31,13 +31,8 @@
                     Logger.message('No response returned from the server', 'error');
                     vm.locations = [];
                 } else {
-                    if (response.status === 'ok') {
-                        vm.locations = response.locations;
-                        Logger.status('ok');
-                    } else {
-                        vm.locations = [];
-                        Logger.message(response.info, response.status);
-                    }
+                    vm.locations = response;
+                    Logger.status('ok');
                 }
             });
         }

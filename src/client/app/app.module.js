@@ -34,6 +34,13 @@
                 data: {
                     authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
                 }
+            })
+            .state('test', {
+                url: '/test',
+                templateUrl: 'app/tester.html',
+                data: {
+                    authorizedRoles: [USER_ROLES.all]
+                }
             });
     }
 
@@ -61,7 +68,7 @@
                     var authorizedRoles = next.data.authorizedRoles;
                     if (!SecurityService.isAuthorized(authorizedRoles)) {
                         Logger.message('user was not authorized to proceed');
-                        event.preventDefault();
+                        // event.preventDefault();
                         if (SecurityService.isAuthenticated()) {
                             // user is not allowed
                             $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);

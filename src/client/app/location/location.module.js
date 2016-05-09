@@ -5,6 +5,11 @@ angular
         'event-managing-logger',
         'event-managing-security'
     ])
+    .constant("location_server", {
+        url: 'http://localhost',
+        port: 3000,
+        location: 'locations'
+    })
     .config(['$stateProvider', 'USER_ROLES', configuration]);
 
 function configuration($stateProvider, USER_ROLES) {

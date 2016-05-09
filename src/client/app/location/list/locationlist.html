@@ -3,6 +3,7 @@
     <div class="row">
         <ul ng-repeat="location in vm.locations | orderBy:  'name' | filter:locationfilter" class="list-inline animate-repeat">
             <li class="card col-xs-6" ng-click="vm.gotoLocation(location)">
+                <p class="col-lg-1 text-left"><img ng-src="{{location.avatar}}" height="24"/></p>
                 <div class="col-xs-3 text-left">{{location.name}}</div>
                 <div class="col-xs-2">{{location.contactinformation.phone}}</div>
                 <div class="col-xs-2">{{location.contactinformation.address}}</div>
