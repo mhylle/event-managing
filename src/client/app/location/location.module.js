@@ -5,7 +5,7 @@ angular
         'event-managing-logger',
         'event-managing-security'
     ])
-    .constant("location_server", {
+    .constant('locationServer', {
         url: 'http://localhost',
         port: 3000,
         location: 'locations'

@@ -5,11 +5,11 @@
         .module('event-managing-users')
         .factory('userservice', userservice);
 
-    userservice.$inject = ['$http', 'Logger', 'user_server'];
+    userservice.$inject = ['$http', 'Logger', 'userServer'];
 
     /* @ngInject */
-    function userservice($http, Logger, user_server) {
-        var usersLocation = user_server.url + ':' + user_server.port + '/api/' + user_server.location;
+    function userservice($http, Logger, userServer) {
+        var usersLocation = userServer.url + ':' + userServer.port + '/api/' + userServer.location;
         var service = {
             name: 'userservice',
             getUsers: getUsers,

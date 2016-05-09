@@ -4,7 +4,7 @@ angular
         'event-managing',
         'event-managing-security'
     ])
-    .constant("user_server", {
+    .constant('userServer', {
         url: 'http://localhost',
         port: 3000,
         location: 'users'

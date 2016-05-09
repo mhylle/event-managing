@@ -5,11 +5,11 @@
         .module('event-managing-locations')
         .factory('locationservice', locationservice);
 
-    locationservice.$inject = ['$http', 'Logger', 'location_server'];
+    locationservice.$inject = ['$http', 'Logger', 'locationServer'];
 
     /* @ngInject */
-    function locationservice($http, Logger, location_server) {
-        var locationLocation = location_server.url + ':' + location_server.port + '/api/' + location_server.location;
+    function locationservice($http, Logger, locationServer) {
+        var locationLocation = locationServer.url + ':' + locationServer.port + '/api/' + locationServer.location;
         var service = {
             name: 'locationservice',
             getLocations: getLocations,
