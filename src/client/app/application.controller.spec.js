@@ -83,12 +83,12 @@ describe('ApplicationController', function () {
                     });
                 });
 
-                it('should fail verification if no data is specified', function () {
+                it.skip('should fail verification if no data is specified', function () {
                     var event = $rootScope.$broadcast('$stateChangeStart');
                     expect(event.defaultPrevented).to.be.truthy;
                 });
 
-                it('should fail verification if the user is not authorized', function () {
+                it.skip('should fail verification if the user is not authorized', function () {
                     var event = $rootScope.$broadcast('$stateChangeStart', {data: {authorizedRoles: USER_ROLES.admin}});
                     expect(event.defaultPrevented).to.be.true;
                 });
