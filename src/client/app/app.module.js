@@ -79,7 +79,7 @@
                     }
                 }
             } else {
-                event.preventDefault();
+                // event.preventDefault();
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
                 Logger.error('data attribute did not exist on next object, this is an error..');
             }

@@ -5,10 +5,11 @@
         .module('event-managing-groups')
         .factory('groupservice', groupservice);
 
-    groupservice.$inject = ['$http', 'Logger'];
+    groupservice.$inject = ['$http', 'Logger', 'groupsServer'];
 
     /* @ngInject */
-    function groupservice($http, Logger) {
+    function groupservice($http, Logger, groupsServer) {
+        var groupsLocation = groupsServer.url + ':' + groupsServer.port + '/api/' + groupsServer.location;
         var service = {
             name: 'groupservice',
             getGroups: getGroups,
@@ -22,7 +23,7 @@
         ////////////////
 
         function getGroups() {
-            return $http.get('/api/group')
+            return $http.get(groupsLocation)
                 .then(onGetGroupsSuccess)
                 .catch(onGetGroupsError);
 
@@ -37,7 +38,7 @@
 
         function getGroup(id) {
             Logger.info('Trying to retrieve group by id ' + id);
-            return $http.get('/api/group/id/' + id)
+            return $http.get(groupsLocation + '/id/' + id)
                 .then(onGetGroupSuccess)
                 .catch(onGetGroupError);
 
@@ -59,7 +60,7 @@
                 return;
             }
 
-            return $http.put('/api/group/id/' + group.id + '/users', users)
+            return $http.put(groupsLocation + '/id/' + group.id + '/users', users)
                 .then(onSuccess)
                 .catch(onError);
         }
@@ -72,7 +73,7 @@
             if (!group || !user) {
                 return;
             }
-            var url = '/api/group/id/' + group.id + '/user/id/' + user.id;
+            var url = groupsLocation + '/id/' + group.id + '/user/id/' + user.id;
             switch (action) {
                 case 'delete':
                     return $http.delete(url)

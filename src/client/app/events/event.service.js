@@ -8,10 +8,11 @@
         .module('event-managing-events')
         .factory('EventService', EventService);
 
-    EventService.$inject = ['$http', '$q', 'Logger'];
+    EventService.$inject = ['$http', 'Logger', 'eventServer'];
 
     /* @ngInject */
-    function EventService($http, $q, Logger) {
+    function EventService($http, Logger, eventServer) {
+        var eventLocation = eventServer.url + ':' + eventServer.port + '/api/' + eventServer.location;
         var service = {
             name: 'EventService',
             getEvents: getEvents,
@@ -24,7 +25,7 @@
 
         ////////////////
         function getEvents() {
-            return $http.get('/api/event')
+            return $http.get(eventLocation)
                 .then(onGetEventsSuccess)
                 .catch(onGetEventsError);
 
@@ -44,7 +45,7 @@
 
         function getEvent(id) {
             Logger.info('Trying to retrieve event by id ' + id);
-            return $http.get('/api/event/id/' + id)
+            return $http.get(eventLocation + '/id/' + id)
                 .then(onGetEventSuccess)
                 .catch(onGetEventError);
 
@@ -58,9 +59,9 @@
             }
         }
 
-        function createEvent(event) {
-            Logger.info('Trying to retrieve event by id ' + event.id);
-            return $http.post('/api/event', event)
+        function createEvent(evt) {
+            Logger.info('Trying to retrieve event by id ' + evt.id);
+            return $http.post(eventLocation, evt)
                 .then(onCreateEventSuccess)
                 .catch(onCreateEventError);
 
@@ -83,7 +84,7 @@
                 return {status: 'missing data', info: 'You must supply a user to attend.'};
             }
 
-            return $http.get('/api/event/attend/eid/' + event.id + '/uid/' + user.id)
+            return $http.get(eventLocation + '/attend/eid/' + event.id + '/uid/' + user.id)
                     .then(onAttendEventSuccess)
                     .catch(onAttendEventError);
 
@@ -105,7 +106,7 @@
                 return {status: 'missing data', info: 'You must supply a user to unattend.'};
             }
 
-            return $http.get('/api/event/unattend/eid/' + event.id + '/uid/' + user.id)
+            return $http.get(eventLocation + '/unattend/eid/' + event.id + '/uid/' + user.id)
                 .then(onUnattendEventSuccess)
                 .catch(onUnattendEventError);
 

@@ -6,6 +6,11 @@ angular
         'event-managing-security',
         'event-managing-users'
     ])
+    .constant('groupsServer', {
+        url: 'http://localhost',
+        port: 3000,
+        location: 'groups'
+    })
     .config(['$stateProvider', 'USER_ROLES', configuration]);
 
 function configuration($stateProvider, USER_ROLES) {

@@ -38,13 +38,8 @@
                     Logger.message('No response returned from the server', 'error');
                     vm.events = [];
                 } else {
-                    if (response.status === 'ok') {
-                        vm.events = response.events;
-                        Logger.status('ok');
-                    } else {
-                        vm.events = [];
-                        Logger.message(response.info, response.status);
-                    }
+                    vm.events = response;
+                    Logger.status('ok');
                 }
             });
         }

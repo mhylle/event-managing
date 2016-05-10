@@ -4,7 +4,7 @@ var errorhandler = require('errorhandler');
 var router = express.Router();
 
 var four0four = require('./framework/utils/404')();
-var security = require('./framework/security/security.service')();
+// var security = require('./framework/security/security.service')();
 //var eventservice = require('./events/event.service')();
 
 //var DataRepository = require('./framework/data/data.repository');
@@ -17,25 +17,25 @@ var app = express();
 //app.set('jwtTokenSecret', '123456ABCDEF');
 app.use(errorhandler);
 
-var groups = require('./routes/groups.js')(router);
-var users = require('./routes/users.js')(router);
-var events = require('./routes/events.js')(router);
-var locations = require('./routes/locations.js')(router);
+// var groups = require('./routes/groups.js')(router);
+// var users = require('./routes/users.js')(router);
+// var events = require('./routes/events.js')(router);
+// var locations = require('./routes/locations.js')(router);
 
-router.post('/login/', login);
-router.get('/logout/', logout);
+// router.post('/login/', login);
+// router.get('/logout/', logout);
 router.get('/*', four0four.notFoundMiddleware);
 
 module.exports = router;
 
 //////////////
-function login(req, res, next) {
-    res.json(security.login(req, res, next));
-}
+// function login(req, res, next) {
+//     res.json(security.login(req, res, next));
+// }
 
-function logout(req, res, next) {
-    security.logout(req, res, next);
-}
+// function logout(req, res, next) {
+//     security.logout(req, res, next);
+// }
 
 //function requiresAuthentication(req, res, next) {
 //    security.requiresAuthentication(req, res, next);
