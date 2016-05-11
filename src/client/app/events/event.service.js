@@ -61,7 +61,14 @@
 
         function createEvent(evt) {
             Logger.info('Trying to retrieve event by id ' + evt.id);
-            return $http.post(eventLocation, evt)
+            return $http({
+                url: eventLocation,
+                method: 'POST',
+                data: evt,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
                 .then(onCreateEventSuccess)
                 .catch(onCreateEventError);
 
@@ -85,8 +92,8 @@
             }
 
             return $http.get(eventLocation + '/attend/eid/' + event.id + '/uid/' + user.id)
-                    .then(onAttendEventSuccess)
-                    .catch(onAttendEventError);
+                .then(onAttendEventSuccess)
+                .catch(onAttendEventError);
 
             function onAttendEventSuccess(response) {
                 return response.data;
