@@ -13,7 +13,8 @@
         var service = {
             name: 'locationservice',
             getLocations: getLocations,
-            getLocation: getLocation
+            getLocation: getLocation,
+            createLocation: createLocation
         };
         return service;
 
@@ -45,6 +46,29 @@
             }
 
             function onGetLocationError(error) {
+                Logger.error(error);
+            }
+        }
+
+        function createLocation(loc) {
+            Logger.info('Trying to retrieve location by id ' + loc.id);
+            return $http({
+                url: locationLocation,
+                method: 'POST',
+                data: loc,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+                .then(onCreateLocationSuccess)
+                .catch(onCreateLocationError);
+
+            function onCreateLocationSuccess(response) {
+                Logger.info(response.name);
+                return response;
+            }
+
+            function onCreateLocationError(error) {
                 Logger.error(error);
             }
         }

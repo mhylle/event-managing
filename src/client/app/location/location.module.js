@@ -34,6 +34,13 @@ function configuration($stateProvider, USER_ROLES) {
             data: {
                 authorizedRoles: [USER_ROLES.all]
             }
+        })
+        .state('locations.create', {
+            url: '/create',
+            templateUrl: 'app/location/create/createlocation.html',
+            data: {
+                authorizedRoles: [USER_ROLES.all]
+            }
         });
 }
 

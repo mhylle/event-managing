@@ -51,10 +51,10 @@
         $scope.isAuthorized = SecurityService.isAuthorized;
 
         $rootScope.$on(AUTH_EVENTS.notAuthorized, function () {
-            Logger.message('Not authorized to continue');
+            // Logger.message('Not authorized to continue');
         });
         $rootScope.$on(AUTH_EVENTS.notAuthenticated, function () {
-            Logger.message('Not authenticated to continue');
+            // Logger.message('Not authenticated to continue');
         });
     }
 
