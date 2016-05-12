@@ -9,7 +9,7 @@
             <div class="text-left col-xs-2"><label>Location</label></div>
             <div class="text-left col-xs-10">
                 <select ng-model="vm.event.location">
-                    <option ng-repeat="location in vm.locations | orderBy: 'name'" value="{{location.id}}">
+                    <option ng-repeat="location in vm.locations track by location._id | orderBy: 'name'" value="{{location._id}}">
                         {{location.name}}
                     </option>
                 </select>
