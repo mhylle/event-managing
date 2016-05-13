@@ -15,10 +15,13 @@
         var vm = this;
         vm.title = 'CreateEventController';
 
-        vm.event = {};
+        vm.event = {
+            signstart : new Date()
+        };
         vm.locations = [];
 
         vm.create = create;
+        vm.submitForm = submitForm;
 
         activate();
         vm.datepicker = {
@@ -36,6 +39,30 @@
                 },
                 open: function () {
                     vm.datepicker.end.opened = true;
+                }
+            },
+            signstart: {
+                today: function () {
+                    vm.event.signstart = new Date();
+                },
+                open: function () {
+                    vm.datepicker.signstart.opened = true;
+                }
+            },
+            signend: {
+                today: function () {
+                    vm.event.signend = new Date();
+                },
+                open: function () {
+                    vm.datepicker.signend.opened = true;
+                }
+            },
+            lastAttend: {
+                today: function () {
+                    vm.event.lastAttend = new Date();
+                },
+                open: function () {
+                    vm.datepicker.lastAttend.opened = true;
                 }
             }
         };
@@ -65,6 +92,19 @@
                     Logger.message('An error occured while creating the event', 'failed');
                 }
             });
+        }
+
+        function submitForm(isValid) {
+            console.log('submitting');
+            vm.formSubmitted = true;
+            // check to make sure the form is completely valid
+            if (isValid) {
+                create();
+                Logger.message('Form was validated to be ok');
+            } else {
+                console.log('not valid');
+                Logger.message('We have a field in the form that is in error.');
+            }
         }
     }
 })();
