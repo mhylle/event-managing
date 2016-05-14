@@ -1,0 +1,24 @@
+<div class="header headersmall row" ng-click="vm.gotoEvent(event)">
+    <div class="event-title col-xs-10">{{event.name}}</div>
+    <div class="event-status col-xs-2 text-right">X</div>
+</div>
+<div class="card-content" ng-click="vm.gotoEvent(event)">
+    <div class="event-from-label">Fra:</div>
+    <div class="event-from-content">{{event.start | date: 'dd-MM-yyyy : HH:mm'}}</div>
+    <div class="event-to-label">&nbsp;til:</div>
+    <div class="event-to-content">{{event.end | date: 'dd-MM-yyyy : HH:mm'}}</div>
+    <div class="clearfix"></div>
+
+    <div class="event-time-remaining-label">Tilmelding:</div>
+    <div class="event-time-remaining-content">{{event.signend | amDifference : null : 'days'}} days to sign end</div>
+    <div class="clearfix"></div>
+    <div class="event-location-label">Sted:</div>
+    <div class="event-location-content" ng-repeat="location in event.location">
+        <div>{{location}}</div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div>
+    <button ng-click="vm.signup(event)">{{(event | isattendingeventfilter: vm.user) ? 'Attend' : 'Cancel'}}
+    </button>
+</div>

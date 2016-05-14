@@ -45,6 +45,16 @@ gulp.task('vet', function () {
         .pipe($.jscs());
 });
 
+gulp.task('complexity', false, function() {
+    return gulp.src(config.allvetjs)
+        .pipe($.complexity({
+            cyclomatix: 12,
+            halstead: 20,
+            maintainability: 80,
+            breakOnErrors: false,
+            verbose: false
+        }));
+});
 /**
  * Create a visualizer report
  */
@@ -560,7 +570,7 @@ function startBrowserSync(isDev, specRunner) {
 
     var options = {
         proxy: 'localhost:' + port,
-        port: 3000,
+        port: 3030,
         files: isDev ? [
             config.client + '**/*.*',
             '!' + config.less,

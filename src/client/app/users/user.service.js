@@ -5,10 +5,11 @@
         .module('event-managing-users')
         .factory('userservice', userservice);
 
-    userservice.$inject = ['$http', 'Logger'];
+    userservice.$inject = ['$http', 'Logger', 'userServer'];
 
     /* @ngInject */
-    function userservice($http, Logger) {
+    function userservice($http, Logger, userServer) {
+        var usersLocation = userServer.url + ':' + userServer.port + '/api/' + userServer.location;
         var service = {
             name: 'userservice',
             getUsers: getUsers,
@@ -19,7 +20,7 @@
 
         ////////////////
         function getUsers() {
-            return $http.get('/api/user')
+            return $http.get(usersLocation)
                 .then(onGetUsersSuccess)
                 .catch(onGetUsersError);
 
@@ -34,7 +35,8 @@
 
         function getUser(id) {
             Logger.info('Trying to retrieve user by id ' + id);
-            return $http.get('/api/user/id/' + id)
+
+            return $http.get(usersLocation + '/id/' + id)
                 .then(onGetUserSuccess)
                 .catch(onGetUserError);
 
@@ -49,7 +51,7 @@
         }
 
         function createUser(user) {
-            return $http.post('/api/user/', user)
+            return $http.post(usersLocation, user)
                 .then(onCreateUserSuccess)
                 .catch(onCreateUserError);
 

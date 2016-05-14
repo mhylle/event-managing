@@ -44,10 +44,10 @@
         $scope.isAuthorized = SecurityService.isAuthorized;
 
         $rootScope.$on(AUTH_EVENTS.notAuthorized, function () {
-            Logger.message('Not authorized to continue');
+            // Logger.message('Not authorized to continue');
         });
         $rootScope.$on(AUTH_EVENTS.notAuthenticated, function () {
-            Logger.message('Not authenticated to continue');
+            // Logger.message('Not authenticated to continue');
         });
     }
 
@@ -61,7 +61,7 @@
                     var authorizedRoles = next.data.authorizedRoles;
                     if (!SecurityService.isAuthorized(authorizedRoles)) {
                         Logger.message('User was not authorized to proceed');
-                        event.preventDefault();
+                        //event.preventDefault();
                         if (SecurityService.isAuthenticated()) {
                             // user is not allowed
                             $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
@@ -69,12 +69,10 @@
                             // user is not logged in
                             $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
                         }
-                    } else {
-                        Logger.message('');
                     }
                 }
             } else {
-                event.preventDefault();
+                // event.preventDefault();
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
                 Logger.error('data attribute did not exist on next object, this is an error..');
             }

@@ -5,6 +5,11 @@ angular
         'event-managing-logger',
         'event-managing-security'
     ])
+    .constant('locationServer', {
+        url: 'http://localhost',
+        port: 3000,
+        location: 'locations'
+    })
     .config(['$stateProvider', 'USER_ROLES', configuration]);
 
 function configuration($stateProvider, USER_ROLES) {
@@ -28,6 +33,13 @@ function configuration($stateProvider, USER_ROLES) {
             templateUrl: 'app/location/view/location.html',
             data: {
                 authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+            }
+        })
+        .state('locations.create', {
+            url: '/create',
+            templateUrl: 'app/location/create/createlocation.html',
+            data: {
+                authorizedRoles: [USER_ROLES.all]
             }
         });
 }

@@ -3,7 +3,13 @@ angular
         'ui.router',
         'event-managing',
         'event-managing-security'
-    ]).config(['$stateProvider', 'USER_ROLES', configuration]);
+    ])
+    .constant('userServer', {
+        url: 'http://localhost',
+        port: 3000,
+        location: 'users'
+    })
+    .config(['$stateProvider', 'USER_ROLES', configuration]);
 
 function configuration($stateProvider, USER_ROLES) {
     $stateProvider

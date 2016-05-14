@@ -34,13 +34,8 @@
                     Logger.message('No response returned from the server', 'error');
                     vm.users = [];
                 } else {
-                    if (response.status === 'ok') {
-                        vm.users = response.users;
-                        Logger.status('ok');
-                    } else {
-                        vm.users = [];
-                        Logger.message(response.info, response.status);
-                    }
+                    vm.users = response;
+                    Logger.status('ok');
                 }
             });
         }
