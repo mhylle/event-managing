@@ -1,6 +1,6 @@
 angular
     .module('event-managing-components', [
         'ngAnimate',
-        'keyboard',
+        // 'keyboard',
         'event-managing-logger'
     ]);

@@ -7,14 +7,15 @@
 
     alertdialogcontroller.$inject = ['modals'];
 
-
     /* @ngInject */
     /**
      * Controller for the alert dialog
-     * @param modals modals service for modal dialogs
+     * @param {service} modals  modals service for modal dialogs
      */
     function alertdialogcontroller(modals) {
+        /* jshint -W040 */
         var vm = this;
+        /* jshint +W040 */
         vm.title = 'alertdialogcontroller';
         var params;
         activate();
@@ -30,5 +31,4 @@
             vm.denyButton = (params.denyButton || 'No');
         }
     }
-
 })();

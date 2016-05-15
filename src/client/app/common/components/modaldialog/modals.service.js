@@ -9,7 +9,9 @@
 
     /* @ngInject */
     function modals($rootScope, $q, Logger) {
+        /* jshint -W040 */
         var service = this;
+        /* jshint +W040 */
         service.open = open;
         service.params = params;
         service.proceedTo = proceedTo;

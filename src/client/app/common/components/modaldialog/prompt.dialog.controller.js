@@ -10,7 +10,8 @@
     /* @ngInject */
     /**
      * controller for a prompt dialog
-     * @param modals the modals service for modal dialogs
+     * @param {scope} $scope the scope
+     * @param {service} modals the modals service for modal dialogs
      */
     function promptdialogcontroller($scope, modals) {
         // var vm = this;
@@ -33,11 +34,11 @@
         }
 
         function submit() {
-            if (! $scope.form.input) {
+            if (!$scope.form.input) {
                 return ($scope.errorMessage = 'Please enter a value');
             }
 
-            modals.resolve ($scope.form.input);
+            modals.resolve($scope.form.input);
         }
     }
 

@@ -56,8 +56,6 @@
                         Logger.message('Login failed. Did you supply the correct username or password?');
                     }
                 });
-
-
             }, function handleReject(error) {
                 Logger.message('Prompt rejected: ' + error);
             });

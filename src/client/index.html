@@ -89,8 +89,6 @@
 <script src="/tools/bower_components/angular-smart-table/dist/smart-table.js"></script>
 <script src="/tools/bower_components/ng-lodash/build/ng-lodash.js"></script>
 <script src="/tools/bower_components/angular-loading-bar/build/loading-bar.js"></script>
-<script src="/tools/bower_components/moment/moment.js"></script>
-<script src="/tools/bower_components/angular-moment/angular-moment.js"></script>
 <script src="/tools/bower_components/rangy/rangy-core.js"></script>
 <script src="/tools/bower_components/rangy/rangy-classapplier.js"></script>
 <script src="/tools/bower_components/rangy/rangy-highlighter.js"></script>
@@ -104,12 +102,15 @@
 <script src="/tools/bower_components/angular-aria/angular-aria.js"></script>
 <script src="/tools/bower_components/angular-messages/angular-messages.js"></script>
 <script src="/tools/bower_components/angular-material/angular-material.js"></script>
+<script src="/tools/bower_components/moment/moment.js"></script>
+<script src="/tools/bower_components/angular-moment/angular-moment.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
 <!-- build:js js/app.js -->
 <!-- inject:js -->
 <script src="/src/client/app/app.module.js"></script>
+<script src="/src/client/app/common/components/event-managing-components.module.js"></script>
 <script src="/src/client/app/common/logger/logger.module.js"></script>
 <script src="/src/client/app/events/event.module.js"></script>
 <script src="/src/client/app/groups/group.module.js"></script>
@@ -117,6 +118,12 @@
 <script src="/src/client/app/location/location.module.js"></script>
 <script src="/src/client/app/security/security.module.js"></script>
 <script src="/src/client/app/users/user.module.js"></script>
+<script src="/src/client/app/common/components/login/login.directive.js"></script>
+<script src="/src/client/app/common/components/modaldialog/alert.dialog.controller.js"></script>
+<script src="/src/client/app/common/components/modaldialog/confirm.dialog.controller.js"></script>
+<script src="/src/client/app/common/components/modaldialog/emmodals.directive.js"></script>
+<script src="/src/client/app/common/components/modaldialog/modals.service.js"></script>
+<script src="/src/client/app/common/components/modaldialog/prompt.dialog.controller.js"></script>
 <script src="/src/client/app/common/logger/logger.service.js"></script>
 <script src="/src/client/app/events/create/createvent.controller.js"></script>
 <script src="/src/client/app/events/event.service.js"></script>
@@ -129,10 +136,10 @@
 <script src="/src/client/app/groups/list/grouplist.controller.js"></script>
 <script src="/src/client/app/groups/view/groupview.controller.js"></script>
 <script src="/src/client/app/layout/header.controller.js"></script>
+<script src="/src/client/app/location/create/createlocation.controller.js"></script>
 <script src="/src/client/app/location/list/locationlist.controller.js"></script>
 <script src="/src/client/app/location/location.service.js"></script>
 <script src="/src/client/app/location/view/locationview.controller.js"></script>
-<script src="/src/client/app/security/login/login.directive.js"></script>
 <script src="/src/client/app/security/security.constants.js"></script>
 <script src="/src/client/app/security/security.controller.js"></script>
 <script src="/src/client/app/security/security.interceptor.js"></script>
