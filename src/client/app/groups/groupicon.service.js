@@ -19,7 +19,7 @@
             if (!group) {
                 return 'na.png';
             }
-            if (group.type === 'public') {
+            if (group.type === 'Public') {
                 return 'open.png';
             }
             if (group.type === 'private') {

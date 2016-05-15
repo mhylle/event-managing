@@ -15,8 +15,8 @@
          ng-click="vm.gotoUser(user)">
         <div class="user.basedata">
             <p class="col-lg-1 text-left"><img ng-src="{{user.avatar}}" height="24"/></p>
-            <p class="col-lg-2 text-left">{{user.logicalid}}</p>
-            <p class="col-lg-2 text-left">{{user.name.firstname}} {{user.name.lastname}}</p>
+            <p class="col-lg-2 text-left">{{user._id}}</p>
+            <p class="col-lg-2 text-left">{{user.firstname}} {{user.lastname}}</p>
             <p class="col-lg-1 text-left">{{user.username}}</p>
             <p class="col-lg-2 text-left">{{user.email}}</p>
             <p class="col-lg-1 text-right">{{user.phone}}</p>
