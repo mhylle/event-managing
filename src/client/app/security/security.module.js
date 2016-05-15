@@ -4,4 +4,9 @@
 angular
     .module('event-managing-security',
         ['event-managing-logger',
-            'ngLodash']);
+            'ngLodash'])
+    .constant('securityServer', {
+        url: 'http://localhost',
+        port: 3000,
+        location: '/'
+    });

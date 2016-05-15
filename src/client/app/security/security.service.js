@@ -9,6 +9,7 @@
 
     /* @ngInject */
     function SecurityService($http, $window, Session, lodash) {
+        var securityLocation = securityServer.url + ':' + securityServer.port;
         var service = this;
         service.login = login;
         service.isAuthenticated = isAuthenticated;
@@ -17,7 +18,7 @@
         ////////////////
         function login(credentials) {
             return $http
-                .post('/api/login', credentials)
+                .post(securityLocation + '/api/login', credentials)
                 .then(function (response) {
                     if (response.data.status === 200) {
                         var user = response.data.user;

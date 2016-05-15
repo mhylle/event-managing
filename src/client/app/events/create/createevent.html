@@ -1,6 +1,6 @@
 <div class="panel panel-default" ng-controller="createeventcontroller as vm">
     <div class="panel panel-heading">Create Event</div>
-    <form name="eventform" ng-submit="vm.submitForm(eventform.$valid)">
+    <form name="eventform" ng-submit="vm.submitForm(eventform.$valid)" novalidate>
         <div class="panel panel-body">
             <div class="well row">
                 <div class="text-left col-xs-2"><label>Name</label></div>
@@ -110,6 +110,7 @@
             <button type="submit" class="btn btn-primary">Create</button>
             <!--<button ng-click="vm.create()">Create</button>-->
         </div>
+        <div ng-messages="userForm.name.$error"></div>
     </form>
 
 </div>
