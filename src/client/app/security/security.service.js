@@ -5,10 +5,10 @@
         .module('event-managing-security')
         .service('SecurityService', SecurityService);
 
-    SecurityService.$inject = ['$http', '$window', 'Session', 'lodash'];
+    SecurityService.$inject = ['$http', '$window', 'Session', 'lodash', 'securityServer'];
 
     /* @ngInject */
-    function SecurityService($http, $window, Session, lodash) {
+    function SecurityService($http, $window, Session, lodash, securityServer) {
         var securityLocation = securityServer.url + ':' + securityServer.port;
         var service = this;
         service.login = login;
@@ -17,6 +17,20 @@
 
         ////////////////
         function login(credentials) {
+            return $http({
+                url: securityLocation + '/api/login',
+                method: 'POST',
+                data: credentials,
+                headers: {
+                    common: {
+                        Authorization: {
+                            username: credentials.username,
+                            password: credentials.password
+                        }
+                    },
+                    "Content-Type": "application/json"
+                }
+            })
             return $http
                 .post(securityLocation + '/api/login', credentials)
                 .then(function (response) {
