@@ -31,19 +31,36 @@
                     "Content-Type": "application/json"
                 }
             })
-            return $http
-                .post(securityLocation + '/api/login', credentials)
                 .then(function (response) {
-                    if (response.data.status === 200) {
-                        var user = response.data.user;
-                        $window.sessionStorage.userInfo = response.data.accesstoken;
-                        Session.create(user.id, user, user.roles);
-                        return true;
-                    } else {
+                        if (response.status === 200) {
+                            var user = response.data.user;
+                            $window.sessionStorage.userInfo = response.data.accesstoken;
+                            Session.create(user.id, user, user.roles);
+                            return true;
+                        } else {
+                            Session.destroy();
+                            return false;
+                        }
+                    })
+                .catch(function(response) {
+                    if (response.status === 401) {
+                        console.log('Unable to login: ' + response);
                         Session.destroy();
-                        return false;
                     }
                 });
+            // return $http
+            //     .post(securityLocation + '/api/login', credentials)
+            //     .then(function (response) {
+            //         if (response.data.status === 200) {
+            //             var user = response.data.user;
+            //             $window.sessionStorage.userInfo = response.data.accesstoken;
+            //             Session.create(user.id, user, user.roles);
+            //             return true;
+            //         } else {
+            //             Session.destroy();
+            //             return false;
+            //         }
+            //     });
         }
 
         function isAuthenticated() {
