@@ -20,16 +20,17 @@
             var authdata = base64.encode(credentials.username + ':' + credentials.password);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
 
-            return $http({
-                url: securityLocation + '/api/login',
-                method: 'POST',
-                data: credentials,
-            })
+            return $http(
+                {
+                    url: securityLocation + '/api/login',
+                    method: 'POST',
+                    data: credentials,
+                })
                 .then(function (response) {
                     if (response.status === 200) {
                         var user = response.data.user;
-                        $window.sessionStorage.userInfo = response.data.accesstoken;
-                        Session.create(user.id, user, user.roles);
+                        $window.sessionStorage.userInfo = response.data.accessToken;
+                        Session.create(response.data.accessToken, user, user.roles);
                         return true;
                     } else {
                         Session.destroy();

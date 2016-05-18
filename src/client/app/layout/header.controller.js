@@ -29,7 +29,7 @@
             }, function (newVal) {
                 Logger.info('watch triggered..');
                 if (typeof newVal !== 'undefined' && newVal !== null) {
-                    vm.username = newVal.name.firstname + ' ' + newVal.name.lastname;
+                    vm.username = newVal.firstname + ' ' + newVal.lastname;
                 } else {
                     vm.username = 'Guest';
                 }
@@ -49,9 +49,9 @@
                 var credentials = {username: response.username, password: response.password};
                 SecurityService.login(credentials).then(function (response) {
                     if (response) {
-                        Logger.message('Welcome ' + Session.user.name.firstname +
-                            ' ' + Session.user.name.lastname + '!');
-                        vm.username = Session.user.name.firstname + ' ' + Session.user.name.lastname;
+                        Logger.message('Welcome ' + Session.user.firstname +
+                            ' ' + Session.user.lastname + '!');
+                        vm.username = Session.user.firstname + ' ' + Session.user.lastname;
                     } else {
                         Logger.message('Login failed. Did you supply the correct username or password?');
                     }

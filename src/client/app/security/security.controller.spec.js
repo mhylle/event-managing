@@ -57,7 +57,7 @@ describe('SecurityController', function () {
                 controller.credentials.username = 'mockUser';
                 controller.credentials.password = 'mockUser';
                 $httpBackend.expectPOST('/api/login', controller.credentials).respond(
-                    {status: 200, accesstoken: 'aaa', user: user}
+                    {status: 200, accessToken: 'aaa', user: user}
                 );
                 controller.login(controller.credentials);
                 $httpBackend.flush();
@@ -79,7 +79,7 @@ describe('SecurityController', function () {
                 controller.credentials.username = 'mockNotAUser';
                 controller.credentials.password = 'mockNotAUser';
                 $httpBackend.expectPOST('/api/login', controller.credentials).respond(
-                    {status: 401, accesstoken: null, user: null}
+                    {status: 401, accessToken: null, user: null}
                 );
                 controller.login(controller.credentials);
                 $httpBackend.flush();

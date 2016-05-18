@@ -3,7 +3,7 @@ angular
     .factory('sessionInjector',['$window', function ($window) {
         var sessionInjector = {
             request: function (config) {
-                config.headers.accesstoken = $window.sessionStorage.userInfo;
+                config.headers.accessToken = $window.sessionStorage.userInfo;
                 console.log('interceptor called., using ' + $window.sessionStorage.userInfo + ' as session token');
                 return config;
             }
