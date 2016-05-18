@@ -5,10 +5,10 @@
         .module('event-managing-security')
         .service('SecurityService', SecurityService);
 
-    SecurityService.$inject = ['$http', '$window', 'Session', 'lodash', 'securityServer'];
+    SecurityService.$inject = ['$http', '$window', 'Session', 'lodash', 'base64', 'securityServer'];
 
     /* @ngInject */
-    function SecurityService($http, $window, Session, lodash, securityServer) {
+    function SecurityService($http, $window, Session, lodash, base64, securityServer) {
         var securityLocation = securityServer.url + ':' + securityServer.port;
         var service = this;
         service.login = login;
@@ -17,50 +17,31 @@
 
         ////////////////
         function login(credentials) {
+            var authdata = base64.encode(credentials.username + ':' + credentials.password);
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
+
             return $http({
                 url: securityLocation + '/api/login',
                 method: 'POST',
                 data: credentials,
-                headers: {
-                    common: {
-                        Authorization: {
-                            username: credentials.username,
-                            password: credentials.password
-                        }
-                    },
-                    "Content-Type": "application/json"
-                }
             })
                 .then(function (response) {
-                        if (response.status === 200) {
-                            var user = response.data.user;
-                            $window.sessionStorage.userInfo = response.data.accesstoken;
-                            Session.create(user.id, user, user.roles);
-                            return true;
-                        } else {
-                            Session.destroy();
-                            return false;
-                        }
-                    })
-                .catch(function(response) {
+                    if (response.status === 200) {
+                        var user = response.data.user;
+                        $window.sessionStorage.userInfo = response.data.accesstoken;
+                        Session.create(user.id, user, user.roles);
+                        return true;
+                    } else {
+                        Session.destroy();
+                        return false;
+                    }
+                })
+                .catch(function (response) {
                     if (response.status === 401) {
                         console.log('Unable to login: ' + response);
                         Session.destroy();
                     }
                 });
-            // return $http
-            //     .post(securityLocation + '/api/login', credentials)
-            //     .then(function (response) {
-            //         if (response.data.status === 200) {
-            //             var user = response.data.user;
-            //             $window.sessionStorage.userInfo = response.data.accesstoken;
-            //             Session.create(user.id, user, user.roles);
-            //             return true;
-            //         } else {
-            //             Session.destroy();
-            //             return false;
-            //         }
-            //     });
         }
 
         function isAuthenticated() {
