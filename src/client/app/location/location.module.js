@@ -10,36 +10,39 @@ angular
         port: 3000,
         location: 'locations'
     })
-    .config(['$stateProvider', 'USER_ROLES', configuration]);
+    .config(['$stateProvider', configuration])
+    .run(function() {
 
-function configuration($stateProvider, USER_ROLES) {
+    });
+
+function configuration($stateProvider) {
     $stateProvider
         .state('locations', {
             url: '/location',
             templateUrl: 'app/location/location.html',
             data: {
-                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+                authorizedGroups: []
             }
         })
         .state('locations.list', {
             url: '/list',
             templateUrl: 'app/location/list/locationlist.html',
             data: {
-                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+                authorizedGroups: []
             }
         })
         .state('locations.view', {
             url: '/view/:id',
             templateUrl: 'app/location/view/location.html',
             data: {
-                authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+                authorizedGroups: []
             }
         })
         .state('locations.create', {
             url: '/create',
             templateUrl: 'app/location/create/createlocation.html',
             data: {
-                authorizedRoles: [USER_ROLES.all]
+                authorizedGroups: []
             }
         });
 }

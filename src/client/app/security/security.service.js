@@ -58,6 +58,8 @@
                 return true;
             }
 
+            var user = Session.user;
+            var groups = user.groups;
             var authorized = lodash.intersection(authorizedRoles, Session.userRoles).length > 0;
             return (isAuthenticated() && authorized);
         }

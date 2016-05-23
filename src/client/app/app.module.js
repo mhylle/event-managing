@@ -14,17 +14,17 @@
         'event-managing-groups',
         'event-managing-locations',
         'event-managing-security'
-    ]).config(['$stateProvider', 'USER_ROLES', configuration])
+    ]).config(['$stateProvider', configuration])
         .controller('ApplicationController', ApplicationController)
         .run(setupSecurity);
 
-    function configuration($stateProvider, USER_ROLES) {
+    function configuration($stateProvider) {
         $stateProvider
             .state('login', {
                 url: '/login',
                 templateUrl: 'app/security/login.html',
                 data: {
-                    authorizedRoles: [USER_ROLES.all]
+                    authorizedGroups: []
                 }
             })
 
@@ -32,22 +32,21 @@
                 url: '/home',
                 templateUrl: 'app/home.html',
                 data: {
-                    authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
+                    authorizedGroups: []
                 }
             });
     }
 
-    ApplicationController.$inject = ['$rootScope', '$scope', 'AUTH_EVENTS', 'USER_ROLES', 'SecurityService', 'Logger'];
-    function ApplicationController($rootScope, $scope, AUTH_EVENTS, USER_ROLES, SecurityService, Logger) {
+    ApplicationController.$inject = ['$rootScope', '$scope', 'AUTH_EVENTS', 'SecurityService', 'Logger'];
+    function ApplicationController($rootScope, $scope, AUTH_EVENTS, SecurityService, Logger) {
         $scope.currentUser = null;
-        $scope.userRoles = USER_ROLES;
         $scope.isAuthorized = SecurityService.isAuthorized;
 
         $rootScope.$on(AUTH_EVENTS.notAuthorized, function () {
-            // Logger.message('Not authorized to continue');
+            Logger.message('Not authorized to continue');
         });
         $rootScope.$on(AUTH_EVENTS.notAuthenticated, function () {
-            // Logger.message('Not authenticated to continue');
+            Logger.message('Not authenticated to continue');
         });
     }
 
@@ -61,7 +60,7 @@
                     var authorizedRoles = next.data.authorizedRoles;
                     if (!SecurityService.isAuthorized(authorizedRoles)) {
                         Logger.message('User was not authorized to proceed');
-                        //event.preventDefault();
+                        event.preventDefault();
                         if (SecurityService.isAuthenticated()) {
                             // user is not allowed
                             $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
@@ -72,7 +71,7 @@
                     }
                 }
             } else {
-                // event.preventDefault();
+                event.preventDefault();
                 $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
                 Logger.error('data attribute did not exist on next object, this is an error..');
             }

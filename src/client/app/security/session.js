@@ -16,22 +16,19 @@
         var session = this;
         session.id  = null;
         session.user = null;
-        session.userRoles = null;
 
         this.create = create;
         this.destroy = destroy;
 
         ////////////////
-        function create(sessionId, user, userRoles) {
+        function create(sessionId, user) {
             session.id = sessionId;
             session.user = user;
-            session.userRoles = userRoles;
         }
 
         function destroy() {
             session.id = null;
             session.user = null;
-            session.userRoles = null;
         }
     }
 })();
