@@ -82,7 +82,7 @@
                 method: 'POST',
                 data: evt,
                 headers: {
-                    "Content-Type": "application/json"
+                    'Content-Type': 'application/json'
                 }
             })
                 .then(onCreateEventSuccess)
