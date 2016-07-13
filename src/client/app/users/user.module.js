@@ -9,9 +9,10 @@ angular
         port: 3000,
         location: 'users'
     })
-    .config(['$stateProvider', 'USER_ROLES', configuration]);
+    .config(['$stateProvider', configuration]);
 
-function configuration($stateProvider, USER_ROLES) {
+function configuration($stateProvider) {
+    var USER_ROLES = '*';
     $stateProvider
         .state('users', {
             url: '/users',
