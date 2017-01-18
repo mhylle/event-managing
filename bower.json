@@ -35,7 +35,7 @@
     "textAngular": "^1.5.0",
     "angular-bootstrap": "^1.1.2",
     "angular-material": "^1.1.0-rc1",
-    "angular-moment": "1.0.0-beta.6",
+    "angular-moment": "1.0.1",
     "moment": "^2.13.0",
     "angular-utf8-base64": "^0.0.5"
   },
