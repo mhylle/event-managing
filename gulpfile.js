@@ -467,10 +467,10 @@ function clean(path, done) {
 function inject(src, label, order) {
     var options = {read: false};
     if (label) {
-        options.name = 'inject:' + label;
+        return $.inject(orderSrc(src, order,options),{name:'inject:' + label});
+    } else {
+        return $.inject(orderSrc(src, order,options));
     }
-
-    return $.inject(orderSrc(src, order), options);
 }
 
 /**
@@ -479,13 +479,12 @@ function inject(src, label, order) {
  * @param   {Array} order Glob array pattern
  * @returns {Stream} The ordered stream
  */
-function orderSrc(src, order) {
-    //order = order || ['**/*'];
+function orderSrc(src, order,options) {
+//order = order || ['* /'];
     return gulp
-        .src(src)
+        .src(src,options)
         .pipe($.if(order, $.order(order)));
 }
-
 /**
  * serve the code
  * --debug-brk or --debug
