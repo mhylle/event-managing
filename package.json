@@ -142,7 +142,7 @@
     "node-notifier": "^4.4.0",
     "nodeunit": "^0.10.2",
     "phantomjs": "^2.1.1",
-    "plato": "^1.5.0",
+    "plato": "^1.7.0",
     "q": "^1.0.1",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.6.0",
