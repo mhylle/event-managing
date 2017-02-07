@@ -140,7 +140,7 @@
     "minimist": "^1.2.0",
     "mocha": "^3.2.0",
     "node-notifier": "^4.4.0",
-    "nodeunit": "^0.10.2",
+    "nodeunit": "^0.11.0",
     "phantomjs": "^2.1.1",
     "plato": "^1.7.0",
     "q": "^1.0.1",
