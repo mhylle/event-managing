@@ -58,7 +58,7 @@
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.2.0",
     "moment": "2.17.1",
-    "mongoose": "^4.4.10",
+    "mongoose": "4.8.1",
     "morgan": "^1.7.0",
     "node-notifier": "^5.0.0",
     "oauth2-server": "^2.4.1",
