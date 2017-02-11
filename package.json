@@ -29,7 +29,7 @@
   "homepage": "https://event-managing.com",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.15.0",
+    "body-parser": "1.16.0",
     "browser-sync": "^2.11.2",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
