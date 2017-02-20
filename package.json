@@ -139,7 +139,7 @@
     "method-override": "^2.3.4",
     "minimist": "^1.2.0",
     "mocha": "^3.2.0",
-    "node-notifier": "^4.4.0",
+    "node-notifier": "^5.0.0",
     "nodeunit": "^0.10.2",
     "phantomjs": "^2.1.1",
     "plato": "^1.7.0",
